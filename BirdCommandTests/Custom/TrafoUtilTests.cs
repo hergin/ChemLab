@@ -46,5 +46,41 @@ namespace BirdCommand.Custom.Tests
 
             Assert.IsTrue(TrafoUtil.DoesPatternExist(model, pattern));
         }
+
+        [TestMethod()]
+        public void PatternMatchTests3()
+        {
+            List<BaseElement> model = new List<BaseElement>();
+            model.Add(new EmptyCell(0, 0));
+            model.Add(new EmptyCell(50, 0));
+            model.Add(new EmptyCell(0, 50));
+            model.Add(new BirdCell(50, 0));
+            model.Add(new EmptyCell(50, 50));
+
+            List<BaseElement> pattern = new List<BaseElement>();
+            pattern.Add(new EmptyCell(0, 50));
+            pattern.Add(new EmptyCell(50, 50));
+            pattern.Add(new BirdCell(50, 50));
+
+            Assert.IsTrue(TrafoUtil.DoesPatternExist(model, pattern));
+        }
+
+        [TestMethod()]
+        public void PatternMatchTests4()
+        {
+            List<BaseElement> model = new List<BaseElement>();
+            model.Add(new EmptyCell(0, 0));
+            model.Add(new EmptyCell(50, 0));
+            model.Add(new EmptyCell(0, 50));
+            model.Add(new BirdCell(50, 0));
+            model.Add(new EmptyCell(50, 50));
+
+            List<BaseElement> pattern = new List<BaseElement>();
+            pattern.Add(new EmptyCell(0, 50));
+            pattern.Add(new EmptyCell(50, 50));
+            pattern.Add(new BirdCell(0, 50));
+
+            Assert.IsFalse(TrafoUtil.DoesPatternExist(model, pattern));
+        }
     }
 }

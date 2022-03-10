@@ -16,18 +16,20 @@ namespace BirdCommand.Custom
     [Serializable]
     public class BirdCell : RectangleElement
     {
-        Direction Direction;
+        private Direction direction;
+        public Direction Direction { get => direction; }
+
         public BirdCell(int x, int y) : base(x, y, BirdCommandMain.CELL_SIZE, BirdCommandMain.CELL_SIZE)
         {
             Background = Resources.BirdDown;
-            Direction = Direction.Down;
+            direction = Direction.Down;
             FillColor1 = Color.Transparent;
             FillColor2 = Color.Transparent;
         }
 
         public BirdCell(int x, int y, Direction direction) : base(x, y, BirdCommandMain.CELL_SIZE, BirdCommandMain.CELL_SIZE)
         {
-            Direction = direction;
+            this.direction = direction;
             FillColor1 = Color.Transparent;
             FillColor2 = Color.Transparent;
             switch(direction)
@@ -52,22 +54,22 @@ namespace BirdCommand.Custom
             if (Direction.Equals(Direction.Down))
             {
                 Background = Resources.BirdLeft;
-                Direction = Direction.Left;
+                direction = Direction.Left;
             }
             else if (Direction.Equals(Direction.Left))
             {
                 Background = Resources.BirdUp;
-                Direction = Direction.Up;
+                direction = Direction.Up;
             }
             else if (Direction.Equals(Direction.Up))
             {
                 Background = Resources.BirdRight;
-                Direction = Direction.Right;
+                direction = Direction.Right;
             }
             else if (Direction.Equals(Direction.Right))
             {
                 Background = Resources.BirdDown;
-                Direction = Direction.Down;
+                direction = Direction.Down;
             }
         }
 
@@ -76,22 +78,22 @@ namespace BirdCommand.Custom
             if (Direction.Equals(Direction.Down))
             {
                 Background = Resources.BirdRight;
-                Direction = Direction.Right;
+                direction = Direction.Right;
             }
             else if (Direction.Equals(Direction.Left))
             {
                 Background = Resources.BirdDown;
-                Direction = Direction.Down;
+                direction = Direction.Down;
             }
             else if (Direction.Equals(Direction.Up))
             {
                 Background = Resources.BirdLeft;
-                Direction = Direction.Left;
+                direction = Direction.Left;
             }
             else if (Direction.Equals(Direction.Right))
             {
                 Background = Resources.BirdUp;
-                Direction = Direction.Up;
+                direction = Direction.Up;
             }
         }
 

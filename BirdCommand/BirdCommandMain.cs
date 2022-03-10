@@ -217,6 +217,16 @@ namespace BirdCommand
             }
         }
 
+        private void button12_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Result: "+
+                TrafoUtil.DoesPatternExist(
+                    designer_board.Document.Elements.GetArray().ToList(),
+                    DesignerUtil.FindElementsWithin(
+                        designer_trafo,
+                        designer_trafo.Document.Elements.GetArray().Where(s=>s is RuleCell).First())));
+        }
+
         private void button8_Click(object sender, EventArgs e)
         {
             designer_trafo.Document.Action = DesignerAction.Add;
