@@ -54,6 +54,7 @@
     </Compile>
     <Compile Include="Custom\BirdCell.cs" />
     <Compile Include="Custom\BlockCell.cs" />
+    <Compile Include="Custom\DesignerUtil.cs" />
     <Compile Include="Custom\SnapCell.cs" />
     <Compile Include="Custom\RuleCell.cs" />
     <Compile Include="Custom\StartCell.cs" />

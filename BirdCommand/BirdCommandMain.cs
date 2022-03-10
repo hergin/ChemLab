@@ -28,6 +28,7 @@ namespace BirdCommand
 
             designer_trafo.ElementClick += Designer_trafo_ElementClick;
             designer_trafo.MouseUp += Designer_trafo_MouseUp;
+            designer_trafo.ElementMouseUp += Designer_trafo_ElementMouseUp;
             designer_trafo.ElementMoved += Designer_trafo_ElementMoved;
             designer_trafo.ElementMoving += Designer_trafo_ElementMoving;
 
@@ -36,12 +37,23 @@ namespace BirdCommand
             // LoadLevel1();
         }
 
-        private void Designer_trafo_ElementMoved(object sender, ElementEventArgs e)
+        private void Designer_trafo_ElementMouseUp(object sender, ElementMouseEventArgs e)
         {
-            if(e.Element is RuleCell)
+            if (e.Element is RuleCell rule)
             {
                 // TODO put the current rule right after the highlighted element and move the rest accordingly.
             }
+            else if (e.Element is BirdCell bird)
+            {
+                var cellUnderneath = DesignerUtil.FindCellUnderneath(designer_trafo, bird);
+                if (cellUnderneath != null)
+                    bird.Location = cellUnderneath.Location;
+            }
+        }
+
+        private void Designer_trafo_ElementMoved(object sender, ElementEventArgs e)
+        {
+            
         }
 
         private void Designer_trafo_ElementMoving(object sender, ElementEventArgs e)
@@ -56,62 +68,38 @@ namespace BirdCommand
         {
             if (addBird)
             {
+                // Add the bird and align it with the empty cell underneath (if there is one)
                 var bird = new BirdCell(e.X, e.Y);
-                var cellUnderneath = FindCellUnderneath(designer_trafo, bird);
+                var cellUnderneath = DesignerUtil.FindCellUnderneath(designer_trafo, bird);
                 if (cellUnderneath != null)
                     bird.Location = cellUnderneath.Location;
-                // TODO if there is a cell underneath, auto-center the bird on the cell.
                 designer_trafo.Document.AddElement(bird);
                 addBird = false;
             }
             if (addEmpty)
             {
-                // TODO if there is a cell around, auto-move this one to it.
-                designer_trafo.Document.AddElement(new EmptyCell(e.X, e.Y));
+                // if there is a cell around, snap this one to it.
+                var empty = new EmptyCell(e.X, e.Y);
+                var newPosition = DesignerUtil.FindPositionOfAnotherEmptyAround(designer_trafo, empty);
+                empty.Location = newPosition;
+                designer_trafo.Document.AddElement(empty);
                 addEmpty = false;
             }
+            DesignerUtil.ArrangeTheOrder(designer_trafo);
         }
 
-        EmptyCell FindCellUnderneath(Designer designer, BirdCell bird)
-        {
-            foreach (var element in designer.Document.Elements)
-            {
-                BaseElement casted = element as BaseElement;
-                if (casted is EmptyCell result
-                    && bird.Location.Y >= casted.Location.Y && bird.Location.Y <= casted.Location.Y + casted.Size.Height
-                    && bird.Location.X >= casted.Location.X && bird.Location.X <= casted.Location.X + casted.Size.Width)
-                {
-                    return result;
-                }
-            }
-            return null;
-        }
+        
 
         private void Designer_trafo_ElementClick(object sender, ElementEventArgs e)
         {
             if (e.Element is RuleCell)
             {
-                List<BaseElement> list = FindElementsWithin(designer_trafo,e.Element);
+                List<BaseElement> list = DesignerUtil.FindElementsWithin(designer_trafo,e.Element);
                 designer_trafo.Document.SelectElements(list.ToArray());
             }
         }
 
-        List<BaseElement> FindElementsWithin(Designer designer, BaseElement parentElement)
-        {
-            List<BaseElement> result = new List<BaseElement>();
-            foreach (var element in designer.Document.Elements)
-            {
-                BaseElement casted = element as BaseElement;
-                if (casted.Location.Y >= parentElement.Location.Y && casted.Location.Y <= parentElement.Location.Y + parentElement.Size.Height
-                    && casted.Location.Y + casted.Size.Height <= parentElement.Location.Y + parentElement.Size.Height
-                    && casted.Location.X >= parentElement.Location.X && casted.Location.X <= parentElement.Location.X + parentElement.Size.Width
-                    && casted.Location.X + casted.Size.Width <= parentElement.Location.X + parentElement.Size.Width)
-                {
-                    result.Add(casted);
-                }
-            }
-            return result;
-        }
+        
 
         void LoadLevel1()
         {
