@@ -257,14 +257,15 @@ namespace BirdCommand
 
         private void button15_Click(object sender, EventArgs e)
         {
-            var nextRule = designer_trafo.Document.Elements.GetArray().Where(el=> el is RuleCell).First();
-            if (nextRule != null)
+            var allRules = designer_trafo.Document.Elements.GetArray().Where(el => el is RuleCell).ToList();
+            allRules.Sort((a, b) => { return a.Location.Y - b.Location.Y; });
+            foreach (var rule in allRules)
             {
                 var ruleType = TrafoUtil.IdentifyRuleType(
                     TrafoUtil.FindPreConditionElements(designer_trafo.Document.Elements.GetArray().ToList(),
-                        (RuleCell)designer_trafo.Document.Elements.GetArray().Where(el => el is RuleCell).First()),
+                        rule),
                     TrafoUtil.FindPostConditionElements(designer_trafo.Document.Elements.GetArray().ToList(),
-                        (RuleCell)designer_trafo.Document.Elements.GetArray().Where(el => el is RuleCell).First()));
+                        rule));
                 switch (ruleType)
                 {
                     case RuleType.TurnRight:
