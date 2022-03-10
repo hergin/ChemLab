@@ -51,8 +51,8 @@ namespace BirdCommand.Custom
             {
                 BaseElement casted = element as BaseElement;
                 if (casted is EmptyCell result
-                    && bird.Location.Y >= casted.Location.Y && bird.Location.Y <= casted.Location.Y + casted.Size.Height
-                    && bird.Location.X >= casted.Location.X && bird.Location.X <= casted.Location.X + casted.Size.Width)
+                    && bird.Location.Y >= casted.Location.Y && bird.Location.Y < casted.Location.Y + casted.Size.Height
+                    && bird.Location.X >= casted.Location.X && bird.Location.X < casted.Location.X + casted.Size.Width)
                 {
                     return result;
                 }

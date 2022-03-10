@@ -283,6 +283,58 @@ namespace BirdCommand.Custom.Tests
         }
 
         [TestMethod()]
+        public void IdentifyRuleTypeTests_MoveForward()
+        {
+            List<BaseElement> lhs = new List<BaseElement>();
+            lhs.Add(new EmptyCell(0, 0));
+            lhs.Add(new EmptyCell(0, 50));
+            lhs.Add(new BirdCell(0, 0,Direction.Down));
+
+            List<BaseElement> rhs = new List<BaseElement>();
+            rhs.Add(new EmptyCell(0, 0));
+            rhs.Add(new EmptyCell(0, 50));
+            rhs.Add(new BirdCell(0, 50, Direction.Down));
+
+            Assert.AreEqual(RuleType.MoveForward, TrafoUtil.IdentifyRuleType(lhs, rhs));
+
+            lhs = new List<BaseElement>();
+            lhs.Add(new EmptyCell(0, 0));
+            lhs.Add(new EmptyCell(0, 50));
+            lhs.Add(new BirdCell(0, 50, Direction.Up));
+
+            rhs = new List<BaseElement>();
+            rhs.Add(new EmptyCell(0, 0));
+            rhs.Add(new EmptyCell(0, 50));
+            rhs.Add(new BirdCell(0, 0, Direction.Up));
+
+            Assert.AreEqual(RuleType.MoveForward, TrafoUtil.IdentifyRuleType(lhs, rhs));
+
+            lhs = new List<BaseElement>();
+            lhs.Add(new EmptyCell(0, 0));
+            lhs.Add(new EmptyCell(50, 0));
+            lhs.Add(new BirdCell(0, 0, Direction.Right));
+
+            rhs = new List<BaseElement>();
+            rhs.Add(new EmptyCell(0, 0));
+            rhs.Add(new EmptyCell(50, 0));
+            rhs.Add(new BirdCell(50, 0, Direction.Right));
+
+            Assert.AreEqual(RuleType.MoveForward, TrafoUtil.IdentifyRuleType(lhs, rhs));
+
+            lhs = new List<BaseElement>();
+            lhs.Add(new EmptyCell(0, 0));
+            lhs.Add(new EmptyCell(50, 0));
+            lhs.Add(new BirdCell(50, 0, Direction.Left));
+
+            rhs = new List<BaseElement>();
+            rhs.Add(new EmptyCell(0, 0));
+            rhs.Add(new EmptyCell(50, 0));
+            rhs.Add(new BirdCell(0, 0, Direction.Left));
+
+            Assert.AreEqual(RuleType.MoveForward, TrafoUtil.IdentifyRuleType(lhs, rhs));
+        }
+
+        [TestMethod()]
         public void FindPreConditionElementsTest()
         {
             List<BaseElement> allElements = new List<BaseElement>();

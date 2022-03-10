@@ -99,6 +99,94 @@ namespace BirdCommand.Custom
                 }
             }
 
+            // Move Forward rules identification: There is only one bird and two empty cell first
+            if (filteredLhs.Where(f => f is BirdCell).Count() == 1 && filteredLhs.Where(f => f is EmptyCell).Count() == 2
+                && filteredRhs.Where(f => f is BirdCell).Count() == 1 && filteredRhs.Where(f => f is EmptyCell).Count() == 2)
+
+            {
+                // Bird is in either one of the cells
+                var birdLhs = filteredLhs.Where(f => f is BirdCell).First() as BirdCell;
+                var birdRhs = filteredRhs.Where(f => f is BirdCell).First() as BirdCell;
+                if (filteredLhs.Where(f => f is EmptyCell && f.Location.Equals(birdLhs.Location)).Count() == 1
+                    && filteredRhs.Where(f => f is EmptyCell && f.Location.Equals(birdRhs.Location)).Count() == 1)
+                {
+                    // Birds are facing the same direction
+                    if(birdLhs.Direction.Equals(birdRhs.Direction))
+                    {
+                        // In the LHS, the cell that doesnt have the bird should be in front of the bird.
+                        var lhsEmptyCell = filteredLhs.Where(f => f is EmptyCell && !f.Location.Equals(birdLhs.Location)).First();
+                        if (birdLhs.Direction == Direction.Down)
+                        {
+                            var yDifferenceBetweenBirdLhsAndLhsEmpty = birdLhs.Location.Y - lhsEmptyCell.Location.Y;
+                            // Bird is on top and empty cell is on bottom
+                            if (yDifferenceBetweenBirdLhsAndLhsEmpty == -BirdCommandMain.CELL_SIZE)
+                            {
+                                // now do the same check for the RHS
+                                var rhsEmptyCell = filteredRhs.Where(f => f is EmptyCell && !f.Location.Equals(birdRhs.Location)).First();
+
+                                var yDifferenceBetweenBirdRhsAndRhsEmpty = birdRhs.Location.Y - rhsEmptyCell.Location.Y;
+                                // Bird is on bottom and empty cell is on top
+                                if (yDifferenceBetweenBirdRhsAndRhsEmpty == BirdCommandMain.CELL_SIZE)
+                                {
+                                    return RuleType.MoveForward;
+                                }
+                            }
+                        }
+                        else if (birdLhs.Direction == Direction.Up)
+                        {
+                            var yDifferenceBetweenBirdLhsAndLhsEmpty = birdLhs.Location.Y - lhsEmptyCell.Location.Y;
+                            // Bird is on bottom and empty cell is on top LHS
+                            if (yDifferenceBetweenBirdLhsAndLhsEmpty == BirdCommandMain.CELL_SIZE)
+                            {
+                                // now do the same check for the RHS
+                                var rhsEmptyCell = filteredRhs.Where(f => f is EmptyCell && !f.Location.Equals(birdRhs.Location)).First();
+
+                                var yDifferenceBetweenBirdRhsAndRhsEmpty = birdRhs.Location.Y - rhsEmptyCell.Location.Y;
+                                // Bird is on top and empty cell is on bottom RHS
+                                if (yDifferenceBetweenBirdRhsAndRhsEmpty == -BirdCommandMain.CELL_SIZE)
+                                {
+                                    return RuleType.MoveForward;
+                                }
+                            }
+                        }
+                        else if (birdLhs.Direction == Direction.Left)
+                        {
+                            var xDifferenceBetweenBirdLhsAndLhsEmpty = birdLhs.Location.X - lhsEmptyCell.Location.X;
+                            // Bird is on right and empty cell is on left LHS
+                            if (xDifferenceBetweenBirdLhsAndLhsEmpty == BirdCommandMain.CELL_SIZE)
+                            {
+                                // now do the same check for the RHS
+                                var rhsEmptyCell = filteredRhs.Where(f => f is EmptyCell && !f.Location.Equals(birdRhs.Location)).First();
+
+                                var xDifferenceBetweenBirdRhsAndRhsEmpty = birdRhs.Location.X - rhsEmptyCell.Location.X;
+                                // Bird is on left and empty cell is on right RHS
+                                if (xDifferenceBetweenBirdRhsAndRhsEmpty == -BirdCommandMain.CELL_SIZE)
+                                {
+                                    return RuleType.MoveForward;
+                                }
+                            }
+                        }
+                        else if (birdLhs.Direction == Direction.Right)
+                        {
+                            var xDifferenceBetweenBirdLhsAndLhsEmpty = birdLhs.Location.X - lhsEmptyCell.Location.X;
+                            // Bird is on left and empty cell is on right LHS
+                            if (xDifferenceBetweenBirdLhsAndLhsEmpty == -BirdCommandMain.CELL_SIZE)
+                            {
+                                // now do the same check for the RHS
+                                var rhsEmptyCell = filteredRhs.Where(f => f is EmptyCell && !f.Location.Equals(birdRhs.Location)).First();
+
+                                var xDifferenceBetweenBirdRhsAndRhsEmpty = birdRhs.Location.X - rhsEmptyCell.Location.X;
+                                // Bird is on right and empty cell is on left RHS
+                                if (xDifferenceBetweenBirdRhsAndRhsEmpty == BirdCommandMain.CELL_SIZE)
+                                {
+                                    return RuleType.MoveForward;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
             return RuleType.DoNothing;
         }
 

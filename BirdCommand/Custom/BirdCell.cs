@@ -97,6 +97,26 @@ namespace BirdCommand.Custom
             }
         }
 
+        public void MoveForward()
+        {
+            if (Direction.Equals(Direction.Down))
+            {
+                MoveDown();
+            }
+            else if (Direction.Equals(Direction.Left))
+            {
+                MoveLeft();
+            }
+            else if (Direction.Equals(Direction.Up))
+            {
+                MoveUp();
+            }
+            else if (Direction.Equals(Direction.Right))
+            {
+                MoveRight();
+            }
+        }
+
         public void MoveDown()
         {
             Location = new Point(location.X, location.Y + BirdCommandMain.CELL_SIZE);

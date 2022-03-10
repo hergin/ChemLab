@@ -240,7 +240,7 @@ namespace BirdCommand
                 }
                 else if (element is BirdCell bird)
                 {
-                    designer_trafo.Document.AddElement(new BirdCell(bird.Location.X + 200, bird.Location.Y));
+                    designer_trafo.Document.AddElement(new BirdCell(bird.Location.X + 200, bird.Location.Y, bird.Direction));
                 }
             }
         }
@@ -266,18 +266,30 @@ namespace BirdCommand
                         rule),
                     TrafoUtil.FindPostConditionElements(designer_trafo.Document.Elements.GetArray().ToList(),
                         rule));
-                switch (ruleType)
+                if (TrafoUtil.DoesPatternExist(designer_board.Document.Elements.GetArray().ToList(), TrafoUtil.FindPreConditionElements(designer_trafo.Document.Elements.GetArray().ToList(),
+                        rule)))
                 {
-                    case RuleType.TurnRight:
-                        theBird.TurnRight();
-                        break;
-                    case RuleType.TurnLeft:
-                        theBird.TurnLeft();
-                        break;
-                    case RuleType.Turn180:
-                        theBird.TurnRight();
-                        theBird.TurnRight();
-                        break;
+                    // TODO pattern exists for other move forward or turn rules than the one in the model, should find a solution
+                    switch (ruleType)
+                    {
+                        case RuleType.TurnRight:
+                            theBird.TurnRight();
+                            break;
+                        case RuleType.TurnLeft:
+                            theBird.TurnLeft();
+                            break;
+                        case RuleType.Turn180:
+                            theBird.TurnRight();
+                            theBird.TurnRight();
+                            break;
+                        case RuleType.MoveForward:
+                            theBird.MoveForward();
+                            break;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Pattern doesn't exist!");
                 }
             }
 
