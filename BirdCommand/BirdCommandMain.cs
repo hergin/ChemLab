@@ -72,8 +72,24 @@ namespace BirdCommand
         {
             if (e.Element is RuleCell)
             {
-                // TODO select the contents of the rule as well
+                List<BaseElement> list = FindElementsWithin(designer_trafo,e.Element);
+                designer_trafo.Document.SelectElements(list.ToArray());
             }
+        }
+
+        List<BaseElement> FindElementsWithin(Designer designer, BaseElement parentElement)
+        {
+            List<BaseElement> result = new List<BaseElement>();
+            foreach (var element in designer.Document.Elements)
+            {
+                BaseElement casted = element as BaseElement;
+                if (casted.Location.Y >= parentElement.Location.Y && casted.Location.Y <= parentElement.Location.Y + parentElement.Size.Height
+                    && casted.Location.X >= parentElement.Location.X && casted.Location.X <= parentElement.Location.X + parentElement.Size.Width)
+                {
+                    result.Add(casted);
+                }
+            }
+            return result;
         }
 
         void LoadLevel1()
