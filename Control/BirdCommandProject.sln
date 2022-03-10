@@ -1,12 +1,14 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31911.196
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31919.166
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Diagram.NET", "Diagram.NET.csproj", "{46FE3660-273C-474B-BA51-835F5CDEDA58}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestForm", "..\TestForm\TestForm.csproj", "{0468C95B-C0D7-415E-9D73-64E11AD97738}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BirdCommand", "..\BirdCommand\BirdCommand.csproj", "{8B12CDDF-8F86-40D4-9EF8-5EAF9501E6FE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BirdCommandTests", "..\BirdCommandTests\BirdCommandTests.csproj", "{093A872D-6CB4-44A4-8A98-06EC5A8CE188}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,6 +28,10 @@ Global
 		{8B12CDDF-8F86-40D4-9EF8-5EAF9501E6FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B12CDDF-8F86-40D4-9EF8-5EAF9501E6FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8B12CDDF-8F86-40D4-9EF8-5EAF9501E6FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{093A872D-6CB4-44A4-8A98-06EC5A8CE188}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{093A872D-6CB4-44A4-8A98-06EC5A8CE188}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{093A872D-6CB4-44A4-8A98-06EC5A8CE188}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{093A872D-6CB4-44A4-8A98-06EC5A8CE188}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

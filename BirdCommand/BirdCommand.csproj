@@ -61,6 +61,7 @@
     <Compile Include="Custom\EmptyCell.cs" />
     <Compile Include="Custom\LevelDesigner.cs" />
     <Compile Include="Custom\PigCell.cs" />
+    <Compile Include="Custom\TrafoUtil.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="BirdCommandMain.resx">

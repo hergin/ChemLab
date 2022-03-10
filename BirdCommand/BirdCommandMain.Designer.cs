@@ -61,6 +61,7 @@ namespace BirdCommand
             // 
             // button2
             // 
+            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button2.Location = new System.Drawing.Point(251, 454);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(88, 23);
@@ -209,6 +210,7 @@ namespace BirdCommand
             // 
             // button10
             // 
+            this.button10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button10.Location = new System.Drawing.Point(983, 242);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(88, 43);
@@ -219,6 +221,7 @@ namespace BirdCommand
             // 
             // button11
             // 
+            this.button11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button11.Location = new System.Drawing.Point(983, 291);
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(88, 43);
