@@ -43,9 +43,9 @@ namespace BirdCommand
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(621, 332);
+            this.button1.Location = new System.Drawing.Point(244, 513);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(153, 23);
+            this.button1.Size = new System.Drawing.Size(100, 23);
             this.button1.TabIndex = 2;
             this.button1.Text = "Move Bird Down";
             this.button1.UseVisualStyleBackColor = true;
@@ -53,9 +53,9 @@ namespace BirdCommand
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(621, 220);
+            this.button2.Location = new System.Drawing.Point(251, 454);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(153, 23);
+            this.button2.Size = new System.Drawing.Size(88, 23);
             this.button2.TabIndex = 3;
             this.button2.Text = "Move Bird Up";
             this.button2.UseVisualStyleBackColor = true;
@@ -63,9 +63,9 @@ namespace BirdCommand
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(732, 272);
+            this.button3.Location = new System.Drawing.Point(307, 484);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(153, 23);
+            this.button3.Size = new System.Drawing.Size(96, 23);
             this.button3.TabIndex = 4;
             this.button3.Text = "Move Bird Right";
             this.button3.UseVisualStyleBackColor = true;
@@ -73,9 +73,9 @@ namespace BirdCommand
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(512, 272);
+            this.button4.Location = new System.Drawing.Point(186, 484);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(153, 23);
+            this.button4.Size = new System.Drawing.Size(91, 23);
             this.button4.TabIndex = 5;
             this.button4.Text = "Move Bird Left";
             this.button4.UseVisualStyleBackColor = true;
@@ -83,9 +83,9 @@ namespace BirdCommand
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(732, 54);
+            this.button5.Location = new System.Drawing.Point(95, 454);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(77, 69);
+            this.button5.Size = new System.Drawing.Size(77, 82);
             this.button5.TabIndex = 6;
             this.button5.Text = "Turn Right";
             this.button5.UseVisualStyleBackColor = true;
@@ -93,9 +93,9 @@ namespace BirdCommand
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(575, 54);
+            this.button6.Location = new System.Drawing.Point(12, 454);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(77, 69);
+            this.button6.Size = new System.Drawing.Size(77, 82);
             this.button6.TabIndex = 7;
             this.button6.Text = "Turn Left";
             this.button6.UseVisualStyleBackColor = true;
@@ -114,7 +114,7 @@ namespace BirdCommand
             // linkLabel1
             // 
             this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(481, 387);
+            this.linkLabel1.Location = new System.Drawing.Point(119, 425);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(42, 13);
             this.linkLabel1.TabIndex = 8;
@@ -125,7 +125,7 @@ namespace BirdCommand
             // linkLabel2
             // 
             this.linkLabel2.AutoSize = true;
-            this.linkLabel2.Location = new System.Drawing.Point(545, 387);
+            this.linkLabel2.Location = new System.Drawing.Point(183, 425);
             this.linkLabel2.Name = "linkLabel2";
             this.linkLabel2.Size = new System.Drawing.Size(42, 13);
             this.linkLabel2.TabIndex = 9;
@@ -136,7 +136,7 @@ namespace BirdCommand
             // linkLabel3
             // 
             this.linkLabel3.AutoSize = true;
-            this.linkLabel3.Location = new System.Drawing.Point(610, 387);
+            this.linkLabel3.Location = new System.Drawing.Point(248, 425);
             this.linkLabel3.Name = "linkLabel3";
             this.linkLabel3.Size = new System.Drawing.Size(42, 13);
             this.linkLabel3.TabIndex = 10;
@@ -148,7 +148,7 @@ namespace BirdCommand
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(915, 430);
+            this.ClientSize = new System.Drawing.Size(1121, 550);
             this.Controls.Add(this.linkLabel3);
             this.Controls.Add(this.linkLabel2);
             this.Controls.Add(this.linkLabel1);
