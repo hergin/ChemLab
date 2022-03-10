@@ -12,6 +12,8 @@ using System.Windows.Forms;
 
 namespace BirdCommand
 {
+    // TODO when you click on the newly slide area to create something or to select, it automatically goes to top.
+    // TODO rule counts on top-right
     public partial class BirdCommandMain : Form
     {
         public static int CELL_SIZE = 50;

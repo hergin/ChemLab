@@ -99,6 +99,8 @@ namespace BirdCommand.Custom
                 }
             }
 
+            // TODO another turn rule (just the bird, no cells underneath).
+
             // Move Forward rules identification: There is only one bird and two empty cell first
             if (filteredLhs.Where(f => f is BirdCell).Count() == 1 && filteredLhs.Where(f => f is EmptyCell).Count() == 2
                 && filteredRhs.Where(f => f is BirdCell).Count() == 1 && filteredRhs.Where(f => f is EmptyCell).Count() == 2)
