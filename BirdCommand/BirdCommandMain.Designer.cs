@@ -162,6 +162,7 @@ namespace BirdCommand
             // 
             // button7
             // 
+            this.button7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.button7.Location = new System.Drawing.Point(553, 467);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(119, 23);
@@ -172,6 +173,9 @@ namespace BirdCommand
             // 
             // panel1
             // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.AutoScroll = true;
             this.panel1.Controls.Add(this.designer_trafo);
             this.panel1.Location = new System.Drawing.Point(439, 12);
@@ -181,6 +185,7 @@ namespace BirdCommand
             // 
             // button9
             // 
+            this.button9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button9.Image = global::BirdCommand.Properties.Resources.BirdDown;
             this.button9.Location = new System.Drawing.Point(983, 32);
             this.button9.Name = "button9";
@@ -191,6 +196,7 @@ namespace BirdCommand
             // 
             // button8
             // 
+            this.button8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button8.Image = global::BirdCommand.Properties.Resources.Empty;
             this.button8.Location = new System.Drawing.Point(983, 132);
             this.button8.Name = "button8";

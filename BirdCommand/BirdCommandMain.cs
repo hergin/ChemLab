@@ -84,7 +84,9 @@ namespace BirdCommand
             {
                 BaseElement casted = element as BaseElement;
                 if (casted.Location.Y >= parentElement.Location.Y && casted.Location.Y <= parentElement.Location.Y + parentElement.Size.Height
-                    && casted.Location.X >= parentElement.Location.X && casted.Location.X <= parentElement.Location.X + parentElement.Size.Width)
+                    && casted.Location.Y + casted.Size.Height <= parentElement.Location.Y + parentElement.Size.Height
+                    && casted.Location.X >= parentElement.Location.X && casted.Location.X <= parentElement.Location.X + parentElement.Size.Width
+                    && casted.Location.X + casted.Size.Width <= parentElement.Location.X + parentElement.Size.Width)
                 {
                     result.Add(casted);
                 }
