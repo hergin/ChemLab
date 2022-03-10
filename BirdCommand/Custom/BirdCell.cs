@@ -11,7 +11,7 @@ namespace BirdCommand.Custom
 {
     public enum Direction
     {
-        Up, Down, Right, Left
+        Up, Right, Down, Left
     }
     [Serializable]
     public class BirdCell : RectangleElement

@@ -222,9 +222,37 @@ namespace BirdCommand
             MessageBox.Show("Result: "+
                 TrafoUtil.DoesPatternExist(
                     designer_board.Document.Elements.GetArray().ToList(),
-                    DesignerUtil.FindElementsWithin(
-                        designer_trafo,
-                        designer_trafo.Document.Elements.GetArray().Where(s=>s is RuleCell).First())));
+                    TrafoUtil.FindPreConditionElements(
+                        designer_trafo.Document.Elements.GetArray().ToList(),
+                        (RuleCell)designer_trafo.Document.Elements.GetArray().Where(s=>s is RuleCell).First())));
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            var lhsElements = TrafoUtil.FindPreConditionElements(designer_trafo.Document.Elements.GetArray().ToList(),
+                (RuleCell)designer_trafo.Document.SelectedElements.GetArray().Where(el => el is RuleCell).First());
+
+            foreach (var element in lhsElements)
+            {
+                if (element is EmptyCell empty)
+                {
+                    designer_trafo.Document.AddElement(new EmptyCell(empty.Location.X + 200, empty.Location.Y));
+                }
+                else if (element is BirdCell bird)
+                {
+                    designer_trafo.Document.AddElement(new BirdCell(bird.Location.X + 200, bird.Location.Y));
+                }
+            }
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+            var ruleType = TrafoUtil.IdentifyRuleType(
+                TrafoUtil.FindPreConditionElements(designer_trafo.Document.Elements.GetArray().ToList(),
+                    (RuleCell)designer_trafo.Document.SelectedElements.GetArray().Where(el => el is RuleCell).First()),
+                TrafoUtil.FindPostConditionElements(designer_trafo.Document.Elements.GetArray().ToList(),
+                    (RuleCell)designer_trafo.Document.SelectedElements.GetArray().Where(el => el is RuleCell).First()));
+            MessageBox.Show("RuleType: " + ruleType);
         }
 
         private void button8_Click(object sender, EventArgs e)
