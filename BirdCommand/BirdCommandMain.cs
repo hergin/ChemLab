@@ -181,18 +181,40 @@ namespace BirdCommand
             var highestY = 0;
             foreach (var element in designer_trafo.Document.Elements)
             {
-                if(((BaseElement)element).Location.Y + ((BaseElement)element).Size.Height > highestY)
+                if (element is RuleCell || element is StartCell)
                 {
-                    highestY = ((BaseElement)element).Location.Y + ((BaseElement)element).Size.Height;
+                    if (((BaseElement)element).Location.Y + ((BaseElement)element).Size.Height > highestY)
+                    {
+                        highestY = ((BaseElement)element).Location.Y + ((BaseElement)element).Size.Height;
+                    }
                 }
             }
             designer_trafo.Document.AddElement(new RuleCell(21, highestY-4));
+            DesignerUtil.ArrangeTheOrder(designer_trafo);
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
             designer_trafo.Document.Action = DesignerAction.Add;
             addBird = true;
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            if(designer_trafo.Document.SelectedElements.Count == 1
+                && designer_trafo.Document.SelectedElements[0] is BirdCell bird)
+            {
+                bird.TurnRight();
+            }
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            if (designer_trafo.Document.SelectedElements.Count == 1
+                && designer_trafo.Document.SelectedElements[0] is BirdCell bird)
+            {
+                bird.TurnLeft();
+            }
         }
 
         private void button8_Click(object sender, EventArgs e)
