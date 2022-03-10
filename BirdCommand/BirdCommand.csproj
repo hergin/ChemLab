@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8B12CDDF-8F86-40D4-9EF8-5EAF9501E6FE}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>BirdCommand</RootNamespace>
+    <AssemblyName>BirdCommand</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BirdCommandMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BirdCommandMain.Designer.cs">
+      <DependentUpon>BirdCommandMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Custom\BirdCell.cs" />
+    <Compile Include="Custom\BlockCell.cs" />
+    <Compile Include="Custom\EmptyCell.cs" />
+    <Compile Include="Custom\LevelDesigner.cs" />
+    <Compile Include="Custom\PigCell.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="BirdCommandMain.resx">
+      <DependentUpon>BirdCommandMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Control\Diagram.NET.csproj">
+      <Project>{46FE3660-273C-474B-BA51-835F5CDEDA58}</Project>
+      <Name>Diagram.NET</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BirdDown.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BirdLeft.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BirdRight.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BirdUp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Empty.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Pig.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Glass.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HalfStone.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HalfWood.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Stone.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TNT.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Wood.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hoc1.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hoc2.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hoc3.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
