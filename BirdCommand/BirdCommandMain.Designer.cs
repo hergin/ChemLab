@@ -42,6 +42,7 @@ namespace BirdCommand
             this.designer_trafo = new Dalssoft.DiagramNet.Designer();
             this.button7 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button9 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -178,13 +179,23 @@ namespace BirdCommand
             this.panel1.Size = new System.Drawing.Size(499, 401);
             this.panel1.TabIndex = 13;
             // 
+            // button9
+            // 
+            this.button9.Image = global::BirdCommand.Properties.Resources.BirdDown;
+            this.button9.Location = new System.Drawing.Point(983, 32);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(88, 94);
+            this.button9.TabIndex = 15;
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
+            // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(744, 468);
+            this.button8.Image = global::BirdCommand.Properties.Resources.Empty;
+            this.button8.Location = new System.Drawing.Point(983, 132);
             this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(75, 23);
-            this.button8.TabIndex = 14;
-            this.button8.Text = "Add bird";
+            this.button8.Size = new System.Drawing.Size(88, 87);
+            this.button8.TabIndex = 16;
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
@@ -194,6 +205,7 @@ namespace BirdCommand
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1121, 550);
             this.Controls.Add(this.button8);
+            this.Controls.Add(this.button9);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.linkLabel3);
@@ -229,6 +241,7 @@ namespace BirdCommand
         private Dalssoft.DiagramNet.Designer designer_trafo;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Button button8;
     }
 }

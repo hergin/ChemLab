@@ -54,6 +54,7 @@
     </Compile>
     <Compile Include="Custom\BirdCell.cs" />
     <Compile Include="Custom\BlockCell.cs" />
+    <Compile Include="Custom\SnapCell.cs" />
     <Compile Include="Custom\RuleCell.cs" />
     <Compile Include="Custom\StartCell.cs" />
     <Compile Include="Custom\EmptyCell.cs" />
@@ -143,6 +144,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\rule.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\snap.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

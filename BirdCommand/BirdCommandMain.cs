@@ -17,6 +17,7 @@ namespace BirdCommand
         public static int CELL_SIZE = 50;
         BirdCell theBird;
         StartCell theStart;
+        bool addBird = false, addEmpty = false;
 
         public BirdCommandMain()
         {
@@ -25,7 +26,54 @@ namespace BirdCommand
             theStart = new StartCell();
             designer_trafo.Document.AddElement(theStart);
 
+            designer_trafo.ElementClick += Designer_trafo_ElementClick;
+            designer_trafo.MouseUp += Designer_trafo_MouseUp;
+            designer_trafo.ElementMoved += Designer_trafo_ElementMoved;
+            designer_trafo.ElementMoving += Designer_trafo_ElementMoving;
+
+            //designer_trafo.Document.AddElement(new SnapCell(0, 0));
+
             // LoadLevel1();
+        }
+
+        private void Designer_trafo_ElementMoved(object sender, ElementEventArgs e)
+        {
+            if(e.Element is RuleCell)
+            {
+                // TODO put the current rule right after the highlighted element and move the rest accordingly.
+            }
+        }
+
+        private void Designer_trafo_ElementMoving(object sender, ElementEventArgs e)
+        {
+            if(e.Element is RuleCell)
+            {
+                // TODO highlight the closest rule that this can snap (this can be done by adding another cell, like HighlightCell)
+            }
+        }
+
+        private void Designer_trafo_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (addBird)
+            {
+                // TODO if there is a cell underneath, auto-center the bird on the cell.
+                designer_trafo.Document.AddElement(new BirdCell(e.X, e.Y));
+                addBird = false;
+            }
+            if (addEmpty)
+            {
+                // TODO if there is a cell around, auto-move this one to it.
+                designer_trafo.Document.AddElement(new EmptyCell(e.X, e.Y));
+                addEmpty = false;
+            }
+        }
+
+        private void Designer_trafo_ElementClick(object sender, ElementEventArgs e)
+        {
+            if (e.Element is RuleCell)
+            {
+                // TODO select the contents of the rule as well
+            }
         }
 
         void LoadLevel1()
@@ -116,9 +164,16 @@ namespace BirdCommand
             designer_trafo.Document.AddElement(new RuleCell(21, highestY-4));
         }
 
+        private void button9_Click(object sender, EventArgs e)
+        {
+            designer_trafo.Document.Action = DesignerAction.Add;
+            addBird = true;
+        }
+
         private void button8_Click(object sender, EventArgs e)
         {
             designer_trafo.Document.Action = DesignerAction.Add;
+            addEmpty = true;
         }
     }
 }

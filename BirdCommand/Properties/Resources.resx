@@ -160,6 +160,9 @@
   <data name="rule_start" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\rule-start.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="snap" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\snap.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Stone" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Stone.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
