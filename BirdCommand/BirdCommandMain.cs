@@ -255,6 +255,33 @@ namespace BirdCommand
             MessageBox.Show("RuleType: " + ruleType);
         }
 
+        private void button15_Click(object sender, EventArgs e)
+        {
+            var nextRule = designer_trafo.Document.Elements.GetArray().Where(el=> el is RuleCell).First();
+            if (nextRule != null)
+            {
+                var ruleType = TrafoUtil.IdentifyRuleType(
+                    TrafoUtil.FindPreConditionElements(designer_trafo.Document.Elements.GetArray().ToList(),
+                        (RuleCell)designer_trafo.Document.Elements.GetArray().Where(el => el is RuleCell).First()),
+                    TrafoUtil.FindPostConditionElements(designer_trafo.Document.Elements.GetArray().ToList(),
+                        (RuleCell)designer_trafo.Document.Elements.GetArray().Where(el => el is RuleCell).First()));
+                switch (ruleType)
+                {
+                    case RuleType.TurnRight:
+                        theBird.TurnRight();
+                        break;
+                    case RuleType.TurnLeft:
+                        theBird.TurnLeft();
+                        break;
+                    case RuleType.Turn180:
+                        theBird.TurnRight();
+                        theBird.TurnRight();
+                        break;
+                }
+            }
+
+        }
+
         private void button8_Click(object sender, EventArgs e)
         {
             designer_trafo.Document.Action = DesignerAction.Add;
