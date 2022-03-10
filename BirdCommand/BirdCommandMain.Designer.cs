@@ -39,6 +39,11 @@ namespace BirdCommand
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.linkLabel2 = new System.Windows.Forms.LinkLabel();
             this.linkLabel3 = new System.Windows.Forms.LinkLabel();
+            this.designer_trafo = new Dalssoft.DiagramNet.Designer();
+            this.button7 = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.button8 = new System.Windows.Forms.Button();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -144,11 +149,53 @@ namespace BirdCommand
             this.linkLabel3.Text = "Level 3";
             this.linkLabel3.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel3_LinkClicked);
             // 
+            // designer_trafo
+            // 
+            this.designer_trafo.AutoScroll = true;
+            this.designer_trafo.BackColor = System.Drawing.SystemColors.Window;
+            this.designer_trafo.Dock = System.Windows.Forms.DockStyle.Top;
+            this.designer_trafo.Location = new System.Drawing.Point(0, 0);
+            this.designer_trafo.Name = "designer_trafo";
+            this.designer_trafo.Size = new System.Drawing.Size(482, 2000);
+            this.designer_trafo.TabIndex = 11;
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(553, 467);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(119, 23);
+            this.button7.TabIndex = 12;
+            this.button7.Text = "Add new rule";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.AutoScroll = true;
+            this.panel1.Controls.Add(this.designer_trafo);
+            this.panel1.Location = new System.Drawing.Point(439, 12);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(499, 401);
+            this.panel1.TabIndex = 13;
+            // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(744, 468);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(75, 23);
+            this.button8.TabIndex = 14;
+            this.button8.Text = "Add bird";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
+            // 
             // BirdCommandMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1121, 550);
+            this.Controls.Add(this.button8);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.button7);
             this.Controls.Add(this.linkLabel3);
             this.Controls.Add(this.linkLabel2);
             this.Controls.Add(this.linkLabel1);
@@ -162,6 +209,7 @@ namespace BirdCommand
             this.Name = "BirdCommandMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Bird Command";
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -178,6 +226,10 @@ namespace BirdCommand
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.LinkLabel linkLabel2;
         private System.Windows.Forms.LinkLabel linkLabel3;
+        private Dalssoft.DiagramNet.Designer designer_trafo;
+        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button button8;
     }
 }
 

@@ -54,6 +54,8 @@
     </Compile>
     <Compile Include="Custom\BirdCell.cs" />
     <Compile Include="Custom\BlockCell.cs" />
+    <Compile Include="Custom\RuleCell.cs" />
+    <Compile Include="Custom\StartCell.cs" />
     <Compile Include="Custom\EmptyCell.cs" />
     <Compile Include="Custom\LevelDesigner.cs" />
     <Compile Include="Custom\PigCell.cs" />
@@ -135,6 +137,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\hoc3.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rule-start.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rule.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

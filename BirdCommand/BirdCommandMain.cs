@@ -16,12 +16,16 @@ namespace BirdCommand
     {
         public static int CELL_SIZE = 50;
         BirdCell theBird;
+        StartCell theStart;
 
         public BirdCommandMain()
         {
             InitializeComponent();
 
-            LoadLevel1();
+            theStart = new StartCell();
+            designer_trafo.Document.AddElement(theStart);
+
+            // LoadLevel1();
         }
 
         void LoadLevel1()
@@ -97,6 +101,24 @@ namespace BirdCommand
         private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             LoadLevel3();
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            var highestY = 0;
+            foreach (var element in designer_trafo.Document.Elements)
+            {
+                if(((BaseElement)element).Location.Y + ((BaseElement)element).Size.Height > highestY)
+                {
+                    highestY = ((BaseElement)element).Location.Y + ((BaseElement)element).Size.Height;
+                }
+            }
+            designer_trafo.Document.AddElement(new RuleCell(21, highestY-4));
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            designer_trafo.Document.Action = DesignerAction.Add;
         }
     }
 }
