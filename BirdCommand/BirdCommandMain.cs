@@ -56,8 +56,12 @@ namespace BirdCommand
         {
             if (addBird)
             {
+                var bird = new BirdCell(e.X, e.Y);
+                var cellUnderneath = FindCellUnderneath(designer_trafo, bird);
+                if (cellUnderneath != null)
+                    bird.Location = cellUnderneath.Location;
                 // TODO if there is a cell underneath, auto-center the bird on the cell.
-                designer_trafo.Document.AddElement(new BirdCell(e.X, e.Y));
+                designer_trafo.Document.AddElement(bird);
                 addBird = false;
             }
             if (addEmpty)
@@ -66,6 +70,21 @@ namespace BirdCommand
                 designer_trafo.Document.AddElement(new EmptyCell(e.X, e.Y));
                 addEmpty = false;
             }
+        }
+
+        EmptyCell FindCellUnderneath(Designer designer, BirdCell bird)
+        {
+            foreach (var element in designer.Document.Elements)
+            {
+                BaseElement casted = element as BaseElement;
+                if (casted is EmptyCell result
+                    && bird.Location.Y >= casted.Location.Y && bird.Location.Y <= casted.Location.Y + casted.Size.Height
+                    && bird.Location.X >= casted.Location.X && bird.Location.X <= casted.Location.X + casted.Size.Width)
+                {
+                    return result;
+                }
+            }
+            return null;
         }
 
         private void Designer_trafo_ElementClick(object sender, ElementEventArgs e)
