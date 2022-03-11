@@ -34,6 +34,9 @@ namespace BirdCommand
             designer_trafo.ElementMoved += Designer_trafo_ElementMoved;
             designer_trafo.ElementMoving += Designer_trafo_ElementMoving;
 
+
+            //designer_trafo.Document.AddElement(label);
+
             //designer_trafo.Document.AddElement(new SnapCell(0, 0));
 
             // LoadLevel1();
@@ -268,33 +271,46 @@ namespace BirdCommand
                         rule),
                     TrafoUtil.FindPostConditionElements(designer_trafo.Document.Elements.GetArray().ToList(),
                         rule));
-                if (TrafoUtil.DoesPatternExist(designer_board.Document.Elements.GetArray().ToList(), TrafoUtil.FindPreConditionElements(designer_trafo.Document.Elements.GetArray().ToList(),
-                        rule)))
+                for (int i = 0; i < ((RuleCell)rule).RuleCount; i++)
                 {
-                    // TODO pattern exists for other move forward or turn rules than the one in the model, should find a solution
-                    switch (ruleType)
+                    if (TrafoUtil.DoesPatternExist(designer_board.Document.Elements.GetArray().ToList(), TrafoUtil.FindPreConditionElements(designer_trafo.Document.Elements.GetArray().ToList(),
+                            rule)))
                     {
-                        case RuleType.TurnRight:
-                            theBird.TurnRight();
-                            break;
-                        case RuleType.TurnLeft:
-                            theBird.TurnLeft();
-                            break;
-                        case RuleType.Turn180:
-                            theBird.TurnRight();
-                            theBird.TurnRight();
-                            break;
-                        case RuleType.MoveForward:
-                            theBird.MoveForward();
-                            break;
+                        // TODO pattern exists for other move forward or turn rules than the one in the model, should find a solution
+                        switch (ruleType)
+                        {
+                            case RuleType.TurnRight:
+                                theBird.TurnRight();
+                                break;
+                            case RuleType.TurnLeft:
+                                theBird.TurnLeft();
+                                break;
+                            case RuleType.Turn180:
+                                theBird.TurnRight();
+                                theBird.TurnRight();
+                                break;
+                            case RuleType.MoveForward:
+                                theBird.MoveForward();
+                                break;
+                        }
                     }
-                }
-                else
-                {
-                    MessageBox.Show("Pattern doesn't exist!");
+                    else
+                    {
+                        MessageBox.Show("Pattern doesn't exist!");
+                    }
                 }
             }
 
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+            ((RuleCell)designer_trafo.Document.SelectedElements.GetArray().Where(el => el is RuleCell).First()).IncreaseRuleCount();
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+            ((RuleCell)designer_trafo.Document.SelectedElements.GetArray().Where(el => el is RuleCell).First()).DecreaseRuleCount();
         }
 
         private void button8_Click(object sender, EventArgs e)
