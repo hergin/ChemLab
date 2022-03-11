@@ -10,7 +10,7 @@ namespace BirdCommand.Custom
 {
     public enum RuleType
     {
-        MoveForward, TurnRight, TurnLeft, Turn180, DoNothing
+        MoveForward, TurnRight, TurnLeft, Turn180, NotSupportedYet
     }
 
     public class TrafoUtil
@@ -189,7 +189,7 @@ namespace BirdCommand.Custom
                 }
             }
 
-            return RuleType.DoNothing;
+            return RuleType.NotSupportedYet;
         }
 
         public static List<BaseElement> FindPreConditionElements(List<BaseElement> allElements, BaseElement parentElement)

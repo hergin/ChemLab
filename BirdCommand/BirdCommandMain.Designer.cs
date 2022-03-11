@@ -54,13 +54,25 @@ namespace BirdCommand
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.button16 = new System.Windows.Forms.Button();
             this.button17 = new System.Windows.Forms.Button();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.addRuleButton = new System.Windows.Forms.Button();
+            this.toAddEmptyButton = new System.Windows.Forms.Button();
+            this.toAddBirdButton = new System.Windows.Forms.Button();
+            this.debugPanel = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.panel3.SuspendLayout();
+            this.debugPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(248, 625);
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button1.Location = new System.Drawing.Point(256, 109);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(100, 23);
             this.button1.TabIndex = 2;
@@ -70,8 +82,8 @@ namespace BirdCommand
             // 
             // button2
             // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.Location = new System.Drawing.Point(255, 566);
+            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button2.Location = new System.Drawing.Point(263, 50);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(88, 23);
             this.button2.TabIndex = 3;
@@ -81,7 +93,8 @@ namespace BirdCommand
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(311, 596);
+            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button3.Location = new System.Drawing.Point(319, 80);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(96, 23);
             this.button3.TabIndex = 4;
@@ -91,7 +104,8 @@ namespace BirdCommand
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(190, 596);
+            this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button4.Location = new System.Drawing.Point(198, 80);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(91, 23);
             this.button4.TabIndex = 5;
@@ -101,7 +115,8 @@ namespace BirdCommand
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(99, 566);
+            this.button5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button5.Location = new System.Drawing.Point(107, 50);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(77, 82);
             this.button5.TabIndex = 6;
@@ -111,7 +126,8 @@ namespace BirdCommand
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(16, 566);
+            this.button6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button6.Location = new System.Drawing.Point(24, 50);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(77, 82);
             this.button6.TabIndex = 7;
@@ -124,15 +140,16 @@ namespace BirdCommand
             this.designer_board.AutoScroll = true;
             this.designer_board.BackColor = System.Drawing.SystemColors.Window;
             this.designer_board.Enabled = false;
-            this.designer_board.Location = new System.Drawing.Point(16, 124);
+            this.designer_board.Location = new System.Drawing.Point(16, 105);
             this.designer_board.Name = "designer_board";
             this.designer_board.Size = new System.Drawing.Size(401, 401);
             this.designer_board.TabIndex = 1;
             // 
             // linkLabel1
             // 
+            this.linkLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(123, 537);
+            this.linkLabel1.Location = new System.Drawing.Point(216, 21);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(42, 13);
             this.linkLabel1.TabIndex = 8;
@@ -142,8 +159,9 @@ namespace BirdCommand
             // 
             // linkLabel2
             // 
+            this.linkLabel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.linkLabel2.AutoSize = true;
-            this.linkLabel2.Location = new System.Drawing.Point(187, 537);
+            this.linkLabel2.Location = new System.Drawing.Point(280, 21);
             this.linkLabel2.Name = "linkLabel2";
             this.linkLabel2.Size = new System.Drawing.Size(42, 13);
             this.linkLabel2.TabIndex = 9;
@@ -153,8 +171,9 @@ namespace BirdCommand
             // 
             // linkLabel3
             // 
+            this.linkLabel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.linkLabel3.AutoSize = true;
-            this.linkLabel3.Location = new System.Drawing.Point(252, 537);
+            this.linkLabel3.Location = new System.Drawing.Point(345, 21);
             this.linkLabel3.Name = "linkLabel3";
             this.linkLabel3.Size = new System.Drawing.Size(42, 13);
             this.linkLabel3.TabIndex = 10;
@@ -169,13 +188,13 @@ namespace BirdCommand
             this.designer_trafo.Dock = System.Windows.Forms.DockStyle.Top;
             this.designer_trafo.Location = new System.Drawing.Point(0, 0);
             this.designer_trafo.Name = "designer_trafo";
-            this.designer_trafo.Size = new System.Drawing.Size(482, 2000);
+            this.designer_trafo.Size = new System.Drawing.Size(607, 2000);
             this.designer_trafo.TabIndex = 11;
             // 
             // button7
             // 
             this.button7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button7.Location = new System.Drawing.Point(490, 555);
+            this.button7.Location = new System.Drawing.Point(444, 20);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(119, 23);
             this.button7.TabIndex = 12;
@@ -190,16 +209,16 @@ namespace BirdCommand
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.AutoScroll = true;
             this.panel1.Controls.Add(this.designer_trafo);
-            this.panel1.Location = new System.Drawing.Point(439, 12);
+            this.panel1.Location = new System.Drawing.Point(633, 138);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(499, 514);
+            this.panel1.Size = new System.Drawing.Size(624, 627);
             this.panel1.TabIndex = 13;
             // 
             // button9
             // 
             this.button9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button9.Image = global::BirdCommand.Properties.Resources.BirdDown;
-            this.button9.Location = new System.Drawing.Point(983, 32);
+            this.button9.Location = new System.Drawing.Point(960, 28);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(88, 94);
             this.button9.TabIndex = 15;
@@ -210,7 +229,7 @@ namespace BirdCommand
             // 
             this.button8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button8.Image = global::BirdCommand.Properties.Resources.Empty;
-            this.button8.Location = new System.Drawing.Point(983, 132);
+            this.button8.Location = new System.Drawing.Point(1070, 30);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(88, 87);
             this.button8.TabIndex = 16;
@@ -220,7 +239,7 @@ namespace BirdCommand
             // button10
             // 
             this.button10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button10.Location = new System.Drawing.Point(983, 242);
+            this.button10.Location = new System.Drawing.Point(748, 31);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(88, 43);
             this.button10.TabIndex = 17;
@@ -231,7 +250,7 @@ namespace BirdCommand
             // button11
             // 
             this.button11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button11.Location = new System.Drawing.Point(983, 291);
+            this.button11.Location = new System.Drawing.Point(748, 80);
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(88, 43);
             this.button11.TabIndex = 18;
@@ -242,7 +261,7 @@ namespace BirdCommand
             // button12
             // 
             this.button12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button12.Location = new System.Drawing.Point(641, 555);
+            this.button12.Location = new System.Drawing.Point(463, 51);
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(239, 23);
             this.button12.TabIndex = 19;
@@ -253,7 +272,7 @@ namespace BirdCommand
             // button13
             // 
             this.button13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button13.Location = new System.Drawing.Point(641, 584);
+            this.button13.Location = new System.Drawing.Point(463, 80);
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(239, 23);
             this.button13.TabIndex = 20;
@@ -264,7 +283,7 @@ namespace BirdCommand
             // button14
             // 
             this.button14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button14.Location = new System.Drawing.Point(641, 613);
+            this.button14.Location = new System.Drawing.Point(463, 109);
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(239, 23);
             this.button14.TabIndex = 21;
@@ -274,10 +293,9 @@ namespace BirdCommand
             // 
             // button15
             // 
-            this.button15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button15.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button15.Image = global::BirdCommand.Properties.Resources.run_button;
-            this.button15.Location = new System.Drawing.Point(969, 567);
+            this.button15.Location = new System.Drawing.Point(16, 514);
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(123, 53);
             this.button15.TabIndex = 22;
@@ -286,18 +304,21 @@ namespace BirdCommand
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(126, 12);
+            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox1.Image = global::BirdCommand.Properties.Resources.Bird_Command_logos_back;
+            this.pictureBox1.Location = new System.Drawing.Point(18, 10);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(200, 100);
+            this.pictureBox1.Size = new System.Drawing.Size(150, 75);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 23;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            this.pictureBox1.DoubleClick += new System.EventHandler(this.pictureBox1_DoubleClick);
             // 
             // button16
             // 
             this.button16.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button16.Location = new System.Drawing.Point(983, 340);
+            this.button16.Location = new System.Drawing.Point(855, 30);
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(88, 43);
             this.button16.TabIndex = 24;
@@ -308,7 +329,7 @@ namespace BirdCommand
             // button17
             // 
             this.button17.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button17.Location = new System.Drawing.Point(983, 389);
+            this.button17.Location = new System.Drawing.Point(855, 79);
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(88, 43);
             this.button17.TabIndex = 25;
@@ -316,42 +337,157 @@ namespace BirdCommand
             this.button17.UseVisualStyleBackColor = true;
             this.button17.Click += new System.EventHandler(this.button17_Click);
             // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(173)))), ((int)(((byte)(188)))));
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(1269, 91);
+            this.panel2.TabIndex = 26;
+            // 
+            // label1
+            // 
+            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(118)))), ((int)(((byte)(101)))), ((int)(((byte)(160)))));
+            this.label1.Font = new System.Drawing.Font("Trebuchet MS", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(434, 105);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(196, 30);
+            this.label1.TabIndex = 27;
+            this.label1.Text = "Blocks";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label2
+            // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(118)))), ((int)(((byte)(101)))), ((int)(((byte)(160)))));
+            this.label2.Font = new System.Drawing.Font("Trebuchet MS", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.Location = new System.Drawing.Point(633, 105);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(624, 30);
+            this.label2.TabIndex = 28;
+            this.label2.Text = "Workspace";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(228)))), ((int)(((byte)(228)))), ((int)(((byte)(228)))));
+            this.panel3.Controls.Add(this.addRuleButton);
+            this.panel3.Controls.Add(this.toAddEmptyButton);
+            this.panel3.Controls.Add(this.toAddBirdButton);
+            this.panel3.Location = new System.Drawing.Point(434, 138);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(196, 366);
+            this.panel3.TabIndex = 29;
+            // 
+            // addRuleButton
+            // 
+            this.addRuleButton.BackgroundImage = global::BirdCommand.Properties.Resources.rule;
+            this.addRuleButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.addRuleButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.addRuleButton.Font = new System.Drawing.Font("Trebuchet MS", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addRuleButton.ForeColor = System.Drawing.Color.White;
+            this.addRuleButton.Location = new System.Drawing.Point(3, 242);
+            this.addRuleButton.Name = "addRuleButton";
+            this.addRuleButton.Size = new System.Drawing.Size(190, 102);
+            this.addRuleButton.TabIndex = 5;
+            this.addRuleButton.Text = "Add a rule";
+            this.addRuleButton.UseVisualStyleBackColor = true;
+            this.addRuleButton.Click += new System.EventHandler(this.addRuleButton_Click);
+            // 
+            // toAddEmptyButton
+            // 
+            this.toAddEmptyButton.BackgroundImage = global::BirdCommand.Properties.Resources.Empty;
+            this.toAddEmptyButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.toAddEmptyButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.toAddEmptyButton.Location = new System.Drawing.Point(61, 129);
+            this.toAddEmptyButton.Name = "toAddEmptyButton";
+            this.toAddEmptyButton.Size = new System.Drawing.Size(75, 85);
+            this.toAddEmptyButton.TabIndex = 4;
+            this.toAddEmptyButton.UseVisualStyleBackColor = true;
+            this.toAddEmptyButton.Click += new System.EventHandler(this.toAddEmptyButton_Click);
+            // 
+            // toAddBirdButton
+            // 
+            this.toAddBirdButton.BackgroundImage = global::BirdCommand.Properties.Resources.BirdDown;
+            this.toAddBirdButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.toAddBirdButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.toAddBirdButton.Location = new System.Drawing.Point(62, 23);
+            this.toAddBirdButton.Name = "toAddBirdButton";
+            this.toAddBirdButton.Size = new System.Drawing.Size(75, 85);
+            this.toAddBirdButton.TabIndex = 3;
+            this.toAddBirdButton.UseVisualStyleBackColor = true;
+            this.toAddBirdButton.Click += new System.EventHandler(this.toAddBirdButton_Click);
+            // 
+            // debugPanel
+            // 
+            this.debugPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.debugPanel.BackColor = System.Drawing.Color.Salmon;
+            this.debugPanel.Controls.Add(this.label3);
+            this.debugPanel.Controls.Add(this.linkLabel2);
+            this.debugPanel.Controls.Add(this.button1);
+            this.debugPanel.Controls.Add(this.button2);
+            this.debugPanel.Controls.Add(this.button3);
+            this.debugPanel.Controls.Add(this.button17);
+            this.debugPanel.Controls.Add(this.button4);
+            this.debugPanel.Controls.Add(this.button8);
+            this.debugPanel.Controls.Add(this.button16);
+            this.debugPanel.Controls.Add(this.button9);
+            this.debugPanel.Controls.Add(this.button5);
+            this.debugPanel.Controls.Add(this.button6);
+            this.debugPanel.Controls.Add(this.linkLabel1);
+            this.debugPanel.Controls.Add(this.button11);
+            this.debugPanel.Controls.Add(this.button14);
+            this.debugPanel.Controls.Add(this.button10);
+            this.debugPanel.Controls.Add(this.linkLabel3);
+            this.debugPanel.Controls.Add(this.button13);
+            this.debugPanel.Controls.Add(this.button12);
+            this.debugPanel.Controls.Add(this.button7);
+            this.debugPanel.Location = new System.Drawing.Point(16, 615);
+            this.debugPanel.Name = "debugPanel";
+            this.debugPanel.Size = new System.Drawing.Size(1241, 150);
+            this.debugPanel.TabIndex = 30;
+            this.debugPanel.Visible = false;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Trebuchet MS", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(21, 15);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(114, 22);
+            this.label3.TabIndex = 26;
+            this.label3.Text = "DEBUG PANEL";
+            // 
             // BirdCommandMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1121, 663);
-            this.Controls.Add(this.button17);
-            this.Controls.Add(this.button16);
+            this.BackColor = System.Drawing.Color.White;
+            this.ClientSize = new System.Drawing.Size(1269, 777);
+            this.Controls.Add(this.debugPanel);
+            this.Controls.Add(this.panel3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.button15);
-            this.Controls.Add(this.button14);
-            this.Controls.Add(this.button13);
-            this.Controls.Add(this.button12);
-            this.Controls.Add(this.button11);
-            this.Controls.Add(this.button10);
-            this.Controls.Add(this.button8);
-            this.Controls.Add(this.button9);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.button7);
-            this.Controls.Add(this.linkLabel3);
-            this.Controls.Add(this.linkLabel2);
-            this.Controls.Add(this.linkLabel1);
-            this.Controls.Add(this.button6);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.designer_board);
+            this.Controls.Add(this.panel2);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "BirdCommandMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Bird Command";
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.panel3.ResumeLayout(false);
+            this.debugPanel.ResumeLayout(false);
+            this.debugPanel.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -380,6 +516,15 @@ namespace BirdCommand
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button button16;
         private System.Windows.Forms.Button button17;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel debugPanel;
+        private System.Windows.Forms.Button toAddBirdButton;
+        private System.Windows.Forms.Button addRuleButton;
+        private System.Windows.Forms.Button toAddEmptyButton;
+        private System.Windows.Forms.Label label3;
     }
 }
 

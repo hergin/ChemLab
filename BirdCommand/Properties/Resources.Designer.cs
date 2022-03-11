@@ -73,6 +73,16 @@ namespace BirdCommand.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Bird_Command_logos_back {
+            get {
+                object obj = ResourceManager.GetObject("Bird_Command_logos_back", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Bird_Command_logos_transparent {
             get {
                 object obj = ResourceManager.GetObject("Bird_Command_logos_transparent", resourceCulture);

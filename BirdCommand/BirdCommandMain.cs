@@ -313,6 +313,45 @@ namespace BirdCommand
             ((RuleCell)designer_trafo.Document.SelectedElements.GetArray().Where(el => el is RuleCell).First()).DecreaseRuleCount();
         }
 
+        private void toAddBirdButton_Click(object sender, EventArgs e)
+        {
+            designer_trafo.Document.Action = DesignerAction.Add;
+            addBird = true;
+        }
+
+        private void toAddEmptyButton_Click(object sender, EventArgs e)
+        {
+            designer_trafo.Document.Action = DesignerAction.Add;
+            addEmpty = true;
+        }
+
+        private void addRuleButton_Click(object sender, EventArgs e)
+        {
+            var highestY = 0;
+            foreach (var element in designer_trafo.Document.Elements)
+            {
+                if (element is RuleCell || element is StartCell)
+                {
+                    if (((BaseElement)element).Location.Y + ((BaseElement)element).Size.Height > highestY)
+                    {
+                        highestY = ((BaseElement)element).Location.Y + ((BaseElement)element).Size.Height;
+                    }
+                }
+            }
+            designer_trafo.Document.AddElement(new RuleCell(21, highestY - 4));
+            DesignerUtil.ArrangeTheOrder(designer_trafo);
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox1_DoubleClick(object sender, EventArgs e)
+        {
+            debugPanel.Visible = !debugPanel.Visible;
+        }
+
         private void button8_Click(object sender, EventArgs e)
         {
             designer_trafo.Document.Action = DesignerAction.Add;

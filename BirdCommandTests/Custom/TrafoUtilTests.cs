@@ -96,7 +96,7 @@ namespace BirdCommand.Custom.Tests
             rhs.Add(new EmptyCell(0, 50));
             rhs.Add(new BirdCell(0, 0));
 
-            Assert.AreEqual(RuleType.DoNothing, TrafoUtil.IdentifyRuleType(lhs, rhs));
+            Assert.AreEqual(RuleType.NotSupportedYet, TrafoUtil.IdentifyRuleType(lhs, rhs));
         }
 
         [TestMethod()]
