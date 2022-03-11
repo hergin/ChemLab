@@ -133,6 +133,26 @@ namespace BirdCommand.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap copyLHStoRHSbutton {
+            get {
+                object obj = ResourceManager.GetObject("copyLHStoRHSbutton", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap decreaseRuleCountButton {
+            get {
+                object obj = ResourceManager.GetObject("decreaseRuleCountButton", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Empty {
             get {
                 object obj = ResourceManager.GetObject("Empty", resourceCulture);
@@ -241,6 +261,16 @@ namespace BirdCommand.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap increaseRuleCountButton {
+            get {
+                object obj = ResourceManager.GetObject("increaseRuleCountButton", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Pig {
             get {
                 object obj = ResourceManager.GetObject("Pig", resourceCulture);
@@ -304,6 +334,26 @@ namespace BirdCommand.Properties {
         internal static System.Drawing.Bitmap TNT {
             get {
                 object obj = ResourceManager.GetObject("TNT", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap turnLeftButton {
+            get {
+                object obj = ResourceManager.GetObject("turnLeftButton", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap turnRightButton {
+            get {
+                object obj = ResourceManager.GetObject("turnRightButton", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

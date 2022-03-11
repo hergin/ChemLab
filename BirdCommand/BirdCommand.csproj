@@ -171,5 +171,20 @@
   <ItemGroup>
     <None Include="Resources\Bird Command-logos_back.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\turnRightButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\turnLeftButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\increaseRuleCountButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\decreaseRuleCountButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\copyLHStoRHSbutton.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

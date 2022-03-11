@@ -29,6 +29,7 @@ namespace BirdCommand
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BirdCommandMain));
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -65,11 +66,12 @@ namespace BirdCommand
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.turnSelectedBirdRightButton = new System.Windows.Forms.Button();
-            this.turnSelectedBirdLeftButton = new System.Windows.Forms.Button();
-            this.copyLhsToRhsButton = new System.Windows.Forms.Button();
-            this.increaseRuleCountButton = new System.Windows.Forms.Button();
             this.decreaseRuleCountButton = new System.Windows.Forms.Button();
+            this.increaseRuleCountButton = new System.Windows.Forms.Button();
+            this.turnLeftButton = new System.Windows.Forms.Button();
+            this.turnRightButton = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.copyLhsToRhsButton = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel3.SuspendLayout();
@@ -486,70 +488,75 @@ namespace BirdCommand
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(228)))), ((int)(((byte)(228)))), ((int)(((byte)(228)))));
+            this.panel4.Controls.Add(this.copyLhsToRhsButton);
             this.panel4.Controls.Add(this.decreaseRuleCountButton);
             this.panel4.Controls.Add(this.increaseRuleCountButton);
-            this.panel4.Controls.Add(this.copyLhsToRhsButton);
-            this.panel4.Controls.Add(this.turnSelectedBirdLeftButton);
-            this.panel4.Controls.Add(this.turnSelectedBirdRightButton);
+            this.panel4.Controls.Add(this.turnLeftButton);
+            this.panel4.Controls.Add(this.turnRightButton);
             this.panel4.Location = new System.Drawing.Point(434, 398);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(196, 224);
+            this.panel4.Size = new System.Drawing.Size(196, 289);
             this.panel4.TabIndex = 30;
-            // 
-            // turnSelectedBirdRightButton
-            // 
-            this.turnSelectedBirdRightButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.turnSelectedBirdRightButton.Location = new System.Drawing.Point(14, 16);
-            this.turnSelectedBirdRightButton.Name = "turnSelectedBirdRightButton";
-            this.turnSelectedBirdRightButton.Size = new System.Drawing.Size(168, 23);
-            this.turnSelectedBirdRightButton.TabIndex = 0;
-            this.turnSelectedBirdRightButton.Text = "Turn selected bird RIGHT";
-            this.turnSelectedBirdRightButton.UseVisualStyleBackColor = true;
-            this.turnSelectedBirdRightButton.Click += new System.EventHandler(this.turnSelectedBirdRightButton_Click);
-            // 
-            // turnSelectedBirdLeftButton
-            // 
-            this.turnSelectedBirdLeftButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.turnSelectedBirdLeftButton.Location = new System.Drawing.Point(14, 45);
-            this.turnSelectedBirdLeftButton.Name = "turnSelectedBirdLeftButton";
-            this.turnSelectedBirdLeftButton.Size = new System.Drawing.Size(168, 23);
-            this.turnSelectedBirdLeftButton.TabIndex = 1;
-            this.turnSelectedBirdLeftButton.Text = "Turn selected bird LEFT";
-            this.turnSelectedBirdLeftButton.UseVisualStyleBackColor = true;
-            this.turnSelectedBirdLeftButton.Click += new System.EventHandler(this.turnSelectedBirdLeftButton_Click);
-            // 
-            // copyLhsToRhsButton
-            // 
-            this.copyLhsToRhsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.copyLhsToRhsButton.Location = new System.Drawing.Point(14, 74);
-            this.copyLhsToRhsButton.Name = "copyLhsToRhsButton";
-            this.copyLhsToRhsButton.Size = new System.Drawing.Size(168, 38);
-            this.copyLhsToRhsButton.TabIndex = 2;
-            this.copyLhsToRhsButton.Text = "Copy \'Current Pattern\' to \'Pattern After\'";
-            this.copyLhsToRhsButton.UseVisualStyleBackColor = true;
-            this.copyLhsToRhsButton.Click += new System.EventHandler(this.copyLhsToRhsButton_Click);
-            // 
-            // increaseRuleCountButton
-            // 
-            this.increaseRuleCountButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.increaseRuleCountButton.Location = new System.Drawing.Point(14, 118);
-            this.increaseRuleCountButton.Name = "increaseRuleCountButton";
-            this.increaseRuleCountButton.Size = new System.Drawing.Size(168, 23);
-            this.increaseRuleCountButton.TabIndex = 3;
-            this.increaseRuleCountButton.Text = "Increase rule count of selected";
-            this.increaseRuleCountButton.UseVisualStyleBackColor = true;
-            this.increaseRuleCountButton.Click += new System.EventHandler(this.increaseRuleCountButton_Click);
             // 
             // decreaseRuleCountButton
             // 
-            this.decreaseRuleCountButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.decreaseRuleCountButton.Location = new System.Drawing.Point(14, 147);
+            this.decreaseRuleCountButton.BackgroundImage = global::BirdCommand.Properties.Resources.decreaseRuleCountButton;
+            this.decreaseRuleCountButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.decreaseRuleCountButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.decreaseRuleCountButton.Location = new System.Drawing.Point(104, 202);
             this.decreaseRuleCountButton.Name = "decreaseRuleCountButton";
-            this.decreaseRuleCountButton.Size = new System.Drawing.Size(168, 23);
-            this.decreaseRuleCountButton.TabIndex = 4;
-            this.decreaseRuleCountButton.Text = "Decrease rule count of selected";
+            this.decreaseRuleCountButton.Size = new System.Drawing.Size(75, 44);
+            this.decreaseRuleCountButton.TabIndex = 9;
             this.decreaseRuleCountButton.UseVisualStyleBackColor = true;
-            this.decreaseRuleCountButton.Click += new System.EventHandler(this.decreaseRuleCountButton_Click);
+            this.decreaseRuleCountButton.Click += new System.EventHandler(this.decreaseRuleCountButton_Click_1);
+            // 
+            // increaseRuleCountButton
+            // 
+            this.increaseRuleCountButton.BackgroundImage = global::BirdCommand.Properties.Resources.increaseRuleCountButton;
+            this.increaseRuleCountButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.increaseRuleCountButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.increaseRuleCountButton.Location = new System.Drawing.Point(15, 202);
+            this.increaseRuleCountButton.Name = "increaseRuleCountButton";
+            this.increaseRuleCountButton.Size = new System.Drawing.Size(75, 44);
+            this.increaseRuleCountButton.TabIndex = 8;
+            this.increaseRuleCountButton.UseVisualStyleBackColor = true;
+            this.increaseRuleCountButton.Click += new System.EventHandler(this.increaseRuleCountButton_Click_1);
+            // 
+            // turnLeftButton
+            // 
+            this.turnLeftButton.BackgroundImage = global::BirdCommand.Properties.Resources.turnLeftButton;
+            this.turnLeftButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.turnLeftButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.turnLeftButton.Location = new System.Drawing.Point(106, 14);
+            this.turnLeftButton.Name = "turnLeftButton";
+            this.turnLeftButton.Size = new System.Drawing.Size(60, 69);
+            this.turnLeftButton.TabIndex = 7;
+            this.turnLeftButton.UseVisualStyleBackColor = true;
+            this.turnLeftButton.Click += new System.EventHandler(this.turnLeftButton_Click);
+            // 
+            // turnRightButton
+            // 
+            this.turnRightButton.BackgroundImage = global::BirdCommand.Properties.Resources.turnRightButton;
+            this.turnRightButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.turnRightButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.turnRightButton.Location = new System.Drawing.Point(25, 14);
+            this.turnRightButton.Name = "turnRightButton";
+            this.turnRightButton.Size = new System.Drawing.Size(60, 69);
+            this.turnRightButton.TabIndex = 6;
+            this.turnRightButton.UseVisualStyleBackColor = true;
+            this.turnRightButton.Click += new System.EventHandler(this.turnRightButton_Click);
+            // 
+            // copyLhsToRhsButton
+            // 
+            this.copyLhsToRhsButton.BackgroundImage = global::BirdCommand.Properties.Resources.copyLHStoRHSbutton;
+            this.copyLhsToRhsButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.copyLhsToRhsButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.copyLhsToRhsButton.Location = new System.Drawing.Point(15, 98);
+            this.copyLhsToRhsButton.Name = "copyLhsToRhsButton";
+            this.copyLhsToRhsButton.Size = new System.Drawing.Size(164, 91);
+            this.copyLhsToRhsButton.TabIndex = 10;
+            this.copyLhsToRhsButton.UseVisualStyleBackColor = true;
+            this.copyLhsToRhsButton.Click += new System.EventHandler(this.copyLhsToRhsButton_Click_1);
             // 
             // BirdCommandMain
             // 
@@ -618,11 +625,12 @@ namespace BirdCommand
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Button turnSelectedBirdRightButton;
-        private System.Windows.Forms.Button turnSelectedBirdLeftButton;
-        private System.Windows.Forms.Button copyLhsToRhsButton;
-        private System.Windows.Forms.Button decreaseRuleCountButton;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Button turnRightButton;
+        private System.Windows.Forms.Button turnLeftButton;
         private System.Windows.Forms.Button increaseRuleCountButton;
+        private System.Windows.Forms.Button decreaseRuleCountButton;
+        private System.Windows.Forms.Button copyLhsToRhsButton;
     }
 }
 

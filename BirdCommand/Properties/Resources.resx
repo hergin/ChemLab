@@ -139,6 +139,12 @@
   <data name="Bird_Command_logos_transparent" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Bird Command-logos_transparent.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="copyLHStoRHSbutton" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\copyLHStoRHSbutton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="decreaseRuleCountButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\decreaseRuleCountButton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Empty" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Empty.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -166,6 +172,9 @@
   <data name="icon1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="increaseRuleCountButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\increaseRuleCountButton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Pig" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Pig.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -186,6 +195,12 @@
   </data>
   <data name="TNT" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\TNT.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="turnLeftButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\turnLeftButton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="turnRightButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\turnRightButton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Wood" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Wood.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

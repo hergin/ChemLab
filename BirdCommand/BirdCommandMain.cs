@@ -34,6 +34,12 @@ namespace BirdCommand
             designer_trafo.ElementMoved += Designer_trafo_ElementMoved;
             designer_trafo.ElementMoving += Designer_trafo_ElementMoving;
 
+            toolTip1.SetToolTip(turnLeftButton, "Turn selected bird left");
+            toolTip1.SetToolTip(turnRightButton, "Turn selected bird right");
+            toolTip1.SetToolTip(increaseRuleCountButton, "Increase the rule count of the selected rule");
+            toolTip1.SetToolTip(decreaseRuleCountButton, "Decrease the rule count of the selected rule");
+            toolTip1.SetToolTip(copyLhsToRhsButton, "Copy 'Current Pattern' to 'Pattern After'");
+
 
             //designer_trafo.Document.AddElement(label);
 
@@ -352,18 +358,6 @@ namespace BirdCommand
             debugPanel.Visible = !debugPanel.Visible;
         }
 
-        private void turnSelectedBirdRightButton_Click(object sender, EventArgs e)
-        {
-            if (designer_trafo.Document.SelectedElements.Count == 1
-                && designer_trafo.Document.SelectedElements[0] is BirdCell bird)
-            {
-                bird.TurnRight();
-            } else
-            {
-                MessageBox.Show("Please select a bird first to turn right.", "No bird selected!");
-            }
-        }
-
         private void turnSelectedBirdLeftButton_Click(object sender, EventArgs e)
         {
             if (designer_trafo.Document.SelectedElements.Count == 1
@@ -379,7 +373,7 @@ namespace BirdCommand
 
         private void copyLhsToRhsButton_Click(object sender, EventArgs e)
         {
-            if (designer_trafo.Document.SelectedElements.GetArray().Where(el => el is RuleCell).Count() == 1)
+            if (designer_trafo.Document.SelectedElements.GetArray().Where(el => el is RuleCell).Count() >= 1)
             {
                 var lhsElements = TrafoUtil.FindPreConditionElements(designer_trafo.Document.Elements.GetArray().ToList(),
                     (RuleCell)designer_trafo.Document.SelectedElements.GetArray().Where(el => el is RuleCell).First());
@@ -401,9 +395,35 @@ namespace BirdCommand
             }
         }
 
-        private void increaseRuleCountButton_Click(object sender, EventArgs e)
+        private void turnRightButton_Click(object sender, EventArgs e)
         {
-            if (designer_trafo.Document.SelectedElements.GetArray().Where(el => el is RuleCell).Count() == 1)
+            if (designer_trafo.Document.SelectedElements.Count == 1
+                && designer_trafo.Document.SelectedElements[0] is BirdCell bird)
+            {
+                bird.TurnRight();
+            }
+            else
+            {
+                MessageBox.Show("Please select a bird first to turn right.", "No bird selected!");
+            }
+        }
+
+        private void turnLeftButton_Click(object sender, EventArgs e)
+        {
+            if (designer_trafo.Document.SelectedElements.Count == 1
+                && designer_trafo.Document.SelectedElements[0] is BirdCell bird)
+            {
+                bird.TurnLeft();
+            }
+            else
+            {
+                MessageBox.Show("Please select a bird first to turn left.", "No bird selected!");
+            }
+        }
+
+        private void increaseRuleCountButton_Click_1(object sender, EventArgs e)
+        {
+            if (designer_trafo.Document.SelectedElements.GetArray().Where(el => el is RuleCell).Count() >= 1)
             {
                 ((RuleCell)designer_trafo.Document.SelectedElements.GetArray().Where(el => el is RuleCell).First()).IncreaseRuleCount();
             }
@@ -413,15 +433,40 @@ namespace BirdCommand
             }
         }
 
-        private void decreaseRuleCountButton_Click(object sender, EventArgs e)
+        private void decreaseRuleCountButton_Click_1(object sender, EventArgs e)
         {
-            if (designer_trafo.Document.SelectedElements.GetArray().Where(el => el is RuleCell).Count() == 1)
+            if (designer_trafo.Document.SelectedElements.GetArray().Where(el => el is RuleCell).Count() >= 1)
             {
-                ((RuleCell)designer_trafo.Document.SelectedElements.GetArray().Where(el => el is RuleCell).First()).IncreaseRuleCount();
+                ((RuleCell)designer_trafo.Document.SelectedElements.GetArray().Where(el => el is RuleCell).First()).DecreaseRuleCount();
             }
             else
             {
                 MessageBox.Show("Please select a rule first to decrease its rule count.", "No rule selected!");
+            }
+        }
+
+        private void copyLhsToRhsButton_Click_1(object sender, EventArgs e)
+        {
+            if (designer_trafo.Document.SelectedElements.GetArray().Where(el => el is RuleCell).Count() >= 1)
+            {
+                var lhsElements = TrafoUtil.FindPreConditionElements(designer_trafo.Document.Elements.GetArray().ToList(),
+                    (RuleCell)designer_trafo.Document.SelectedElements.GetArray().Where(el => el is RuleCell).First());
+
+                foreach (var element in lhsElements)
+                {
+                    if (element is EmptyCell empty)
+                    {
+                        designer_trafo.Document.AddElement(new EmptyCell(empty.Location.X + 200, empty.Location.Y));
+                    }
+                    else if (element is BirdCell bird)
+                    {
+                        designer_trafo.Document.AddElement(new BirdCell(bird.Location.X + 200, bird.Location.Y, bird.Direction));
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select a rule first to copy its 'current pattern' to its 'pattern after'.", "No rule selected!");
             }
         }
 
