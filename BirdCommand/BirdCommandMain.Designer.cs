@@ -505,6 +505,7 @@ namespace BirdCommand
             this.turnSelectedBirdRightButton.TabIndex = 0;
             this.turnSelectedBirdRightButton.Text = "Turn selected bird RIGHT";
             this.turnSelectedBirdRightButton.UseVisualStyleBackColor = true;
+            this.turnSelectedBirdRightButton.Click += new System.EventHandler(this.turnSelectedBirdRightButton_Click);
             // 
             // turnSelectedBirdLeftButton
             // 
@@ -515,6 +516,7 @@ namespace BirdCommand
             this.turnSelectedBirdLeftButton.TabIndex = 1;
             this.turnSelectedBirdLeftButton.Text = "Turn selected bird LEFT";
             this.turnSelectedBirdLeftButton.UseVisualStyleBackColor = true;
+            this.turnSelectedBirdLeftButton.Click += new System.EventHandler(this.turnSelectedBirdLeftButton_Click);
             // 
             // copyLhsToRhsButton
             // 
@@ -525,6 +527,7 @@ namespace BirdCommand
             this.copyLhsToRhsButton.TabIndex = 2;
             this.copyLhsToRhsButton.Text = "Copy \'Current Pattern\' to \'Pattern After\'";
             this.copyLhsToRhsButton.UseVisualStyleBackColor = true;
+            this.copyLhsToRhsButton.Click += new System.EventHandler(this.copyLhsToRhsButton_Click);
             // 
             // increaseRuleCountButton
             // 
@@ -535,6 +538,7 @@ namespace BirdCommand
             this.increaseRuleCountButton.TabIndex = 3;
             this.increaseRuleCountButton.Text = "Increase rule count of selected";
             this.increaseRuleCountButton.UseVisualStyleBackColor = true;
+            this.increaseRuleCountButton.Click += new System.EventHandler(this.increaseRuleCountButton_Click);
             // 
             // decreaseRuleCountButton
             // 
@@ -545,6 +549,7 @@ namespace BirdCommand
             this.decreaseRuleCountButton.TabIndex = 4;
             this.decreaseRuleCountButton.Text = "Decrease rule count of selected";
             this.decreaseRuleCountButton.UseVisualStyleBackColor = true;
+            this.decreaseRuleCountButton.Click += new System.EventHandler(this.decreaseRuleCountButton_Click);
             // 
             // BirdCommandMain
             // 
