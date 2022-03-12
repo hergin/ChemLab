@@ -481,7 +481,7 @@ namespace BirdCommand
             {
                 if (theBird != null)
                     theBird.Location = originalBirdPosition;
-                foreach (var element in designer_trafo.Document.Elements.GetArray().Where(el => !(el is StartCell)))
+                foreach (var element in designer_trafo.Document.Elements.GetArray().Where(el => !(el is StartCell || el is SnapCell)))
                 {
                     designer_trafo.Document.DeleteElement(element);
                 }
