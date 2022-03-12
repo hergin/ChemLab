@@ -1,0 +1,30 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31919.166
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BirdCommand", "BirdCommand\BirdCommand.csproj", "{8B12CDDF-8F86-40D4-9EF8-5EAF9501E6FE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BirdCommandTests", "BirdCommandTests\BirdCommandTests.csproj", "{53F552BE-9250-4388-9D8F-CAFEC86892EB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8B12CDDF-8F86-40D4-9EF8-5EAF9501E6FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B12CDDF-8F86-40D4-9EF8-5EAF9501E6FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B12CDDF-8F86-40D4-9EF8-5EAF9501E6FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B12CDDF-8F86-40D4-9EF8-5EAF9501E6FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53F552BE-9250-4388-9D8F-CAFEC86892EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53F552BE-9250-4388-9D8F-CAFEC86892EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53F552BE-9250-4388-9D8F-CAFEC86892EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53F552BE-9250-4388-9D8F-CAFEC86892EB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2ADEFB30-B62B-426D-BCD0-D5C6F8B0E8E0}
+	EndGlobalSection
+EndGlobal

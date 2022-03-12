@@ -65,10 +65,57 @@
     <Compile Include="Custom\LevelDesigner.cs" />
     <Compile Include="Custom\PigCell.cs" />
     <Compile Include="Custom\TrafoUtil.cs" />
+    <Compile Include="DiagramNET\Designer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DiagramNET\DesignerAction.cs" />
+    <Compile Include="DiagramNET\DiagramUtil.cs" />
+    <Compile Include="DiagramNET\Document.cs" />
+    <Compile Include="DiagramNET\EditLabelAction.cs" />
+    <Compile Include="DiagramNET\ElementCollection.cs" />
+    <Compile Include="DiagramNET\element\BaseElement.cs" />
+    <Compile Include="DiagramNET\element\BaseLinkElement.cs" />
+    <Compile Include="DiagramNET\element\CommentBoxElement.cs" />
+    <Compile Include="DiagramNET\element\CommentBoxNode.cs" />
+    <Compile Include="DiagramNET\element\ConnectorElement.cs" />
+    <Compile Include="DiagramNET\element\controller\CommentBoxController.cs" />
+    <Compile Include="DiagramNET\element\controller\ConnectorController.cs" />
+    <Compile Include="DiagramNET\element\controller\ControllerHelper.cs" />
+    <Compile Include="DiagramNET\element\controller\ElipseController.cs" />
+    <Compile Include="DiagramNET\element\controller\IControllable.cs" />
+    <Compile Include="DiagramNET\element\controller\IController.cs" />
+    <Compile Include="DiagramNET\element\controller\ILabelController.cs" />
+    <Compile Include="DiagramNET\element\controller\IMoveController.cs" />
+    <Compile Include="DiagramNET\element\controller\IResizeController.cs" />
+    <Compile Include="DiagramNET\element\controller\LineController.cs" />
+    <Compile Include="DiagramNET\element\controller\RectangleController.cs" />
+    <Compile Include="DiagramNET\element\controller\RightAngleLinkController.cs" />
+    <Compile Include="DiagramNET\element\ElipseElement.cs" />
+    <Compile Include="DiagramNET\element\ElipseNode.cs" />
+    <Compile Include="DiagramNET\element\ILabelElement.cs" />
+    <Compile Include="DiagramNET\element\LabelElement.cs" />
+    <Compile Include="DiagramNET\element\LineElement.cs" />
+    <Compile Include="DiagramNET\element\NodeElement.cs" />
+    <Compile Include="DiagramNET\element\RectangleElement.cs" />
+    <Compile Include="DiagramNET\element\RectangleNode.cs" />
+    <Compile Include="DiagramNET\element\RightAngleLinkElement.cs" />
+    <Compile Include="DiagramNET\element\StraightLinkElement.cs" />
+    <Compile Include="DiagramNET\events\ElementConnectEventArgs.cs" />
+    <Compile Include="DiagramNET\events\ElementEventArgs.cs" />
+    <Compile Include="DiagramNET\events\ElementMouseEventArgs.cs" />
+    <Compile Include="DiagramNET\events\ElementSelectionEventArgs.cs" />
+    <Compile Include="DiagramNET\GeneralEnuns.cs" />
+    <Compile Include="DiagramNET\IContainer.cs" />
+    <Compile Include="DiagramNET\MoveAction.cs" />
+    <Compile Include="DiagramNET\ResizeAction.cs" />
+    <Compile Include="DiagramNET\UndoManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="BirdCommandMain.resx">
       <DependentUpon>BirdCommandMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DiagramNET\Designer.resx">
+      <DependentUpon>Designer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -92,12 +139,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Control\Diagram.NET.csproj">
-      <Project>{46FE3660-273C-474B-BA51-835F5CDEDA58}</Project>
-      <Name>Diagram.NET</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\BirdDown.png" />
@@ -222,5 +263,6 @@
   <ItemGroup>
     <None Include="Resources\maze2.PNG" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

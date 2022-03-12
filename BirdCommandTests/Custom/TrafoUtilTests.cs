@@ -288,7 +288,7 @@ namespace BirdCommand.Custom.Tests
             List<BaseElement> lhs = new List<BaseElement>();
             lhs.Add(new EmptyCell(0, 0));
             lhs.Add(new EmptyCell(0, 50));
-            lhs.Add(new BirdCell(0, 0,Direction.Down));
+            lhs.Add(new BirdCell(0, 0, Direction.Down));
 
             List<BaseElement> rhs = new List<BaseElement>();
             rhs.Add(new EmptyCell(0, 0));
