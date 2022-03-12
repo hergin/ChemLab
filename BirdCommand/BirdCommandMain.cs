@@ -8,6 +8,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -56,11 +57,87 @@ namespace BirdCommand
             designer_trafo.Document.AddElement(theSnapCell);
             theSnapCell.Visible = false;
 
+            trafoRunner.DoWork += TrafoRunner_DoWork;
+            trafoRunner.ProgressChanged += TrafoRunner_ProgressChanged;
+
             //designer_trafo.Document.AddElement(label);
 
             //designer_trafo.Document.AddElement(new SnapCell(0, 0));
 
             // LoadLevel1();
+        }
+
+        private void TrafoRunner_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            switch (e.ProgressPercentage)
+            {
+                case 0:
+                    ((RuleCell)e.UserState).Highlight();
+                    break;
+                case 1:
+                    ((RuleCell)e.UserState).Unhighlight();
+                    break;
+                case 2:
+                    MessageBox.Show(e.UserState.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+            }
+        }
+
+        private void TrafoRunner_DoWork(object sender, DoWorkEventArgs e)
+        {
+            // TODO take empty or other scenarios into account
+            // TODO run slowly step by step highlighting the current rule
+            var allRules = designer_trafo.Document.Elements.GetArray().Where(el => el is RuleCell).ToList();
+            allRules.Sort((a, b) => { return a.Location.Y - b.Location.Y; });
+            foreach (var rule in allRules)
+            {
+                try
+                {
+                    trafoRunner.ReportProgress(0, rule);
+                    var ruleType = TrafoUtil.IdentifyRuleType(
+                        TrafoUtil.FindPreConditionElements(designer_trafo.Document.Elements.GetArray().ToList(),
+                            rule),
+                        TrafoUtil.FindPostConditionElements(designer_trafo.Document.Elements.GetArray().ToList(),
+                            rule));
+                    for (int i = 0; i < ((RuleCell)rule).RuleCount; i++)
+                    {
+                        if (TrafoUtil.DoesPatternExist(designer_board.Document.Elements.GetArray().ToList(), TrafoUtil.FindPreConditionElements(designer_trafo.Document.Elements.GetArray().ToList(),
+                                rule)))
+                        {
+                            // TODO pattern exists for other move forward or turn rules than the one in the model, should find a solution
+                            switch (ruleType)
+                            {
+                                case RuleType.TurnRight:
+                                    theBird.TurnRight();
+                                    break;
+                                case RuleType.TurnLeft:
+                                    theBird.TurnLeft();
+                                    break;
+                                case RuleType.Turn180:
+                                    theBird.Turn180();
+                                    break;
+                                case RuleType.MoveForward:
+                                    theBird.MoveForward();
+                                    break;
+                            }
+                            Thread.Sleep(1000);
+                        }
+                        else
+                        {
+                            trafoRunner.ReportProgress(2, "Pattern doesn't exist!");
+                            trafoRunner.CancelAsync();
+                            return;
+                        }
+                    }
+                    trafoRunner.ReportProgress(1, rule);
+                }
+                catch (Exception exp)
+                {
+                    trafoRunner.ReportProgress(2, exp.Message);
+                    trafoRunner.CancelAsync();
+                    return;
+                }
+            }
         }
 
         private void Designer_trafo_ElementMouseUp(object sender, ElementMouseEventArgs e)
@@ -482,7 +559,7 @@ namespace BirdCommand
 
         private void startOver()
         {
-            theBird?.Reset();
+            Reset();
             foreach (var element in designer_trafo.Document.Elements.GetArray().Where(el => !(el is StartCell || el is SnapCell)))
             {
                 designer_trafo.Document.DeleteElement(element);
@@ -512,59 +589,23 @@ namespace BirdCommand
 
         private void runButton_Click(object sender, EventArgs e)
         {
-            // TODO take empty or other scenarios into account
-            // TODO run slowly step by step highlighting the current rule
-            var allRules = designer_trafo.Document.Elements.GetArray().Where(el => el is RuleCell).ToList();
-            allRules.Sort((a, b) => { return a.Location.Y - b.Location.Y; });
-            foreach (var rule in allRules)
-            {
-                try
-                {
-                    var ruleType = TrafoUtil.IdentifyRuleType(
-                        TrafoUtil.FindPreConditionElements(designer_trafo.Document.Elements.GetArray().ToList(),
-                            rule),
-                        TrafoUtil.FindPostConditionElements(designer_trafo.Document.Elements.GetArray().ToList(),
-                            rule));
-                    for (int i = 0; i < ((RuleCell)rule).RuleCount; i++)
-                    {
-                        if (TrafoUtil.DoesPatternExist(designer_board.Document.Elements.GetArray().ToList(), TrafoUtil.FindPreConditionElements(designer_trafo.Document.Elements.GetArray().ToList(),
-                                rule)))
-                        {
-                            // TODO pattern exists for other move forward or turn rules than the one in the model, should find a solution
-                            switch (ruleType)
-                            {
-                                case RuleType.TurnRight:
-                                    theBird.TurnRight();
-                                    break;
-                                case RuleType.TurnLeft:
-                                    theBird.TurnLeft();
-                                    break;
-                                case RuleType.Turn180:
-                                    theBird.TurnRight();
-                                    theBird.TurnRight();
-                                    break;
-                                case RuleType.MoveForward:
-                                    theBird.MoveForward();
-                                    break;
-                            }
-                        }
-                        else
-                        {
-                            MessageBox.Show("Pattern doesn't exist!");
-                        }
-                    }
-                }
-                catch (Exception exp)
-                {
-                    MessageBox.Show(exp.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-            }
+            theStart.Highlight();
+            trafoRunner.RunWorkerAsync();
         }
 
         private void resetButton_Click_1(object sender, EventArgs e)
         {
+            Reset();
+        }
+
+        void Reset()
+        {
+            theStart.Unhighlight();
             theBird?.Reset();
+            foreach (var rule in designer_trafo.Document.Elements.GetArray().Where(el => el is RuleCell))
+            {
+                ((RuleCell)rule).Unhighlight();
+            }
         }
 
         private void maze1button_MouseEnter(object sender, EventArgs e)

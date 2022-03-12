@@ -37,11 +37,9 @@ namespace BirdCommand
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
-            this.designer_board = new Dalssoft.DiagramNet.Designer();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.linkLabel2 = new System.Windows.Forms.LinkLabel();
             this.linkLabel3 = new System.Windows.Forms.LinkLabel();
-            this.designer_trafo = new Dalssoft.DiagramNet.Designer();
             this.button7 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.button9 = new System.Windows.Forms.Button();
@@ -81,6 +79,9 @@ namespace BirdCommand
             this.startOverButton = new System.Windows.Forms.PictureBox();
             this.runButton = new System.Windows.Forms.PictureBox();
             this.resetButton = new System.Windows.Forms.PictureBox();
+            this.trafoRunner = new System.ComponentModel.BackgroundWorker();
+            this.designer_trafo = new Dalssoft.DiagramNet.Designer();
+            this.designer_board = new Dalssoft.DiagramNet.Designer();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -163,16 +164,6 @@ namespace BirdCommand
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
-            // designer_board
-            // 
-            this.designer_board.AutoScroll = true;
-            this.designer_board.BackColor = System.Drawing.SystemColors.Window;
-            this.designer_board.Enabled = false;
-            this.designer_board.Location = new System.Drawing.Point(16, 105);
-            this.designer_board.Name = "designer_board";
-            this.designer_board.Size = new System.Drawing.Size(401, 401);
-            this.designer_board.TabIndex = 1;
-            // 
             // linkLabel1
             // 
             this.linkLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -208,16 +199,6 @@ namespace BirdCommand
             this.linkLabel3.TabStop = true;
             this.linkLabel3.Text = "Level 3";
             this.linkLabel3.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel3_LinkClicked);
-            // 
-            // designer_trafo
-            // 
-            this.designer_trafo.AutoScroll = true;
-            this.designer_trafo.BackColor = System.Drawing.SystemColors.Window;
-            this.designer_trafo.Dock = System.Windows.Forms.DockStyle.Top;
-            this.designer_trafo.Location = new System.Drawing.Point(0, 0);
-            this.designer_trafo.Name = "designer_trafo";
-            this.designer_trafo.Size = new System.Drawing.Size(607, 2000);
-            this.designer_trafo.TabIndex = 11;
             // 
             // button7
             // 
@@ -692,6 +673,31 @@ namespace BirdCommand
             this.resetButton.MouseEnter += new System.EventHandler(this.resetButton_MouseEnter);
             this.resetButton.MouseLeave += new System.EventHandler(this.resetButton_MouseLeave);
             // 
+            // trafoRunner
+            // 
+            this.trafoRunner.WorkerReportsProgress = true;
+            this.trafoRunner.WorkerSupportsCancellation = true;
+            // 
+            // designer_trafo
+            // 
+            this.designer_trafo.AutoScroll = true;
+            this.designer_trafo.BackColor = System.Drawing.SystemColors.Window;
+            this.designer_trafo.Dock = System.Windows.Forms.DockStyle.Top;
+            this.designer_trafo.Location = new System.Drawing.Point(0, 0);
+            this.designer_trafo.Name = "designer_trafo";
+            this.designer_trafo.Size = new System.Drawing.Size(607, 2000);
+            this.designer_trafo.TabIndex = 11;
+            // 
+            // designer_board
+            // 
+            this.designer_board.AutoScroll = true;
+            this.designer_board.BackColor = System.Drawing.SystemColors.Window;
+            this.designer_board.Enabled = false;
+            this.designer_board.Location = new System.Drawing.Point(16, 105);
+            this.designer_board.Name = "designer_board";
+            this.designer_board.Size = new System.Drawing.Size(401, 401);
+            this.designer_board.TabIndex = 1;
+            // 
             // BirdCommandMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -786,6 +792,7 @@ namespace BirdCommand
         private System.Windows.Forms.PictureBox maze3button;
         private System.Windows.Forms.PictureBox maze2button;
         private System.Windows.Forms.Button button15;
+        private System.ComponentModel.BackgroundWorker trafoRunner;
     }
 }
 

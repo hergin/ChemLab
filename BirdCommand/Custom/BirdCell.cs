@@ -77,6 +77,30 @@ namespace BirdCommand.Custom
             }
         }
 
+        public void Turn180()
+        {
+            if (Direction.Equals(Direction.Down))
+            {
+                Background = Resources.BirdUp;
+                direction = Direction.Up;
+            }
+            else if (Direction.Equals(Direction.Left))
+            {
+                Background = Resources.BirdRight;
+                direction = Direction.Right;
+            }
+            else if (Direction.Equals(Direction.Up))
+            {
+                Background = Resources.BirdDown;
+                direction = Direction.Down;
+            }
+            else if (Direction.Equals(Direction.Right))
+            {
+                Background = Resources.BirdLeft;
+                direction = Direction.Left;
+            }
+        }
+
         public void TurnRight()
         {
             if (Direction.Equals(Direction.Down))
