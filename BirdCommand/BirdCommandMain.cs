@@ -75,7 +75,8 @@ namespace BirdCommand
             }
             else if (e.Element is BirdCell bird)
             {
-                var cellUnderneath = DesignerUtil.FindCellUnderneath(designer_trafo, bird);
+                // the snapping is based on mouse position, not the bird origin
+                var cellUnderneath = DesignerUtil.FindCellUnderneath(designer_trafo, new Point(e.X, e.Y));
                 if (cellUnderneath != null)
                     bird.Location = cellUnderneath.Location;
             }
