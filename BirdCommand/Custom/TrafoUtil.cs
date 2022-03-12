@@ -72,9 +72,9 @@ namespace BirdCommand.Custom
                 throw new Exception("Patterns do not have same number of elements!");
 
             // 2) There should be at most one bird at each pattern.
-            //    0 is NOT acceptable for now, where the rule might be killing bird! TODO
+            //  TODO 0 is NOT acceptable for now, where the rule might be killing bird!
             if (filteredLhs.Where(f => f is BirdCell).Count() != 1 || filteredRhs.Where(f => f is BirdCell).Count() != 1)
-                throw new Exception("Patterns should only have one bird!");
+                throw new Exception("Patterns (current or after) should have one bird!");
 
             // Turn rules identification: There is only one bird and one empty cell first.
             if (filteredLhs.Where(f => f is BirdCell).Count() == 1 && filteredLhs.Where(f => f is EmptyCell).Count() == 1

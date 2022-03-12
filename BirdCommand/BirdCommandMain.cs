@@ -50,6 +50,8 @@ namespace BirdCommand
             toolTip1.SetToolTip(maze2button, "Open maze 2");
             toolTip1.SetToolTip(maze3button, "Open maze 3");
 
+            designer_trafo.Document.GridSize = new System.Drawing.Size(10000, 10000);
+
             //designer_trafo.Document.AddElement(label);
 
             //designer_trafo.Document.AddElement(new SnapCell(0, 0));
@@ -492,38 +494,46 @@ namespace BirdCommand
             allRules.Sort((a, b) => { return a.Location.Y - b.Location.Y; });
             foreach (var rule in allRules)
             {
-                var ruleType = TrafoUtil.IdentifyRuleType(
-                    TrafoUtil.FindPreConditionElements(designer_trafo.Document.Elements.GetArray().ToList(),
-                        rule),
-                    TrafoUtil.FindPostConditionElements(designer_trafo.Document.Elements.GetArray().ToList(),
-                        rule));
-                for (int i = 0; i < ((RuleCell)rule).RuleCount; i++)
+                try
                 {
-                    if (TrafoUtil.DoesPatternExist(designer_board.Document.Elements.GetArray().ToList(), TrafoUtil.FindPreConditionElements(designer_trafo.Document.Elements.GetArray().ToList(),
-                            rule)))
+                    var ruleType = TrafoUtil.IdentifyRuleType(
+                        TrafoUtil.FindPreConditionElements(designer_trafo.Document.Elements.GetArray().ToList(),
+                            rule),
+                        TrafoUtil.FindPostConditionElements(designer_trafo.Document.Elements.GetArray().ToList(),
+                            rule));
+                    for (int i = 0; i < ((RuleCell)rule).RuleCount; i++)
                     {
-                        // TODO pattern exists for other move forward or turn rules than the one in the model, should find a solution
-                        switch (ruleType)
+                        if (TrafoUtil.DoesPatternExist(designer_board.Document.Elements.GetArray().ToList(), TrafoUtil.FindPreConditionElements(designer_trafo.Document.Elements.GetArray().ToList(),
+                                rule)))
                         {
-                            case RuleType.TurnRight:
-                                theBird.TurnRight();
-                                break;
-                            case RuleType.TurnLeft:
-                                theBird.TurnLeft();
-                                break;
-                            case RuleType.Turn180:
-                                theBird.TurnRight();
-                                theBird.TurnRight();
-                                break;
-                            case RuleType.MoveForward:
-                                theBird.MoveForward();
-                                break;
+                            // TODO pattern exists for other move forward or turn rules than the one in the model, should find a solution
+                            switch (ruleType)
+                            {
+                                case RuleType.TurnRight:
+                                    theBird.TurnRight();
+                                    break;
+                                case RuleType.TurnLeft:
+                                    theBird.TurnLeft();
+                                    break;
+                                case RuleType.Turn180:
+                                    theBird.TurnRight();
+                                    theBird.TurnRight();
+                                    break;
+                                case RuleType.MoveForward:
+                                    theBird.MoveForward();
+                                    break;
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("Pattern doesn't exist!");
                         }
                     }
-                    else
-                    {
-                        MessageBox.Show("Pattern doesn't exist!");
-                    }
+                }
+                catch (Exception exp)
+                {
+                    MessageBox.Show(exp.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
                 }
             }
         }
