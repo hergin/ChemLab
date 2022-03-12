@@ -462,6 +462,7 @@ namespace BirdCommand
                 {
                     designer_trafo.Document.DeleteElement(element);
                 }
+                designer_trafo.Document.ClearSelection();
             }
         }
 

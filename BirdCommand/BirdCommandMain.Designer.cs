@@ -57,6 +57,9 @@ namespace BirdCommand
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.maze3button = new System.Windows.Forms.PictureBox();
+            this.maze2button = new System.Windows.Forms.PictureBox();
+            this.maze1button = new System.Windows.Forms.PictureBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -77,23 +80,20 @@ namespace BirdCommand
             this.startOverButton = new System.Windows.Forms.PictureBox();
             this.runButton = new System.Windows.Forms.PictureBox();
             this.resetButton = new System.Windows.Forms.PictureBox();
-            this.maze1button = new System.Windows.Forms.PictureBox();
-            this.maze2button = new System.Windows.Forms.PictureBox();
-            this.maze3button = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.maze3button)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.maze2button)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.maze1button)).BeginInit();
             this.panel3.SuspendLayout();
             this.debugPanel.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.startOverButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.runButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.resetButton)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.maze1button)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.maze2button)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.maze3button)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -323,9 +323,9 @@ namespace BirdCommand
             this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox1.BackgroundImage = global::BirdCommand.Properties.Resources.Bird_Command_logos_back;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox1.Location = new System.Drawing.Point(123, 0);
+            this.pictureBox1.Location = new System.Drawing.Point(24, 8);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(187, 91);
+            this.pictureBox1.Size = new System.Drawing.Size(446, 76);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 23;
             this.pictureBox1.TabStop = false;
@@ -357,8 +357,8 @@ namespace BirdCommand
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(173)))), ((int)(((byte)(188)))));
-            this.panel2.Controls.Add(this.panel6);
             this.panel2.Controls.Add(this.pictureBox1);
+            this.panel2.Controls.Add(this.panel6);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
@@ -370,7 +370,7 @@ namespace BirdCommand
             this.panel6.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.panel6.Controls.Add(this.panel5);
             this.panel6.Controls.Add(this.label5);
-            this.panel6.Location = new System.Drawing.Point(468, 17);
+            this.panel6.Location = new System.Drawing.Point(526, 16);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(308, 63);
             this.panel6.TabIndex = 38;
@@ -386,6 +386,48 @@ namespace BirdCommand
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(153, 54);
             this.panel5.TabIndex = 37;
+            // 
+            // maze3button
+            // 
+            this.maze3button.BackColor = System.Drawing.Color.Transparent;
+            this.maze3button.BackgroundImage = global::BirdCommand.Properties.Resources.maze3;
+            this.maze3button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.maze3button.Location = new System.Drawing.Point(102, 6);
+            this.maze3button.Name = "maze3button";
+            this.maze3button.Size = new System.Drawing.Size(48, 43);
+            this.maze3button.TabIndex = 2;
+            this.maze3button.TabStop = false;
+            this.maze3button.Click += new System.EventHandler(this.maze3button_Click);
+            this.maze3button.MouseEnter += new System.EventHandler(this.maze3button_MouseEnter);
+            this.maze3button.MouseLeave += new System.EventHandler(this.maze3button_MouseLeave);
+            // 
+            // maze2button
+            // 
+            this.maze2button.BackColor = System.Drawing.Color.Transparent;
+            this.maze2button.BackgroundImage = global::BirdCommand.Properties.Resources.maze2;
+            this.maze2button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.maze2button.Location = new System.Drawing.Point(55, 6);
+            this.maze2button.Name = "maze2button";
+            this.maze2button.Size = new System.Drawing.Size(48, 43);
+            this.maze2button.TabIndex = 1;
+            this.maze2button.TabStop = false;
+            this.maze2button.Click += new System.EventHandler(this.maze2button_Click);
+            this.maze2button.MouseEnter += new System.EventHandler(this.maze2button_MouseEnter);
+            this.maze2button.MouseLeave += new System.EventHandler(this.maze2button_MouseLeave);
+            // 
+            // maze1button
+            // 
+            this.maze1button.BackColor = System.Drawing.Color.Transparent;
+            this.maze1button.BackgroundImage = global::BirdCommand.Properties.Resources.maze1;
+            this.maze1button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.maze1button.Location = new System.Drawing.Point(7, 6);
+            this.maze1button.Name = "maze1button";
+            this.maze1button.Size = new System.Drawing.Size(48, 43);
+            this.maze1button.TabIndex = 0;
+            this.maze1button.TabStop = false;
+            this.maze1button.Click += new System.EventHandler(this.maze1button_Click);
+            this.maze1button.MouseEnter += new System.EventHandler(this.maze1button_MouseEnter);
+            this.maze1button.MouseLeave += new System.EventHandler(this.maze1button_MouseLeave);
             // 
             // label5
             // 
@@ -527,6 +569,8 @@ namespace BirdCommand
             // 
             // panel4
             // 
+            this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(228)))), ((int)(((byte)(228)))), ((int)(((byte)(228)))));
             this.panel4.Controls.Add(this.copyLhsToRhsButton);
             this.panel4.Controls.Add(this.decreaseRuleCountButton);
@@ -535,7 +579,7 @@ namespace BirdCommand
             this.panel4.Controls.Add(this.turnRightButton);
             this.panel4.Location = new System.Drawing.Point(434, 406);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(196, 289);
+            this.panel4.Size = new System.Drawing.Size(196, 441);
             this.panel4.TabIndex = 30;
             // 
             // copyLhsToRhsButton
@@ -635,60 +679,18 @@ namespace BirdCommand
             this.resetButton.MouseEnter += new System.EventHandler(this.resetButton_MouseEnter);
             this.resetButton.MouseLeave += new System.EventHandler(this.resetButton_MouseLeave);
             // 
-            // maze1button
-            // 
-            this.maze1button.BackColor = System.Drawing.Color.Transparent;
-            this.maze1button.BackgroundImage = global::BirdCommand.Properties.Resources.maze1;
-            this.maze1button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.maze1button.Location = new System.Drawing.Point(7, 6);
-            this.maze1button.Name = "maze1button";
-            this.maze1button.Size = new System.Drawing.Size(48, 43);
-            this.maze1button.TabIndex = 0;
-            this.maze1button.TabStop = false;
-            this.maze1button.Click += new System.EventHandler(this.maze1button_Click);
-            this.maze1button.MouseEnter += new System.EventHandler(this.maze1button_MouseEnter);
-            this.maze1button.MouseLeave += new System.EventHandler(this.maze1button_MouseLeave);
-            // 
-            // maze2button
-            // 
-            this.maze2button.BackColor = System.Drawing.Color.Transparent;
-            this.maze2button.BackgroundImage = global::BirdCommand.Properties.Resources.maze2;
-            this.maze2button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.maze2button.Location = new System.Drawing.Point(55, 6);
-            this.maze2button.Name = "maze2button";
-            this.maze2button.Size = new System.Drawing.Size(48, 43);
-            this.maze2button.TabIndex = 1;
-            this.maze2button.TabStop = false;
-            this.maze2button.Click += new System.EventHandler(this.maze2button_Click);
-            this.maze2button.MouseEnter += new System.EventHandler(this.maze2button_MouseEnter);
-            this.maze2button.MouseLeave += new System.EventHandler(this.maze2button_MouseLeave);
-            // 
-            // maze3button
-            // 
-            this.maze3button.BackColor = System.Drawing.Color.Transparent;
-            this.maze3button.BackgroundImage = global::BirdCommand.Properties.Resources.maze3;
-            this.maze3button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.maze3button.Location = new System.Drawing.Point(102, 6);
-            this.maze3button.Name = "maze3button";
-            this.maze3button.Size = new System.Drawing.Size(48, 43);
-            this.maze3button.TabIndex = 2;
-            this.maze3button.TabStop = false;
-            this.maze3button.Click += new System.EventHandler(this.maze3button_Click);
-            this.maze3button.MouseEnter += new System.EventHandler(this.maze3button_MouseEnter);
-            this.maze3button.MouseLeave += new System.EventHandler(this.maze3button_MouseLeave);
-            // 
             // BirdCommandMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1269, 855);
+            this.Controls.Add(this.debugPanel);
             this.Controls.Add(this.resetButton);
             this.Controls.Add(this.runButton);
             this.Controls.Add(this.startOverButton);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.debugPanel);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -706,6 +708,9 @@ namespace BirdCommand
             this.panel2.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.maze3button)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.maze2button)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.maze1button)).EndInit();
             this.panel3.ResumeLayout(false);
             this.debugPanel.ResumeLayout(false);
             this.debugPanel.PerformLayout();
@@ -713,9 +718,6 @@ namespace BirdCommand
             ((System.ComponentModel.ISupportInitialize)(this.startOverButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.runButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.resetButton)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.maze1button)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.maze2button)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.maze3button)).EndInit();
             this.ResumeLayout(false);
 
         }
