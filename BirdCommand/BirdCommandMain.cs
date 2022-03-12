@@ -46,6 +46,9 @@ namespace BirdCommand
             toolTip1.SetToolTip(addRuleButton, "Add an empty rule to the next available place in the program");
             toolTip1.SetToolTip(resetButton, "Move the bird back to the original position in the maze");
             toolTip1.SetToolTip(startOverButton, "This will reset the puzzle to its start state and delete all the blocks you've added or changed.");
+            toolTip1.SetToolTip(maze1button, "Open maze 1");
+            toolTip1.SetToolTip(maze2button, "Open maze 2");
+            toolTip1.SetToolTip(maze3button, "Open maze 3");
 
             //designer_trafo.Document.AddElement(label);
 
@@ -529,6 +532,51 @@ namespace BirdCommand
         {
             if(theBird != null)
                 theBird.Location = originalBirdPosition;
+        }
+
+        private void maze1button_MouseEnter(object sender, EventArgs e)
+        {
+            maze1button.BackgroundImage = Resources.maze1_over;
+        }
+
+        private void maze1button_MouseLeave(object sender, EventArgs e)
+        {
+            maze1button.BackgroundImage = Resources.maze1;
+        }
+
+        private void maze2button_MouseEnter(object sender, EventArgs e)
+        {
+            maze2button.BackgroundImage = Resources.maze2_over;
+        }
+
+        private void maze2button_MouseLeave(object sender, EventArgs e)
+        {
+            maze2button.BackgroundImage = Resources.maze2;
+        }
+
+        private void maze3button_MouseEnter(object sender, EventArgs e)
+        {
+            maze3button.BackgroundImage = Resources.maze3_over;
+        }
+
+        private void maze3button_MouseLeave(object sender, EventArgs e)
+        {
+            maze3button.BackgroundImage = Resources.maze3;
+        }
+
+        private void maze1button_Click(object sender, EventArgs e)
+        {
+            LoadLevel1();
+        }
+
+        private void maze2button_Click(object sender, EventArgs e)
+        {
+            LoadLevel2();
+        }
+
+        private void maze3button_Click(object sender, EventArgs e)
+        {
+            LoadLevel3();
         }
 
         private void button8_Click(object sender, EventArgs e)

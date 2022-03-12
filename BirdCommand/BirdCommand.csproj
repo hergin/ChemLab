@@ -201,5 +201,26 @@
   <ItemGroup>
     <None Include="Resources\reset-button-over.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\maze-selector-box.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\maze2_over.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\maze3.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\maze3_over.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\maze1.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\maze1_over.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\maze2.PNG" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
