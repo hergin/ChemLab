@@ -291,6 +291,16 @@ namespace BirdCommand.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap reset_button_over {
+            get {
+                object obj = ResourceManager.GetObject("reset_button_over", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap rule {
             get {
                 object obj = ResourceManager.GetObject("rule", resourceCulture);
@@ -314,6 +324,16 @@ namespace BirdCommand.Properties {
         internal static System.Drawing.Bitmap run_button {
             get {
                 object obj = ResourceManager.GetObject("run_button", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap run_button_over {
+            get {
+                object obj = ResourceManager.GetObject("run_button_over", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -19,6 +19,7 @@ namespace BirdCommand
     {
         public static int CELL_SIZE = 50;
         BirdCell theBird;
+        Point originalBirdPosition;
         StartCell theStart;
         bool addBird = false, addEmpty = false;
 
@@ -44,6 +45,7 @@ namespace BirdCommand
             toolTip1.SetToolTip(toAddEmptyButton, "Add an empty cell (Click here and then click to the canvas)");
             toolTip1.SetToolTip(addRuleButton, "Add an empty rule to the next available place in the program");
             toolTip1.SetToolTip(resetButton, "Move the bird back to the original position in the maze");
+            toolTip1.SetToolTip(startOverButton, "This will reset the puzzle to its start state and delete all the blocks you've added or changed.");
 
             //designer_trafo.Document.AddElement(label);
 
@@ -124,6 +126,7 @@ namespace BirdCommand
             LevelDesigner.Level1(designer_board);
 
             theBird = (BirdCell)designer_board.Document.Elements.GetArray().Where(e => e is BirdCell).First();
+            originalBirdPosition = theBird.Location;
         }
 
         void LoadLevel2()
@@ -134,6 +137,7 @@ namespace BirdCommand
             LevelDesigner.Level2(designer_board);
 
             theBird = (BirdCell)designer_board.Document.Elements.GetArray().Where(e => e is BirdCell).First();
+            originalBirdPosition = theBird.Location;
         }
 
         void LoadLevel3()
@@ -144,6 +148,7 @@ namespace BirdCommand
             LevelDesigner.Level3(designer_board);
 
             theBird = (BirdCell)designer_board.Document.Elements.GetArray().Where(e => e is BirdCell).First();
+            originalBirdPosition = theBird.Location;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -268,51 +273,6 @@ namespace BirdCommand
                 TrafoUtil.FindPostConditionElements(designer_trafo.Document.Elements.GetArray().ToList(),
                     (RuleCell)designer_trafo.Document.SelectedElements.GetArray().Where(el => el is RuleCell).First()));
             MessageBox.Show("RuleType: " + ruleType);
-        }
-
-        private void button15_Click(object sender, EventArgs e)
-        {
-            // TODO take empty or other scenarios into account
-            // TODO run slowly step by step highlighting the current rule
-            var allRules = designer_trafo.Document.Elements.GetArray().Where(el => el is RuleCell).ToList();
-            allRules.Sort((a, b) => { return a.Location.Y - b.Location.Y; });
-            foreach (var rule in allRules)
-            {
-                var ruleType = TrafoUtil.IdentifyRuleType(
-                    TrafoUtil.FindPreConditionElements(designer_trafo.Document.Elements.GetArray().ToList(),
-                        rule),
-                    TrafoUtil.FindPostConditionElements(designer_trafo.Document.Elements.GetArray().ToList(),
-                        rule));
-                for (int i = 0; i < ((RuleCell)rule).RuleCount; i++)
-                {
-                    if (TrafoUtil.DoesPatternExist(designer_board.Document.Elements.GetArray().ToList(), TrafoUtil.FindPreConditionElements(designer_trafo.Document.Elements.GetArray().ToList(),
-                            rule)))
-                    {
-                        // TODO pattern exists for other move forward or turn rules than the one in the model, should find a solution
-                        switch (ruleType)
-                        {
-                            case RuleType.TurnRight:
-                                theBird.TurnRight();
-                                break;
-                            case RuleType.TurnLeft:
-                                theBird.TurnLeft();
-                                break;
-                            case RuleType.Turn180:
-                                theBird.TurnRight();
-                                theBird.TurnRight();
-                                break;
-                            case RuleType.MoveForward:
-                                theBird.MoveForward();
-                                break;
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("Pattern doesn't exist!");
-                    }
-                }
-            }
-
         }
 
         private void button16_Click(object sender, EventArgs e)
@@ -491,13 +451,84 @@ namespace BirdCommand
             DialogResult dialogResult = MessageBox.Show("This will reset the puzzle to its start state and delete all the blocks you've added or changed.", "Are you sure you want to start over?", MessageBoxButtons.YesNo,MessageBoxIcon.Question);
             if (dialogResult == DialogResult.Yes)
             {
-                // TODO
+                if (theBird != null)
+                    theBird.Location = originalBirdPosition;
+                foreach (var element in designer_trafo.Document.Elements.GetArray().Where(el => !(el is StartCell)))
+                {
+                    designer_trafo.Document.DeleteElement(element);
+                }
             }
         }
 
-        private void resetButton_Click(object sender, EventArgs e)
+
+        private void runButton_MouseEnter(object sender, EventArgs e)
         {
-            // TODO
+            runButton.BackgroundImage = Resources.run_button_over;
+        }
+
+        private void runButton_MouseLeave(object sender, EventArgs e)
+        {
+            runButton.BackgroundImage = Resources.run_button;
+        }
+
+        private void resetButton_MouseEnter(object sender, EventArgs e)
+        {
+            resetButton.BackgroundImage = Resources.reset_button_over;
+        }
+
+        private void resetButton_MouseLeave(object sender, EventArgs e)
+        {
+            resetButton.BackgroundImage = Resources.reset_button;
+        }
+
+        private void runButton_Click(object sender, EventArgs e)
+        {
+            // TODO take empty or other scenarios into account
+            // TODO run slowly step by step highlighting the current rule
+            var allRules = designer_trafo.Document.Elements.GetArray().Where(el => el is RuleCell).ToList();
+            allRules.Sort((a, b) => { return a.Location.Y - b.Location.Y; });
+            foreach (var rule in allRules)
+            {
+                var ruleType = TrafoUtil.IdentifyRuleType(
+                    TrafoUtil.FindPreConditionElements(designer_trafo.Document.Elements.GetArray().ToList(),
+                        rule),
+                    TrafoUtil.FindPostConditionElements(designer_trafo.Document.Elements.GetArray().ToList(),
+                        rule));
+                for (int i = 0; i < ((RuleCell)rule).RuleCount; i++)
+                {
+                    if (TrafoUtil.DoesPatternExist(designer_board.Document.Elements.GetArray().ToList(), TrafoUtil.FindPreConditionElements(designer_trafo.Document.Elements.GetArray().ToList(),
+                            rule)))
+                    {
+                        // TODO pattern exists for other move forward or turn rules than the one in the model, should find a solution
+                        switch (ruleType)
+                        {
+                            case RuleType.TurnRight:
+                                theBird.TurnRight();
+                                break;
+                            case RuleType.TurnLeft:
+                                theBird.TurnLeft();
+                                break;
+                            case RuleType.Turn180:
+                                theBird.TurnRight();
+                                theBird.TurnRight();
+                                break;
+                            case RuleType.MoveForward:
+                                theBird.MoveForward();
+                                break;
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Pattern doesn't exist!");
+                    }
+                }
+            }
+        }
+
+        private void resetButton_Click_1(object sender, EventArgs e)
+        {
+            if(theBird != null)
+                theBird.Location = originalBirdPosition;
         }
 
         private void button8_Click(object sender, EventArgs e)

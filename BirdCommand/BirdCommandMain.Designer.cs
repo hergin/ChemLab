@@ -51,7 +51,6 @@ namespace BirdCommand
             this.button12 = new System.Windows.Forms.Button();
             this.button13 = new System.Windows.Forms.Button();
             this.button14 = new System.Windows.Forms.Button();
-            this.runButton = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.button16 = new System.Windows.Forms.Button();
             this.button17 = new System.Windows.Forms.Button();
@@ -72,14 +71,17 @@ namespace BirdCommand
             this.turnLeftButton = new System.Windows.Forms.Button();
             this.turnRightButton = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.resetButton = new System.Windows.Forms.Button();
             this.startOverButton = new System.Windows.Forms.PictureBox();
+            this.runButton = new System.Windows.Forms.PictureBox();
+            this.resetButton = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel3.SuspendLayout();
             this.debugPanel.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.startOverButton)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.runButton)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.resetButton)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -303,18 +305,6 @@ namespace BirdCommand
             this.button14.Text = "Identify Rule Type";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
-            // 
-            // runButton
-            // 
-            this.runButton.BackgroundImage = global::BirdCommand.Properties.Resources.run_button;
-            this.runButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.runButton.ForeColor = System.Drawing.Color.Transparent;
-            this.runButton.Location = new System.Drawing.Point(16, 514);
-            this.runButton.Name = "runButton";
-            this.runButton.Size = new System.Drawing.Size(135, 61);
-            this.runButton.TabIndex = 22;
-            this.runButton.UseVisualStyleBackColor = true;
-            this.runButton.Click += new System.EventHandler(this.button15_Click);
             // 
             // pictureBox1
             // 
@@ -554,17 +544,6 @@ namespace BirdCommand
             this.turnRightButton.UseVisualStyleBackColor = true;
             this.turnRightButton.Click += new System.EventHandler(this.turnRightButton_Click);
             // 
-            // resetButton
-            // 
-            this.resetButton.BackgroundImage = global::BirdCommand.Properties.Resources.reset_button;
-            this.resetButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.resetButton.Location = new System.Drawing.Point(157, 514);
-            this.resetButton.Name = "resetButton";
-            this.resetButton.Size = new System.Drawing.Size(137, 61);
-            this.resetButton.TabIndex = 32;
-            this.resetButton.UseVisualStyleBackColor = true;
-            this.resetButton.Click += new System.EventHandler(this.resetButton_Click);
-            // 
             // startOverButton
             // 
             this.startOverButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -581,14 +560,41 @@ namespace BirdCommand
             this.startOverButton.MouseEnter += new System.EventHandler(this.startOverButton_MouseEnter);
             this.startOverButton.MouseLeave += new System.EventHandler(this.startOverButton_MouseLeave);
             // 
+            // runButton
+            // 
+            this.runButton.BackgroundImage = global::BirdCommand.Properties.Resources.run_button;
+            this.runButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.runButton.Location = new System.Drawing.Point(16, 520);
+            this.runButton.Name = "runButton";
+            this.runButton.Size = new System.Drawing.Size(124, 57);
+            this.runButton.TabIndex = 34;
+            this.runButton.TabStop = false;
+            this.runButton.Click += new System.EventHandler(this.runButton_Click);
+            this.runButton.MouseEnter += new System.EventHandler(this.runButton_MouseEnter);
+            this.runButton.MouseLeave += new System.EventHandler(this.runButton_MouseLeave);
+            // 
+            // resetButton
+            // 
+            this.resetButton.BackgroundImage = global::BirdCommand.Properties.Resources.reset_button;
+            this.resetButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.resetButton.Location = new System.Drawing.Point(146, 520);
+            this.resetButton.Name = "resetButton";
+            this.resetButton.Size = new System.Drawing.Size(135, 57);
+            this.resetButton.TabIndex = 35;
+            this.resetButton.TabStop = false;
+            this.resetButton.Click += new System.EventHandler(this.resetButton_Click_1);
+            this.resetButton.MouseEnter += new System.EventHandler(this.resetButton_MouseEnter);
+            this.resetButton.MouseLeave += new System.EventHandler(this.resetButton_MouseLeave);
+            // 
             // BirdCommandMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1269, 855);
-            this.Controls.Add(this.startOverButton);
             this.Controls.Add(this.resetButton);
+            this.Controls.Add(this.runButton);
+            this.Controls.Add(this.startOverButton);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.debugPanel);
@@ -596,7 +602,6 @@ namespace BirdCommand
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.runButton);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.designer_board);
             this.Controls.Add(this.panel2);
@@ -612,6 +617,8 @@ namespace BirdCommand
             this.debugPanel.PerformLayout();
             this.panel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.startOverButton)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.runButton)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.resetButton)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -637,7 +644,6 @@ namespace BirdCommand
         private System.Windows.Forms.Button button12;
         private System.Windows.Forms.Button button13;
         private System.Windows.Forms.Button button14;
-        private System.Windows.Forms.Button runButton;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button button16;
         private System.Windows.Forms.Button button17;
@@ -658,8 +664,9 @@ namespace BirdCommand
         private System.Windows.Forms.Button increaseRuleCountButton;
         private System.Windows.Forms.Button decreaseRuleCountButton;
         private System.Windows.Forms.Button copyLhsToRhsButton;
-        private System.Windows.Forms.Button resetButton;
         private System.Windows.Forms.PictureBox startOverButton;
+        private System.Windows.Forms.PictureBox runButton;
+        private System.Windows.Forms.PictureBox resetButton;
     }
 }
 

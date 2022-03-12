@@ -195,5 +195,11 @@
   <ItemGroup>
     <None Include="Resources\start-over-button-over.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\run-button-over.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\reset-button-over.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
