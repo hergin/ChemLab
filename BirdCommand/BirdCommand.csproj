@@ -186,5 +186,14 @@
   <ItemGroup>
     <None Include="Resources\copyLHStoRHSbutton.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\reset-button.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\start-over-button.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\start-over-button-over.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,4 +1,5 @@
 ﻿using BirdCommand.Custom;
+using BirdCommand.Properties;
 using Dalssoft.DiagramNet;
 using System;
 using System.Collections.Generic;
@@ -39,7 +40,10 @@ namespace BirdCommand
             toolTip1.SetToolTip(increaseRuleCountButton, "Increase the rule count of the selected rule");
             toolTip1.SetToolTip(decreaseRuleCountButton, "Decrease the rule count of the selected rule");
             toolTip1.SetToolTip(copyLhsToRhsButton, "Copy 'Current Pattern' to 'Pattern After'");
-
+            toolTip1.SetToolTip(toAddBirdButton, "Add a bird (Click here and then click to the canvas)");
+            toolTip1.SetToolTip(toAddEmptyButton, "Add an empty cell (Click here and then click to the canvas)");
+            toolTip1.SetToolTip(addRuleButton, "Add an empty rule to the next available place in the program");
+            toolTip1.SetToolTip(resetButton, "Move the bird back to the original position in the maze");
 
             //designer_trafo.Document.AddElement(label);
 
@@ -268,6 +272,8 @@ namespace BirdCommand
 
         private void button15_Click(object sender, EventArgs e)
         {
+            // TODO take empty or other scenarios into account
+            // TODO run slowly step by step highlighting the current rule
             var allRules = designer_trafo.Document.Elements.GetArray().Where(el => el is RuleCell).ToList();
             allRules.Sort((a, b) => { return a.Location.Y - b.Location.Y; });
             foreach (var rule in allRules)
@@ -468,6 +474,30 @@ namespace BirdCommand
             {
                 MessageBox.Show("Please select a rule first to copy its 'current pattern' to its 'pattern after'.", "No rule selected!");
             }
+        }
+
+        private void startOverButton_MouseEnter(object sender, EventArgs e)
+        {
+            startOverButton.BackgroundImage = Resources.start_over_button_over;
+        }
+
+        private void startOverButton_MouseLeave(object sender, EventArgs e)
+        {
+            startOverButton.BackgroundImage = Resources.start_over_button;
+        }
+
+        private void startOverButton_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("This will reset the puzzle to its start state and delete all the blocks you've added or changed.", "Are you sure you want to start over?", MessageBoxButtons.YesNo,MessageBoxIcon.Question);
+            if (dialogResult == DialogResult.Yes)
+            {
+                // TODO
+            }
+        }
+
+        private void resetButton_Click(object sender, EventArgs e)
+        {
+            // TODO
         }
 
         private void button8_Click(object sender, EventArgs e)
