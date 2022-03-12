@@ -263,6 +263,11 @@
   <ItemGroup>
     <None Include="Resources\maze2.PNG" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\rule-highlighted.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rule-start-highlighted.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

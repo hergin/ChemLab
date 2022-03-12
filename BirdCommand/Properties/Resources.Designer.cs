@@ -381,9 +381,29 @@ namespace BirdCommand.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap rule_highlighted {
+            get {
+                object obj = ResourceManager.GetObject("rule_highlighted", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap rule_start {
             get {
                 object obj = ResourceManager.GetObject("rule_start", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap rule_start_highlighted {
+            get {
+                object obj = ResourceManager.GetObject("rule_start_highlighted", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

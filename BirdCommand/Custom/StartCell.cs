@@ -18,5 +18,15 @@ namespace BirdCommand.Custom
             FillColor1 = Color.Transparent;
             FillColor2 = Color.Transparent;
         }
+
+        public void Highlight()
+        {
+            Background = Resources.rule_start_highlighted;
+        }
+
+        public void Unhighlight()
+        {
+            Background = Resources.rule_start;
+        }
     }
 }

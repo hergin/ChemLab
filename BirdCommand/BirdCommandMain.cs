@@ -615,6 +615,12 @@ namespace BirdCommand
             LoadLevel3();
         }
 
+        private void button15_Click(object sender, EventArgs e)
+        {
+            ((RuleCell)designer_trafo.Document.Elements.GetArray().Where(el => el is RuleCell).First()).Highlight();
+            ((StartCell)designer_trafo.Document.Elements.GetArray().Where(el => el is StartCell).First()).Highlight();
+        }
+
         private void button8_Click(object sender, EventArgs e)
         {
             designer_trafo.Document.Action = DesignerAction.Add;

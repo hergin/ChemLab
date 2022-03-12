@@ -28,6 +28,16 @@ namespace BirdCommand.Custom
             Label.Text = "1";
         }
 
+        public void Highlight()
+        {
+            Background = Resources.rule_highlighted;
+        }
+
+        public void Unhighlight()
+        {
+            Background = Resources.rule;
+        }
+
         public void IncreaseRuleCount()
         {
             ruleCount++;

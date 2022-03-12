@@ -68,6 +68,7 @@ namespace BirdCommand
             this.toAddEmptyButton = new System.Windows.Forms.Button();
             this.toAddBirdButton = new System.Windows.Forms.Button();
             this.debugPanel = new System.Windows.Forms.Panel();
+            this.button15 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -519,6 +520,7 @@ namespace BirdCommand
             this.debugPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.debugPanel.BackColor = System.Drawing.Color.Salmon;
+            this.debugPanel.Controls.Add(this.button15);
             this.debugPanel.Controls.Add(this.label3);
             this.debugPanel.Controls.Add(this.linkLabel2);
             this.debugPanel.Controls.Add(this.button1);
@@ -544,6 +546,17 @@ namespace BirdCommand
             this.debugPanel.Size = new System.Drawing.Size(1241, 150);
             this.debugPanel.TabIndex = 30;
             this.debugPanel.Visible = false;
+            // 
+            // button15
+            // 
+            this.button15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button15.Location = new System.Drawing.Point(583, 20);
+            this.button15.Name = "button15";
+            this.button15.Size = new System.Drawing.Size(119, 23);
+            this.button15.TabIndex = 27;
+            this.button15.Text = "Highlight selected rule";
+            this.button15.UseVisualStyleBackColor = true;
+            this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
             // label3
             // 
@@ -772,6 +785,7 @@ namespace BirdCommand
         private System.Windows.Forms.PictureBox maze1button;
         private System.Windows.Forms.PictureBox maze3button;
         private System.Windows.Forms.PictureBox maze2button;
+        private System.Windows.Forms.Button button15;
     }
 }
 
