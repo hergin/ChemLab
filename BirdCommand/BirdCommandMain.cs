@@ -21,6 +21,7 @@ namespace BirdCommand
         BirdCell theBird;
         Point originalBirdPosition;
         StartCell theStart;
+        SnapCell theSnapCell;
         bool addBird = false, addEmpty = false;
 
         public BirdCommandMain()
@@ -52,6 +53,10 @@ namespace BirdCommand
 
             designer_trafo.Document.GridSize = new System.Drawing.Size(10000, 10000);
 
+            theSnapCell = new SnapCell(0, 0);
+            designer_trafo.Document.AddElement(theSnapCell);
+            theSnapCell.Visible = false;
+
             //designer_trafo.Document.AddElement(label);
 
             //designer_trafo.Document.AddElement(new SnapCell(0, 0));
@@ -61,9 +66,13 @@ namespace BirdCommand
 
         private void Designer_trafo_ElementMouseUp(object sender, ElementMouseEventArgs e)
         {
+            theSnapCell.Visible = false;
             if (e.Element is RuleCell rule)
             {
-                // TODO put the current rule right after the highlighted element and move the rest accordingly.
+                // snap the current rule to the highlighted element
+                e.Element.Location = new Point(theSnapCell.Location.X - 10, theSnapCell.Location.Y + 1);
+                // TODO move the contents of the rule as well and move the rest of the rules accordingly.
+                Designer_trafo_ElementClick(sender, e);
             }
             else if (e.Element is BirdCell bird)
             {
@@ -82,7 +91,21 @@ namespace BirdCommand
         {
             if(e.Element is RuleCell)
             {
-                // TODO highlight the closest rule that this can snap (this can be done by adding another cell, like HighlightCell)
+                var possibleElements = designer_trafo.Document.Elements.GetArray().Where(el => (el is RuleCell || el is StartCell) && el.Location != e.Element.Location);
+
+                var smallest = int.MaxValue;
+                BaseElement closestElement = null;
+                foreach (var element in possibleElements)
+                {
+                    if( Math.Abs(element.Location.Y+element.Size.Height - e.Element.Location.Y) < smallest)
+                    {
+                        smallest = Math.Abs(element.Location.Y + element.Size.Height - e.Element.Location.Y);
+                        closestElement = element;
+                    }
+                }
+                theSnapCell.Location = new Point(closestElement.Location.X+11, closestElement.Location.Y + closestElement.Size.Height-5);
+                theSnapCell.Visible = true;
+                designer_trafo.Document.BringToFrontElement(theSnapCell);
             }
         }
 
