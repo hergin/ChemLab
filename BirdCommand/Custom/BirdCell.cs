@@ -16,6 +16,9 @@ namespace BirdCommand.Custom
     [Serializable]
     public class BirdCell : RectangleElement
     {
+        Point birthPosition;
+        Direction birthDirection;
+
         private Direction direction;
         public Direction Direction { get => direction; }
 
@@ -23,16 +26,41 @@ namespace BirdCommand.Custom
         {
             Background = Resources.BirdDown;
             direction = Direction.Down;
+            birthDirection = Direction.Down;
             FillColor1 = Color.Transparent;
             FillColor2 = Color.Transparent;
+            birthPosition = new Point(x, y);
         }
 
         public BirdCell(int x, int y, Direction direction) : base(x, y, BirdCommandMain.CELL_SIZE, BirdCommandMain.CELL_SIZE)
         {
             this.direction = direction;
+            birthDirection = direction;
             FillColor1 = Color.Transparent;
             FillColor2 = Color.Transparent;
-            switch(direction)
+            birthPosition = new Point(x, y);
+            switch (direction)
+            {
+                case Direction.Up:
+                    Background = Resources.BirdUp;
+                    break;
+                case Direction.Down:
+                    Background = Resources.BirdDown;
+                    break;
+                case Direction.Left:
+                    Background = Resources.BirdLeft;
+                    break;
+                case Direction.Right:
+                    Background = Resources.BirdRight;
+                    break;
+            }
+        }
+
+        public void Reset()
+        {
+            direction = birthDirection;
+            Location = birthPosition;
+            switch (direction)
             {
                 case Direction.Up:
                     Background = Resources.BirdUp;

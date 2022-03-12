@@ -312,7 +312,7 @@ namespace Dalssoft.DiagramNet
                             if ((e.Clicks == 2) && (selectedElement is ILabelElement))
                             {
                                 selectedLabel = ((ILabelElement)selectedElement).Label;
-                                StartEditLabel();
+                                // StartEditLabel(); // Hack to eliminate double clicks on elements
                                 break;
                             }
 
@@ -935,8 +935,8 @@ namespace Dalssoft.DiagramNet
 				}
 			}
 
-			resizeAction = new ResizeAction();
-			resizeAction.Select(document);
+			// resizeAction = new ResizeAction(); // HACK to eliminate resizing in our project
+			// resizeAction.Select(document);
 		}
 
 		private void EndSelectElements(Rectangle selectionRectangle)

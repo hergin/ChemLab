@@ -19,7 +19,6 @@ namespace BirdCommand
     {
         public static int CELL_SIZE = 50;
         BirdCell theBird;
-        Point originalBirdPosition;
         StartCell theStart;
         SnapCell theSnapCell;
         bool addBird = false, addEmpty = false;
@@ -137,7 +136,7 @@ namespace BirdCommand
 
         private void Designer_trafo_ElementClick(object sender, ElementEventArgs e)
         {
-            if (e.Element is RuleCell)
+            if (e.Element is RuleCell rule)
             {
                 List<BaseElement> list = DesignerUtil.FindElementsWithin(designer_trafo,e.Element);
                 designer_trafo.Document.SelectElements(list.ToArray());
@@ -154,7 +153,6 @@ namespace BirdCommand
             LevelDesigner.Level1(designer_board);
 
             theBird = (BirdCell)designer_board.Document.Elements.GetArray().Where(e => e is BirdCell).First();
-            originalBirdPosition = theBird.Location;
         }
 
         void LoadLevel2()
@@ -165,7 +163,6 @@ namespace BirdCommand
             LevelDesigner.Level2(designer_board);
 
             theBird = (BirdCell)designer_board.Document.Elements.GetArray().Where(e => e is BirdCell).First();
-            originalBirdPosition = theBird.Location;
         }
 
         void LoadLevel3()
@@ -176,7 +173,6 @@ namespace BirdCommand
             LevelDesigner.Level3(designer_board);
 
             theBird = (BirdCell)designer_board.Document.Elements.GetArray().Where(e => e is BirdCell).First();
-            originalBirdPosition = theBird.Location;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -479,16 +475,19 @@ namespace BirdCommand
             DialogResult dialogResult = MessageBox.Show("This will reset the puzzle to its start state and delete all the blocks you've added or changed.", "Are you sure you want to start over?", MessageBoxButtons.YesNo,MessageBoxIcon.Question);
             if (dialogResult == DialogResult.Yes)
             {
-                if (theBird != null)
-                    theBird.Location = originalBirdPosition;
-                foreach (var element in designer_trafo.Document.Elements.GetArray().Where(el => !(el is StartCell || el is SnapCell)))
-                {
-                    designer_trafo.Document.DeleteElement(element);
-                }
-                designer_trafo.Document.ClearSelection();
+                startOver();
             }
         }
 
+        private void startOver()
+        {
+            theBird?.Reset();
+            foreach (var element in designer_trafo.Document.Elements.GetArray().Where(el => !(el is StartCell || el is SnapCell)))
+            {
+                designer_trafo.Document.DeleteElement(element);
+            }
+            designer_trafo.Document.ClearSelection();
+        }
 
         private void runButton_MouseEnter(object sender, EventArgs e)
         {
@@ -564,8 +563,7 @@ namespace BirdCommand
 
         private void resetButton_Click_1(object sender, EventArgs e)
         {
-            if(theBird != null)
-                theBird.Location = originalBirdPosition;
+            theBird?.Reset();
         }
 
         private void maze1button_MouseEnter(object sender, EventArgs e)
@@ -600,16 +598,19 @@ namespace BirdCommand
 
         private void maze1button_Click(object sender, EventArgs e)
         {
+            startOver();
             LoadLevel1();
         }
 
         private void maze2button_Click(object sender, EventArgs e)
         {
+            startOver();
             LoadLevel2();
         }
 
         private void maze3button_Click(object sender, EventArgs e)
         {
+            startOver();
             LoadLevel3();
         }
 
