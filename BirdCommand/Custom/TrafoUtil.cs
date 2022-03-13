@@ -13,6 +13,11 @@ namespace BirdCommand.Custom
         MoveForward, TurnRight, TurnLeft, Turn180, NotSupportedYet
     }
 
+    public enum TrafoProgress
+    {
+        Highlight = 0, Unhighlight = 1, Error = 2
+    }
+
     public class TrafoUtil
     {
         public static List<BaseElement> FindPattern(List<BaseElement> model, List<BaseElement> pattern)

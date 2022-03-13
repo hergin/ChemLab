@@ -38,7 +38,6 @@ namespace BirdCommand
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.designer_trafo = new Dalssoft.DiagramNet.Designer();
             this.button12 = new System.Windows.Forms.Button();
             this.button14 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -69,7 +68,9 @@ namespace BirdCommand
             this.runButton = new System.Windows.Forms.PictureBox();
             this.resetButton = new System.Windows.Forms.PictureBox();
             this.trafoRunner = new System.ComponentModel.BackgroundWorker();
+            this.designer_trafo = new Dalssoft.DiagramNet.Designer();
             this.designer_board = new Dalssoft.DiagramNet.Designer();
+            this.button7 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -163,16 +164,6 @@ namespace BirdCommand
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(624, 705);
             this.panel1.TabIndex = 13;
-            // 
-            // designer_trafo
-            // 
-            this.designer_trafo.AutoScroll = true;
-            this.designer_trafo.BackColor = System.Drawing.SystemColors.Window;
-            this.designer_trafo.Dock = System.Windows.Forms.DockStyle.Top;
-            this.designer_trafo.Location = new System.Drawing.Point(0, 0);
-            this.designer_trafo.Name = "designer_trafo";
-            this.designer_trafo.Size = new System.Drawing.Size(607, 2000);
-            this.designer_trafo.TabIndex = 11;
             // 
             // button12
             // 
@@ -375,6 +366,7 @@ namespace BirdCommand
             this.debugPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.debugPanel.BackColor = System.Drawing.Color.Salmon;
+            this.debugPanel.Controls.Add(this.button7);
             this.debugPanel.Controls.Add(this.label3);
             this.debugPanel.Controls.Add(this.button1);
             this.debugPanel.Controls.Add(this.button2);
@@ -529,6 +521,16 @@ namespace BirdCommand
             this.trafoRunner.WorkerReportsProgress = true;
             this.trafoRunner.WorkerSupportsCancellation = true;
             // 
+            // designer_trafo
+            // 
+            this.designer_trafo.AutoScroll = true;
+            this.designer_trafo.BackColor = System.Drawing.SystemColors.Window;
+            this.designer_trafo.Dock = System.Windows.Forms.DockStyle.Top;
+            this.designer_trafo.Location = new System.Drawing.Point(0, 0);
+            this.designer_trafo.Name = "designer_trafo";
+            this.designer_trafo.Size = new System.Drawing.Size(607, 2000);
+            this.designer_trafo.TabIndex = 11;
+            // 
             // designer_board
             // 
             this.designer_board.AutoScroll = true;
@@ -538,6 +540,17 @@ namespace BirdCommand
             this.designer_board.Name = "designer_board";
             this.designer_board.Size = new System.Drawing.Size(401, 401);
             this.designer_board.TabIndex = 1;
+            // 
+            // button7
+            // 
+            this.button7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button7.Location = new System.Drawing.Point(721, 50);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(239, 23);
+            this.button7.TabIndex = 27;
+            this.button7.Text = "Solve maze 3";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // BirdCommandMain
             // 
@@ -622,6 +635,7 @@ namespace BirdCommand
         private System.Windows.Forms.PictureBox maze3button;
         private System.Windows.Forms.PictureBox maze2button;
         private System.ComponentModel.BackgroundWorker trafoRunner;
+        private System.Windows.Forms.Button button7;
     }
 }
 

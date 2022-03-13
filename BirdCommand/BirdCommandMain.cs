@@ -18,6 +18,7 @@ namespace BirdCommand
     // TODO when pig and cell is on the same cell, congratulate and finish the game!
     public partial class BirdCommandMain : Form
     {
+        private const int TimeoutBetweenRuleExecution = 1000;
         public static int CELL_SIZE = 50;
         BirdCell theBird;
         StartCell theStart;
@@ -71,13 +72,13 @@ namespace BirdCommand
         {
             switch (e.ProgressPercentage)
             {
-                case 0:
+                case (int)TrafoProgress.Highlight:
                     ((RuleCell)e.UserState).Highlight();
                     break;
-                case 1:
+                case (int)TrafoProgress.Unhighlight:
                     ((RuleCell)e.UserState).Unhighlight();
                     break;
-                case 2:
+                case (int)TrafoProgress.Error:
                     MessageBox.Show(e.UserState.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     break;
             }
@@ -92,7 +93,7 @@ namespace BirdCommand
             {
                 try
                 {
-                    trafoRunner.ReportProgress(0, rule);
+                    trafoRunner.ReportProgress((int)TrafoProgress.Highlight, rule);
                     var ruleType = TrafoUtil.IdentifyRuleType(
                         TrafoUtil.FindPreConditionElements(designer_trafo.Document.Elements.GetArray().ToList(),
                             rule),
@@ -119,20 +120,20 @@ namespace BirdCommand
                                     theBird.MoveForward();
                                     break;
                             }
-                            Thread.Sleep(1000);
+                            Thread.Sleep(TimeoutBetweenRuleExecution);
                         }
                         else
                         {
-                            trafoRunner.ReportProgress(2, "Pattern doesn't exist!");
+                            trafoRunner.ReportProgress((int)TrafoProgress.Error, "Pattern doesn't exist!");
                             trafoRunner.CancelAsync();
                             return;
                         }
                     }
-                    trafoRunner.ReportProgress(1, rule);
+                    trafoRunner.ReportProgress((int)TrafoProgress.Unhighlight, rule);
                 }
                 catch (Exception exp)
                 {
-                    trafoRunner.ReportProgress(2, exp.Message);
+                    trafoRunner.ReportProgress((int)TrafoProgress.Error, exp.Message);
                     trafoRunner.CancelAsync();
                     return;
                 }
@@ -312,6 +313,11 @@ namespace BirdCommand
 
         private void addRuleButton_Click(object sender, EventArgs e)
         {
+            AddRuleToNextEmptySpot();
+        }
+
+        private RuleCell AddRuleToNextEmptySpot()
+        {
             var highestY = 0;
             foreach (var element in designer_trafo.Document.Elements)
             {
@@ -323,8 +329,10 @@ namespace BirdCommand
                     }
                 }
             }
-            designer_trafo.Document.AddElement(new RuleCell(21, highestY - 4));
+            var newRule = new RuleCell(21, highestY - 4);
+            designer_trafo.Document.AddElement(newRule);
             DesignerUtil.ArrangeTheOrder(designer_trafo);
+            return newRule;
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -391,24 +399,29 @@ namespace BirdCommand
         {
             if (designer_trafo.Document.SelectedElements.GetArray().Where(el => el is RuleCell).Count() >= 1)
             {
-                var lhsElements = TrafoUtil.FindPreConditionElements(designer_trafo.Document.Elements.GetArray().ToList(),
-                    (RuleCell)designer_trafo.Document.SelectedElements.GetArray().Where(el => el is RuleCell).First());
-
-                foreach (var element in lhsElements)
-                {
-                    if (element is EmptyCell empty)
-                    {
-                        designer_trafo.Document.AddElement(new EmptyCell(empty.Location.X + 200, empty.Location.Y));
-                    }
-                    else if (element is BirdCell bird)
-                    {
-                        designer_trafo.Document.AddElement(new BirdCell(bird.Location.X + 200, bird.Location.Y, bird.Direction));
-                    }
-                }
+                CopyLHStoRHS((RuleCell)designer_trafo.Document.SelectedElements.GetArray().Where(el => el is RuleCell).First());
             }
             else
             {
                 MessageBox.Show("Please select a rule first to copy its 'current pattern' to its 'pattern after'.", "No rule selected!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void CopyLHStoRHS(RuleCell rule)
+        {
+            var lhsElements = TrafoUtil.FindPreConditionElements(designer_trafo.Document.Elements.GetArray().ToList(),
+                                rule);
+
+            foreach (var element in lhsElements)
+            {
+                if (element is EmptyCell empty)
+                {
+                    designer_trafo.Document.AddElement(new EmptyCell(empty.Location.X + 200, empty.Location.Y));
+                }
+                else if (element is BirdCell bird)
+                {
+                    designer_trafo.Document.AddElement(new BirdCell(bird.Location.X + 200, bird.Location.Y, bird.Direction));
+                }
             }
         }
 
@@ -522,6 +535,32 @@ namespace BirdCommand
         {
             startOver();
             LoadLevel2();
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            RuleCell firstRule = AddRuleToNextEmptySpot();
+            firstRule.IncreaseRuleCount();
+            designer_trafo.Document.AddElement(new EmptyCell(firstRule.Location.X + 50, firstRule.Location.Y + 50));
+            designer_trafo.Document.AddElement(new EmptyCell(firstRule.Location.X + 100, firstRule.Location.Y + 50));
+            designer_trafo.Document.AddElement(new BirdCell(firstRule.Location.X + 50, firstRule.Location.Y + 50,Direction.Right));
+            designer_trafo.Document.AddElement(new EmptyCell(firstRule.Location.X + 250, firstRule.Location.Y + 50));
+            designer_trafo.Document.AddElement(new EmptyCell(firstRule.Location.X + 300, firstRule.Location.Y + 50));
+            designer_trafo.Document.AddElement(new BirdCell(firstRule.Location.X + 300, firstRule.Location.Y + 50, Direction.Right));
+
+            RuleCell secondRule = AddRuleToNextEmptySpot();
+            designer_trafo.Document.AddElement(new EmptyCell(secondRule.Location.X + 50, secondRule.Location.Y + 50));
+            designer_trafo.Document.AddElement(new BirdCell(secondRule.Location.X + 50, secondRule.Location.Y + 50, Direction.Right));
+            designer_trafo.Document.AddElement(new EmptyCell(secondRule.Location.X + 250, secondRule.Location.Y + 50));
+            designer_trafo.Document.AddElement(new BirdCell(secondRule.Location.X + 250, secondRule.Location.Y + 50, Direction.Down));
+
+            RuleCell thirdRule = AddRuleToNextEmptySpot();
+            designer_trafo.Document.AddElement(new EmptyCell(thirdRule.Location.X + 50, thirdRule.Location.Y + 50));
+            designer_trafo.Document.AddElement(new EmptyCell(thirdRule.Location.X + 50, thirdRule.Location.Y + 100));
+            designer_trafo.Document.AddElement(new BirdCell(thirdRule.Location.X + 50, thirdRule.Location.Y + 50, Direction.Down));
+            designer_trafo.Document.AddElement(new EmptyCell(thirdRule.Location.X + 250, thirdRule.Location.Y + 50));
+            designer_trafo.Document.AddElement(new EmptyCell(thirdRule.Location.X + 250, thirdRule.Location.Y + 100));
+            designer_trafo.Document.AddElement(new BirdCell(thirdRule.Location.X + 250, thirdRule.Location.Y + 100, Direction.Down));
         }
 
         private void maze3button_Click(object sender, EventArgs e)
