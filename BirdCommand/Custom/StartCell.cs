@@ -12,7 +12,7 @@ namespace BirdCommand.Custom
     [Serializable]
     public class StartCell : RectangleElement
     {
-        public StartCell() : base(20, 20, 99, 33)
+        public StartCell() : base(230, 30, 99, 33)
         {
             Background = Resources.rule_start;
             FillColor1 = Color.Transparent;

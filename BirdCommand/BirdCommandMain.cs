@@ -16,13 +16,21 @@ namespace BirdCommand
 {
     // TODO when you click on the newly slide area to create something or to select, it automatically goes to top.
     // TODO when pig and cell is on the same cell, congratulate and finish the game!
+    // TODO prevent the blockPanel and theStart being selected!
+    // TODO get rid of all magical numbers somehow
+    // TODO the blocksPanel should be taken into account while getting the rules and such from the designer.
+    //             There should be one single place to get elements so we can filter them there.
     public partial class BirdCommandMain : Form
     {
         private const int TimeoutBetweenRuleExecution = 1000;
         public static int CELL_SIZE = 50;
+        Point birdButtonLocation = new Point(30, 30),
+            emptyCellButtonLocation = new Point(110, 30),
+            ruleButtonLocation = new Point(25,120);
         BirdCell theBird;
         StartCell theStart;
         SnapCell theSnapCell;
+        RectangleNode blockPanel;
         bool addBird = false, addEmpty = false;
 
         public BirdCommandMain()
@@ -34,18 +42,17 @@ namespace BirdCommand
 
             designer_trafo.ElementClick += Designer_trafo_ElementClick;
             designer_trafo.MouseUp += Designer_trafo_MouseUp;
+            designer_trafo.MouseDown += Designer_trafo_MouseDown;
             designer_trafo.ElementMouseUp += Designer_trafo_ElementMouseUp;
             designer_trafo.ElementMoved += Designer_trafo_ElementMoved;
             designer_trafo.ElementMoving += Designer_trafo_ElementMoving;
+            designer_trafo.Resize += Designer_trafo_Resize;
 
             toolTip1.SetToolTip(turnLeftButton, "Turn selected bird left");
             toolTip1.SetToolTip(turnRightButton, "Turn selected bird right");
             toolTip1.SetToolTip(increaseRuleCountButton, "Increase the rule count of the selected rule");
             toolTip1.SetToolTip(decreaseRuleCountButton, "Decrease the rule count of the selected rule");
             toolTip1.SetToolTip(copyLhsToRhsButton, "Copy 'Current Pattern' to 'Pattern After'");
-            toolTip1.SetToolTip(toAddBirdButton, "Add a bird (Click here and then click to the canvas)");
-            toolTip1.SetToolTip(toAddEmptyButton, "Add an empty cell (Click here and then click to the canvas)");
-            toolTip1.SetToolTip(addRuleButton, "Add an empty rule to the next available place in the program");
             toolTip1.SetToolTip(resetButton, "Move the bird back to the original position in the maze");
             toolTip1.SetToolTip(startOverButton, "This will reset the puzzle to its start state and delete all the blocks you've added or changed.");
             toolTip1.SetToolTip(maze1button, "Open maze 1");
@@ -53,6 +60,18 @@ namespace BirdCommand
             toolTip1.SetToolTip(maze3button, "Open maze 3");
 
             designer_trafo.Document.GridSize = new System.Drawing.Size(10000, 10000);
+            blockPanel = new RectangleNode(0, 0, 200, 220);
+            blockPanel.FillColor1 = Color.FromArgb(228, 228, 228);
+            blockPanel.FillColor2 = Color.FromArgb(228, 228, 228);
+            designer_trafo.Document.AddElement(blockPanel);
+
+            var addBirdButton = new BirdCell(birdButtonLocation.X, birdButtonLocation.Y);
+            designer_trafo.Document.AddElement(addBirdButton);
+            var addCellButton = new EmptyCell(emptyCellButtonLocation.X, emptyCellButtonLocation.Y);
+            designer_trafo.Document.AddElement(addCellButton);
+            var addRuleButtonOnCanvas = new RuleCell(ruleButtonLocation.X, ruleButtonLocation.Y, 140, 70);
+            designer_trafo.Document.AddElement(addRuleButtonOnCanvas);
+
 
             theSnapCell = new SnapCell(0, 0);
             designer_trafo.Document.AddElement(theSnapCell);
@@ -61,11 +80,45 @@ namespace BirdCommand
             trafoRunner.DoWork += TrafoRunner_DoWork;
             trafoRunner.ProgressChanged += TrafoRunner_ProgressChanged;
 
-            //designer_trafo.Document.AddElement(label);
-
-            //designer_trafo.Document.AddElement(new SnapCell(0, 0));
-
             // LoadLevel1();
+        }
+
+        private void Designer_trafo_Resize(object sender, EventArgs e)
+        {
+            blockPanel.Size = new Size(200, designer_trafo.Height);
+        }
+
+        private void Designer_trafo_MouseDown(object sender, MouseEventArgs e)
+        {
+            // TODO if element is not dragged to the canvas, delete the newly created one or the old one! It sure has duplication on the button area.
+            if (designer_trafo.Document.FindElement(e.Location) != null
+                && designer_trafo.Document.FindElement(e.Location) is BirdCell bird
+                && bird.Location == birdButtonLocation)
+            {
+                var newBird = new BirdCell(birdButtonLocation.X, birdButtonLocation.Y);
+                designer_trafo.Document.AddElement(newBird);
+                designer_trafo.Document.SendToBackElement(newBird);
+                designer_trafo.Document.SendToBackElement(blockPanel);
+            }
+            else if (designer_trafo.Document.FindElement(e.Location) != null
+              && designer_trafo.Document.FindElement(e.Location) is EmptyCell empty
+              && empty.Location == emptyCellButtonLocation)
+            {
+                var newEmptyCell = new EmptyCell(emptyCellButtonLocation.X, emptyCellButtonLocation.Y);
+                designer_trafo.Document.AddElement(newEmptyCell);
+                designer_trafo.Document.SendToBackElement(newEmptyCell);
+                designer_trafo.Document.SendToBackElement(blockPanel);
+            }
+            else if (designer_trafo.Document.FindElement(e.Location) != null
+              && designer_trafo.Document.FindElement(e.Location) is RuleCell rule
+              && rule.Location == ruleButtonLocation)
+            {
+                rule.ResizeToOriginal();
+                var newRule = new RuleCell(ruleButtonLocation.X, ruleButtonLocation.Y, 140, 70);
+                designer_trafo.Document.AddElement(newRule);
+                designer_trafo.Document.SendToBackElement(newRule);
+                designer_trafo.Document.SendToBackElement(blockPanel);
+            }
         }
 
         private void TrafoRunner_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -87,7 +140,7 @@ namespace BirdCommand
         private void TrafoRunner_DoWork(object sender, DoWorkEventArgs e)
         {
             // TODO take empty or other scenarios into account
-            var allRules = designer_trafo.Document.Elements.GetArray().Where(el => el is RuleCell).ToList();
+            var allRules = designer_trafo.Document.Elements.GetArray().Where(el => el is RuleCell && el.Location!=ruleButtonLocation).ToList();
             allRules.Sort((a, b) => { return a.Location.Y - b.Location.Y; });
             foreach (var rule in allRules)
             {
@@ -146,7 +199,7 @@ namespace BirdCommand
             if (e.Element is RuleCell rule)
             {
                 // snap the current rule to the highlighted element
-                e.Element.Location = new Point(theSnapCell.Location.X - 10, theSnapCell.Location.Y + 1);
+                e.Element.Location = new Point(theSnapCell.Location.X - 11, theSnapCell.Location.Y);
                 // TODO move the contents of the rule as well and move the rest of the rules accordingly.
                 Designer_trafo_ElementClick(sender, e);
             }
@@ -168,7 +221,9 @@ namespace BirdCommand
         {
             if(e.Element is RuleCell)
             {
-                var possibleElements = designer_trafo.Document.Elements.GetArray().Where(el => (el is RuleCell || el is StartCell) && el.Location != e.Element.Location);
+                var possibleElements = designer_trafo.Document.Elements.GetArray().Where(el => (el is RuleCell || el is StartCell)
+                    && el.Location != e.Element.Location
+                    && el.Location != ruleButtonLocation);
 
                 var smallest = int.MaxValue;
                 BaseElement closestElement = null;
@@ -321,7 +376,7 @@ namespace BirdCommand
             var highestY = 0;
             foreach (var element in designer_trafo.Document.Elements)
             {
-                if (element is RuleCell || element is StartCell)
+                if ((element is RuleCell || element is StartCell) && ((BaseElement)element).Location != ruleButtonLocation)
                 {
                     if (((BaseElement)element).Location.Y + ((BaseElement)element).Size.Height > highestY)
                     {
@@ -329,7 +384,7 @@ namespace BirdCommand
                     }
                 }
             }
-            var newRule = new RuleCell(21, highestY - 4);
+            var newRule = new RuleCell(231, highestY - 5);
             designer_trafo.Document.AddElement(newRule);
             DesignerUtil.ArrangeTheOrder(designer_trafo);
             return newRule;
@@ -447,7 +502,7 @@ namespace BirdCommand
         private void startOver()
         {
             Reset();
-            foreach (var element in designer_trafo.Document.Elements.GetArray().Where(el => !(el is StartCell || el is SnapCell)))
+            foreach (var element in designer_trafo.Document.Elements.GetArray().Where(el => !(el is StartCell || el is SnapCell || el.Location.X < 200)))
             {
                 designer_trafo.Document.DeleteElement(element);
             }
