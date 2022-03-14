@@ -195,6 +195,42 @@ namespace BirdCommand.Custom.Tests
         }
 
         [TestMethod()]
+        public void IdentifyRuleTypeTests_Turns_onlyOneBird()
+        {
+            List<BaseElement> lhs = new List<BaseElement>();
+            lhs.Add(new BirdCell(0, 0));
+
+            List<BaseElement> rhs = new List<BaseElement>();
+            rhs.Add(new BirdCell(0, 0, Direction.Right));
+
+            Assert.AreEqual(RuleType.TurnLeft, TrafoUtil.IdentifyRuleType(lhs, rhs));
+
+            lhs = new List<BaseElement>();
+            lhs.Add(new BirdCell(0, 0, Direction.Up));
+
+            rhs = new List<BaseElement>();
+            rhs.Add(new BirdCell(0, 0, Direction.Left));
+
+            Assert.AreEqual(RuleType.TurnLeft, TrafoUtil.IdentifyRuleType(lhs, rhs));
+
+            lhs = new List<BaseElement>();
+            lhs.Add(new BirdCell(0, 0, Direction.Left));
+
+            rhs = new List<BaseElement>();
+            rhs.Add(new BirdCell(0, 0, Direction.Up));
+
+            Assert.AreEqual(RuleType.TurnRight, TrafoUtil.IdentifyRuleType(lhs, rhs));
+
+            lhs = new List<BaseElement>();
+            lhs.Add(new BirdCell(0, 0, Direction.Right));
+
+            rhs = new List<BaseElement>();
+            rhs.Add(new BirdCell(0, 0, Direction.Left));
+
+            Assert.AreEqual(RuleType.Turn180, TrafoUtil.IdentifyRuleType(lhs, rhs));
+        }
+
+        [TestMethod()]
         public void IdentifyRuleTypeTests_TurnLeft()
         {
             List<BaseElement> lhs = new List<BaseElement>();

@@ -35,6 +35,12 @@ namespace BirdCommand.Custom
 
             var result = new List<BaseElement>();
 
+            // If there is only one bird, just check direction (already checked)
+            if (pattern.Count() == 1)
+            {
+                result.Add(birdInModel);
+            }
+
             foreach (var cell in pattern.Where(p => p is EmptyCell))
             {
                 Point expectedPosition = new Point(birdInModel.Location.X - (birdInPattern.Location.X - cell.Location.X), birdInModel.Location.Y - (birdInPattern.Location.Y - cell.Location.Y));
@@ -86,6 +92,23 @@ namespace BirdCommand.Custom
             // 3) TODO We only allow for patterns with two or less empty cells for now
             if (filteredLhs.Where(f => f is EmptyCell).Count() >2 || filteredRhs.Where(f => f is EmptyCell).Count() > 2)
                 throw new Exception("We only allow for patterns with two or less empty cells for now!");
+
+            // Turn rules identification: There is only one bird (that's it)
+            if (filteredLhs.Where(f => f is BirdCell).Count() == 1 && filteredRhs.Where(f => f is BirdCell).Count() == 1)
+            {
+                var birdLhs = filteredLhs.Where(f => f is BirdCell).First() as BirdCell;
+                var birdRhs = filteredRhs.Where(f => f is BirdCell).First() as BirdCell;
+                
+                // Identifying which way to turn
+                var difference = birdLhs.Direction - birdRhs.Direction;
+
+                if ((difference + 4) % 4 == 3)
+                    return RuleType.TurnRight;
+                else if ((difference + 4) % 4 == 1)
+                    return RuleType.TurnLeft;
+                else if ((difference + 4) % 4 == 2)
+                    return RuleType.Turn180;
+            }
 
             // Turn rules identification: There is only one bird and one empty cell first.
             if (filteredLhs.Where(f => f is BirdCell).Count() == 1 && filteredLhs.Where(f => f is EmptyCell).Count() == 1
