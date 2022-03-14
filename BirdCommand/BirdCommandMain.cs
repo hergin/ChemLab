@@ -116,6 +116,7 @@ namespace BirdCommand
               && rule.Location == ruleButtonLocation)
             {
                 rule.ResizeToOriginal();
+                designer_trafo.Document.BringToFrontElement(rule);
                 var newRule = new RuleCell(ruleButtonLocation.X, ruleButtonLocation.Y, 140, 70);
                 designer_trafo.Document.AddElement(newRule);
                 designer_trafo.Document.SendToBackElement(newRule);
