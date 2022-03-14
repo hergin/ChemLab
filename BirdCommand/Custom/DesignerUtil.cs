@@ -60,6 +60,21 @@ namespace BirdCommand.Custom
             return null;
         }
 
+        internal static EmptyCell FindCellUnderneath(Designer designer, EmptyCell empty, Point point)
+        {
+            foreach (var element in designer.Document.Elements)
+            {
+                BaseElement casted = element as BaseElement;
+                if (casted is EmptyCell result && !result.Equals(empty)
+                    && point.Y >= casted.Location.Y && point.Y < casted.Location.Y + casted.Size.Height
+                    && point.X >= casted.Location.X && point.X < casted.Location.X + casted.Size.Width)
+                {
+                    return result;
+                }
+            }
+            return null;
+        }
+
         internal static EmptyCell FindCellUnderneath(Designer designer, Point point)
         {
             foreach (var element in designer.Document.Elements)

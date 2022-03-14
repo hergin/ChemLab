@@ -210,6 +210,33 @@ namespace BirdCommand
                 if (cellUnderneath != null)
                     bird.Location = cellUnderneath.Location;
             }
+            else if(e.Element is EmptyCell emptyCell)
+            {
+                var emptyUnderneathSouth = DesignerUtil.FindCellUnderneath(designer_trafo, emptyCell, new Point(e.X, e.Y+CELL_SIZE));
+                if (emptyUnderneathSouth != null)
+                {
+                    emptyCell.Location = new Point(emptyUnderneathSouth.Location.X, emptyUnderneathSouth.Location.Y - CELL_SIZE);
+                    return;
+                }
+                var emptyUnderneathNorth = DesignerUtil.FindCellUnderneath(designer_trafo, emptyCell, new Point(e.X, e.Y - CELL_SIZE));
+                if (emptyUnderneathNorth != null)
+                {
+                    emptyCell.Location = new Point(emptyUnderneathNorth.Location.X, emptyUnderneathNorth.Location.Y + CELL_SIZE);
+                    return;
+                }
+                var emptyUnderneathEast = DesignerUtil.FindCellUnderneath(designer_trafo, emptyCell, new Point(e.X - CELL_SIZE, e.Y ));
+                if (emptyUnderneathEast != null)
+                {
+                    emptyCell.Location = new Point(emptyUnderneathEast.Location.X + CELL_SIZE, emptyUnderneathEast.Location.Y);
+                    return;
+                }
+                var emptyUnderneathWest = DesignerUtil.FindCellUnderneath(designer_trafo, emptyCell, new Point(e.X + CELL_SIZE, e.Y));
+                if (emptyUnderneathWest != null)
+                {
+                    emptyCell.Location = new Point(emptyUnderneathWest.Location.X - CELL_SIZE, emptyUnderneathWest.Location.Y);
+                    return;
+                }
+            }
         }
 
         private void Designer_trafo_ElementMoved(object sender, ElementEventArgs e)
