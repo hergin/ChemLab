@@ -15,7 +15,7 @@ using System.Windows.Forms;
 namespace BirdCommand
 {
     // TODO when you click on the newly slide area to create something or to select, it automatically goes to top.
-    // TODO when pig and cell is on the same cell, congratulate and finish the game!
+    // TODO when maze is done, decide what's gonna happen next (going to other maze? etc.)
     // TODO prevent the blockPanel and theStart being selected!
     // TODO get rid of all magical numbers somehow
     // TODO the blocksPanel should be taken into account while getting the rules and such from the designer.
@@ -28,6 +28,7 @@ namespace BirdCommand
             emptyCellButtonLocation = new Point(110, 30),
             ruleButtonLocation = new Point(25,120);
         BirdCell theBird;
+        PigCell thePig;
         StartCell theStart;
         SnapCell theSnapCell;
         RectangleNode blockPanel;
@@ -135,6 +136,12 @@ namespace BirdCommand
                 case (int)TrafoProgress.Error:
                     MessageBox.Show(e.UserState.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     break;
+                case (int)TrafoProgress.Success:
+                    MessageBox.Show("You caught the pig!", "Congrats", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    break;
+                case (int)TrafoProgress.Failure:
+                    MessageBox.Show("Start again! Something's not quite right yet.", "Pig is not caught", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    break;
             }
         }
 
@@ -175,6 +182,12 @@ namespace BirdCommand
                                     break;
                             }
                             Thread.Sleep(TimeoutBetweenRuleExecution);
+                            if(theBird.Location.Equals(thePig.Location))
+                            {
+                                trafoRunner.ReportProgress((int)TrafoProgress.Success);
+                                trafoRunner.CancelAsync();
+                                return;
+                            }
                         }
                         else
                         {
@@ -192,6 +205,9 @@ namespace BirdCommand
                     return;
                 }
             }
+            trafoRunner.ReportProgress((int)TrafoProgress.Failure);
+            trafoRunner.CancelAsync();
+            return;
         }
 
         private void Designer_trafo_ElementMouseUp(object sender, ElementMouseEventArgs e)
@@ -310,6 +326,7 @@ namespace BirdCommand
             LevelDesigner.Level1(designer_board);
 
             theBird = (BirdCell)designer_board.Document.Elements.GetArray().Where(e => e is BirdCell).First();
+            thePig= (PigCell)designer_board.Document.Elements.GetArray().Where(e => e is PigCell).First();
         }
 
         void LoadLevel2()
@@ -320,6 +337,7 @@ namespace BirdCommand
             LevelDesigner.Level2(designer_board);
 
             theBird = (BirdCell)designer_board.Document.Elements.GetArray().Where(e => e is BirdCell).First();
+            thePig = (PigCell)designer_board.Document.Elements.GetArray().Where(e => e is PigCell).First();
         }
 
         void LoadLevel3()
@@ -330,6 +348,7 @@ namespace BirdCommand
             LevelDesigner.Level3(designer_board);
 
             theBird = (BirdCell)designer_board.Document.Elements.GetArray().Where(e => e is BirdCell).First();
+            thePig = (PigCell)designer_board.Document.Elements.GetArray().Where(e => e is PigCell).First();
         }
 
         private void button1_Click(object sender, EventArgs e)

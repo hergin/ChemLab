@@ -15,7 +15,9 @@ namespace BirdCommand.Custom
 
     public enum TrafoProgress
     {
-        Highlight = 0, Unhighlight = 1, Error = 2
+        Highlight = 0, Unhighlight = 1, Error = 2,
+        Success = 3,
+        Failure = 4
     }
 
     public class TrafoUtil
