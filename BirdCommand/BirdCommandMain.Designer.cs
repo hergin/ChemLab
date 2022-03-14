@@ -64,6 +64,7 @@ namespace BirdCommand
             this.runButton = new System.Windows.Forms.PictureBox();
             this.resetButton = new System.Windows.Forms.PictureBox();
             this.trafoRunner = new System.ComponentModel.BackgroundWorker();
+            this.duplicateButton = new System.Windows.Forms.Button();
             this.designer_board = new Dalssoft.DiagramNet.Designer();
             this.designer_trafo = new Dalssoft.DiagramNet.Designer();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -355,6 +356,7 @@ namespace BirdCommand
             this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(228)))), ((int)(((byte)(228)))), ((int)(((byte)(228)))));
+            this.panel4.Controls.Add(this.duplicateButton);
             this.panel4.Controls.Add(this.copyLhsToRhsButton);
             this.panel4.Controls.Add(this.decreaseRuleCountButton);
             this.panel4.Controls.Add(this.increaseRuleCountButton);
@@ -467,6 +469,17 @@ namespace BirdCommand
             this.trafoRunner.WorkerReportsProgress = true;
             this.trafoRunner.WorkerSupportsCancellation = true;
             // 
+            // duplicateButton
+            // 
+            this.duplicateButton.BackgroundImage = global::BirdCommand.Properties.Resources.duplicateButton;
+            this.duplicateButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.duplicateButton.Location = new System.Drawing.Point(17, 259);
+            this.duplicateButton.Name = "duplicateButton";
+            this.duplicateButton.Size = new System.Drawing.Size(164, 91);
+            this.duplicateButton.TabIndex = 11;
+            this.duplicateButton.UseVisualStyleBackColor = true;
+            this.duplicateButton.Click += new System.EventHandler(this.duplicateButton_Click);
+            // 
             // designer_board
             // 
             this.designer_board.AutoScroll = true;
@@ -482,7 +495,6 @@ namespace BirdCommand
             this.designer_trafo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.designer_trafo.AutoScroll = true;
             this.designer_trafo.BackColor = System.Drawing.SystemColors.Window;
             this.designer_trafo.Location = new System.Drawing.Point(434, 142);
             this.designer_trafo.Name = "designer_trafo";
@@ -565,6 +577,7 @@ namespace BirdCommand
         private System.Windows.Forms.PictureBox maze2button;
         private System.ComponentModel.BackgroundWorker trafoRunner;
         private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button duplicateButton;
     }
 }
 

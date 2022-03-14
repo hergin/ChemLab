@@ -55,6 +55,7 @@ namespace BirdCommand
             toolTip1.SetToolTip(copyLhsToRhsButton, "Copy 'Current Pattern' to 'Pattern After'");
             toolTip1.SetToolTip(resetButton, "Move the bird back to the original position in the maze");
             toolTip1.SetToolTip(startOverButton, "This will reset the puzzle to its start state and delete all the blocks you've added or changed.");
+            toolTip1.SetToolTip(duplicateButton, "Duplicate the selected rule");
             toolTip1.SetToolTip(maze1button, "Open maze 1");
             toolTip1.SetToolTip(maze2button, "Open maze 2");
             toolTip1.SetToolTip(maze3button, "Open maze 3");
@@ -611,6 +612,18 @@ namespace BirdCommand
         {
             startOver();
             LoadLevel1();
+        }
+
+        private void duplicateButton_Click(object sender, EventArgs e)
+        {
+            if (designer_trafo.Document.SelectedElements.GetArray().Where(el => el is RuleCell).Count() >= 1)
+            {
+                // TODO duplicate
+            }
+            else
+            {
+                MessageBox.Show("Please select a rule first to duplicate.", "No rule selected!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void maze2button_Click(object sender, EventArgs e)

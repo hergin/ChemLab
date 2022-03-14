@@ -269,5 +269,8 @@
   <ItemGroup>
     <None Include="Resources\rule-start-highlighted.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\duplicateButton.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
