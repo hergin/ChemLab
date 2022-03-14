@@ -216,9 +216,19 @@ namespace BirdCommand
             theSnapCell.Visible = false;
             if (e.Element is RuleCell rule)
             {
-                // snap the current rule to the highlighted element
-                e.Element.Location = new Point(theSnapCell.Location.X - 11, theSnapCell.Location.Y);
-                // TODO move the contents of the rule as well and move the rest of the rules accordingly.
+                var ruleStarterPosition = rule.Location;
+
+                var ruleContent = DesignerUtil.FindElementsWithin(designer_trafo, e.Element);
+                foreach (var element in ruleContent)
+                {
+                    // move the contents of the rule as well
+                    var differenceX = Math.Abs(element.Location.X - ruleStarterPosition.X);
+                    var differenceY = Math.Abs(element.Location.Y - ruleStarterPosition.Y);
+                    element.Location = new Point(theSnapCell.Location.X - 11 + differenceX, theSnapCell.Location.Y + differenceY);
+                }
+
+                // TODO move the rest of the rules accordingly (if we put rule within two rules)
+
                 Designer_trafo_ElementClick(sender, e);
             }
             else if (e.Element is BirdCell bird)
