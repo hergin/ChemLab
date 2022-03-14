@@ -54,6 +54,7 @@ namespace BirdCommand
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.duplicateButton = new System.Windows.Forms.Button();
             this.copyLhsToRhsButton = new System.Windows.Forms.Button();
             this.decreaseRuleCountButton = new System.Windows.Forms.Button();
             this.increaseRuleCountButton = new System.Windows.Forms.Button();
@@ -64,7 +65,6 @@ namespace BirdCommand
             this.runButton = new System.Windows.Forms.PictureBox();
             this.resetButton = new System.Windows.Forms.PictureBox();
             this.trafoRunner = new System.ComponentModel.BackgroundWorker();
-            this.duplicateButton = new System.Windows.Forms.Button();
             this.designer_board = new Dalssoft.DiagramNet.Designer();
             this.designer_trafo = new Dalssoft.DiagramNet.Designer();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -367,6 +367,18 @@ namespace BirdCommand
             this.panel4.Size = new System.Drawing.Size(200, 705);
             this.panel4.TabIndex = 30;
             // 
+            // duplicateButton
+            // 
+            this.duplicateButton.BackgroundImage = global::BirdCommand.Properties.Resources.duplicateButton;
+            this.duplicateButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.duplicateButton.Location = new System.Drawing.Point(17, 259);
+            this.duplicateButton.Name = "duplicateButton";
+            this.duplicateButton.Size = new System.Drawing.Size(164, 91);
+            this.duplicateButton.TabIndex = 11;
+            this.duplicateButton.UseVisualStyleBackColor = true;
+            this.duplicateButton.Visible = false;
+            this.duplicateButton.Click += new System.EventHandler(this.duplicateButton_Click);
+            // 
             // copyLhsToRhsButton
             // 
             this.copyLhsToRhsButton.BackgroundImage = global::BirdCommand.Properties.Resources.copyLHStoRHSbutton;
@@ -469,17 +481,6 @@ namespace BirdCommand
             this.trafoRunner.WorkerReportsProgress = true;
             this.trafoRunner.WorkerSupportsCancellation = true;
             // 
-            // duplicateButton
-            // 
-            this.duplicateButton.BackgroundImage = global::BirdCommand.Properties.Resources.duplicateButton;
-            this.duplicateButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.duplicateButton.Location = new System.Drawing.Point(17, 259);
-            this.duplicateButton.Name = "duplicateButton";
-            this.duplicateButton.Size = new System.Drawing.Size(164, 91);
-            this.duplicateButton.TabIndex = 11;
-            this.duplicateButton.UseVisualStyleBackColor = true;
-            this.duplicateButton.Click += new System.EventHandler(this.duplicateButton_Click);
-            // 
             // designer_board
             // 
             this.designer_board.AutoScroll = true;
@@ -495,6 +496,7 @@ namespace BirdCommand
             this.designer_trafo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.designer_trafo.AutoScroll = true;
             this.designer_trafo.BackColor = System.Drawing.SystemColors.Window;
             this.designer_trafo.Location = new System.Drawing.Point(434, 142);
             this.designer_trafo.Name = "designer_trafo";

@@ -83,6 +83,10 @@ namespace BirdCommand.Custom
             if (filteredLhs.Where(f => f is BirdCell).Count() != 1 || filteredRhs.Where(f => f is BirdCell).Count() != 1)
                 throw new Exception("Patterns (current or after) should have one bird!");
 
+            // 3) TODO We only allow for patterns with two or less empty cells for now
+            if (filteredLhs.Where(f => f is EmptyCell).Count() >2 || filteredRhs.Where(f => f is EmptyCell).Count() > 2)
+                throw new Exception("We only allow for patterns with two or less empty cells for now!");
+
             // Turn rules identification: There is only one bird and one empty cell first.
             if (filteredLhs.Where(f => f is BirdCell).Count() == 1 && filteredLhs.Where(f => f is EmptyCell).Count() == 1
                 && filteredRhs.Where(f => f is BirdCell).Count() == 1 && filteredRhs.Where(f => f is EmptyCell).Count() == 1)

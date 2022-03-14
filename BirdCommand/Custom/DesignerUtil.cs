@@ -96,7 +96,7 @@ namespace BirdCommand.Custom
             foreach (var element in designer.Document.Elements)
             {
                 BaseElement casted = element as BaseElement;
-                if (!(casted is StartCell || casted is SnapCell)) // don't select those with rules even if it might be inside sometimes
+                if (!(casted is StartCell || casted is SnapCell) && casted.Location.X > 200) // don't select those with rules even if it might be inside sometimes
                 {
                     if (casted.Location.Y >= parentElement.Location.Y && casted.Location.Y <= parentElement.Location.Y + parentElement.Size.Height
                         && casted.Location.Y + casted.Size.Height <= parentElement.Location.Y + parentElement.Size.Height
