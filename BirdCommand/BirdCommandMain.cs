@@ -211,23 +211,32 @@ namespace BirdCommand
             return;
         }
 
+        void MoveRuleAndItsContents(RuleCell rule, int newX, int newY)
+        {
+            var ruleStarterPosition = rule.Location;
+
+            var ruleContent = DesignerUtil.FindElementsWithin(designer_trafo, rule);
+            foreach (var element in ruleContent)
+            {
+                // move the contents of the rule as well
+                var differenceX = Math.Abs(element.Location.X - ruleStarterPosition.X);
+                var differenceY = Math.Abs(element.Location.Y - ruleStarterPosition.Y);
+                element.Location = new Point(newX + differenceX, newY + differenceY);
+            }
+        }
+
         private void Designer_trafo_ElementMouseUp(object sender, ElementMouseEventArgs e)
         {
             theSnapCell.Visible = false;
             if (e.Element is RuleCell rule)
             {
-                var ruleStarterPosition = rule.Location;
+                MoveRuleAndItsContents(rule, theSnapCell.Location.X - 11, theSnapCell.Location.Y);
 
-                var ruleContent = DesignerUtil.FindElementsWithin(designer_trafo, e.Element);
-                foreach (var element in ruleContent)
+                // TODO Move the rest of the rules accordingly (if we put rule within two rules)
+                foreach (var otherRule in designer_trafo.Document.Elements.GetArray().Where(el=>el is RuleCell && el.Location.X > 200 && el.Location.Y > rule.Location.Y))
                 {
-                    // move the contents of the rule as well
-                    var differenceX = Math.Abs(element.Location.X - ruleStarterPosition.X);
-                    var differenceY = Math.Abs(element.Location.Y - ruleStarterPosition.Y);
-                    element.Location = new Point(theSnapCell.Location.X - 11 + differenceX, theSnapCell.Location.Y + differenceY);
+                    // this should be investigated more. Because some elements of the newly moved rule might be on top of the existing rule which will mess things up.
                 }
-
-                // TODO move the rest of the rules accordingly (if we put rule within two rules)
 
                 Designer_trafo_ElementClick(sender, e);
             }
