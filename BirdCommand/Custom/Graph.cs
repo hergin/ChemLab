@@ -29,6 +29,14 @@ namespace BirdCommand.Custom
 
         public List<Node> Nodes { get { return nodes; } }
         public List<Edge> Edges { get { return edges; } }
+
+        public override string ToString()
+        {
+            return "NODES\n-----\n"
+                + String.Join("\n", nodes.Select(n => n.ToString()))
+                + "\n\nEDGES\n-----\n"
+                + String.Join("\n", edges.Select(e => e.ToString()));
+        }
     }
 
     public class Node

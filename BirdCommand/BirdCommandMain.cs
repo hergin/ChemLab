@@ -688,6 +688,26 @@ namespace BirdCommand
             }
         }
 
+        private void button9_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(
+                ConvertUtil.PatternToGraph(
+                    TrafoUtil.FindPreConditionElements(
+                        designer_trafo.Document.Elements.GetArray().ToList(),
+                        designer_trafo.Document.SelectedElements.GetArray().Where(x => x is RuleCell).First())).ToString(),
+                "LHS");
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(
+                ConvertUtil.PatternToGraph(
+                    TrafoUtil.FindPostConditionElements(
+                        designer_trafo.Document.Elements.GetArray().ToList(),
+                        designer_trafo.Document.SelectedElements.GetArray().Where(x => x is RuleCell).First())).ToString(),
+                "RHS");
+        }
+
         private void maze2button_Click(object sender, EventArgs e)
         {
             startOver();
