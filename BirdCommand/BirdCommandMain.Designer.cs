@@ -67,6 +67,7 @@ namespace BirdCommand
             this.trafoRunner = new System.ComponentModel.BackgroundWorker();
             this.designer_board = new Dalssoft.DiagramNet.Designer();
             this.designer_trafo = new Dalssoft.DiagramNet.Designer();
+            this.button8 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
             this.panel6.SuspendLayout();
@@ -301,6 +302,7 @@ namespace BirdCommand
             this.debugPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.debugPanel.BackColor = System.Drawing.Color.Salmon;
+            this.debugPanel.Controls.Add(this.button8);
             this.debugPanel.Controls.Add(this.button7);
             this.debugPanel.Controls.Add(this.label3);
             this.debugPanel.Controls.Add(this.button1);
@@ -503,6 +505,16 @@ namespace BirdCommand
             this.designer_trafo.Size = new System.Drawing.Size(697, 705);
             this.designer_trafo.TabIndex = 11;
             // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(1063, 51);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(75, 23);
+            this.button8.TabIndex = 28;
+            this.button8.Text = "Run python";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
+            // 
             // BirdCommandMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -580,6 +592,7 @@ namespace BirdCommand
         private System.ComponentModel.BackgroundWorker trafoRunner;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button duplicateButton;
+        private System.Windows.Forms.Button button8;
     }
 }
 

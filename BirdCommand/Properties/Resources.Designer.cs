@@ -151,6 +151,16 @@ namespace BirdCommand.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] difference_finding {
+            get {
+                object obj = ResourceManager.GetObject("difference_finding", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap duplicateButton {
@@ -203,7 +213,7 @@ namespace BirdCommand.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Wo-Wo-Wo-Wo-Wo-Wo-Wo-Wo
         ///Wo-Wo-Wo-St-Wo-St-Wo-Wo
-        ///Wo-Wo-HW-Bi-Gl-Wo-Wo-HW
+        ///Wo-Wo-HW-BD-Gl-Wo-Wo-HW
         ///Wo-Wo-St-Em-HW-Wo-Wo-Wo
         ///Wo-HW-HW-Pi-HW-Wo-Wo-Wo
         ///Wo-Wo-Wo-St-Wo-Wo-Wo-Wo
@@ -345,6 +355,16 @@ namespace BirdCommand.Properties {
             get {
                 object obj = ResourceManager.GetObject("maze3_over", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] pattern_matching {
+            get {
+                object obj = ResourceManager.GetObject("pattern_matching", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         
@@ -515,6 +535,16 @@ namespace BirdCommand.Properties {
             get {
                 object obj = ResourceManager.GetObject("Wood", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] WPy64_39100 {
+            get {
+                object obj = ResourceManager.GetObject("WPy64_39100", resourceCulture);
+                return ((byte[])(obj));
             }
         }
     }
