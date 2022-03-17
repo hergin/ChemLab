@@ -1,4 +1,5 @@
-﻿using Dalssoft.DiagramNet;
+﻿using BirdCommand.Properties;
+using Dalssoft.DiagramNet;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -13,28 +14,28 @@ namespace BirdCommand.Custom
         public static Graph PatternToGraph(List<BaseElement> elements)
         {
             var result = new Graph();
-            var allEmptyElements = elements.Where(e => e is EmptyCell);
+            var allEmptyAndBlockCells = elements.Where(e => e is EmptyCell || e is BlockCell);
             var handled = new List<BaseElement>();
-            foreach (var element in allEmptyElements)
+            foreach (var element in allEmptyAndBlockCells)
             {
-                result.Add(new Node() { Id = IdFromLocation(element.Location), Type = "Em" });
+                result.Add(new Node() { Id = IdFromLocation(element.Location), Type = GetShortTypeOf(element) });
                 
-                var cellAbove = allEmptyElements.Where(empty => empty.Location.X == element.Location.X && empty.Location.Y == element.Location.Y - BirdCommandMain.CELL_SIZE).FirstOrDefault();
+                var cellAbove = allEmptyAndBlockCells.Where(empty => empty.Location.X == element.Location.X && empty.Location.Y == element.Location.Y - BirdCommandMain.CELL_SIZE).FirstOrDefault();
                 if (cellAbove != null && !handled.Contains(cellAbove))
                 {
                     result.Add(new Edge() { From = IdFromLocation(element.Location), To = IdFromLocation(cellAbove.Location) });
                 }
-                var cellBelow = allEmptyElements.Where(empty => empty.Location.X == element.Location.X && empty.Location.Y == element.Location.Y + BirdCommandMain.CELL_SIZE).FirstOrDefault();
+                var cellBelow = allEmptyAndBlockCells.Where(empty => empty.Location.X == element.Location.X && empty.Location.Y == element.Location.Y + BirdCommandMain.CELL_SIZE).FirstOrDefault();
                 if (cellBelow != null && !handled.Contains(cellBelow))
                 {
                     result.Add(new Edge() { From = IdFromLocation(element.Location), To = IdFromLocation(cellBelow.Location) });
                 }
-                var cellRight = allEmptyElements.Where(empty => empty.Location.X == element.Location.X + BirdCommandMain.CELL_SIZE && empty.Location.Y == element.Location.Y).FirstOrDefault();
+                var cellRight = allEmptyAndBlockCells.Where(empty => empty.Location.X == element.Location.X + BirdCommandMain.CELL_SIZE && empty.Location.Y == element.Location.Y).FirstOrDefault();
                 if (cellRight != null && !handled.Contains(cellRight))
                 {
                     result.Add(new Edge() { From = IdFromLocation(element.Location), To = IdFromLocation(cellRight.Location) });
                 }
-                var cellLeft = allEmptyElements.Where(empty => empty.Location.X == element.Location.X - BirdCommandMain.CELL_SIZE && empty.Location.Y == element.Location.Y).FirstOrDefault();
+                var cellLeft = allEmptyAndBlockCells.Where(empty => empty.Location.X == element.Location.X - BirdCommandMain.CELL_SIZE && empty.Location.Y == element.Location.Y).FirstOrDefault();
                 if (cellLeft != null && !handled.Contains(cellLeft))
                 {
                     result.Add(new Edge() { From = IdFromLocation(element.Location), To = IdFromLocation(cellLeft.Location) });
@@ -42,7 +43,65 @@ namespace BirdCommand.Custom
 
                 handled.Add(element);
             }
+
+            var possibleBird = elements.Where(e => e is BirdCell).FirstOrDefault();
+            if (possibleBird != null)
+            {
+                var bird = possibleBird as BirdCell;
+                result.Add(new Node() { Id = "Bird", Type = GetShortTypeOf(bird) });
+                result.Add(new Edge() { From = IdFromLocation(bird.Location), To = "Bird" });
+            }
+
+            var possiblePig = elements.Where(e => e is PigCell).FirstOrDefault();
+            if (possiblePig != null)
+            {
+                var pig = possiblePig as PigCell;
+                result.Add(new Node() { Id = "Pig", Type = GetShortTypeOf(pig) });
+                result.Add(new Edge() { From = IdFromLocation(pig.Location), To = "Pig" });
+            }
+
             return result;
+        }
+
+        public static String GetShortTypeOf(BaseElement baseElement)
+        {
+            if (baseElement is EmptyCell cell)
+                return "Em";
+            else if (baseElement is BlockCell blockCell)
+            {
+                switch (blockCell.BlockType)
+                {
+                    case BlockType.Glass:
+                        return "Gl";
+                    case BlockType.HalfStone:
+                        return "HS";
+                    case BlockType.HalfWood:
+                        return "HW";
+                    case BlockType.Stone:
+                        return "St";
+                    case BlockType.TNT:
+                        return "Tn";
+                    case BlockType.Wood:
+                        return "Wo";
+                }
+            }
+            else if (baseElement is BirdCell birdCell)
+            {
+                switch (birdCell.Direction)
+                {
+                    case Direction.Up:
+                        return "BU";
+                    case Direction.Right:
+                        return "BR";
+                    case Direction.Down:
+                        return "BD";
+                    case Direction.Left:
+                        return "BL";
+                }
+            }
+            else if (baseElement is PigCell pigCell)
+                return "Pi";
+            return "";
         }
 
         public static String IdFromLocation(Point Location)

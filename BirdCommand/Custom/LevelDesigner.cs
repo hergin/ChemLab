@@ -10,67 +10,78 @@ namespace BirdCommand.Custom
 {
     public class LevelDesigner
     {
-        public static void GenericLevelDesign(Designer theBoard, String boardString)
+        public static List<BaseElement> ProduceLevelElements(String boardString)
         {
+            var result = new List<BaseElement>();
             var rows = boardString.Split(new char[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
 
-            for (int i = 0; i < 8; i++)
+            for (int i = 0; i < rows.Count(); i++)
             {
                 var cols = rows[i].Split(new char[] { '-' }, StringSplitOptions.RemoveEmptyEntries);
-                for (int j = 0; j < 8; j++)
+                for (int j = 0; j < cols.Count(); j++)
                 {
                     var nextValue = cols[j];
                     switch (nextValue)
                     {
                         case "St":
-                            theBoard.Document.AddElement(new BlockCell(j * BirdCommandMain.CELL_SIZE, i * BirdCommandMain.CELL_SIZE, BlockType.Stone));
+                            result.Add(new BlockCell(j * BirdCommandMain.CELL_SIZE, i * BirdCommandMain.CELL_SIZE, BlockType.Stone));
                             break;
                         case "Wo":
-                            theBoard.Document.AddElement(new BlockCell(j * BirdCommandMain.CELL_SIZE, i * BirdCommandMain.CELL_SIZE, BlockType.Wood));
+                            result.Add(new BlockCell(j * BirdCommandMain.CELL_SIZE, i * BirdCommandMain.CELL_SIZE, BlockType.Wood));
                             break;
                         case "HW":
-                            theBoard.Document.AddElement(new BlockCell(j * BirdCommandMain.CELL_SIZE, i * BirdCommandMain.CELL_SIZE, BlockType.HalfWood));
+                            result.Add(new BlockCell(j * BirdCommandMain.CELL_SIZE, i * BirdCommandMain.CELL_SIZE, BlockType.HalfWood));
                             break;
                         case "HS":
-                            theBoard.Document.AddElement(new BlockCell(j * BirdCommandMain.CELL_SIZE, i * BirdCommandMain.CELL_SIZE, BlockType.HalfStone));
+                            result.Add(new BlockCell(j * BirdCommandMain.CELL_SIZE, i * BirdCommandMain.CELL_SIZE, BlockType.HalfStone));
                             break;
                         case "Gl":
-                            theBoard.Document.AddElement(new BlockCell(j * BirdCommandMain.CELL_SIZE, i * BirdCommandMain.CELL_SIZE, BlockType.Glass));
+                            result.Add(new BlockCell(j * BirdCommandMain.CELL_SIZE, i * BirdCommandMain.CELL_SIZE, BlockType.Glass));
                             break;
                         case "Tn":
-                            theBoard.Document.AddElement(new BlockCell(j * BirdCommandMain.CELL_SIZE, i * BirdCommandMain.CELL_SIZE, BlockType.TNT));
+                            result.Add(new BlockCell(j * BirdCommandMain.CELL_SIZE, i * BirdCommandMain.CELL_SIZE, BlockType.TNT));
                             break;
                         case "Em":
-                            theBoard.Document.AddElement(new EmptyCell(j * BirdCommandMain.CELL_SIZE, i * BirdCommandMain.CELL_SIZE));
+                            result.Add(new EmptyCell(j * BirdCommandMain.CELL_SIZE, i * BirdCommandMain.CELL_SIZE));
                             break;
                         case "Bi":
-                            theBoard.Document.AddElement(new EmptyCell(j * BirdCommandMain.CELL_SIZE, i * BirdCommandMain.CELL_SIZE));
-                            theBoard.Document.AddElement(new BirdCell(j * BirdCommandMain.CELL_SIZE, i * BirdCommandMain.CELL_SIZE));
+                            result.Add(new EmptyCell(j * BirdCommandMain.CELL_SIZE, i * BirdCommandMain.CELL_SIZE));
+                            result.Add(new BirdCell(j * BirdCommandMain.CELL_SIZE, i * BirdCommandMain.CELL_SIZE));
                             break;
                         case "BL":
-                            theBoard.Document.AddElement(new EmptyCell(j * BirdCommandMain.CELL_SIZE, i * BirdCommandMain.CELL_SIZE));
-                            theBoard.Document.AddElement(new BirdCell(j * BirdCommandMain.CELL_SIZE, i * BirdCommandMain.CELL_SIZE,Direction.Left));
+                            result.Add(new EmptyCell(j * BirdCommandMain.CELL_SIZE, i * BirdCommandMain.CELL_SIZE));
+                            result.Add(new BirdCell(j * BirdCommandMain.CELL_SIZE, i * BirdCommandMain.CELL_SIZE, Direction.Left));
                             break;
                         case "BR":
-                            theBoard.Document.AddElement(new EmptyCell(j * BirdCommandMain.CELL_SIZE, i * BirdCommandMain.CELL_SIZE));
-                            theBoard.Document.AddElement(new BirdCell(j * BirdCommandMain.CELL_SIZE, i * BirdCommandMain.CELL_SIZE, Direction.Right));
+                            result.Add(new EmptyCell(j * BirdCommandMain.CELL_SIZE, i * BirdCommandMain.CELL_SIZE));
+                            result.Add(new BirdCell(j * BirdCommandMain.CELL_SIZE, i * BirdCommandMain.CELL_SIZE, Direction.Right));
                             break;
                         case "BU":
-                            theBoard.Document.AddElement(new EmptyCell(j * BirdCommandMain.CELL_SIZE, i * BirdCommandMain.CELL_SIZE));
-                            theBoard.Document.AddElement(new BirdCell(j * BirdCommandMain.CELL_SIZE, i * BirdCommandMain.CELL_SIZE, Direction.Up));
+                            result.Add(new EmptyCell(j * BirdCommandMain.CELL_SIZE, i * BirdCommandMain.CELL_SIZE));
+                            result.Add(new BirdCell(j * BirdCommandMain.CELL_SIZE, i * BirdCommandMain.CELL_SIZE, Direction.Up));
                             break;
                         case "BD":
-                            theBoard.Document.AddElement(new EmptyCell(j * BirdCommandMain.CELL_SIZE, i * BirdCommandMain.CELL_SIZE));
-                            theBoard.Document.AddElement(new BirdCell(j * BirdCommandMain.CELL_SIZE, i * BirdCommandMain.CELL_SIZE, Direction.Down));
+                            result.Add(new EmptyCell(j * BirdCommandMain.CELL_SIZE, i * BirdCommandMain.CELL_SIZE));
+                            result.Add(new BirdCell(j * BirdCommandMain.CELL_SIZE, i * BirdCommandMain.CELL_SIZE, Direction.Down));
                             break;
                         case "Pi":
-                            theBoard.Document.AddElement(new EmptyCell(j * BirdCommandMain.CELL_SIZE, i * BirdCommandMain.CELL_SIZE));
-                            theBoard.Document.AddElement(new PigCell(j * BirdCommandMain.CELL_SIZE, i * BirdCommandMain.CELL_SIZE));
+                            result.Add(new EmptyCell(j * BirdCommandMain.CELL_SIZE, i * BirdCommandMain.CELL_SIZE));
+                            result.Add(new PigCell(j * BirdCommandMain.CELL_SIZE, i * BirdCommandMain.CELL_SIZE));
                             break;
                     }
                 }
             }
+            return result;
+        }
 
+        public static void GenericLevelDesign(Designer theBoard, String boardString)
+        {
+            var cells = ProduceLevelElements(boardString);
+            foreach (var cell in cells)
+            {
+                theBoard.Document.AddElement(cell);
+            }
+            
             theBoard.Document.BringToFrontElement(theBoard.Document.Elements.GetArray().Where(e => e is PigCell).First());
             theBoard.Document.BringToFrontElement(theBoard.Document.Elements.GetArray().Where(e => e is BirdCell).First());
         }

@@ -17,6 +17,9 @@ namespace BirdCommand.Custom
     [Serializable]
     public class BlockCell : RectangleElement
     {
+        private BlockType type;
+        public BlockType BlockType { get => type; }
+
         public BlockCell(int x, int y) : base(x, y, BirdCommandMain.CELL_SIZE, BirdCommandMain.CELL_SIZE)
         {
             Background = Resources.Wood;
@@ -24,7 +27,8 @@ namespace BirdCommand.Custom
 
         public BlockCell(int x, int y, BlockType type) : base(x, y, BirdCommandMain.CELL_SIZE, BirdCommandMain.CELL_SIZE)
         {
-            switch(type)
+            this.type = type;
+            switch (type)
             {
                 case BlockType.Glass:
                     Background = Resources.Glass;

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Dalssoft.DiagramNet;
+using BirdCommandTests.Properties;
 
 namespace BirdCommand.Custom.Tests
 {
@@ -20,7 +21,7 @@ namespace BirdCommand.Custom.Tests
             List<BaseElement> lhs = new List<BaseElement>();
             lhs.Add(new EmptyCell(0, 0));
             lhs.Add(new EmptyCell(0, 50));
-            
+
             var result = ConvertUtil.PatternToGraph(lhs);
 
             Assert.AreEqual(2, result.Nodes.Count);
@@ -78,6 +79,22 @@ namespace BirdCommand.Custom.Tests
 
             Assert.AreEqual(4, result.Nodes.Count);
             Assert.AreEqual(3, result.Edges.Count);
+        }
+
+        [TestMethod()]
+        public void PatternToGraphTest_Mazes()
+        {
+            var elementsOfSmallMaze = LevelDesigner.ProduceLevelElements(Resources.small_maze);
+            var result = ConvertUtil.PatternToGraph(elementsOfSmallMaze);
+
+            Assert.AreEqual(14, result.Nodes.Count);
+            Assert.AreEqual(19, result.Edges.Count);
+
+            var elementsOfMaze1 = LevelDesigner.ProduceLevelElements(Resources.hoc1);
+            result = ConvertUtil.PatternToGraph(elementsOfMaze1);
+
+            Assert.AreEqual(66, result.Nodes.Count, "Including bird and pig now!");
+            Assert.AreEqual(114, result.Edges.Count);
         }
     }
 }
