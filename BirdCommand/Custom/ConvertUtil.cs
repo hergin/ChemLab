@@ -11,6 +11,14 @@ namespace BirdCommand.Custom
 {
     public class ConvertUtil
     {
+        // TODO generic links between the blocks doesn't give the right result.
+        //          There should be direction links.
+        //          For example: this pattern exists in this model in the current system.
+        //                       because it looks like 3 connected empty cells.
+        //
+        //                              E                    W-E-W
+        //                              E-E                  W-E-W
+        //                                                   W-E-W
         public static Graph PatternToGraph(List<BaseElement> elements)
         {
             var result = new Graph();

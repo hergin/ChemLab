@@ -37,6 +37,16 @@ namespace BirdCommand.Custom
                 + "\n\nEDGES\n-----\n"
                 + String.Join("\n", edges.Select(e => e.ToString()));
         }
+
+        public String NodesToPY()
+        {
+            return String.Join(",", Nodes.Select(r => r.Id + "-" + r.Type));
+        }
+
+        public String EdgesToPY()
+        {
+            return String.Join(",", Edges);
+        }
     }
 
     public class Node
