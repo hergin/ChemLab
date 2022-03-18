@@ -459,6 +459,18 @@ namespace BirdCommand.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to HW-BD-Gl
+        ///St-Em-HW
+        ///HW-Pi-HW
+        ///Wo-St-Wo.
+        /// </summary>
+        internal static string small_maze {
+            get {
+                return ResourceManager.GetString("small_maze", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap snap {

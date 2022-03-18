@@ -7,7 +7,7 @@ model_edge_string = sys.argv[2]
 pattern_node_string = sys.argv[3]
 pattern_edge_String = sys.argv[4]
 
-model = nx.Graph()
+model = nx.DiGraph()
 for node in model_node_string.split(","):
     id = node.split("-")[0]
     type = node.split("-")[1]
@@ -19,7 +19,7 @@ for edge in model_edge_string.split(","):
     model.add_edges_from([(id1,id2,{"type":type})])
 
 
-pattern = nx.Graph()
+pattern = nx.DiGraph()
 for node in pattern_node_string.split(","):
     id = node.split("-")[0]
     type = node.split("-")[1]

@@ -667,8 +667,11 @@ namespace BirdCommand
 
         private void button8_Click(object sender, EventArgs e)
         {
-            var maze = LevelDesigner.ProduceLevelElements(Resources.hoc1);
-            var mazeGraph = ConvertUtil.PatternToGraph(maze);
+            // TODO matching seems to be at least what I have in mind. But still bird is matched with both the following patterns.
+            //      E-B             E
+            //      E               E-B
+            // Probably, bird's direction should also have some effect in the edges not only nodes.
+            var mazeGraph = ConvertUtil.PatternToGraph(designer_board.Document.Elements.GetArray().ToList());
 
             var patternGraph = ConvertUtil.PatternToGraph(
                     TrafoUtil.FindPreConditionElements(
@@ -718,6 +721,17 @@ namespace BirdCommand
                         DesignerUtil.GetTrafoElementsOutsideBlockWithoutStartOrSnapOrBlock(designer_trafo),
                         designer_trafo.Document.SelectedElements.GetArray().Where(x => x is RuleCell).First())).ToString(),
                 "RHS");
+        }
+
+        private void button11_Click(object sender, EventArgs ev)
+        {
+            designer_board.Document.SelectAllElements();
+            designer_board.Document.DeleteSelectedElements();
+
+            LevelDesigner.GenericLevelDesign(designer_board, Resources.small_maze);
+
+            theBird = (BirdCell)designer_board.Document.Elements.GetArray().Where(e => e is BirdCell).First();
+            thePig = (PigCell)designer_board.Document.Elements.GetArray().Where(e => e is PigCell).First();
         }
 
         private void maze2button_Click(object sender, EventArgs e)

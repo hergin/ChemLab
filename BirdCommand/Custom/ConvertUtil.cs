@@ -11,53 +11,43 @@ namespace BirdCommand.Custom
 {
     public class ConvertUtil
     {
-        // TODO generic links between the blocks doesn't give the right result.
-        //          There should be direction links.
-        //          For example: this pattern exists in this model in the current system.
-        //                       because it looks like 3 connected empty cells.
-        //
-        //                              E                    W-E-W
-        //                              E-E                  W-E-W
-        //                                                   W-E-W
         public static Graph PatternToGraph(List<BaseElement> elements)
         {
             var result = new Graph();
             var allEmptyAndBlockCells = elements.Where(e => e is EmptyCell || e is BlockCell);
-            var handled = new List<BaseElement>();
+
             foreach (var element in allEmptyAndBlockCells)
             {
                 result.Add(new Node() { Id = IdFromLocation(element.Location), Type = GetShortTypeOf(element) });
                 
                 var cellAbove = allEmptyAndBlockCells.Where(empty => empty.Location.X == element.Location.X && empty.Location.Y == element.Location.Y - BirdCommandMain.CELL_SIZE).FirstOrDefault();
-                if (cellAbove != null && !handled.Contains(cellAbove))
+                if (cellAbove != null)
                 {
                     result.Add(new Edge() { From = IdFromLocation(element.Location), To = IdFromLocation(cellAbove.Location), Type="Up" });
                 }
                 var cellBelow = allEmptyAndBlockCells.Where(empty => empty.Location.X == element.Location.X && empty.Location.Y == element.Location.Y + BirdCommandMain.CELL_SIZE).FirstOrDefault();
-                if (cellBelow != null && !handled.Contains(cellBelow))
+                if (cellBelow != null)
                 {
                     result.Add(new Edge() { From = IdFromLocation(element.Location), To = IdFromLocation(cellBelow.Location), Type = "Down" });
                 }
                 var cellRight = allEmptyAndBlockCells.Where(empty => empty.Location.X == element.Location.X + BirdCommandMain.CELL_SIZE && empty.Location.Y == element.Location.Y).FirstOrDefault();
-                if (cellRight != null && !handled.Contains(cellRight))
+                if (cellRight != null)
                 {
                     result.Add(new Edge() { From = IdFromLocation(element.Location), To = IdFromLocation(cellRight.Location), Type = "Right" });
                 }
                 var cellLeft = allEmptyAndBlockCells.Where(empty => empty.Location.X == element.Location.X - BirdCommandMain.CELL_SIZE && empty.Location.Y == element.Location.Y).FirstOrDefault();
-                if (cellLeft != null && !handled.Contains(cellLeft))
+                if (cellLeft != null)
                 {
                     result.Add(new Edge() { From = IdFromLocation(element.Location), To = IdFromLocation(cellLeft.Location), Type = "Left" });
                 }
-
-                handled.Add(element);
             }
 
             var possibleBird = elements.Where(e => e is BirdCell).FirstOrDefault();
             if (possibleBird != null)
             {
                 var bird = possibleBird as BirdCell;
-                result.Add(new Node() { Id = "Bird", Type = GetShortTypeOf(bird) });
-                result.Add(new Edge() { From = IdFromLocation(bird.Location), To = "Bird", Type="Bird" });
+                result.Add(new Node() { Id = "Bird_"+IdFromLocation(bird.Location), Type = GetShortTypeOf(bird) });
+                result.Add(new Edge() { From = IdFromLocation(bird.Location), To = "Bird_" + IdFromLocation(bird.Location), Type = "Bird" });
             }
 
             var possiblePig = elements.Where(e => e is PigCell).FirstOrDefault();

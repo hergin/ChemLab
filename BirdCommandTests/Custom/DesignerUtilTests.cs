@@ -13,7 +13,7 @@ namespace BirdCommand.Custom.Tests
     public class DesignerUtilTests
     {
         [TestMethod()]
-        public void IsFirstInsideSecondTest()
+        public void IsSecondInsideFirstTest()
         {
             var first = new RectangleElement(100, 200, 200, 200);
             var second = new RectangleElement(101, 201, 10, 10);
