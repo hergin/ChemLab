@@ -8,8 +8,54 @@ using System.Threading.Tasks;
 
 namespace BirdCommand.Custom
 {
-    internal class DesignerUtil
+    public class DesignerUtil
     {
+        // Return the elements outside the block panel (skip Snap and Start cells as well)
+        internal static List<BaseElement> GetTrafoElementsOutsideBlockWithoutStartOrSnapOrBlock(Designer designer)
+        {
+            var allElements = designer.Document.Elements.GetArray();
+
+            // Find the blockpanel if exists (it is type of RectangleNode)
+            var possibleBlockPanel = allElements.Where(e => e is RectangleNode).FirstOrDefault();
+            if(possibleBlockPanel != null)
+            {
+                // return the elements fully outside the block panel
+                var blockPanel = possibleBlockPanel as RectangleNode;
+                return allElements.Where(e => !IsSecondInsideFirst(blockPanel, e) && !e.Equals(blockPanel) && !(e is SnapCell) && !(e is StartCell)).ToList();
+            }
+            // return all elements, because there is no block panel
+            return allElements.ToList();
+        }
+
+        internal static List<BaseElement> GetTrafoElementsOutsideBlockWithoutSnapOrBlock(Designer designer)
+        {
+            var allElements = designer.Document.Elements.GetArray();
+
+            // Find the blockpanel if exists (it is type of RectangleNode)
+            var possibleBlockPanel = allElements.Where(e => e is RectangleNode).FirstOrDefault();
+            if (possibleBlockPanel != null)
+            {
+                // return the elements fully outside the block panel
+                var blockPanel = possibleBlockPanel as RectangleNode;
+                return allElements.Where(e => !IsSecondInsideFirst(blockPanel, e) && !(e is SnapCell) && !e.Equals(blockPanel)).ToList();
+            }
+            // return all elements, because there is no block panel
+            return allElements.ToList();
+        }
+
+        public static bool IsSecondInsideFirst(BaseElement first, BaseElement second)
+        {
+            // If the second top-left point is inside and second bottom-right point is inside, then it is inside.
+            if (second.Location.X > first.Location.X && second.Location.X < first.Location.X + first.Size.Width
+                && second.Location.Y > first.Location.Y && second.Location.Y < first.Location.Y + first.Size.Height
+                && second.Location.X + second.Size.Width > first.Location.X && second.Location.X + second.Size.Width < first.Location.X + first.Size.Width
+                && second.Location.Y + second.Size.Height > first.Location.Y && second.Location.Y + second.Size.Height < first.Location.Y + first.Size.Height)
+            {
+                return true;
+            }
+            return false;
+        }
+
         internal static Point FindPositionOfAnotherEmptyAround(Designer designer, EmptyCell empty)
         {
             foreach (var element in designer.Document.Elements)

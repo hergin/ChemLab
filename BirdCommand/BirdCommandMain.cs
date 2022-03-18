@@ -20,8 +20,6 @@ namespace BirdCommand
     // TODO when maze is done, decide what's gonna happen next (going to other maze? etc.)
     // TODO prevent the blockPanel and theStart being selected!
     // TODO get rid of all magical numbers somehow
-    // TODO the blocksPanel should be taken into account while getting the rules and such from the designer.
-    //             There should be one single place to get elements so we can filter them there.
     public partial class BirdCommandMain : Form
     {
         private const int TimeoutBetweenRuleExecution = 1000;
@@ -151,7 +149,7 @@ namespace BirdCommand
         private void TrafoRunner_DoWork(object sender, DoWorkEventArgs e)
         {
             // TODO take empty or other scenarios into account
-            var allRules = designer_trafo.Document.Elements.GetArray().Where(el => el is RuleCell && el.Location!=ruleButtonLocation).ToList();
+            var allRules = DesignerUtil.GetTrafoElementsOutsideBlockWithoutStartOrSnapOrBlock(designer_trafo).Where(el => el is RuleCell).ToList();
             allRules.Sort((a, b) => { return a.Location.Y - b.Location.Y; });
             foreach (var rule in allRules)
             {
@@ -159,13 +157,14 @@ namespace BirdCommand
                 {
                     trafoRunner.ReportProgress((int)TrafoProgress.Highlight, rule);
                     var ruleType = TrafoUtil.IdentifyRuleType(
-                        TrafoUtil.FindPreConditionElements(designer_trafo.Document.Elements.GetArray().ToList(),
+                        TrafoUtil.FindPreConditionElements(DesignerUtil.GetTrafoElementsOutsideBlockWithoutStartOrSnapOrBlock(designer_trafo),
                             rule),
-                        TrafoUtil.FindPostConditionElements(designer_trafo.Document.Elements.GetArray().ToList(),
+                        TrafoUtil.FindPostConditionElements(DesignerUtil.GetTrafoElementsOutsideBlockWithoutStartOrSnapOrBlock(designer_trafo),
                             rule));
                     for (int i = 0; i < ((RuleCell)rule).RuleCount; i++)
                     {
-                        if (TrafoUtil.DoesPatternExist(designer_board.Document.Elements.GetArray().ToList(), TrafoUtil.FindPreConditionElements(designer_trafo.Document.Elements.GetArray().ToList(),
+                        if (TrafoUtil.DoesPatternExist(designer_board.Document.Elements.GetArray().ToList(),
+                                TrafoUtil.FindPreConditionElements(DesignerUtil.GetTrafoElementsOutsideBlockWithoutStartOrSnapOrBlock(designer_trafo),
                                 rule)))
                         {
                             // TODO pattern exists for other move forward or turn rules than the one in the model, should find a solution
@@ -235,7 +234,7 @@ namespace BirdCommand
                 MoveRuleAndItsContents(rule, theSnapCell.Location.X - 11, theSnapCell.Location.Y);
 
                 // TODO Move the rest of the rules accordingly (if we put rule within two rules)
-                foreach (var otherRule in designer_trafo.Document.Elements.GetArray().Where(el=>el is RuleCell && el.Location.X > 200 && el.Location.Y > rule.Location.Y))
+                foreach (var otherRule in DesignerUtil.GetTrafoElementsOutsideBlockWithoutStartOrSnapOrBlock(designer_trafo).Where(el=>el is RuleCell && el.Location.Y > rule.Location.Y))
                 {
                     // this should be investigated more. Because some elements of the newly moved rule might be on top of the existing rule which will mess things up.
                 }
@@ -287,9 +286,8 @@ namespace BirdCommand
         {
             if(e.Element is RuleCell)
             {
-                var possibleElements = designer_trafo.Document.Elements.GetArray().Where(el => (el is RuleCell || el is StartCell)
-                    && el.Location != e.Element.Location
-                    && el.Location != ruleButtonLocation);
+                var possibleElements = DesignerUtil.GetTrafoElementsOutsideBlockWithoutSnapOrBlock(designer_trafo).Where(el => (el is RuleCell || el is StartCell)
+                    && !el.Equals(e.Element));
 
                 var smallest = int.MaxValue;
                 BaseElement closestElement = null;
@@ -409,16 +407,16 @@ namespace BirdCommand
                 TrafoUtil.DoesPatternExist(
                     designer_board.Document.Elements.GetArray().ToList(),
                     TrafoUtil.FindPreConditionElements(
-                        designer_trafo.Document.Elements.GetArray().ToList(),
-                        (RuleCell)designer_trafo.Document.Elements.GetArray().Where(s=>s is RuleCell).First())));
+                        DesignerUtil.GetTrafoElementsOutsideBlockWithoutStartOrSnapOrBlock(designer_trafo),
+                        (RuleCell)DesignerUtil.GetTrafoElementsOutsideBlockWithoutStartOrSnapOrBlock(designer_trafo).Where(s=>s is RuleCell).First())));
         }
 
         private void button14_Click(object sender, EventArgs e)
         {
             var ruleType = TrafoUtil.IdentifyRuleType(
-                TrafoUtil.FindPreConditionElements(designer_trafo.Document.Elements.GetArray().ToList(),
+                TrafoUtil.FindPreConditionElements(DesignerUtil.GetTrafoElementsOutsideBlockWithoutStartOrSnapOrBlock(designer_trafo),
                     (RuleCell)designer_trafo.Document.SelectedElements.GetArray().Where(el => el is RuleCell).First()),
-                TrafoUtil.FindPostConditionElements(designer_trafo.Document.Elements.GetArray().ToList(),
+                TrafoUtil.FindPostConditionElements(DesignerUtil.GetTrafoElementsOutsideBlockWithoutStartOrSnapOrBlock(designer_trafo),
                     (RuleCell)designer_trafo.Document.SelectedElements.GetArray().Where(el => el is RuleCell).First()));
             MessageBox.Show("RuleType: " + ruleType);
         }
@@ -533,7 +531,7 @@ namespace BirdCommand
 
         private void CopyLHStoRHS(RuleCell rule)
         {
-            var lhsElements = TrafoUtil.FindPreConditionElements(designer_trafo.Document.Elements.GetArray().ToList(),
+            var lhsElements = TrafoUtil.FindPreConditionElements(DesignerUtil.GetTrafoElementsOutsideBlockWithoutStartOrSnapOrBlock(designer_trafo).ToList(),
                                 rule);
 
             foreach (var element in lhsElements)
@@ -571,7 +569,7 @@ namespace BirdCommand
         private void startOver()
         {
             Reset();
-            foreach (var element in designer_trafo.Document.Elements.GetArray().Where(el => !(el is StartCell || el is SnapCell || el.Location.X < 200)))
+            foreach (var element in DesignerUtil.GetTrafoElementsOutsideBlockWithoutStartOrSnapOrBlock(designer_trafo))
             {
                 designer_trafo.Document.DeleteElement(element);
             }
@@ -613,7 +611,7 @@ namespace BirdCommand
         {
             theStart.Unhighlight();
             theBird?.Reset();
-            foreach (var rule in designer_trafo.Document.Elements.GetArray().Where(el => el is RuleCell))
+            foreach (var rule in DesignerUtil.GetTrafoElementsOutsideBlockWithoutStartOrSnapOrBlock(designer_trafo).Where(el => el is RuleCell))
             {
                 ((RuleCell)rule).Unhighlight();
             }
@@ -674,8 +672,8 @@ namespace BirdCommand
 
             var patternGraph = ConvertUtil.PatternToGraph(
                     TrafoUtil.FindPreConditionElements(
-                        designer_trafo.Document.Elements.GetArray().ToList(),
-                        designer_trafo.Document.Elements.GetArray().Where(x => x is RuleCell && x.Location.X > 200).First()));
+                        DesignerUtil.GetTrafoElementsOutsideBlockWithoutStartOrSnapOrBlock(designer_trafo),
+                        DesignerUtil.GetTrafoElementsOutsideBlockWithoutStartOrSnapOrBlock(designer_trafo).Where(x => x is RuleCell).First()));
 
 
             // https://betterprogramming.pub/running-python-script-from-c-and-working-with-the-results-843e68d230e5
@@ -707,7 +705,7 @@ namespace BirdCommand
             MessageBox.Show(
                 ConvertUtil.PatternToGraph(
                     TrafoUtil.FindPreConditionElements(
-                        designer_trafo.Document.Elements.GetArray().ToList(),
+                        DesignerUtil.GetTrafoElementsOutsideBlockWithoutStartOrSnapOrBlock(designer_trafo),
                         designer_trafo.Document.SelectedElements.GetArray().Where(x => x is RuleCell).First())).ToString(),
                 "LHS");
         }
@@ -717,7 +715,7 @@ namespace BirdCommand
             MessageBox.Show(
                 ConvertUtil.PatternToGraph(
                     TrafoUtil.FindPostConditionElements(
-                        designer_trafo.Document.Elements.GetArray().ToList(),
+                        DesignerUtil.GetTrafoElementsOutsideBlockWithoutStartOrSnapOrBlock(designer_trafo),
                         designer_trafo.Document.SelectedElements.GetArray().Where(x => x is RuleCell).First())).ToString(),
                 "RHS");
         }
