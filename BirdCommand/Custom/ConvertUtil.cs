@@ -31,22 +31,22 @@ namespace BirdCommand.Custom
                 var cellAbove = allEmptyAndBlockCells.Where(empty => empty.Location.X == element.Location.X && empty.Location.Y == element.Location.Y - BirdCommandMain.CELL_SIZE).FirstOrDefault();
                 if (cellAbove != null && !handled.Contains(cellAbove))
                 {
-                    result.Add(new Edge() { From = IdFromLocation(element.Location), To = IdFromLocation(cellAbove.Location) });
+                    result.Add(new Edge() { From = IdFromLocation(element.Location), To = IdFromLocation(cellAbove.Location), Type="Up" });
                 }
                 var cellBelow = allEmptyAndBlockCells.Where(empty => empty.Location.X == element.Location.X && empty.Location.Y == element.Location.Y + BirdCommandMain.CELL_SIZE).FirstOrDefault();
                 if (cellBelow != null && !handled.Contains(cellBelow))
                 {
-                    result.Add(new Edge() { From = IdFromLocation(element.Location), To = IdFromLocation(cellBelow.Location) });
+                    result.Add(new Edge() { From = IdFromLocation(element.Location), To = IdFromLocation(cellBelow.Location), Type = "Down" });
                 }
                 var cellRight = allEmptyAndBlockCells.Where(empty => empty.Location.X == element.Location.X + BirdCommandMain.CELL_SIZE && empty.Location.Y == element.Location.Y).FirstOrDefault();
                 if (cellRight != null && !handled.Contains(cellRight))
                 {
-                    result.Add(new Edge() { From = IdFromLocation(element.Location), To = IdFromLocation(cellRight.Location) });
+                    result.Add(new Edge() { From = IdFromLocation(element.Location), To = IdFromLocation(cellRight.Location), Type = "Right" });
                 }
                 var cellLeft = allEmptyAndBlockCells.Where(empty => empty.Location.X == element.Location.X - BirdCommandMain.CELL_SIZE && empty.Location.Y == element.Location.Y).FirstOrDefault();
                 if (cellLeft != null && !handled.Contains(cellLeft))
                 {
-                    result.Add(new Edge() { From = IdFromLocation(element.Location), To = IdFromLocation(cellLeft.Location) });
+                    result.Add(new Edge() { From = IdFromLocation(element.Location), To = IdFromLocation(cellLeft.Location), Type = "Left" });
                 }
 
                 handled.Add(element);
@@ -57,7 +57,7 @@ namespace BirdCommand.Custom
             {
                 var bird = possibleBird as BirdCell;
                 result.Add(new Node() { Id = "Bird", Type = GetShortTypeOf(bird) });
-                result.Add(new Edge() { From = IdFromLocation(bird.Location), To = "Bird" });
+                result.Add(new Edge() { From = IdFromLocation(bird.Location), To = "Bird", Type="Bird" });
             }
 
             var possiblePig = elements.Where(e => e is PigCell).FirstOrDefault();
@@ -65,7 +65,7 @@ namespace BirdCommand.Custom
             {
                 var pig = possiblePig as PigCell;
                 result.Add(new Node() { Id = "Pig", Type = GetShortTypeOf(pig) });
-                result.Add(new Edge() { From = IdFromLocation(pig.Location), To = "Pig" });
+                result.Add(new Edge() { From = IdFromLocation(pig.Location), To = "Pig", Type="Pig" });
             }
 
             return result;

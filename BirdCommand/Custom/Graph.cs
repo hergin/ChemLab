@@ -45,7 +45,7 @@ namespace BirdCommand.Custom
 
         public String EdgesToPY()
         {
-            return String.Join(",", Edges);
+            return String.Join(",", Edges.Select(e => e.From + "-" + e.To + "-" + e.Type));
         }
     }
 
@@ -61,7 +61,8 @@ namespace BirdCommand.Custom
     {
         public String From { get; set; }
         public String To { get; set; }
+        public String Type { get; set; }
 
-        public override string ToString() => From + "-" + To;
+        public override string ToString() => From + "-" + To + "[" + Type + "]";
     }
 }
