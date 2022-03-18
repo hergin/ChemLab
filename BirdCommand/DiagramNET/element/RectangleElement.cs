@@ -25,9 +25,9 @@ namespace Dalssoft.DiagramNet
 		public RectangleElement(Point l, Size s): this(l.X, l.Y, s.Width, s.Height) 
 		{}
 
-		public RectangleElement(int top, int left, int width, int height)
+		public RectangleElement(int x, int y, int width, int height)
 		{
-			location  = new Point(top, left);
+			location  = new Point(x, y);
 			size = new Size(width, height);
 		}
 

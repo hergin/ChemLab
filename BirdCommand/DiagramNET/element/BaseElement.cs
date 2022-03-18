@@ -26,9 +26,9 @@ namespace Dalssoft.DiagramNet
 		{
 		}
 
-		protected BaseElement(int top, int left, int width, int height)
+		protected BaseElement(int x, int y, int width, int height)
 		{
-			location  = new Point(top, left);
+			location  = new Point(x, y);
 			size = new Size(width, height);
 		}
         public string  Name { get; set; }
