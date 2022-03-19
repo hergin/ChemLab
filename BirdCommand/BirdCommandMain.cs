@@ -20,6 +20,7 @@ namespace BirdCommand
     // TODO when maze is done, decide what's gonna happen next (going to other maze? etc.)
     // TODO prevent the blockPanel and theStart being selected!
     // TODO get rid of all magical numbers somehow
+    // TODO integrate networkx matching with rules
     public partial class BirdCommandMain : Form
     {
         private const int TimeoutBetweenRuleExecution = 1000;
@@ -562,6 +563,10 @@ namespace BirdCommand
                 else if (element is BirdCell bird)
                 {
                     designer_trafo.Document.AddElement(new BirdCell(bird.Location.X + 200, bird.Location.Y, bird.Direction));
+                }
+                else if (element is PigCell pig)
+                {
+                    designer_trafo.Document.AddElement(new PigCell(pig.Location.X + 200, pig.Location.Y));
                 }
             }
         }
