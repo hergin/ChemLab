@@ -232,7 +232,7 @@ namespace BirdCommand.Custom
             foreach (var element in allElements)
             {
                 BaseElement casted = element as BaseElement;
-                if (casted is EmptyCell || casted is BirdCell)
+                if (casted is EmptyCell || casted is BirdCell || casted is PigCell)
                 {
                     if (casted.Location.Y >= parentElement.Location.Y
                         && casted.Location.Y <= parentElement.Location.Y + parentElement.Size.Height
@@ -254,7 +254,7 @@ namespace BirdCommand.Custom
             foreach (var element in allElements)
             {
                 BaseElement casted = element as BaseElement;
-                if (casted is EmptyCell || casted is BirdCell)
+                if (casted is EmptyCell || casted is BirdCell || casted is PigCell)
                 {
                     if (casted.Location.Y >= parentElement.Location.Y
                         && casted.Location.Y <= parentElement.Location.Y + parentElement.Size.Height

@@ -26,7 +26,8 @@ namespace BirdCommand
         public static int CELL_SIZE = 50;
         Point birdButtonLocation = new Point(30, 30),
             emptyCellButtonLocation = new Point(110, 30),
-            ruleButtonLocation = new Point(25,120);
+            pigButtonLocation = new Point(30, 120),
+            ruleButtonLocation = new Point(25,220);
         BirdCell theBird;
         PigCell thePig;
         StartCell theStart;
@@ -73,6 +74,8 @@ namespace BirdCommand
             designer_trafo.Document.AddElement(addCellButton);
             var addRuleButtonOnCanvas = new RuleCell(ruleButtonLocation.X, ruleButtonLocation.Y, 140, 70);
             designer_trafo.Document.AddElement(addRuleButtonOnCanvas);
+            var addPigButton = new PigCell(pigButtonLocation.X, pigButtonLocation.Y);
+            designer_trafo.Document.AddElement(addPigButton);
 
 
             theSnapCell = new SnapCell(0, 0);
@@ -109,6 +112,15 @@ namespace BirdCommand
                 var newEmptyCell = new EmptyCell(emptyCellButtonLocation.X, emptyCellButtonLocation.Y);
                 designer_trafo.Document.AddElement(newEmptyCell);
                 designer_trafo.Document.SendToBackElement(newEmptyCell);
+                designer_trafo.Document.SendToBackElement(blockPanel);
+            }
+            else if (designer_trafo.Document.FindElement(e.Location) != null
+              && designer_trafo.Document.FindElement(e.Location) is PigCell pig
+              && pig.Location == pigButtonLocation)
+            {
+                var newPigCell = new PigCell(pigButtonLocation.X, pigButtonLocation.Y);
+                designer_trafo.Document.AddElement(newPigCell);
+                designer_trafo.Document.SendToBackElement(newPigCell);
                 designer_trafo.Document.SendToBackElement(blockPanel);
             }
             else if (designer_trafo.Document.FindElement(e.Location) != null
@@ -247,6 +259,13 @@ namespace BirdCommand
                 var cellUnderneath = DesignerUtil.FindCellUnderneath(designer_trafo, new Point(e.X, e.Y));
                 if (cellUnderneath != null)
                     bird.Location = cellUnderneath.Location;
+            }
+            else if (e.Element is PigCell pig)
+            {
+                // the snapping is based on mouse position, not the bird origin
+                var cellUnderneath = DesignerUtil.FindCellUnderneath(designer_trafo, new Point(e.X, e.Y));
+                if (cellUnderneath != null)
+                    pig.Location = cellUnderneath.Location;
             }
             else if(e.Element is EmptyCell emptyCell)
             {
