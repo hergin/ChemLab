@@ -1,50 +1,67 @@
+import sys
 import networkx as nx
 from networkx.algorithms import isomorphism as iso
 
+graph_info = sys.argv[1]
 
-pre_pattern = nx.Graph()
-pre_pattern.add_nodes_from([
-    ("0", {"type": "BD"}),
-    ("1", {"type": "Em"}),
-    ("2", {"type": "Em"}),
-    ("3", {"type": "Em"})
-])
-pre_pattern.add_edges_from([("1", "2"),("1","0"),("2","3")])
-
-post_pattern = nx.Graph()
-post_pattern.add_nodes_from([
-    ("0", {"type": "BD"}),
-    ("1", {"type": "Em"}),
-    ("2", {"type": "Em"})
-])
-post_pattern.add_edges_from([("1", "2"),("2","0")])
+pre_pattern = nx.DiGraph()
+prePatternNodes = graph_info.split("|")[0]
+for node in prePatternNodes.split(","):
+    id = node.split("-")[0]
+    type = node.split("-")[1]
+    pre_pattern.add_nodes_from([(id,{"type":type})])
 
 
-edgesToDelete = post_pattern.edges()-pre_pattern.edges()
-print()
-print("Edges To Delete")
-print("--------")
-for edge in edgesToDelete:
-    print(edge)
+prePatternEdges = graph_info.split("|")[1]
+if prePatternEdges.strip() != "":
+    for edge in prePatternEdges.split(","):
+        id1 = edge.split("-")[0]
+        id2 = edge.split("-")[1]
+        type = edge.split("-")[2]
+        pre_pattern.add_edges_from([(id1,id2,{"type":type})])
 
-edgesToAdd = pre_pattern.edges() - post_pattern.edges()
-print()
-print("Edges To Add")
-print("--------")
-for edge in edgesToAdd:
-    print(edge)
+
+post_pattern = nx.DiGraph()
+postPatternNodes = graph_info.split("|")[2]
+for node in postPatternNodes.split(","):
+    id = node.split("-")[0]
+    type = node.split("-")[1]
+    post_pattern.add_nodes_from([(id,{"type":type})])
+
+postPatternEdges = graph_info.split("|")[3]
+if postPatternEdges.strip() != "":
+    for edge in postPatternEdges.split(","):
+        id1 = edge.split("-")[0]
+        id2 = edge.split("-")[1]
+        type = edge.split("-")[2]
+        post_pattern.add_edges_from([(id1,id2,{"type":type})])
+
 
 nodesToDelete = post_pattern.nodes()-pre_pattern.nodes()
 print()
-print("Nodes To Delete")
-print("--------")
+print("Nodes To Add")
+print("---------------")
 for node in nodesToDelete:
     print(node)
 
 
 nodesToAdd = pre_pattern.nodes() - post_pattern.nodes()
 print()
-print("Nodes To Add")
-print("--------")
+print("Nodes To Delete")
+print("------------")
 for node in nodesToAdd:
     print(node)
+
+edgesToDelete = post_pattern.edges()-pre_pattern.edges()
+print()
+print("Edges To Add")
+print("---------------")
+for edge in edgesToDelete:
+    print(edge)
+
+edgesToAdd = pre_pattern.edges() - post_pattern.edges()
+print()
+print("Edges To Delete")
+print("------------")
+for edge in edgesToAdd:
+    print(edge)

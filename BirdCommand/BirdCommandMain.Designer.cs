@@ -71,6 +71,7 @@ namespace BirdCommand
             this.trafoRunner = new System.ComponentModel.BackgroundWorker();
             this.designer_board = new Dalssoft.DiagramNet.Designer();
             this.designer_trafo = new Dalssoft.DiagramNet.Designer();
+            this.button13 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
             this.panel6.SuspendLayout();
@@ -305,6 +306,7 @@ namespace BirdCommand
             this.debugPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.debugPanel.BackColor = System.Drawing.Color.Salmon;
+            this.debugPanel.Controls.Add(this.button13);
             this.debugPanel.Controls.Add(this.button11);
             this.debugPanel.Controls.Add(this.button10);
             this.debugPanel.Controls.Add(this.button9);
@@ -357,11 +359,11 @@ namespace BirdCommand
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(1063, 51);
+            this.button8.Location = new System.Drawing.Point(1033, 51);
             this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(75, 23);
+            this.button8.Size = new System.Drawing.Size(105, 23);
             this.button8.TabIndex = 28;
-            this.button8.Text = "Run python";
+            this.button8.Text = "PY: find pattern";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
@@ -370,7 +372,7 @@ namespace BirdCommand
             this.button7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.button7.Location = new System.Drawing.Point(721, 50);
             this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(239, 23);
+            this.button7.Size = new System.Drawing.Size(139, 23);
             this.button7.TabIndex = 27;
             this.button7.Text = "Solve maze 3";
             this.button7.UseVisualStyleBackColor = true;
@@ -551,6 +553,16 @@ namespace BirdCommand
             this.designer_trafo.Size = new System.Drawing.Size(697, 705);
             this.designer_trafo.TabIndex = 11;
             // 
+            // button13
+            // 
+            this.button13.Location = new System.Drawing.Point(902, 51);
+            this.button13.Name = "button13";
+            this.button13.Size = new System.Drawing.Size(109, 23);
+            this.button13.TabIndex = 32;
+            this.button13.Text = "PY: find difference";
+            this.button13.UseVisualStyleBackColor = true;
+            this.button13.Click += new System.EventHandler(this.button13_Click);
+            // 
             // BirdCommandMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -632,6 +644,7 @@ namespace BirdCommand
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.Button button11;
+        private System.Windows.Forms.Button button13;
     }
 }
 
