@@ -411,6 +411,16 @@ namespace BirdCommand.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap rule_condensed {
+            get {
+                object obj = ResourceManager.GetObject("rule_condensed", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap rule_highlighted {
             get {
                 object obj = ResourceManager.GetObject("rule_highlighted", resourceCulture);
@@ -459,10 +469,9 @@ namespace BirdCommand.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to HW-BD-Gl
-        ///St-Em-HW
-        ///HW-Pi-HW
-        ///Wo-St-Wo.
+        ///   Looks up a localized string similar to BD
+        ///Em
+        ///Pi.
         /// </summary>
         internal static string small_maze {
             get {

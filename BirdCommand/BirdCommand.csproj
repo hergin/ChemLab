@@ -290,5 +290,8 @@
   <ItemGroup>
     <None Include="Resources\small-maze.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rule-condensed.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

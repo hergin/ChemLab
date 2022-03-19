@@ -21,6 +21,10 @@ namespace BirdCommand
     // TODO prevent the blockPanel and theStart being selected!
     // TODO get rid of all magical numbers somehow
     // TODO integrate networkx matching with rules
+    // TODO don't allow patterns with disjoint empty cells (such as just a diagonal, see below) 
+    //                                                             E
+    //                                                              E
+    // TODO allow only patterns with same number of empty cells FOR NOW
     public partial class BirdCommandMain : Form
     {
         private const int TimeoutBetweenRuleExecution = 1000;

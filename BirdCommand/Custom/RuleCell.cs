@@ -19,7 +19,7 @@ namespace BirdCommand.Custom
 
         public RuleCell(int x, int y, int w, int h) : base(x, y, w, h)
         {
-            Background = Resources.rule;
+            Background = Resources.rule_condensed;
             FillColor1 = Color.Transparent;
             FillColor2 = Color.Transparent;
             Label = new LabelElement(x, y, w, h);
