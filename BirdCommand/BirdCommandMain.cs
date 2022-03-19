@@ -667,10 +667,6 @@ namespace BirdCommand
 
         private void button8_Click(object sender, EventArgs e)
         {
-            // TODO matching seems to be at least what I have in mind. But still bird is matched with both the following patterns.
-            //      E-B             E
-            //      E               E-B
-            // Probably, bird's direction should also have some effect in the edges not only nodes.
             var mazeGraph = ConvertUtil.PatternToGraph(designer_board.Document.Elements.GetArray().ToList());
 
             var patternGraph = ConvertUtil.PatternToGraph(
@@ -698,7 +694,23 @@ namespace BirdCommand
                 {
                     string stderr = process.StandardError.ReadToEnd(); // Here are the exceptions from our Python script
                     string result = reader.ReadToEnd(); // Here is the result of StdOut(for example: print "test")
-                    MessageBox.Show(result, "py");
+                    if (string.IsNullOrEmpty(stderr))
+                    {
+                        var lines = result.Split(new char[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
+                        if (lines[0].Trim() == "True")
+                        {
+                            MessageBox.Show(result, "PY", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            designer_board.Document.SelectElement(designer_board.Document.FindElement(new Point(203,203)));
+                        }
+                        else if (lines[0].Trim() == "False")
+                        {
+                            MessageBox.Show("Pattern not found!", "PY", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show(stderr, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
             }
         }

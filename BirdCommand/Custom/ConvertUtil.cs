@@ -47,7 +47,8 @@ namespace BirdCommand.Custom
             {
                 var bird = possibleBird as BirdCell;
                 result.Add(new Node() { Id = "Bird_"+IdFromLocation(bird.Location), Type = GetShortTypeOf(bird) });
-                result.Add(new Edge() { From = IdFromLocation(bird.Location), To = "Bird_" + IdFromLocation(bird.Location), Type = "Bird" });
+                if (result.Nodes.Where(n => n.Id == IdFromLocation(bird.Location)).Count() > 0)
+                    result.Add(new Edge() { From = IdFromLocation(bird.Location), To = "Bird_" + IdFromLocation(bird.Location), Type = "Bird" });
             }
 
             var possiblePig = elements.Where(e => e is PigCell).FirstOrDefault();
@@ -55,7 +56,8 @@ namespace BirdCommand.Custom
             {
                 var pig = possiblePig as PigCell;
                 result.Add(new Node() { Id = "Pig", Type = GetShortTypeOf(pig) });
-                result.Add(new Edge() { From = IdFromLocation(pig.Location), To = "Pig", Type="Pig" });
+                if (result.Nodes.Where(n => n.Id == IdFromLocation(pig.Location)).Count() > 0)
+                    result.Add(new Edge() { From = IdFromLocation(pig.Location), To = "Pig", Type = "Pig" });
             }
 
             return result;

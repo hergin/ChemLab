@@ -50,6 +50,7 @@ namespace BirdCommand
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.debugPanel = new System.Windows.Forms.Panel();
+            this.button11 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
@@ -70,7 +71,6 @@ namespace BirdCommand
             this.trafoRunner = new System.ComponentModel.BackgroundWorker();
             this.designer_board = new Dalssoft.DiagramNet.Designer();
             this.designer_trafo = new Dalssoft.DiagramNet.Designer();
-            this.button11 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
             this.panel6.SuspendLayout();
@@ -325,6 +325,16 @@ namespace BirdCommand
             this.debugPanel.TabIndex = 30;
             this.debugPanel.Visible = false;
             // 
+            // button11
+            // 
+            this.button11.Location = new System.Drawing.Point(1042, 97);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(115, 23);
+            this.button11.TabIndex = 31;
+            this.button11.Text = "Small Maze Load";
+            this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
+            // 
             // button10
             // 
             this.button10.Location = new System.Drawing.Point(882, 97);
@@ -540,16 +550,6 @@ namespace BirdCommand
             this.designer_trafo.Name = "designer_trafo";
             this.designer_trafo.Size = new System.Drawing.Size(697, 705);
             this.designer_trafo.TabIndex = 11;
-            // 
-            // button11
-            // 
-            this.button11.Location = new System.Drawing.Point(1042, 97);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(115, 23);
-            this.button11.TabIndex = 31;
-            this.button11.Text = "Small Maze Load";
-            this.button11.UseVisualStyleBackColor = true;
-            this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
             // BirdCommandMain
             // 
