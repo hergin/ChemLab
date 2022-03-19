@@ -69,9 +69,9 @@ namespace BirdCommand
             this.runButton = new System.Windows.Forms.PictureBox();
             this.resetButton = new System.Windows.Forms.PictureBox();
             this.trafoRunner = new System.ComponentModel.BackgroundWorker();
+            this.button13 = new System.Windows.Forms.Button();
             this.designer_board = new Dalssoft.DiagramNet.Designer();
             this.designer_trafo = new Dalssoft.DiagramNet.Designer();
-            this.button13 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
             this.panel6.SuspendLayout();
@@ -398,7 +398,7 @@ namespace BirdCommand
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(200, 34);
             this.label4.TabIndex = 31;
-            this.label4.Text = "Useful Commands";
+            this.label4.Text = "Workspace Commands";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panel4
@@ -531,6 +531,16 @@ namespace BirdCommand
             this.trafoRunner.WorkerReportsProgress = true;
             this.trafoRunner.WorkerSupportsCancellation = true;
             // 
+            // button13
+            // 
+            this.button13.Location = new System.Drawing.Point(902, 51);
+            this.button13.Name = "button13";
+            this.button13.Size = new System.Drawing.Size(109, 23);
+            this.button13.TabIndex = 32;
+            this.button13.Text = "PY: find difference";
+            this.button13.UseVisualStyleBackColor = true;
+            this.button13.Click += new System.EventHandler(this.button13_Click);
+            // 
             // designer_board
             // 
             this.designer_board.AutoScroll = true;
@@ -552,16 +562,6 @@ namespace BirdCommand
             this.designer_trafo.Name = "designer_trafo";
             this.designer_trafo.Size = new System.Drawing.Size(697, 705);
             this.designer_trafo.TabIndex = 11;
-            // 
-            // button13
-            // 
-            this.button13.Location = new System.Drawing.Point(902, 51);
-            this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(109, 23);
-            this.button13.TabIndex = 32;
-            this.button13.Text = "PY: find difference";
-            this.button13.UseVisualStyleBackColor = true;
-            this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
             // BirdCommandMain
             // 
