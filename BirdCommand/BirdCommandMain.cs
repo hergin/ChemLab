@@ -797,6 +797,19 @@ namespace BirdCommand
             }
         }
 
+        private void button15_Click(object sender, EventArgs e)
+        {
+            var trafoElements = DesignerUtil.GetTrafoElementsOutsideBlockWithoutStartOrSnapOrBlock(designer_trafo);
+            var rule = trafoElements.Where(x => x is RuleCell).First();
+            var preConditionElements = TrafoUtil.FindPreConditionElements(trafoElements, rule);
+            var rotated = PatternUtil.Rotate90Clockwise(preConditionElements);
+            foreach (var item in rotated)
+            {
+                designer_trafo.Document.AddElement(item);
+                item.Location = new Point(item.Location.X + 400,item.Location.Y+400);
+            }
+        }
+
         private void button11_Click(object sender, EventArgs ev)
         {
             designer_board.Document.SelectAllElements();

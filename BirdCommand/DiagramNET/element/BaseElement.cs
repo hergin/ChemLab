@@ -3,6 +3,9 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.ComponentModel;
 using System.Xml;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
 
 namespace Dalssoft.DiagramNet
 {
@@ -25,6 +28,17 @@ namespace Dalssoft.DiagramNet
 		protected BaseElement()
 		{
 		}
+
+		public BaseElement Clone()
+        {
+			IFormatter formatter = new BinaryFormatter();
+			using (var stream = new MemoryStream())
+			{
+				formatter.Serialize(stream, this);
+				stream.Seek(0, SeekOrigin.Begin);
+				return (BaseElement)formatter.Deserialize(stream);
+			}
+        }
 
 		protected BaseElement(int x, int y, int width, int height)
 		{
