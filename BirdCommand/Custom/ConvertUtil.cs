@@ -11,10 +11,12 @@ namespace BirdCommand.Custom
 {
     public class ConvertUtil
     {
-        public static Graph PatternToGraph(List<BaseElement> elements, int adjustX = 0, int adjustY = 0)
+        public static Graph PatternToGraph(List<BaseElement> elements)
         {
             var result = new Graph();
             var allEmptyAndBlockCells = elements.Where(e => e is EmptyCell || e is BlockCell);
+            var adjustX = elements.Select(e => e.Location.X).Min();
+            var adjustY = elements.Select(e => e.Location.Y).Min();
 
             foreach (var element in allEmptyAndBlockCells)
             {

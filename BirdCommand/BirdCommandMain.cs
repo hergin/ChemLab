@@ -766,18 +766,8 @@ namespace BirdCommand
             var preConditionElements = TrafoUtil.FindPreConditionElements(trafoElements, rule);
             var postConditionElements = TrafoUtil.FindPostConditionElements(trafoElements, rule);
 
-            preConditionElements.Sort((p1, p2) => p1.Location.X - p2.Location.X);
-            var preAdjustX = preConditionElements.First().Location.X - rule.Location.X;
-            preConditionElements.Sort((p1, p2) => p1.Location.Y - p2.Location.Y);
-            var preAdjustY = preConditionElements.First().Location.Y - rule.Location.Y;
-
-            postConditionElements.Sort((p1, p2) => p1.Location.X - p2.Location.X);
-            var postAdjustX = postConditionElements.First().Location.X - rule.Location.X;
-            postConditionElements.Sort((p1, p2) => p1.Location.Y - p2.Location.Y);
-            var postAdjustY = postConditionElements.First().Location.Y - rule.Location.Y;
-
-            var prePatternGraph = ConvertUtil.PatternToGraph(preConditionElements, preAdjustX, preAdjustY);
-            var postPatternGraph = ConvertUtil.PatternToGraph(postConditionElements, postAdjustX, postAdjustY);
+            var prePatternGraph = ConvertUtil.PatternToGraph(preConditionElements);
+            var postPatternGraph = ConvertUtil.PatternToGraph(postConditionElements);
 
             // https://betterprogramming.pub/running-python-script-from-c-and-working-with-the-results-843e68d230e5
             ProcessStartInfo start = new ProcessStartInfo();
