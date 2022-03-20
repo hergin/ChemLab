@@ -803,10 +803,15 @@ namespace BirdCommand
             var rule = trafoElements.Where(x => x is RuleCell).First();
             var preConditionElements = TrafoUtil.FindPreConditionElements(trafoElements, rule);
             var rotated = PatternUtil.Rotate90Clockwise(preConditionElements);
+            var lowestX = preConditionElements.Select(el => el.Location.X).Min();
+            var lowestY = preConditionElements.Select(el => el.Location.Y).Min();
+            designer_trafo.Document.ClearSelection();
+            designer_trafo.Document.SelectElements(preConditionElements.ToArray());
+            designer_trafo.Document.DeleteSelectedElements();
             foreach (var item in rotated)
             {
                 designer_trafo.Document.AddElement(item);
-                item.Location = new Point(item.Location.X + 400,item.Location.Y+400);
+                item.Location = new Point(item.Location.X + lowestX, item.Location.Y + lowestY);
             }
         }
 
