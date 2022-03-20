@@ -31,6 +31,7 @@ namespace Dalssoft.DiagramNet
 
 		public BaseElement Clone()
         {
+			// https://csharp-extension.com/en/method/1002450/object-deepclone
 			IFormatter formatter = new BinaryFormatter();
 			using (var stream = new MemoryStream())
 			{

@@ -18,7 +18,6 @@ namespace BirdCommand
 {
     // TODO when you click on the newly slide area to create something or to select, it automatically goes to top.
     // TODO when maze is done, decide what's gonna happen next (going to other maze? etc.)
-    // TODO prevent the blockPanel and theStart being selected!
     // TODO get rid of all magical numbers somehow
     // TODO integrate networkx matching with rules
     // TODO don't allow patterns with disjoint empty cells (such as just a diagonal, see below) 
@@ -326,6 +325,13 @@ namespace BirdCommand
                 theSnapCell.Location = new Point(closestElement.Location.X+11, closestElement.Location.Y + closestElement.Size.Height-5);
                 theSnapCell.Visible = true;
                 designer_trafo.Document.BringToFrontElement(theSnapCell);
+            } else if(e.Element is RectangleNode block)
+            {
+                block.Location = new Point(0, 0);
+            }
+            else if (e.Element is StartCell start)
+            {
+                start.Location = new Point(230, 30);
             }
         }
 
@@ -359,6 +365,13 @@ namespace BirdCommand
             {
                 List<BaseElement> list = DesignerUtil.FindElementsWithin(designer_trafo,e.Element);
                 designer_trafo.Document.SelectElements(list.ToArray());
+            } else if(e.Element is RectangleNode block)
+            {
+                designer_trafo.Document.ClearSelection();
+            }
+            else if (e.Element is StartCell start)
+            {
+                designer_trafo.Document.ClearSelection();
             }
         }
 
