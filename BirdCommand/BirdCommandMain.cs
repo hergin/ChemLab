@@ -53,6 +53,7 @@ namespace BirdCommand
             designer_trafo.ElementMouseUp += Designer_trafo_ElementMouseUp;
             designer_trafo.ElementMoved += Designer_trafo_ElementMoved;
             designer_trafo.ElementMoving += Designer_trafo_ElementMoving;
+            designer_trafo.ElementMouseDown += Designer_trafo_ElementMouseDown;
             designer_trafo.Resize += Designer_trafo_Resize;
             designer_trafo.MouseMove += Designer_trafo_MouseMove;
 
@@ -94,6 +95,15 @@ namespace BirdCommand
             trafoRunner.ProgressChanged += TrafoRunner_ProgressChanged;
 
             // LoadLevel1();
+        }
+
+        private void Designer_trafo_ElementMouseDown(object sender, ElementMouseEventArgs e)
+        {
+            if (e.Element is RuleCell rule)
+            {
+                List<BaseElement> list = DesignerUtil.FindElementsWithin(designer_trafo, e.Element);
+                designer_trafo.Document.SelectElements(list.ToArray());
+            }
         }
 
         private void Designer_trafo_MouseMove(object sender, MouseEventArgs e)
