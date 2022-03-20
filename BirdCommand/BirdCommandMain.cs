@@ -36,6 +36,7 @@ namespace BirdCommand
         PigCell thePig;
         StartCell theStart;
         SnapCell theSnapCell;
+        TrashCell theTrashCell;
         RectangleNode blockPanel;
         bool addBird = false, addEmpty = false;
 
@@ -53,6 +54,7 @@ namespace BirdCommand
             designer_trafo.ElementMoved += Designer_trafo_ElementMoved;
             designer_trafo.ElementMoving += Designer_trafo_ElementMoving;
             designer_trafo.Resize += Designer_trafo_Resize;
+            designer_trafo.MouseMove += Designer_trafo_MouseMove;
 
             toolTip1.SetToolTip(turnLeftButton, "Turn selected bird left");
             toolTip1.SetToolTip(turnRightButton, "Turn selected bird right");
@@ -81,6 +83,8 @@ namespace BirdCommand
             var addPigButton = new PigCell(pigButtonLocation.X, pigButtonLocation.Y);
             designer_trafo.Document.AddElement(addPigButton);
 
+            theTrashCell = new TrashCell();
+            designer_trafo.Document.AddElement(theTrashCell);
 
             theSnapCell = new SnapCell(0, 0);
             designer_trafo.Document.AddElement(theSnapCell);
@@ -90,6 +94,19 @@ namespace BirdCommand
             trafoRunner.ProgressChanged += TrafoRunner_ProgressChanged;
 
             // LoadLevel1();
+        }
+
+        private void Designer_trafo_MouseMove(object sender, MouseEventArgs e)
+        {
+            if(e.X > theTrashCell.Location.X && e.X < theTrashCell.Location.X + theTrashCell.Size.Width
+                && e.Y > theTrashCell.Location.Y && e.Y < theTrashCell.Location.Y + theTrashCell.Size.Height)
+            {
+                theTrashCell.OpenCan();
+            }
+            else
+            {
+                theTrashCell.CloseCan();
+            }
         }
 
         private void Designer_trafo_Resize(object sender, EventArgs e)
@@ -298,6 +315,11 @@ namespace BirdCommand
                     return;
                 }
             }
+            if (e.X > theTrashCell.Location.X && e.X < theTrashCell.Location.X + theTrashCell.Size.Width
+                && e.Y > theTrashCell.Location.Y && e.Y < theTrashCell.Location.Y + theTrashCell.Size.Height)
+            {
+                designer_trafo.Document.DeleteSelectedElements();
+            }
         }
 
         private void Designer_trafo_ElementMoved(object sender, ElementEventArgs e)
@@ -333,6 +355,11 @@ namespace BirdCommand
             {
                 start.Location = new Point(230, 30);
             }
+            else if (e.Element is TrashCell trash)
+            {
+                trash.Location = new Point(60, 330);
+            }
+            designer_trafo.Document.BringToFrontElement(theTrashCell);
         }
 
         private void Designer_trafo_MouseUp(object sender, MouseEventArgs e)
@@ -370,6 +397,10 @@ namespace BirdCommand
                 designer_trafo.Document.ClearSelection();
             }
             else if (e.Element is StartCell start)
+            {
+                designer_trafo.Document.ClearSelection();
+            }
+            else if (e.Element is TrashCell trash)
             {
                 designer_trafo.Document.ClearSelection();
             }

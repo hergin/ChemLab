@@ -68,6 +68,7 @@
     <Compile Include="Custom\LevelDesigner.cs" />
     <Compile Include="Custom\PigCell.cs" />
     <Compile Include="Custom\TrafoUtil.cs" />
+    <Compile Include="Custom\TrashCell.cs" />
     <Compile Include="DiagramNET\Designer.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -293,6 +294,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\rule-condensed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\canopen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\canclosed.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
