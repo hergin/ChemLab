@@ -31,7 +31,7 @@ namespace BirdCommand
     //            Then, it deletes the selected. Poof, all gone.
     public partial class BirdCommandMain : Form
     {
-        private const int TimeoutBetweenRuleExecution = 1000;
+        private const int TimeoutBetweenRuleExecution = 500;
         public static int CELL_SIZE = 50;
         Point birdButtonLocation = new Point(30, 30),
             emptyCellButtonLocation = new Point(110, 30),
@@ -176,6 +176,11 @@ namespace BirdCommand
         {
             switch (e.ProgressPercentage)
             {
+                case (int)TrafoProgress.UpdateBird:
+                    var changes = e.UserState as Tuple<Point, Direction>;
+                    theBird.Location = new Point(theBird.Location.X + changes.Item1.X, theBird.Location.Y + changes.Item1.Y);
+                    theBird.Direction = changes.Item2;
+                    break;
                 case (int)TrafoProgress.Highlight:
                     ((RuleCell)e.UserState).Highlight();
                     break;
@@ -197,42 +202,27 @@ namespace BirdCommand
         private void TrafoRunner_DoWork(object sender, DoWorkEventArgs e)
         {
             // TODO take empty or other scenarios into account
-            var allRules = DesignerUtil.GetTrafoElementsOutsideBlockWithoutStartOrSnapOrBlock(designer_trafo).Where(el => el is RuleCell).ToList();
+            var allRules = DesignerUtil.GetTrafoElementsOutsideBlockWithoutStartOrSnapOrBlock(designer_trafo).Where(el => el is RuleCell).Cast<RuleCell>().ToList();
             allRules.Sort((a, b) => { return a.Location.Y - b.Location.Y; });
             foreach (var rule in allRules)
             {
                 try
                 {
                     trafoRunner.ReportProgress((int)TrafoProgress.Highlight, rule);
-                    var ruleType = TrafoUtil.IdentifyRuleType(
-                        TrafoUtil.FindPreConditionElements(DesignerUtil.GetTrafoElementsOutsideBlockWithoutStartOrSnapOrBlock(designer_trafo),
-                            rule),
-                        TrafoUtil.FindPostConditionElements(DesignerUtil.GetTrafoElementsOutsideBlockWithoutStartOrSnapOrBlock(designer_trafo),
-                            rule));
+
+                    var trafoElements = DesignerUtil.GetTrafoElementsOutsideBlockWithoutStartOrSnapOrBlock(designer_trafo);
+
                     for (int i = 0; i < ((RuleCell)rule).RuleCount; i++)
                     {
-                        if (TrafoUtil.DoesPatternExist(designer_board.Document.Elements.GetArray().ToList(),
-                                TrafoUtil.FindPreConditionElements(DesignerUtil.GetTrafoElementsOutsideBlockWithoutStartOrSnapOrBlock(designer_trafo),
-                                rule)))
+                        if (PyUtil.IsPatternInTheModel(designer_board.Document.Elements.GetArray().ToList(),
+                            TrafoUtil.FindPreConditionElements(trafoElements, rule)))
                         {
-                            // TODO pattern exists for other move forward or turn rules than the one in the model, should find a solution
-                            switch (ruleType)
-                            {
-                                case RuleType.TurnRight:
-                                    theBird.TurnRight();
-                                    break;
-                                case RuleType.TurnLeft:
-                                    theBird.TurnLeft();
-                                    break;
-                                case RuleType.Turn180:
-                                    theBird.Turn180();
-                                    break;
-                                case RuleType.MoveForward:
-                                    theBird.MoveForward();
-                                    break;
-                            }
+                            // TODO pattern exists for other move forward or turn rules than the one in the model, check pattern-rotated rules
+                            var changes = PyUtil.FindChangesToTheBirdInTheRule(trafoElements, rule);
+                            trafoRunner.ReportProgress((int)TrafoProgress.UpdateBird, changes);
+
                             Thread.Sleep(TimeoutBetweenRuleExecution);
-                            if(theBird.Location.Equals(thePig.Location))
+                            if (theBird.Location.Equals(thePig.Location))
                             {
                                 trafoRunner.ReportProgress((int)TrafoProgress.Success);
                                 trafoRunner.CancelAsync();
@@ -246,6 +236,7 @@ namespace BirdCommand
                             return;
                         }
                     }
+
                     trafoRunner.ReportProgress((int)TrafoProgress.Unhighlight, rule);
                 }
                 catch (Exception exp)

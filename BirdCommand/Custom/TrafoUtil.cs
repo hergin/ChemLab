@@ -17,7 +17,8 @@ namespace BirdCommand.Custom
     {
         Highlight = 0, Unhighlight = 1, Error = 2,
         Success = 3,
-        Failure = 4
+        Failure = 4,
+        UpdateBird = 5
     }
 
     public class TrafoUtil
