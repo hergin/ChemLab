@@ -19,16 +19,10 @@ namespace BirdCommand
     // TODO when you click on the newly slide area to create something or to select, it automatically goes to top.
     // TODO when maze is done, decide what's gonna happen next (going to other maze? etc.)
     // TODO get rid of all magical numbers somehow
-    // TODO integrate networkx matching with rules
     // TODO don't allow patterns with disjoint empty cells unless there are diagonal links (such as just a diagonal, see below) 
     //                                                             E
     //                                                              E
     // TODO allow only patterns with same number of empty cells FOR NOW
-    // TODO There should be better rule deletion.
-    //            When a rule is deleted now (over the trash), it might also delete some of other rules' elements
-    //            because they appear inside of the rule deleted.
-    //            This is also related to when elementMouseDown, it selects rule contents.
-    //            Then, it deletes the selected. Poof, all gone.
     public partial class BirdCommandMain : Form
     {
         private const int TimeoutBetweenRuleExecution = 500;
@@ -52,7 +46,6 @@ namespace BirdCommand
             designer_trafo.Document.AddElement(theStart);
 
             designer_trafo.ElementClick += Designer_trafo_ElementClick;
-            designer_trafo.MouseUp += Designer_trafo_MouseUp;
             designer_trafo.MouseDown += Designer_trafo_MouseDown;
             designer_trafo.ElementMouseUp += Designer_trafo_ElementMouseUp;
             designer_trafo.ElementMoving += Designer_trafo_ElementMoving;
@@ -268,6 +261,14 @@ namespace BirdCommand
         private void Designer_trafo_ElementMouseUp(object sender, ElementMouseEventArgs e)
         {
             theSnapCell.Visible = false;
+
+            if (e.X > theTrashCell.Location.X && e.X < theTrashCell.Location.X + theTrashCell.Size.Width
+                && e.Y > theTrashCell.Location.Y && e.Y < theTrashCell.Location.Y + theTrashCell.Size.Height)
+            {
+                designer_trafo.Document.DeleteSelectedElements();
+                return;
+            }
+
             if (e.Element is RuleCell rule)
             {
                 MoveRuleAndItsContents(rule, theSnapCell.Location.X - 11, theSnapCell.Location.Y);
@@ -278,7 +279,6 @@ namespace BirdCommand
                     // this should be investigated more. Because some elements of the newly moved rule might be on top of the existing rule which will mess things up.
                 }
 
-                Designer_trafo_ElementClick(sender, e);
             }
             else if (e.Element is BirdCell bird)
             {
@@ -382,22 +382,9 @@ namespace BirdCommand
             designer_trafo.Document.BringToFrontElement(theTrashCell);
         }
 
-        private void Designer_trafo_MouseUp(object sender, MouseEventArgs e)
-        {
-            if (e.X > theTrashCell.Location.X && e.X < theTrashCell.Location.X + theTrashCell.Size.Width
-                && e.Y > theTrashCell.Location.Y && e.Y < theTrashCell.Location.Y + theTrashCell.Size.Height)
-            {
-                designer_trafo.Document.DeleteSelectedElements();
-            }
-        }
-
         private void Designer_trafo_ElementClick(object sender, ElementEventArgs e)
         {
-            if (e.Element is RuleCell rule)
-            {
-                List<BaseElement> list = DesignerUtil.FindElementsWithin(designer_trafo,e.Element);
-                designer_trafo.Document.SelectElements(list.ToArray());
-            } else if(e.Element is RectangleNode block)
+            if(e.Element is RectangleNode block)
             {
                 designer_trafo.Document.ClearSelection();
             }
