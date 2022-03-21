@@ -50,6 +50,7 @@ namespace BirdCommand
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.debugPanel = new System.Windows.Forms.Panel();
+            this.button15 = new System.Windows.Forms.Button();
             this.button13 = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
@@ -72,7 +73,7 @@ namespace BirdCommand
             this.trafoRunner = new System.ComponentModel.BackgroundWorker();
             this.designer_board = new Dalssoft.DiagramNet.Designer();
             this.designer_trafo = new Dalssoft.DiagramNet.Designer();
-            this.button15 = new System.Windows.Forms.Button();
+            this.button16 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
             this.panel6.SuspendLayout();
@@ -307,6 +308,7 @@ namespace BirdCommand
             this.debugPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.debugPanel.BackColor = System.Drawing.Color.Salmon;
+            this.debugPanel.Controls.Add(this.button16);
             this.debugPanel.Controls.Add(this.button15);
             this.debugPanel.Controls.Add(this.button13);
             this.debugPanel.Controls.Add(this.button11);
@@ -328,6 +330,17 @@ namespace BirdCommand
             this.debugPanel.Size = new System.Drawing.Size(1325, 150);
             this.debugPanel.TabIndex = 30;
             this.debugPanel.Visible = false;
+            // 
+            // button15
+            // 
+            this.button15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button15.Location = new System.Drawing.Point(570, 97);
+            this.button15.Name = "button15";
+            this.button15.Size = new System.Drawing.Size(134, 23);
+            this.button15.TabIndex = 33;
+            this.button15.Text = "Rotate 90 Clockwise";
+            this.button15.UseVisualStyleBackColor = true;
+            this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
             // button13
             // 
@@ -565,16 +578,15 @@ namespace BirdCommand
             this.designer_trafo.Size = new System.Drawing.Size(697, 705);
             this.designer_trafo.TabIndex = 11;
             // 
-            // button15
+            // button16
             // 
-            this.button15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button15.Location = new System.Drawing.Point(570, 97);
-            this.button15.Name = "button15";
-            this.button15.Size = new System.Drawing.Size(134, 23);
-            this.button15.TabIndex = 33;
-            this.button15.Text = "Rotate 90 Clockwise";
-            this.button15.UseVisualStyleBackColor = true;
-            this.button15.Click += new System.EventHandler(this.button15_Click);
+            this.button16.Location = new System.Drawing.Point(1165, 50);
+            this.button16.Name = "button16";
+            this.button16.Size = new System.Drawing.Size(105, 23);
+            this.button16.TabIndex = 34;
+            this.button16.Text = "PY: update model";
+            this.button16.UseVisualStyleBackColor = true;
+            this.button16.Click += new System.EventHandler(this.button16_Click);
             // 
             // BirdCommandMain
             // 
@@ -659,6 +671,7 @@ namespace BirdCommand
         private System.Windows.Forms.Button button11;
         private System.Windows.Forms.Button button13;
         private System.Windows.Forms.Button button15;
+        private System.Windows.Forms.Button button16;
     }
 }
 
