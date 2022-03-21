@@ -324,11 +324,30 @@ namespace BirdCommand
                     emptyCell.Location = new Point(emptyUnderneathWest.Location.X - CELL_SIZE, emptyUnderneathWest.Location.Y);
                     return;
                 }
-            }
-            if (e.X > theTrashCell.Location.X && e.X < theTrashCell.Location.X + theTrashCell.Size.Width
-                && e.Y > theTrashCell.Location.Y && e.Y < theTrashCell.Location.Y + theTrashCell.Size.Height)
-            {
-                designer_trafo.Document.DeleteSelectedElements();
+                var emptyUnderneathTopLeft = DesignerUtil.FindCellUnderneath(designer_trafo, emptyCell, new Point(e.X - CELL_SIZE, e.Y - CELL_SIZE));
+                if (emptyUnderneathTopLeft != null)
+                {
+                    emptyCell.Location = new Point(emptyUnderneathTopLeft.Location.X + CELL_SIZE, emptyUnderneathTopLeft.Location.Y + CELL_SIZE);
+                    return;
+                }
+                var emptyUnderneathBottomLeft = DesignerUtil.FindCellUnderneath(designer_trafo, emptyCell, new Point(e.X - CELL_SIZE, e.Y + CELL_SIZE));
+                if (emptyUnderneathBottomLeft != null)
+                {
+                    emptyCell.Location = new Point(emptyUnderneathBottomLeft.Location.X + CELL_SIZE, emptyUnderneathBottomLeft.Location.Y - CELL_SIZE);
+                    return;
+                }
+                var emptyUnderneathBottomRight = DesignerUtil.FindCellUnderneath(designer_trafo, emptyCell, new Point(e.X + CELL_SIZE, e.Y + CELL_SIZE));
+                if (emptyUnderneathBottomRight != null)
+                {
+                    emptyCell.Location = new Point(emptyUnderneathBottomRight.Location.X - CELL_SIZE, emptyUnderneathBottomRight.Location.Y - CELL_SIZE);
+                    return;
+                }
+                var emptyUnderneathTopRight = DesignerUtil.FindCellUnderneath(designer_trafo, emptyCell, new Point(e.X + CELL_SIZE, e.Y - CELL_SIZE));
+                if (emptyUnderneathTopRight != null)
+                {
+                    emptyCell.Location = new Point(emptyUnderneathTopRight.Location.X - CELL_SIZE, emptyUnderneathTopRight.Location.Y + CELL_SIZE);
+                    return;
+                }
             }
         }
 
@@ -394,6 +413,11 @@ namespace BirdCommand
                 addEmpty = false;
             }
             DesignerUtil.ArrangeTheOrder(designer_trafo);
+            if (e.X > theTrashCell.Location.X && e.X < theTrashCell.Location.X + theTrashCell.Size.Width
+                && e.Y > theTrashCell.Location.Y && e.Y < theTrashCell.Location.Y + theTrashCell.Size.Height)
+            {
+                designer_trafo.Document.DeleteSelectedElements();
+            }
         }
 
         private void Designer_trafo_ElementClick(object sender, ElementEventArgs e)
