@@ -102,6 +102,7 @@ namespace BirdCommand
 
         private void Designer_trafo_ElementMouseDown(object sender, ElementMouseEventArgs e)
         {
+            DesignerUtil.ArrangeTheOrder(designer_trafo);
             if (e.Element is RuleCell rule)
             {
                 designer_trafo.Document.ClearSelection();
