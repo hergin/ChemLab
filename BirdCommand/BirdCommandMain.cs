@@ -43,7 +43,6 @@ namespace BirdCommand
         SnapCell theSnapCell;
         TrashCell theTrashCell;
         RectangleNode blockPanel;
-        bool addBird = false, addEmpty = false;
 
         public BirdCommandMain()
         {
@@ -56,7 +55,6 @@ namespace BirdCommand
             designer_trafo.MouseUp += Designer_trafo_MouseUp;
             designer_trafo.MouseDown += Designer_trafo_MouseDown;
             designer_trafo.ElementMouseUp += Designer_trafo_ElementMouseUp;
-            designer_trafo.ElementMoved += Designer_trafo_ElementMoved;
             designer_trafo.ElementMoving += Designer_trafo_ElementMoving;
             designer_trafo.ElementMouseDown += Designer_trafo_ElementMouseDown;
             designer_trafo.Resize += Designer_trafo_Resize;
@@ -357,11 +355,6 @@ namespace BirdCommand
             }
         }
 
-        private void Designer_trafo_ElementMoved(object sender, ElementEventArgs e)
-        {
-            
-        }
-
         private void Designer_trafo_ElementMoving(object sender, ElementEventArgs e)
         {
             if(e.Element is RuleCell)
@@ -399,26 +392,6 @@ namespace BirdCommand
 
         private void Designer_trafo_MouseUp(object sender, MouseEventArgs e)
         {
-            if (addBird)
-            {
-                // Add the bird and align it with the empty cell underneath (if there is one)
-                var bird = new BirdCell(e.X, e.Y);
-                var cellUnderneath = DesignerUtil.FindCellUnderneath(designer_trafo, bird);
-                if (cellUnderneath != null)
-                    bird.Location = cellUnderneath.Location;
-                designer_trafo.Document.AddElement(bird);
-                addBird = false;
-            }
-            if (addEmpty)
-            {
-                // if there is a cell around, snap this one to it.
-                var empty = new EmptyCell(e.X, e.Y);
-                var newPosition = DesignerUtil.FindPositionOfAnotherEmptyAround(designer_trafo, empty);
-                empty.Location = newPosition;
-                designer_trafo.Document.AddElement(empty);
-                addEmpty = false;
-            }
-            DesignerUtil.ArrangeTheOrder(designer_trafo);
             if (e.X > theTrashCell.Location.X && e.X < theTrashCell.Location.X + theTrashCell.Size.Width
                 && e.Y > theTrashCell.Location.Y && e.Y < theTrashCell.Location.Y + theTrashCell.Size.Height)
             {
@@ -529,23 +502,6 @@ namespace BirdCommand
             MessageBox.Show("RuleType: " + ruleType);
         }
 
-        private void toAddBirdButton_Click(object sender, EventArgs e)
-        {
-            designer_trafo.Document.Action = DesignerAction.Add;
-            addBird = true;
-        }
-
-        private void toAddEmptyButton_Click(object sender, EventArgs e)
-        {
-            designer_trafo.Document.Action = DesignerAction.Add;
-            addEmpty = true;
-        }
-
-        private void addRuleButton_Click(object sender, EventArgs e)
-        {
-            AddRuleToNextEmptySpot();
-        }
-
         private RuleCell AddRuleToNextEmptySpot()
         {
             var highestY = 0;
@@ -563,11 +519,6 @@ namespace BirdCommand
             designer_trafo.Document.AddElement(newRule);
             DesignerUtil.ArrangeTheOrder(designer_trafo);
             return newRule;
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void pictureBox1_DoubleClick(object sender, EventArgs e)
