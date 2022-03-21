@@ -61,6 +61,16 @@ namespace BirdCommandTests.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] hello {
+            get {
+                object obj = ResourceManager.GetObject("hello", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Wo-Wo-Wo-Wo-Wo-Wo-Wo-Wo
         ///Wo-Wo-Wo-St-Wo-St-Wo-Wo
         ///Wo-Wo-HW-BD-Gl-Wo-Wo-HW

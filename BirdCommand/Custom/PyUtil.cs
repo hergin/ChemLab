@@ -57,10 +57,10 @@ namespace BirdCommand.Custom
         }
 
         // Return a position difference and a new direction for the bird
-        public static Tuple<Point,Direction> UpdateModelForTheRule(List<BaseElement> model, RuleCell rule)
+        public static Tuple<Point,Direction> FindChangesToTheBirdInTheRule(List<BaseElement> trafoElements, RuleCell rule)
         {
-            var preConditionElements = TrafoUtil.FindPreConditionElements(model, rule);
-            var postConditionElements = TrafoUtil.FindPostConditionElements(model, rule);
+            var preConditionElements = TrafoUtil.FindPreConditionElements(trafoElements, rule);
+            var postConditionElements = TrafoUtil.FindPostConditionElements(trafoElements, rule);
 
             var prePatternGraph = ConvertUtil.PatternToGraph(preConditionElements);
             var postPatternGraph = ConvertUtil.PatternToGraph(postConditionElements);

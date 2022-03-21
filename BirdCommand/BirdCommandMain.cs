@@ -802,7 +802,7 @@ namespace BirdCommand
             var trafoElements = DesignerUtil.GetTrafoElementsOutsideBlockWithoutStartOrSnapOrBlock(designer_trafo);
             var rule = trafoElements.Where(x => x is RuleCell).First() as RuleCell;
 
-            var result = PyUtil.UpdateModelForTheRule(trafoElements, rule);
+            var result = PyUtil.FindChangesToTheBirdInTheRule(trafoElements, rule);
 
             theBird.Location = new Point(theBird.Location.X + result.Item1.X, theBird.Location.Y + result.Item1.Y);
             theBird.Direction = result.Item2;
