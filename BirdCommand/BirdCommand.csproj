@@ -61,6 +61,7 @@
     <Compile Include="Custom\DesignerUtil.cs" />
     <Compile Include="Custom\Graph.cs" />
     <Compile Include="Custom\PatternUtil.cs" />
+    <Compile Include="Custom\PyUtil.cs" />
     <Compile Include="Custom\SnapCell.cs" />
     <Compile Include="Custom\RuleCell.cs" />
     <Compile Include="Custom\StartCell.cs" />
@@ -305,6 +306,9 @@
     <None Include="Resources\difference-finding-just-bird.py">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rule-condensed-highlighted.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

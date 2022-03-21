@@ -441,6 +441,16 @@ namespace BirdCommand.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap rule_condensed_highlighted {
+            get {
+                object obj = ResourceManager.GetObject("rule_condensed_highlighted", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap rule_highlighted {
             get {
                 object obj = ResourceManager.GetObject("rule_highlighted", resourceCulture);

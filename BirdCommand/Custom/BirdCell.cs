@@ -20,7 +20,29 @@ namespace BirdCommand.Custom
         Direction birthDirection;
 
         private Direction direction;
-        public Direction Direction { get => direction; }
+        public Direction Direction
+        {
+            get => direction;
+            set
+            {
+                direction = value;
+                switch (value)
+                {
+                    case Direction.Up:
+                        Background = Resources.BirdUp;
+                        break;
+                    case Direction.Down:
+                        Background = Resources.BirdDown;
+                        break;
+                    case Direction.Left:
+                        Background = Resources.BirdLeft;
+                        break;
+                    case Direction.Right:
+                        Background = Resources.BirdRight;
+                        break;
+                }
+            }
+        }
 
         public BirdCell(int x, int y) : base(x, y, BirdCommandMain.CELL_SIZE, BirdCommandMain.CELL_SIZE)
         {
@@ -34,47 +56,17 @@ namespace BirdCommand.Custom
 
         public BirdCell(int x, int y, Direction direction) : base(x, y, BirdCommandMain.CELL_SIZE, BirdCommandMain.CELL_SIZE)
         {
-            this.direction = direction;
+            Direction = direction;
             birthDirection = direction;
             FillColor1 = Color.Transparent;
             FillColor2 = Color.Transparent;
             birthPosition = new Point(x, y);
-            switch (direction)
-            {
-                case Direction.Up:
-                    Background = Resources.BirdUp;
-                    break;
-                case Direction.Down:
-                    Background = Resources.BirdDown;
-                    break;
-                case Direction.Left:
-                    Background = Resources.BirdLeft;
-                    break;
-                case Direction.Right:
-                    Background = Resources.BirdRight;
-                    break;
-            }
         }
 
         public void Reset()
         {
-            direction = birthDirection;
+            Direction = birthDirection;
             Location = birthPosition;
-            switch (direction)
-            {
-                case Direction.Up:
-                    Background = Resources.BirdUp;
-                    break;
-                case Direction.Down:
-                    Background = Resources.BirdDown;
-                    break;
-                case Direction.Left:
-                    Background = Resources.BirdLeft;
-                    break;
-                case Direction.Right:
-                    Background = Resources.BirdRight;
-                    break;
-            }
         }
 
         public void Turn180()

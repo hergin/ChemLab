@@ -40,12 +40,12 @@ namespace BirdCommand.Custom
 
         public void Highlight()
         {
-            Background = Resources.rule_highlighted;
+            Background = Resources.rule_condensed_highlighted;
         }
 
         public void Unhighlight()
         {
-            Background = Resources.rule;
+            Background = Resources.rule_condensed;
         }
 
         public void IncreaseRuleCount()
