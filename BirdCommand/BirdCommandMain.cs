@@ -101,6 +101,7 @@ namespace BirdCommand
         {
             if (e.Element is RuleCell rule)
             {
+                designer_trafo.Document.ClearSelection();
                 List<BaseElement> list = DesignerUtil.FindElementsWithin(designer_trafo, e.Element);
                 designer_trafo.Document.SelectElements(list.ToArray());
             }
