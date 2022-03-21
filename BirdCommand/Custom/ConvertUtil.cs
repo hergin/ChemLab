@@ -52,7 +52,7 @@ namespace BirdCommand.Custom
                 var locationIdUnderBird = IdFromLocation(bird.Location, adjustX, adjustY);
                 var birdId = "Bird_" + bird.Direction + "_" + IdFromLocation(bird.Location, adjustX, adjustY);
                 result.Add(new Node() { Id = birdId, Type = GetShortTypeOf(bird) });
-                if (result.Nodes.Where(n => n.Id == birdId).Count() > 0)
+                if (result.Nodes.Where(n => n.Id == locationIdUnderBird).Count() > 0)
                     result.Add(new Edge() { From = locationIdUnderBird, To = birdId, Type = "Bird_" + bird.Direction });
             }
 
@@ -63,7 +63,7 @@ namespace BirdCommand.Custom
                 var locationIdUnderPig = IdFromLocation(pig.Location, adjustX, adjustY);
                 var pigId = "Pig_" + IdFromLocation(pig.Location, adjustX, adjustY);
                 result.Add(new Node() { Id = pigId, Type = GetShortTypeOf(pig) });
-                if (result.Nodes.Where(n => n.Id == pigId).Count() > 0)
+                if (result.Nodes.Where(n => n.Id == locationIdUnderPig).Count() > 0)
                     result.Add(new Edge() { From = locationIdUnderPig, To = pigId, Type = "Pig" });
             }
 
