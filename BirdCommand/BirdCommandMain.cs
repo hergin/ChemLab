@@ -816,9 +816,7 @@ namespace BirdCommand
             designer_trafo.Document.AddElement(new BirdCell(firstRule.Location.X + 300, firstRule.Location.Y + 50, Direction.Right));
 
             RuleCell secondRule = AddRuleToNextEmptySpot();
-            designer_trafo.Document.AddElement(new EmptyCell(secondRule.Location.X + 50, secondRule.Location.Y + 50));
             designer_trafo.Document.AddElement(new BirdCell(secondRule.Location.X + 50, secondRule.Location.Y + 50, Direction.Right));
-            designer_trafo.Document.AddElement(new EmptyCell(secondRule.Location.X + 250, secondRule.Location.Y + 50));
             designer_trafo.Document.AddElement(new BirdCell(secondRule.Location.X + 250, secondRule.Location.Y + 50, Direction.Down));
 
             RuleCell thirdRule = AddRuleToNextEmptySpot();
