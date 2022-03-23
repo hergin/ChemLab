@@ -279,6 +279,22 @@ namespace BirdCommand.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Gl-HS-Wo-Wo-Wo-Wo-Wo-Wo
+        ///Wo-Wo-Wo-Wo-Wo-Wo-Wo-Wo
+        ///HS-Wo-Gl-HS-Gl-HW-Wo-Wo
+        ///Wo-St-BR-Em-Em-Gl-Wo-HW
+        ///Wo-Wo-Wo-Wo-Em-HW-Gl-Wo
+        ///Wo-HS-Pi-Em-Em-HS-Wo-Wo
+        ///Wo-St-St-Gl-Gl-Wo-Wo-St
+        ///Wo-Wo-Wo-Gl-St-Wo-Wo-Wo.
+        /// </summary>
+        internal static string hoc9 {
+            get {
+                return ResourceManager.GetString("hoc9", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap icon {
@@ -374,6 +390,26 @@ namespace BirdCommand.Properties {
         internal static System.Drawing.Bitmap maze3_over {
             get {
                 object obj = ResourceManager.GetObject("maze3_over", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap maze9 {
+            get {
+                object obj = ResourceManager.GetObject("maze9", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap maze9_over {
+            get {
+                object obj = ResourceManager.GetObject("maze9_over", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

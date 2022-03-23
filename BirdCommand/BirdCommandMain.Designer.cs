@@ -41,6 +41,7 @@ namespace BirdCommand
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.maze9button = new System.Windows.Forms.PictureBox();
             this.maze3button = new System.Windows.Forms.PictureBox();
             this.maze2button = new System.Windows.Forms.PictureBox();
             this.maze1button = new System.Windows.Forms.PictureBox();
@@ -64,12 +65,14 @@ namespace BirdCommand
             this.runButton = new System.Windows.Forms.PictureBox();
             this.resetButton = new System.Windows.Forms.PictureBox();
             this.trafoRunner = new System.ComponentModel.BackgroundWorker();
+            this.label6 = new System.Windows.Forms.Label();
             this.designer_board = new Dalssoft.DiagramNet.Designer();
             this.designer_trafo = new Dalssoft.DiagramNet.Designer();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.maze9button)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.maze3button)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.maze2button)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.maze1button)).BeginInit();
@@ -177,20 +180,37 @@ namespace BirdCommand
             this.panel6.Controls.Add(this.label5);
             this.panel6.Location = new System.Drawing.Point(568, 16);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(308, 63);
+            this.panel6.Size = new System.Drawing.Size(387, 63);
             this.panel6.TabIndex = 38;
             // 
             // panel5
             // 
             this.panel5.BackgroundImage = global::BirdCommand.Properties.Resources.maze_selector_box;
-            this.panel5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.panel5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panel5.Controls.Add(this.maze9button);
             this.panel5.Controls.Add(this.maze3button);
             this.panel5.Controls.Add(this.maze2button);
             this.panel5.Controls.Add(this.maze1button);
+            this.panel5.Controls.Add(this.label6);
             this.panel5.Location = new System.Drawing.Point(147, 4);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(153, 54);
+            this.panel5.Size = new System.Drawing.Size(234, 54);
             this.panel5.TabIndex = 37;
+            // 
+            // maze9button
+            // 
+            this.maze9button.BackColor = System.Drawing.Color.Transparent;
+            this.maze9button.BackgroundImage = global::BirdCommand.Properties.Resources.maze9;
+            this.maze9button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.maze9button.Location = new System.Drawing.Point(179, 6);
+            this.maze9button.Name = "maze9button";
+            this.maze9button.Size = new System.Drawing.Size(48, 43);
+            this.maze9button.TabIndex = 3;
+            this.maze9button.TabStop = false;
+            this.maze9button.Tag = "9";
+            this.maze9button.Click += new System.EventHandler(this.mazeButtons_Click);
+            this.maze9button.MouseEnter += new System.EventHandler(this.maze9button_MouseEnter);
+            this.maze9button.MouseLeave += new System.EventHandler(this.maze9button_MouseLeave);
             // 
             // maze3button
             // 
@@ -469,6 +489,18 @@ namespace BirdCommand
             this.trafoRunner.WorkerReportsProgress = true;
             this.trafoRunner.WorkerSupportsCancellation = true;
             // 
+            // label6
+            // 
+            this.label6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(232)))), ((int)(((byte)(234)))));
+            this.label6.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.Color.White;
+            this.label6.Location = new System.Drawing.Point(150, 6);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(31, 34);
+            this.label6.TabIndex = 38;
+            this.label6.Text = "...";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // designer_board
             // 
             this.designer_board.AutoScroll = true;
@@ -518,6 +550,7 @@ namespace BirdCommand
             this.panel2.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.maze9button)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.maze3button)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.maze2button)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.maze1button)).EndInit();
@@ -567,6 +600,8 @@ namespace BirdCommand
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button duplicateButton;
         private System.Windows.Forms.Button button11;
+        private System.Windows.Forms.PictureBox maze9button;
+        private System.Windows.Forms.Label label6;
     }
 }
 

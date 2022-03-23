@@ -178,6 +178,9 @@
   <data name="hoc3" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\hoc3.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
+  <data name="hoc9" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\hoc9.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
   <data name="icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon.jpeg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -204,6 +207,12 @@
   </data>
   <data name="maze3_over" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\maze3_over.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="maze9" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\maze9.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="maze9_over" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\maze9_over.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="maze_selector_box" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\maze-selector-box.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

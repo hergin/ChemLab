@@ -65,6 +65,7 @@ namespace BirdCommand
             toolTip1.SetToolTip(maze1button, "Open maze 1");
             toolTip1.SetToolTip(maze2button, "Open maze 2");
             toolTip1.SetToolTip(maze3button, "Open maze 3");
+            toolTip1.SetToolTip(maze9button, "Open maze 9");
 
             designer_trafo.Document.GridSize = new System.Drawing.Size(10000, 10000);
             blockPanel = new RectangleNode(0, 0, 200, 220);
@@ -570,6 +571,16 @@ namespace BirdCommand
             {
                 MessageBox.Show("Please select a rule first to duplicate.", "No rule selected!", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+        }
+
+        private void maze9button_MouseEnter(object sender, EventArgs e)
+        {
+            maze9button.BackgroundImage = Resources.maze9_over;
+        }
+
+        private void maze9button_MouseLeave(object sender, EventArgs e)
+        {
+            maze9button.BackgroundImage = Resources.maze9;
         }
 
         private void button11_Click(object sender, EventArgs ev)

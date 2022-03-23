@@ -310,5 +310,14 @@
   <ItemGroup>
     <None Include="Resources\rule-condensed-highlighted.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hoc9.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\maze9_over.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\maze9.PNG" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
