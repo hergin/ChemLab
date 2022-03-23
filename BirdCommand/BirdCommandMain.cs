@@ -25,7 +25,7 @@ namespace BirdCommand
     // TODO allow only patterns with same number of empty cells FOR NOW
     public partial class BirdCommandMain : Form
     {
-        private const int TimeoutBetweenRuleExecution = 500;
+        private const int TimeoutBetweenRuleExecution = 100;
         public static int CELL_SIZE = 50;
         Point birdButtonLocation = new Point(30, 30),
             emptyCellButtonLocation = new Point(110, 30),
@@ -207,11 +207,24 @@ namespace BirdCommand
 
                     for (int i = 0; i < ((RuleCell)rule).RuleCount; i++)
                     {
-                        if (PyUtil.IsPatternInTheModel(designer_board.Document.Elements.GetArray().ToList(),
-                            TrafoUtil.FindPreConditionElements(trafoElements, rule)))
+                        var preConditionElements = TrafoUtil.FindPreConditionElements(trafoElements, rule);
+                        var postConditionElements = TrafoUtil.FindPostConditionElements(trafoElements, rule);
+                        var cloneOfPreConditionElements = PatternUtil.Clone(preConditionElements);
+                        var cloneOfPostConditionElements = PatternUtil.Clone(postConditionElements);
+
+                        // we want to either match the pattern
+                        int counter = 0;
+                        while (!PyUtil.IsPatternInTheModel(designer_board.Document.Elements.GetArray().ToList(),
+                            cloneOfPreConditionElements) && counter++ < 4) 
                         {
-                            // TODO pattern exists for other move forward or turn rules than the one in the model, check pattern-rotated rules
-                            var changes = PyUtil.FindChangesToTheBirdInTheRule(trafoElements, rule);
+                            cloneOfPreConditionElements = PatternUtil.Rotate90Clockwise(cloneOfPreConditionElements);
+                            cloneOfPostConditionElements=PatternUtil.Rotate90Clockwise(cloneOfPostConditionElements);
+                        }
+
+                        if (PyUtil.IsPatternInTheModel(designer_board.Document.Elements.GetArray().ToList(),
+                            cloneOfPreConditionElements))
+                        {
+                            var changes = PyUtil.FindChangesToTheBirdInTheRule(cloneOfPreConditionElements, cloneOfPostConditionElements);
                             trafoRunner.ReportProgress((int)TrafoProgress.UpdateBird, changes);
 
                             Thread.Sleep(TimeoutBetweenRuleExecution);

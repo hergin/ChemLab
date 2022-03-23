@@ -14,6 +14,26 @@ namespace BirdCommand.Custom.Tests
     public class ConvertUtilTests
     {
         [TestMethod()]
+        public void PatternToGraphTest_OnlyBirdOrPig()
+        {
+            List<BaseElement> lhs = new List<BaseElement>();
+            lhs.Add(new BirdCell(30, 30));
+
+            var result = ConvertUtil.PatternToGraph(lhs);
+
+            Assert.AreEqual(0,result.Edges.Count);
+            Assert.AreEqual(1,result.Nodes.Count);
+
+            lhs = new List<BaseElement>();
+            lhs.Add(new PigCell(30, 30));
+
+            result = ConvertUtil.PatternToGraph(lhs);
+
+            Assert.AreEqual(0, result.Edges.Count);
+            Assert.AreEqual(1, result.Nodes.Count);
+        }
+
+        [TestMethod()]
         public void PatternToGraphTest_OnlyEmpty()
         {
             //   X

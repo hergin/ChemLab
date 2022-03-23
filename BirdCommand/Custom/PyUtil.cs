@@ -62,6 +62,11 @@ namespace BirdCommand.Custom
             var preConditionElements = TrafoUtil.FindPreConditionElements(trafoElements, rule);
             var postConditionElements = TrafoUtil.FindPostConditionElements(trafoElements, rule);
 
+            return FindChangesToTheBirdInTheRule(preConditionElements,postConditionElements);
+        }
+
+        public static Tuple<Point, Direction> FindChangesToTheBirdInTheRule(List<BaseElement> preConditionElements, List<BaseElement> postConditionElements)
+        {
             var prePatternGraph = ConvertUtil.PatternToGraph(preConditionElements);
             var postPatternGraph = ConvertUtil.PatternToGraph(postConditionElements);
 
