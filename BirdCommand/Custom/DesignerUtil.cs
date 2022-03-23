@@ -10,6 +10,61 @@ namespace BirdCommand.Custom
 {
     public class DesignerUtil
     {
+        internal static void CopyLHStoRHS(Designer designer, RuleCell rule)
+        {
+            var lhsElements = TrafoUtil.FindPreConditionElements(DesignerUtil.GetTrafoElementsOutsideBlockWithoutStartOrSnapOrBlock(designer).ToList(),
+                                rule);
+
+            foreach (var element in lhsElements)
+            {
+                if (element is EmptyCell empty)
+                {
+                    designer.Document.AddElement(new EmptyCell(empty.Location.X + 200, empty.Location.Y));
+                }
+                else if (element is BirdCell bird)
+                {
+                    designer.Document.AddElement(new BirdCell(bird.Location.X + 200, bird.Location.Y, bird.Direction));
+                }
+                else if (element is PigCell pig)
+                {
+                    designer.Document.AddElement(new PigCell(pig.Location.X + 200, pig.Location.Y));
+                }
+            }
+        }
+
+        internal static RuleCell AddRuleToNextEmptySpot(Designer designer, Point ruleButtonLocation)
+        {
+            var highestY = 0;
+            foreach (var element in designer.Document.Elements)
+            {
+                if ((element is RuleCell || element is StartCell) && ((BaseElement)element).Location != ruleButtonLocation)
+                {
+                    if (((BaseElement)element).Location.Y + ((BaseElement)element).Size.Height > highestY)
+                    {
+                        highestY = ((BaseElement)element).Location.Y + ((BaseElement)element).Size.Height;
+                    }
+                }
+            }
+            var newRule = new RuleCell(231, highestY - 5);
+            designer.Document.AddElement(newRule);
+            DesignerUtil.ArrangeTheOrder(designer);
+            return newRule;
+        }
+
+        internal static void MoveRuleAndItsContents(Designer designer, RuleCell rule, int newX, int newY)
+        {
+            var ruleStarterPosition = rule.Location;
+
+            var ruleContent = DesignerUtil.FindElementsWithin(designer, rule);
+            foreach (var element in ruleContent)
+            {
+                // move the contents of the rule as well
+                var differenceX = Math.Abs(element.Location.X - ruleStarterPosition.X);
+                var differenceY = Math.Abs(element.Location.Y - ruleStarterPosition.Y);
+                element.Location = new Point(newX + differenceX, newY + differenceY);
+            }
+        }
+
         // Return the elements outside the block panel (skip Snap and Start cells as well)
         internal static List<BaseElement> GetTrafoElementsOutsideBlockWithoutStartOrSnapOrBlock(Designer designer)
         {
@@ -172,6 +227,58 @@ namespace BirdCommand.Custom
             foreach (var birdCell in birdCells)
             {
                 designer.Document.BringToFrontElement(birdCell);
+            }
+        }
+
+        internal static void SnapNewEmptyCellToExistingNeighbors(Designer designer_trafo, EmptyCell emptyCell, Point locationDropped)
+        {
+            var emptyUnderneathSouth = DesignerUtil.FindCellUnderneath(designer_trafo, emptyCell, new Point(locationDropped.X, locationDropped.Y + BirdCommandMain.CELL_SIZE));
+            if (emptyUnderneathSouth != null)
+            {
+                emptyCell.Location = new Point(emptyUnderneathSouth.Location.X, emptyUnderneathSouth.Location.Y - BirdCommandMain.CELL_SIZE);
+                return;
+            }
+            var emptyUnderneathNorth = DesignerUtil.FindCellUnderneath(designer_trafo, emptyCell, new Point(locationDropped.X, locationDropped.Y - BirdCommandMain.CELL_SIZE));
+            if (emptyUnderneathNorth != null)
+            {
+                emptyCell.Location = new Point(emptyUnderneathNorth.Location.X, emptyUnderneathNorth.Location.Y + BirdCommandMain.CELL_SIZE);
+                return;
+            }
+            var emptyUnderneathEast = DesignerUtil.FindCellUnderneath(designer_trafo, emptyCell, new Point(locationDropped.X - BirdCommandMain.CELL_SIZE, locationDropped.Y));
+            if (emptyUnderneathEast != null)
+            {
+                emptyCell.Location = new Point(emptyUnderneathEast.Location.X + BirdCommandMain.CELL_SIZE, emptyUnderneathEast.Location.Y);
+                return;
+            }
+            var emptyUnderneathWest = DesignerUtil.FindCellUnderneath(designer_trafo, emptyCell, new Point(locationDropped.X + BirdCommandMain.CELL_SIZE, locationDropped.Y));
+            if (emptyUnderneathWest != null)
+            {
+                emptyCell.Location = new Point(emptyUnderneathWest.Location.X - BirdCommandMain.CELL_SIZE, emptyUnderneathWest.Location.Y);
+                return;
+            }
+            var emptyUnderneathTopLeft = DesignerUtil.FindCellUnderneath(designer_trafo, emptyCell, new Point(locationDropped.X - BirdCommandMain.CELL_SIZE, locationDropped.Y - BirdCommandMain.CELL_SIZE));
+            if (emptyUnderneathTopLeft != null)
+            {
+                emptyCell.Location = new Point(emptyUnderneathTopLeft.Location.X + BirdCommandMain.CELL_SIZE, emptyUnderneathTopLeft.Location.Y + BirdCommandMain.CELL_SIZE);
+                return;
+            }
+            var emptyUnderneathBottomLeft = DesignerUtil.FindCellUnderneath(designer_trafo, emptyCell, new Point(locationDropped.X - BirdCommandMain.CELL_SIZE, locationDropped.Y + BirdCommandMain.CELL_SIZE));
+            if (emptyUnderneathBottomLeft != null)
+            {
+                emptyCell.Location = new Point(emptyUnderneathBottomLeft.Location.X + BirdCommandMain.CELL_SIZE, emptyUnderneathBottomLeft.Location.Y - BirdCommandMain.CELL_SIZE);
+                return;
+            }
+            var emptyUnderneathBottomRight = DesignerUtil.FindCellUnderneath(designer_trafo, emptyCell, new Point(locationDropped.X + BirdCommandMain.CELL_SIZE, locationDropped.Y + BirdCommandMain.CELL_SIZE));
+            if (emptyUnderneathBottomRight != null)
+            {
+                emptyCell.Location = new Point(emptyUnderneathBottomRight.Location.X - BirdCommandMain.CELL_SIZE, emptyUnderneathBottomRight.Location.Y - BirdCommandMain.CELL_SIZE);
+                return;
+            }
+            var emptyUnderneathTopRight = DesignerUtil.FindCellUnderneath(designer_trafo, emptyCell, new Point(locationDropped.X + BirdCommandMain.CELL_SIZE, locationDropped.Y - BirdCommandMain.CELL_SIZE));
+            if (emptyUnderneathTopRight != null)
+            {
+                emptyCell.Location = new Point(emptyUnderneathTopRight.Location.X - BirdCommandMain.CELL_SIZE, emptyUnderneathTopRight.Location.Y + BirdCommandMain.CELL_SIZE);
+                return;
             }
         }
     }

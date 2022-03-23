@@ -37,8 +37,6 @@ namespace BirdCommand
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
-            this.button12 = new System.Windows.Forms.Button();
-            this.button14 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
@@ -50,12 +48,8 @@ namespace BirdCommand
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.debugPanel = new System.Windows.Forms.Panel();
-            this.button15 = new System.Windows.Forms.Button();
-            this.button13 = new System.Windows.Forms.Button();
+            this.button16 = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
-            this.button10 = new System.Windows.Forms.Button();
-            this.button9 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -73,7 +67,6 @@ namespace BirdCommand
             this.trafoRunner = new System.ComponentModel.BackgroundWorker();
             this.designer_board = new Dalssoft.DiagramNet.Designer();
             this.designer_trafo = new Dalssoft.DiagramNet.Designer();
-            this.button16 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
             this.panel6.SuspendLayout();
@@ -153,28 +146,6 @@ namespace BirdCommand
             this.button6.Text = "Turn Left";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
-            // 
-            // button12
-            // 
-            this.button12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button12.Location = new System.Drawing.Point(463, 51);
-            this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(239, 23);
-            this.button12.TabIndex = 19;
-            this.button12.Text = "Does selected rule pattern exist in the model?";
-            this.button12.UseVisualStyleBackColor = true;
-            this.button12.Click += new System.EventHandler(this.button12_Click);
-            // 
-            // button14
-            // 
-            this.button14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button14.Location = new System.Drawing.Point(418, 97);
-            this.button14.Name = "button14";
-            this.button14.Size = new System.Drawing.Size(134, 23);
-            this.button14.TabIndex = 21;
-            this.button14.Text = "Identify Rule Type";
-            this.button14.UseVisualStyleBackColor = true;
-            this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
             // pictureBox1
             // 
@@ -308,12 +279,7 @@ namespace BirdCommand
             | System.Windows.Forms.AnchorStyles.Right)));
             this.debugPanel.BackColor = System.Drawing.Color.Salmon;
             this.debugPanel.Controls.Add(this.button16);
-            this.debugPanel.Controls.Add(this.button15);
-            this.debugPanel.Controls.Add(this.button13);
             this.debugPanel.Controls.Add(this.button11);
-            this.debugPanel.Controls.Add(this.button10);
-            this.debugPanel.Controls.Add(this.button9);
-            this.debugPanel.Controls.Add(this.button8);
             this.debugPanel.Controls.Add(this.button7);
             this.debugPanel.Controls.Add(this.label3);
             this.debugPanel.Controls.Add(this.button1);
@@ -322,38 +288,25 @@ namespace BirdCommand
             this.debugPanel.Controls.Add(this.button4);
             this.debugPanel.Controls.Add(this.button5);
             this.debugPanel.Controls.Add(this.button6);
-            this.debugPanel.Controls.Add(this.button14);
-            this.debugPanel.Controls.Add(this.button12);
             this.debugPanel.Location = new System.Drawing.Point(16, 693);
             this.debugPanel.Name = "debugPanel";
             this.debugPanel.Size = new System.Drawing.Size(1325, 150);
             this.debugPanel.TabIndex = 30;
             this.debugPanel.Visible = false;
             // 
-            // button15
+            // button16
             // 
-            this.button15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button15.Location = new System.Drawing.Point(570, 97);
-            this.button15.Name = "button15";
-            this.button15.Size = new System.Drawing.Size(134, 23);
-            this.button15.TabIndex = 33;
-            this.button15.Text = "Rotate 90 Clockwise";
-            this.button15.UseVisualStyleBackColor = true;
-            this.button15.Click += new System.EventHandler(this.button15_Click);
-            // 
-            // button13
-            // 
-            this.button13.Location = new System.Drawing.Point(902, 51);
-            this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(109, 23);
-            this.button13.TabIndex = 32;
-            this.button13.Text = "PY: find difference";
-            this.button13.UseVisualStyleBackColor = true;
-            this.button13.Click += new System.EventHandler(this.button13_Click);
+            this.button16.Location = new System.Drawing.Point(1165, 50);
+            this.button16.Name = "button16";
+            this.button16.Size = new System.Drawing.Size(105, 23);
+            this.button16.TabIndex = 34;
+            this.button16.Text = "PY: update model";
+            this.button16.UseVisualStyleBackColor = true;
+            this.button16.Click += new System.EventHandler(this.button16_Click);
             // 
             // button11
             // 
-            this.button11.Location = new System.Drawing.Point(1042, 97);
+            this.button11.Location = new System.Drawing.Point(479, 109);
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(115, 23);
             this.button11.TabIndex = 31;
@@ -361,40 +314,10 @@ namespace BirdCommand
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
-            // button10
-            // 
-            this.button10.Location = new System.Drawing.Point(882, 97);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(111, 23);
-            this.button10.TabIndex = 30;
-            this.button10.Text = "Show RHS Graph";
-            this.button10.UseVisualStyleBackColor = true;
-            this.button10.Click += new System.EventHandler(this.button10_Click);
-            // 
-            // button9
-            // 
-            this.button9.Location = new System.Drawing.Point(754, 97);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(122, 23);
-            this.button9.TabIndex = 29;
-            this.button9.Text = "Show LHS Graph";
-            this.button9.UseVisualStyleBackColor = true;
-            this.button9.Click += new System.EventHandler(this.button9_Click);
-            // 
-            // button8
-            // 
-            this.button8.Location = new System.Drawing.Point(1033, 51);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(105, 23);
-            this.button8.TabIndex = 28;
-            this.button8.Text = "PY: find pattern";
-            this.button8.UseVisualStyleBackColor = true;
-            this.button8.Click += new System.EventHandler(this.button8_Click);
-            // 
             // button7
             // 
             this.button7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button7.Location = new System.Drawing.Point(721, 50);
+            this.button7.Location = new System.Drawing.Point(479, 50);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(139, 23);
             this.button7.TabIndex = 27;
@@ -577,16 +500,6 @@ namespace BirdCommand
             this.designer_trafo.Size = new System.Drawing.Size(697, 705);
             this.designer_trafo.TabIndex = 11;
             // 
-            // button16
-            // 
-            this.button16.Location = new System.Drawing.Point(1165, 50);
-            this.button16.Name = "button16";
-            this.button16.Size = new System.Drawing.Size(105, 23);
-            this.button16.TabIndex = 34;
-            this.button16.Text = "PY: update model";
-            this.button16.UseVisualStyleBackColor = true;
-            this.button16.Click += new System.EventHandler(this.button16_Click);
-            // 
             // BirdCommandMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -636,8 +549,6 @@ namespace BirdCommand
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button6;
         private Dalssoft.DiagramNet.Designer designer_trafo;
-        private System.Windows.Forms.Button button12;
-        private System.Windows.Forms.Button button14;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label1;
@@ -664,12 +575,7 @@ namespace BirdCommand
         private System.ComponentModel.BackgroundWorker trafoRunner;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button duplicateButton;
-        private System.Windows.Forms.Button button8;
-        private System.Windows.Forms.Button button9;
-        private System.Windows.Forms.Button button10;
         private System.Windows.Forms.Button button11;
-        private System.Windows.Forms.Button button13;
-        private System.Windows.Forms.Button button15;
         private System.Windows.Forms.Button button16;
     }
 }

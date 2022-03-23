@@ -260,20 +260,6 @@ namespace BirdCommand
             return;
         }
 
-        void MoveRuleAndItsContents(RuleCell rule, int newX, int newY)
-        {
-            var ruleStarterPosition = rule.Location;
-
-            var ruleContent = DesignerUtil.FindElementsWithin(designer_trafo, rule);
-            foreach (var element in ruleContent)
-            {
-                // move the contents of the rule as well
-                var differenceX = Math.Abs(element.Location.X - ruleStarterPosition.X);
-                var differenceY = Math.Abs(element.Location.Y - ruleStarterPosition.Y);
-                element.Location = new Point(newX + differenceX, newY + differenceY);
-            }
-        }
-
         private void Designer_trafo_ElementMouseUp(object sender, ElementMouseEventArgs e)
         {
             theSnapCell.Visible = false;
@@ -287,7 +273,7 @@ namespace BirdCommand
 
             if (e.Element is RuleCell rule)
             {
-                MoveRuleAndItsContents(rule, theSnapCell.Location.X - 11, theSnapCell.Location.Y);
+                DesignerUtil.MoveRuleAndItsContents(designer_trafo, rule, theSnapCell.Location.X - 11, theSnapCell.Location.Y);
 
                 // TODO Move the rest of the rules accordingly (if we put rule within two rules)
                 foreach (var otherRule in DesignerUtil.GetTrafoElementsOutsideBlockWithoutStartOrSnapOrBlock(designer_trafo).Where(el=>el is RuleCell && el.Location.Y > rule.Location.Y))
@@ -312,54 +298,7 @@ namespace BirdCommand
             }
             else if(e.Element is EmptyCell emptyCell)
             {
-                var emptyUnderneathSouth = DesignerUtil.FindCellUnderneath(designer_trafo, emptyCell, new Point(e.X, e.Y+CELL_SIZE));
-                if (emptyUnderneathSouth != null)
-                {
-                    emptyCell.Location = new Point(emptyUnderneathSouth.Location.X, emptyUnderneathSouth.Location.Y - CELL_SIZE);
-                    return;
-                }
-                var emptyUnderneathNorth = DesignerUtil.FindCellUnderneath(designer_trafo, emptyCell, new Point(e.X, e.Y - CELL_SIZE));
-                if (emptyUnderneathNorth != null)
-                {
-                    emptyCell.Location = new Point(emptyUnderneathNorth.Location.X, emptyUnderneathNorth.Location.Y + CELL_SIZE);
-                    return;
-                }
-                var emptyUnderneathEast = DesignerUtil.FindCellUnderneath(designer_trafo, emptyCell, new Point(e.X - CELL_SIZE, e.Y ));
-                if (emptyUnderneathEast != null)
-                {
-                    emptyCell.Location = new Point(emptyUnderneathEast.Location.X + CELL_SIZE, emptyUnderneathEast.Location.Y);
-                    return;
-                }
-                var emptyUnderneathWest = DesignerUtil.FindCellUnderneath(designer_trafo, emptyCell, new Point(e.X + CELL_SIZE, e.Y));
-                if (emptyUnderneathWest != null)
-                {
-                    emptyCell.Location = new Point(emptyUnderneathWest.Location.X - CELL_SIZE, emptyUnderneathWest.Location.Y);
-                    return;
-                }
-                var emptyUnderneathTopLeft = DesignerUtil.FindCellUnderneath(designer_trafo, emptyCell, new Point(e.X - CELL_SIZE, e.Y - CELL_SIZE));
-                if (emptyUnderneathTopLeft != null)
-                {
-                    emptyCell.Location = new Point(emptyUnderneathTopLeft.Location.X + CELL_SIZE, emptyUnderneathTopLeft.Location.Y + CELL_SIZE);
-                    return;
-                }
-                var emptyUnderneathBottomLeft = DesignerUtil.FindCellUnderneath(designer_trafo, emptyCell, new Point(e.X - CELL_SIZE, e.Y + CELL_SIZE));
-                if (emptyUnderneathBottomLeft != null)
-                {
-                    emptyCell.Location = new Point(emptyUnderneathBottomLeft.Location.X + CELL_SIZE, emptyUnderneathBottomLeft.Location.Y - CELL_SIZE);
-                    return;
-                }
-                var emptyUnderneathBottomRight = DesignerUtil.FindCellUnderneath(designer_trafo, emptyCell, new Point(e.X + CELL_SIZE, e.Y + CELL_SIZE));
-                if (emptyUnderneathBottomRight != null)
-                {
-                    emptyCell.Location = new Point(emptyUnderneathBottomRight.Location.X - CELL_SIZE, emptyUnderneathBottomRight.Location.Y - CELL_SIZE);
-                    return;
-                }
-                var emptyUnderneathTopRight = DesignerUtil.FindCellUnderneath(designer_trafo, emptyCell, new Point(e.X + CELL_SIZE, e.Y - CELL_SIZE));
-                if (emptyUnderneathTopRight != null)
-                {
-                    emptyCell.Location = new Point(emptyUnderneathTopRight.Location.X - CELL_SIZE, emptyUnderneathTopRight.Location.Y + CELL_SIZE);
-                    return;
-                }
+                DesignerUtil.SnapNewEmptyCellToExistingNeighbors(designer_trafo, emptyCell, new Point(e.X, e.Y));
             }
         }
 
@@ -416,8 +355,7 @@ namespace BirdCommand
 
         void LoadLevel1()
         {
-            designer_board.Document.SelectAllElements();
-            designer_board.Document.DeleteSelectedElements();
+            designer_board.Document.Elements.Clear();
 
             LevelDesigner.Level1(designer_board);
 
@@ -427,8 +365,7 @@ namespace BirdCommand
 
         void LoadLevel2()
         {
-            designer_board.Document.SelectAllElements();
-            designer_board.Document.DeleteSelectedElements();
+            designer_board.Document.Elements.Clear();
 
             LevelDesigner.Level2(designer_board);
 
@@ -438,8 +375,7 @@ namespace BirdCommand
 
         void LoadLevel3()
         {
-            designer_board.Document.SelectAllElements();
-            designer_board.Document.DeleteSelectedElements();
+            designer_board.Document.Elements.Clear();
 
             LevelDesigner.Level3(designer_board);
 
@@ -475,45 +411,6 @@ namespace BirdCommand
         private void button6_Click(object sender, EventArgs e)
         {
             theBird.TurnLeft();
-        }
-
-        private void button12_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("Result: "+
-                TrafoUtil.DoesPatternExist(
-                    designer_board.Document.Elements.GetArray().ToList(),
-                    TrafoUtil.FindPreConditionElements(
-                        DesignerUtil.GetTrafoElementsOutsideBlockWithoutStartOrSnapOrBlock(designer_trafo),
-                        (RuleCell)DesignerUtil.GetTrafoElementsOutsideBlockWithoutStartOrSnapOrBlock(designer_trafo).Where(s=>s is RuleCell).First())));
-        }
-
-        private void button14_Click(object sender, EventArgs e)
-        {
-            var ruleType = TrafoUtil.IdentifyRuleType(
-                TrafoUtil.FindPreConditionElements(DesignerUtil.GetTrafoElementsOutsideBlockWithoutStartOrSnapOrBlock(designer_trafo),
-                    (RuleCell)designer_trafo.Document.SelectedElements.GetArray().Where(el => el is RuleCell).First()),
-                TrafoUtil.FindPostConditionElements(DesignerUtil.GetTrafoElementsOutsideBlockWithoutStartOrSnapOrBlock(designer_trafo),
-                    (RuleCell)designer_trafo.Document.SelectedElements.GetArray().Where(el => el is RuleCell).First()));
-            MessageBox.Show("RuleType: " + ruleType);
-        }
-
-        private RuleCell AddRuleToNextEmptySpot()
-        {
-            var highestY = 0;
-            foreach (var element in designer_trafo.Document.Elements)
-            {
-                if ((element is RuleCell || element is StartCell) && ((BaseElement)element).Location != ruleButtonLocation)
-                {
-                    if (((BaseElement)element).Location.Y + ((BaseElement)element).Size.Height > highestY)
-                    {
-                        highestY = ((BaseElement)element).Location.Y + ((BaseElement)element).Size.Height;
-                    }
-                }
-            }
-            var newRule = new RuleCell(231, highestY - 5);
-            designer_trafo.Document.AddElement(newRule);
-            DesignerUtil.ArrangeTheOrder(designer_trafo);
-            return newRule;
         }
 
         private void pictureBox1_DoubleClick(object sender, EventArgs e)
@@ -575,33 +472,11 @@ namespace BirdCommand
         {
             if (designer_trafo.Document.SelectedElements.GetArray().Where(el => el is RuleCell).Count() >= 1)
             {
-                CopyLHStoRHS((RuleCell)designer_trafo.Document.SelectedElements.GetArray().Where(el => el is RuleCell).First());
+                DesignerUtil.CopyLHStoRHS(designer_trafo, (RuleCell)designer_trafo.Document.SelectedElements.GetArray().Where(el => el is RuleCell).First());
             }
             else
             {
                 MessageBox.Show("Please select a rule first to copy its 'current pattern' to its 'pattern after'.", "No rule selected!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
-
-        private void CopyLHStoRHS(RuleCell rule)
-        {
-            var lhsElements = TrafoUtil.FindPreConditionElements(DesignerUtil.GetTrafoElementsOutsideBlockWithoutStartOrSnapOrBlock(designer_trafo).ToList(),
-                                rule);
-
-            foreach (var element in lhsElements)
-            {
-                if (element is EmptyCell empty)
-                {
-                    designer_trafo.Document.AddElement(new EmptyCell(empty.Location.X + 200, empty.Location.Y));
-                }
-                else if (element is BirdCell bird)
-                {
-                    designer_trafo.Document.AddElement(new BirdCell(bird.Location.X + 200, bird.Location.Y, bird.Direction));
-                }
-                else if (element is PigCell pig)
-                {
-                    designer_trafo.Document.AddElement(new PigCell(pig.Location.X + 200, pig.Location.Y));
-                }
             }
         }
 
@@ -723,75 +598,6 @@ namespace BirdCommand
             }
         }
 
-        private void button8_Click(object sender, EventArgs e)
-        {
-            if (PyUtil.IsPatternInTheModel(designer_board.Document.Elements.GetArray().ToList(),
-                TrafoUtil.FindPreConditionElements(
-                        DesignerUtil.GetTrafoElementsOutsideBlockWithoutStartOrSnapOrBlock(designer_trafo),
-                        DesignerUtil.GetTrafoElementsOutsideBlockWithoutStartOrSnapOrBlock(designer_trafo).Where(x => x is RuleCell).First())))
-            {
-                MessageBox.Show("Pattern found!", "PY", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            else
-            {
-                MessageBox.Show("Pattern not found!", "PY", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
-
-        private void button9_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show(
-                ConvertUtil.PatternToGraph(
-                    TrafoUtil.FindPreConditionElements(
-                        DesignerUtil.GetTrafoElementsOutsideBlockWithoutStartOrSnapOrBlock(designer_trafo),
-                        designer_trafo.Document.SelectedElements.GetArray().Where(x => x is RuleCell).First())).ToString(),
-                "LHS");
-        }
-
-        private void button10_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show(
-                ConvertUtil.PatternToGraph(
-                    TrafoUtil.FindPostConditionElements(
-                        DesignerUtil.GetTrafoElementsOutsideBlockWithoutStartOrSnapOrBlock(designer_trafo),
-                        designer_trafo.Document.SelectedElements.GetArray().Where(x => x is RuleCell).First())).ToString(),
-                "RHS");
-        }
-
-        private void button13_Click(object sender, EventArgs e)
-        {
-            var trafoElements = DesignerUtil.GetTrafoElementsOutsideBlockWithoutStartOrSnapOrBlock(designer_trafo);
-            var rule = trafoElements.Where(x => x is RuleCell).First();
-            var preConditionElements = TrafoUtil.FindPreConditionElements(trafoElements, rule);
-            var postConditionElements = TrafoUtil.FindPostConditionElements(trafoElements, rule);
-
-            var prePatternGraph = ConvertUtil.PatternToGraph(preConditionElements);
-            var postPatternGraph = ConvertUtil.PatternToGraph(postConditionElements);
-
-            var resultFromPY = PyUtil.CallPython("difference-finding.py",
-                prePatternGraph.NodesToPY() + "|" + prePatternGraph.EdgesToPY() + "|" + postPatternGraph.NodesToPY() + "|" + postPatternGraph.EdgesToPY());
-
-            MessageBox.Show(resultFromPY, "PY", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-
-        private void button15_Click(object sender, EventArgs e)
-        {
-            var trafoElements = DesignerUtil.GetTrafoElementsOutsideBlockWithoutStartOrSnapOrBlock(designer_trafo);
-            var rule = trafoElements.Where(x => x is RuleCell).First();
-            var preConditionElements = TrafoUtil.FindPreConditionElements(trafoElements, rule);
-            var rotated = PatternUtil.Rotate90Clockwise(preConditionElements);
-            var lowestX = preConditionElements.Select(el => el.Location.X).Min();
-            var lowestY = preConditionElements.Select(el => el.Location.Y).Min();
-            designer_trafo.Document.ClearSelection();
-            designer_trafo.Document.SelectElements(preConditionElements.ToArray());
-            designer_trafo.Document.DeleteSelectedElements();
-            foreach (var item in rotated)
-            {
-                designer_trafo.Document.AddElement(item);
-                item.Location = new Point(item.Location.X + lowestX, item.Location.Y + lowestY);
-            }
-        }
-
         private void button16_Click(object sender, EventArgs e)
         {
             var trafoElements = DesignerUtil.GetTrafoElementsOutsideBlockWithoutStartOrSnapOrBlock(designer_trafo);
@@ -822,7 +628,7 @@ namespace BirdCommand
 
         private void button7_Click(object sender, EventArgs e)
         {
-            RuleCell firstRule = AddRuleToNextEmptySpot();
+            RuleCell firstRule = DesignerUtil.AddRuleToNextEmptySpot(designer_trafo, ruleButtonLocation);
             firstRule.IncreaseRuleCount();
             designer_trafo.Document.AddElement(new EmptyCell(firstRule.Location.X + 50, firstRule.Location.Y + 50));
             designer_trafo.Document.AddElement(new EmptyCell(firstRule.Location.X + 100, firstRule.Location.Y + 50));
@@ -831,11 +637,11 @@ namespace BirdCommand
             designer_trafo.Document.AddElement(new EmptyCell(firstRule.Location.X + 300, firstRule.Location.Y + 50));
             designer_trafo.Document.AddElement(new BirdCell(firstRule.Location.X + 300, firstRule.Location.Y + 50, Direction.Right));
 
-            RuleCell secondRule = AddRuleToNextEmptySpot();
+            RuleCell secondRule = DesignerUtil.AddRuleToNextEmptySpot(designer_trafo, ruleButtonLocation);
             designer_trafo.Document.AddElement(new BirdCell(secondRule.Location.X + 50, secondRule.Location.Y + 50, Direction.Right));
             designer_trafo.Document.AddElement(new BirdCell(secondRule.Location.X + 250, secondRule.Location.Y + 50, Direction.Down));
 
-            RuleCell thirdRule = AddRuleToNextEmptySpot();
+            RuleCell thirdRule = DesignerUtil.AddRuleToNextEmptySpot(designer_trafo, ruleButtonLocation);
             designer_trafo.Document.AddElement(new EmptyCell(thirdRule.Location.X + 50, thirdRule.Location.Y + 50));
             designer_trafo.Document.AddElement(new EmptyCell(thirdRule.Location.X + 50, thirdRule.Location.Y + 100));
             designer_trafo.Document.AddElement(new BirdCell(thirdRule.Location.X + 50, thirdRule.Location.Y + 50, Direction.Down));
