@@ -48,7 +48,6 @@ namespace BirdCommand
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.debugPanel = new System.Windows.Forms.Panel();
-            this.button16 = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
@@ -203,7 +202,8 @@ namespace BirdCommand
             this.maze3button.Size = new System.Drawing.Size(48, 43);
             this.maze3button.TabIndex = 2;
             this.maze3button.TabStop = false;
-            this.maze3button.Click += new System.EventHandler(this.maze3button_Click);
+            this.maze3button.Tag = "3";
+            this.maze3button.Click += new System.EventHandler(this.mazeButtons_Click);
             this.maze3button.MouseEnter += new System.EventHandler(this.maze3button_MouseEnter);
             this.maze3button.MouseLeave += new System.EventHandler(this.maze3button_MouseLeave);
             // 
@@ -217,7 +217,8 @@ namespace BirdCommand
             this.maze2button.Size = new System.Drawing.Size(48, 43);
             this.maze2button.TabIndex = 1;
             this.maze2button.TabStop = false;
-            this.maze2button.Click += new System.EventHandler(this.maze2button_Click);
+            this.maze2button.Tag = "2";
+            this.maze2button.Click += new System.EventHandler(this.mazeButtons_Click);
             this.maze2button.MouseEnter += new System.EventHandler(this.maze2button_MouseEnter);
             this.maze2button.MouseLeave += new System.EventHandler(this.maze2button_MouseLeave);
             // 
@@ -231,7 +232,8 @@ namespace BirdCommand
             this.maze1button.Size = new System.Drawing.Size(48, 43);
             this.maze1button.TabIndex = 0;
             this.maze1button.TabStop = false;
-            this.maze1button.Click += new System.EventHandler(this.maze1button_Click);
+            this.maze1button.Tag = "1";
+            this.maze1button.Click += new System.EventHandler(this.mazeButtons_Click);
             this.maze1button.MouseEnter += new System.EventHandler(this.maze1button_MouseEnter);
             this.maze1button.MouseLeave += new System.EventHandler(this.maze1button_MouseLeave);
             // 
@@ -278,7 +280,6 @@ namespace BirdCommand
             this.debugPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.debugPanel.BackColor = System.Drawing.Color.Salmon;
-            this.debugPanel.Controls.Add(this.button16);
             this.debugPanel.Controls.Add(this.button11);
             this.debugPanel.Controls.Add(this.button7);
             this.debugPanel.Controls.Add(this.label3);
@@ -293,16 +294,6 @@ namespace BirdCommand
             this.debugPanel.Size = new System.Drawing.Size(1325, 150);
             this.debugPanel.TabIndex = 30;
             this.debugPanel.Visible = false;
-            // 
-            // button16
-            // 
-            this.button16.Location = new System.Drawing.Point(1165, 50);
-            this.button16.Name = "button16";
-            this.button16.Size = new System.Drawing.Size(105, 23);
-            this.button16.TabIndex = 34;
-            this.button16.Text = "PY: update model";
-            this.button16.UseVisualStyleBackColor = true;
-            this.button16.Click += new System.EventHandler(this.button16_Click);
             // 
             // button11
             // 
@@ -576,7 +567,6 @@ namespace BirdCommand
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button duplicateButton;
         private System.Windows.Forms.Button button11;
-        private System.Windows.Forms.Button button16;
     }
 }
 

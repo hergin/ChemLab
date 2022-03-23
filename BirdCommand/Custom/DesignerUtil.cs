@@ -32,16 +32,16 @@ namespace BirdCommand.Custom
             }
         }
 
-        internal static RuleCell AddRuleToNextEmptySpot(Designer designer, Point ruleButtonLocation)
+        internal static RuleCell AddRuleToNextEmptySpot(Designer designer)
         {
             var highestY = 0;
-            foreach (var element in designer.Document.Elements)
+            foreach (var element in GetTrafoElementsOutsideBlockWithoutSnapOrBlock(designer))
             {
-                if ((element is RuleCell || element is StartCell) && ((BaseElement)element).Location != ruleButtonLocation)
+                if (element is RuleCell || element is StartCell)
                 {
-                    if (((BaseElement)element).Location.Y + ((BaseElement)element).Size.Height > highestY)
+                    if (element.Location.Y + element.Size.Height > highestY)
                     {
-                        highestY = ((BaseElement)element).Location.Y + ((BaseElement)element).Size.Height;
+                        highestY = element.Location.Y + element.Size.Height;
                     }
                 }
             }
@@ -280,6 +280,30 @@ namespace BirdCommand.Custom
                 emptyCell.Location = new Point(emptyUnderneathTopRight.Location.X - BirdCommandMain.CELL_SIZE, emptyUnderneathTopRight.Location.Y + BirdCommandMain.CELL_SIZE);
                 return;
             }
+        }
+
+        internal static void SolveMaze3(Designer designer)
+        {
+            RuleCell firstRule = DesignerUtil.AddRuleToNextEmptySpot(designer);
+            firstRule.IncreaseRuleCount();
+            designer.Document.AddElement(new EmptyCell(firstRule.Location.X + 50, firstRule.Location.Y + 50));
+            designer.Document.AddElement(new EmptyCell(firstRule.Location.X + 100, firstRule.Location.Y + 50));
+            designer.Document.AddElement(new BirdCell(firstRule.Location.X + 50, firstRule.Location.Y + 50, Direction.Right));
+            designer.Document.AddElement(new EmptyCell(firstRule.Location.X + 250, firstRule.Location.Y + 50));
+            designer.Document.AddElement(new EmptyCell(firstRule.Location.X + 300, firstRule.Location.Y + 50));
+            designer.Document.AddElement(new BirdCell(firstRule.Location.X + 300, firstRule.Location.Y + 50, Direction.Right));
+
+            RuleCell secondRule = DesignerUtil.AddRuleToNextEmptySpot(designer);
+            designer.Document.AddElement(new BirdCell(secondRule.Location.X + 50, secondRule.Location.Y + 50, Direction.Right));
+            designer.Document.AddElement(new BirdCell(secondRule.Location.X + 250, secondRule.Location.Y + 50, Direction.Down));
+
+            RuleCell thirdRule = DesignerUtil.AddRuleToNextEmptySpot(designer);
+            designer.Document.AddElement(new EmptyCell(thirdRule.Location.X + 50, thirdRule.Location.Y + 50));
+            designer.Document.AddElement(new EmptyCell(thirdRule.Location.X + 50, thirdRule.Location.Y + 100));
+            designer.Document.AddElement(new BirdCell(thirdRule.Location.X + 50, thirdRule.Location.Y + 50, Direction.Down));
+            designer.Document.AddElement(new EmptyCell(thirdRule.Location.X + 250, thirdRule.Location.Y + 50));
+            designer.Document.AddElement(new EmptyCell(thirdRule.Location.X + 250, thirdRule.Location.Y + 100));
+            designer.Document.AddElement(new BirdCell(thirdRule.Location.X + 250, thirdRule.Location.Y + 100, Direction.Down));
         }
     }
 }

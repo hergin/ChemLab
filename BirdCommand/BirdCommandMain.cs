@@ -228,6 +228,7 @@ namespace BirdCommand
                             cloneOfPreConditionElements))
                         {
                             var changes = PyUtil.FindChangesToTheBirdInTheRule(cloneOfPreConditionElements, cloneOfPostConditionElements);
+                            // TODO if there are no changes (patterns are same), there is an exception from c# parsing py response. Handle it gracefully.
                             trafoRunner.ReportProgress((int)TrafoProgress.UpdateBird, changes);
 
                             Thread.Sleep(TimeoutBetweenRuleExecution);
@@ -353,36 +354,6 @@ namespace BirdCommand
             }
         }
 
-        void LoadLevel1()
-        {
-            designer_board.Document.Elements.Clear();
-
-            LevelDesigner.Level1(designer_board);
-
-            theBird = (BirdCell)designer_board.Document.Elements.GetArray().Where(e => e is BirdCell).First();
-            thePig= (PigCell)designer_board.Document.Elements.GetArray().Where(e => e is PigCell).First();
-        }
-
-        void LoadLevel2()
-        {
-            designer_board.Document.Elements.Clear();
-
-            LevelDesigner.Level2(designer_board);
-
-            theBird = (BirdCell)designer_board.Document.Elements.GetArray().Where(e => e is BirdCell).First();
-            thePig = (PigCell)designer_board.Document.Elements.GetArray().Where(e => e is PigCell).First();
-        }
-
-        void LoadLevel3()
-        {
-            designer_board.Document.Elements.Clear();
-
-            LevelDesigner.Level3(designer_board);
-
-            theBird = (BirdCell)designer_board.Document.Elements.GetArray().Where(e => e is BirdCell).First();
-            thePig = (PigCell)designer_board.Document.Elements.GetArray().Where(e => e is PigCell).First();
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
             theBird.MoveDown();
@@ -495,11 +466,11 @@ namespace BirdCommand
             DialogResult dialogResult = MessageBox.Show("This will reset the puzzle to its start state and delete all the blocks you've added or changed.", "Are you sure you want to start over?", MessageBoxButtons.YesNo,MessageBoxIcon.Question);
             if (dialogResult == DialogResult.Yes)
             {
-                startOver();
+                StartOver();
             }
         }
 
-        private void startOver()
+        private void StartOver()
         {
             Reset();
             foreach (var element in DesignerUtil.GetTrafoElementsOutsideBlockWithoutStartOrSnapOrBlock(designer_trafo))
@@ -580,12 +551,6 @@ namespace BirdCommand
             maze3button.BackgroundImage = Resources.maze3;
         }
 
-        private void maze1button_Click(object sender, EventArgs e)
-        {
-            startOver();
-            LoadLevel1();
-        }
-
         private void duplicateButton_Click(object sender, EventArgs e)
         {
             if (designer_trafo.Document.SelectedElements.GetArray().Where(el => el is RuleCell).Count() >= 1)
@@ -596,17 +561,6 @@ namespace BirdCommand
             {
                 MessageBox.Show("Please select a rule first to duplicate.", "No rule selected!", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-        }
-
-        private void button16_Click(object sender, EventArgs e)
-        {
-            var trafoElements = DesignerUtil.GetTrafoElementsOutsideBlockWithoutStartOrSnapOrBlock(designer_trafo);
-            var rule = trafoElements.Where(x => x is RuleCell).First() as RuleCell;
-
-            var result = PyUtil.FindChangesToTheBirdInTheRule(trafoElements, rule);
-
-            theBird.Location = new Point(theBird.Location.X + result.Item1.X, theBird.Location.Y + result.Item1.Y);
-            theBird.Direction = result.Item2;
         }
 
         private void button11_Click(object sender, EventArgs ev)
@@ -620,40 +574,22 @@ namespace BirdCommand
             thePig = (PigCell)designer_board.Document.Elements.GetArray().Where(e => e is PigCell).First();
         }
 
-        private void maze2button_Click(object sender, EventArgs e)
+        private void mazeButtons_Click(object sender, EventArgs e)
         {
-            startOver();
-            LoadLevel2();
+            StartOver();
+
+            designer_board.Document.Elements.Clear();
+
+            var resourceName = "hoc" + (sender as PictureBox).Tag.ToString();
+            LevelDesigner.GenericLevelDesign(designer_board, Resources.ResourceManager.GetString(resourceName));
+
+            theBird = (BirdCell)designer_board.Document.Elements.GetArray().Where(el => el is BirdCell).First();
+            thePig = (PigCell)designer_board.Document.Elements.GetArray().Where(el => el is PigCell).First();
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
-            RuleCell firstRule = DesignerUtil.AddRuleToNextEmptySpot(designer_trafo, ruleButtonLocation);
-            firstRule.IncreaseRuleCount();
-            designer_trafo.Document.AddElement(new EmptyCell(firstRule.Location.X + 50, firstRule.Location.Y + 50));
-            designer_trafo.Document.AddElement(new EmptyCell(firstRule.Location.X + 100, firstRule.Location.Y + 50));
-            designer_trafo.Document.AddElement(new BirdCell(firstRule.Location.X + 50, firstRule.Location.Y + 50,Direction.Right));
-            designer_trafo.Document.AddElement(new EmptyCell(firstRule.Location.X + 250, firstRule.Location.Y + 50));
-            designer_trafo.Document.AddElement(new EmptyCell(firstRule.Location.X + 300, firstRule.Location.Y + 50));
-            designer_trafo.Document.AddElement(new BirdCell(firstRule.Location.X + 300, firstRule.Location.Y + 50, Direction.Right));
-
-            RuleCell secondRule = DesignerUtil.AddRuleToNextEmptySpot(designer_trafo, ruleButtonLocation);
-            designer_trafo.Document.AddElement(new BirdCell(secondRule.Location.X + 50, secondRule.Location.Y + 50, Direction.Right));
-            designer_trafo.Document.AddElement(new BirdCell(secondRule.Location.X + 250, secondRule.Location.Y + 50, Direction.Down));
-
-            RuleCell thirdRule = DesignerUtil.AddRuleToNextEmptySpot(designer_trafo, ruleButtonLocation);
-            designer_trafo.Document.AddElement(new EmptyCell(thirdRule.Location.X + 50, thirdRule.Location.Y + 50));
-            designer_trafo.Document.AddElement(new EmptyCell(thirdRule.Location.X + 50, thirdRule.Location.Y + 100));
-            designer_trafo.Document.AddElement(new BirdCell(thirdRule.Location.X + 50, thirdRule.Location.Y + 50, Direction.Down));
-            designer_trafo.Document.AddElement(new EmptyCell(thirdRule.Location.X + 250, thirdRule.Location.Y + 50));
-            designer_trafo.Document.AddElement(new EmptyCell(thirdRule.Location.X + 250, thirdRule.Location.Y + 100));
-            designer_trafo.Document.AddElement(new BirdCell(thirdRule.Location.X + 250, thirdRule.Location.Y + 100, Direction.Down));
-        }
-
-        private void maze3button_Click(object sender, EventArgs e)
-        {
-            startOver();
-            LoadLevel3();
+            DesignerUtil.SolveMaze3(designer_trafo);
         }
     }
 }
