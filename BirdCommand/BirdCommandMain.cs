@@ -52,6 +52,7 @@ namespace BirdCommand
             designer_trafo.ElementMouseDown += Designer_trafo_ElementMouseDown;
             designer_trafo.Resize += Designer_trafo_Resize;
             designer_trafo.MouseMove += Designer_trafo_MouseMove;
+            designer_trafo.MouseDoubleClick += Designer_trafo_MouseDoubleClick;
 
             toolTip1.SetToolTip(turnLeftButton, "Turn selected bird left");
             toolTip1.SetToolTip(turnRightButton, "Turn selected bird right");
@@ -91,6 +92,14 @@ namespace BirdCommand
             trafoRunner.ProgressChanged += TrafoRunner_ProgressChanged;
 
             // LoadLevel1();
+        }
+
+        private void Designer_trafo_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if(designer_trafo.Document.FindElement(new Point(e.X, e.Y)) is BirdCell bird)
+            {
+                bird.TurnLeft();
+            }
         }
 
         private void Designer_trafo_ElementMouseDown(object sender, ElementMouseEventArgs e)
