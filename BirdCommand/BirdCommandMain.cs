@@ -25,7 +25,7 @@ namespace BirdCommand
     // TODO allow only patterns with same number of empty cells FOR NOW
     public partial class BirdCommandMain : Form
     {
-        private const int TimeoutBetweenRuleExecution = 100;
+        private const int TimeoutBetweenRuleExecution = 250;
         public static int CELL_SIZE = 50;
         Point birdButtonLocation = new Point(30, 30),
             emptyCellButtonLocation = new Point(110, 30),
@@ -212,15 +212,18 @@ namespace BirdCommand
                         var cloneOfPreConditionElements = PatternUtil.Clone(preConditionElements);
                         var cloneOfPostConditionElements = PatternUtil.Clone(postConditionElements);
 
-                        // we want to either match the pattern
+                        var birdInPre = cloneOfPreConditionElements.Where(el=>el is BirdCell).First() as BirdCell;
+
+                        // We rotate the pattern until the bird direction in the pattern matches to the bird direction in the model (or do it 3 times because it becomes the original pattern after that)
+                        // because if it doesn't match, the rest of the pattern doesn't make sense to try at all
                         int counter = 0;
-                        while (!PyUtil.IsPatternInTheModel(designer_board.Document.Elements.GetArray().ToList(),
-                            cloneOfPreConditionElements) && counter++ < 4) 
+                        while (theBird.Direction != birdInPre.Direction && counter++ < 4)
                         {
                             cloneOfPreConditionElements = PatternUtil.Rotate90Clockwise(cloneOfPreConditionElements);
                             cloneOfPostConditionElements=PatternUtil.Rotate90Clockwise(cloneOfPostConditionElements);
+                            birdInPre = cloneOfPreConditionElements.Where(el => el is BirdCell).First() as BirdCell;
                         }
-
+                        
                         if (PyUtil.IsPatternInTheModel(designer_board.Document.Elements.GetArray().ToList(),
                             cloneOfPreConditionElements))
                         {
