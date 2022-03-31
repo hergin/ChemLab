@@ -23,13 +23,14 @@ namespace BirdCommand
     //                                                             E
     //                                                              E
     // TODO allow only patterns with same number of empty cells FOR NOW
+    // TODO solve the first one by using the whole pattern and it looks like failing sometime.
     public partial class BirdCommandMain : Form
     {
         private const int TimeoutBetweenRuleExecution = 250;
         public static int CELL_SIZE = 50;
         Point birdButtonLocation = new Point(30, 30),
             emptyCellButtonLocation = new Point(110, 30),
-            pigButtonLocation = new Point(30, 120),
+            pigButtonLocation = new Point(70, 120),
             ruleButtonLocation = new Point(25,220);
         BirdCell theBird;
         PigCell thePig;
@@ -92,7 +93,8 @@ namespace BirdCommand
             trafoRunner.DoWork += TrafoRunner_DoWork;
             trafoRunner.ProgressChanged += TrafoRunner_ProgressChanged;
 
-            // LoadLevel1();
+            // TODO uncommenting this removes the rule button and trash button
+            //LoadLevel("1");
         }
 
         private void Designer_trafo_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -596,11 +598,16 @@ namespace BirdCommand
 
         private void mazeButtons_Click(object sender, EventArgs e)
         {
+            LoadLevel((sender as PictureBox).Tag.ToString());
+        }
+
+        private void LoadLevel(String level)
+        {
             StartOver();
 
             designer_board.Document.Elements.Clear();
 
-            var resourceName = "hoc" + (sender as PictureBox).Tag.ToString();
+            var resourceName = "hoc" + level;
             LevelDesigner.GenericLevelDesign(designer_board, Resources.ResourceManager.GetString(resourceName));
 
             theBird = (BirdCell)designer_board.Document.Elements.GetArray().Where(el => el is BirdCell).First();
