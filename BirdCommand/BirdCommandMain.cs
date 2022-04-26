@@ -514,8 +514,12 @@ namespace BirdCommand
 
         private void runButton_Click(object sender, EventArgs e)
         {
-            theStart.Highlight();
-            trafoRunner.RunWorkerAsync();
+            if (!trafoRunner.IsBusy)
+            {
+                Reset();
+                theStart.Highlight();
+                trafoRunner.RunWorkerAsync();
+            }
         }
 
         private void resetButton_Click_1(object sender, EventArgs e)
