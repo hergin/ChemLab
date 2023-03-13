@@ -65,6 +65,8 @@
     <Compile Include="Custom\SnapCell.cs" />
     <Compile Include="Custom\RuleCell.cs" />
     <Compile Include="Custom\StartCell.cs" />
+	<Compile Include="Custom\Ion.cs" />
+	<Compile Include="Custom\IonCell.cs" />
     <Compile Include="Custom\EmptyCell.cs" />
     <Compile Include="Custom\LevelDesigner.cs" />
     <Compile Include="Custom\PigCell.cs" />

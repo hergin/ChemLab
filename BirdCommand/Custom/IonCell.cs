@@ -10,42 +10,35 @@ using System.Threading.Tasks;
 namespace BirdCommand.Custom
 {
     [Serializable]
-    public class IonCell : RectangleElement
+    public class IonCell : ElipseElement
     {
-        private string name;
-        private string symbol;
-        private int charge
+        [NonSerialized]
+        List<Ion> ions;
+
+        public IonCell(int x, int y) : base(x, y, BirdCommandMain.CELL_SIZE, BirdCommandMain.CELL_SIZE)
         {
-            get => charge;
-            set
+            FillColor1 = Color.Blue;
+            FillColor2 = Color.LightBlue;
+            ions = new List<Ion>();
+        }
+
+        public void AddIon(Ion ion)
+        {
+            this.ions.Add(ion);
+            OnAppearanceChanged(new EventArgs());
+        }
+
+        internal override void Draw(Graphics g)
+        {
+            base.Draw(g);
+
+            Pen p;
+            p = new Pen(borderColor, borderWidth);
+
+            foreach (var ion in ions)
             {
-                diff = value;
-                charge = charge + diff
-                }
+                g.DrawEllipse(p, new Rectangle(Location.X + 50, location.Y, 10, 10));
             }
         }
-
-        public IonCell(string name, string symbol,int x, int y) : base(x, y, BirdCommandMain.CELL_SIZE, BirdCommandMain.CELL_SIZE)
-        {
-        name = name;
-        symbol = symbol;
-        Background = Resources.BirdDown;
-            FillColor1 = Color.Black;
-            FillColor2 = Color.Transparent;
-            birthPosition = new Point(x, y);
-        }
-
-        public BirdCell(int x, int y, Direction direction) : base(x, y, BirdCommandMain.CELL_SIZE, BirdCommandMain.CELL_SIZE)
-        {
-            FillColor1 = Color.Transparent;
-            FillColor2 = Color.Transparent;
-            birthPosition = new Point(x, y);
-        }
-
-        public void Reset()
-        {
-            Location = birthPosition;
-        }
-
     }
 }

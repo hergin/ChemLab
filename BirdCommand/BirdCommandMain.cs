@@ -83,8 +83,17 @@ namespace BirdCommand
             var addPigButton = new PigCell(pigButtonLocation.X, pigButtonLocation.Y);
             designer_trafo.Document.AddElement(addPigButton);
 
+            var ioncell = new IonCell(200, 200);
+            ioncell.AddIon(new Ion { Name = "Na", Charge = 2 });
+            designer_trafo.Document.AddElement(ioncell);
+
+            var ioncell2 = new IonCell(250, 250);
+            ioncell.AddIon(new Ion { Name = "Na", Charge = 2 });
+            designer_trafo.Document.AddElement(ioncell2);
+
             theTrashCell = new TrashCell();
             designer_trafo.Document.AddElement(theTrashCell);
+
 
             theSnapCell = new SnapCell(0, 0);
             designer_trafo.Document.AddElement(theSnapCell);
