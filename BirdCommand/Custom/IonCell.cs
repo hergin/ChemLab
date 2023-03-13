@@ -21,6 +21,7 @@ namespace BirdCommand.Custom
             FillColor2 = Color.LightBlue;
             ions = new List<Ion>();
         }
+        
 
         public void AddIon(Ion ion)
         {
@@ -35,10 +36,33 @@ namespace BirdCommand.Custom
             Pen p;
             p = new Pen(borderColor, borderWidth);
 
-            foreach (var ion in ions)
+            if(this.GetTotalCharge() != 0)
             {
-                g.DrawEllipse(p, new Rectangle(Location.X + 50, location.Y, 10, 10));
+                g.DrawEllipse(p, new Rectangle(Location.X + 50, location.Y, 20, 20));
+                g.DrawString(this.GetChargeString(), new Font("Trebuchet MS", 8), Brushes.Black, new PointF(Location.X + 53, Location.Y ));
             }
         }
+       
+        private string GetChargeString()
+        {
+            int charge = this.GetTotalCharge();
+            if(charge < 0)
+            {
+                return charge.ToString();
+            }
+            return "+" + charge.ToString();
+        }
+
+        private int GetTotalCharge()
+        {
+            int totalCharge = 0;
+            foreach (var ion in ions)
+            {
+                totalCharge += ion.Charge;
+            }
+            return totalCharge;
+        }
     }
+
+
 }

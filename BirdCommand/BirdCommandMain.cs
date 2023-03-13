@@ -28,8 +28,8 @@ namespace BirdCommand
     {
         private const int TimeoutBetweenRuleExecution = 250;
         public static int CELL_SIZE = 50;
-        Point birdButtonLocation = new Point(30, 30),
-            emptyCellButtonLocation = new Point(110, 30),
+        Point ion1Location = new Point(30, 30),
+            ion2Location = new Point(110, 30),
             pigButtonLocation = new Point(70, 120),
             ruleButtonLocation = new Point(25,220);
         BirdCell theBird;
@@ -74,21 +74,17 @@ namespace BirdCommand
             blockPanel.FillColor2 = Color.FromArgb(228, 228, 228);
             designer_trafo.Document.AddElement(blockPanel);
 
-            var addBirdButton = new BirdCell(birdButtonLocation.X, birdButtonLocation.Y);
-            designer_trafo.Document.AddElement(addBirdButton);
-            var addCellButton = new EmptyCell(emptyCellButtonLocation.X, emptyCellButtonLocation.Y);
-            designer_trafo.Document.AddElement(addCellButton);
             var addRuleButtonOnCanvas = new RuleCell(ruleButtonLocation.X, ruleButtonLocation.Y, 140, 70);
             designer_trafo.Document.AddElement(addRuleButtonOnCanvas);
             var addPigButton = new PigCell(pigButtonLocation.X, pigButtonLocation.Y);
             designer_trafo.Document.AddElement(addPigButton);
 
-            var ioncell = new IonCell(200, 200);
-            ioncell.AddIon(new Ion { Name = "Na", Charge = 2 });
+            var ioncell = new IonCell(ion1Location.X, ion1Location.Y);
+            ioncell.AddIon(new Ion { Name = "Na", Charge = -2 });
             designer_trafo.Document.AddElement(ioncell);
 
-            var ioncell2 = new IonCell(250, 250);
-            ioncell.AddIon(new Ion { Name = "Na", Charge = 2 });
+            var ioncell2 = new IonCell(ion2Location.X, ion2Location.Y);
+            ioncell2.AddIon(new Ion { Name = "Cl", Charge = 2 });
             designer_trafo.Document.AddElement(ioncell2);
 
             theTrashCell = new TrashCell();
@@ -147,21 +143,21 @@ namespace BirdCommand
         {
             // TODO if element is not dragged to the canvas, delete the newly created one or the old one! It sure has duplication on the button area.
             if (designer_trafo.Document.FindElement(e.Location) != null
-                && designer_trafo.Document.FindElement(e.Location) is BirdCell bird
-                && bird.Location == birdButtonLocation)
+                && designer_trafo.Document.FindElement(e.Location) is IonCell ion1
+                && ion1.Location == ion1Location)
             {
-                var newBird = new BirdCell(birdButtonLocation.X, birdButtonLocation.Y);
-                designer_trafo.Document.AddElement(newBird);
-                designer_trafo.Document.SendToBackElement(newBird);
+                var newIonCell = new IonCell(ion1Location.X, ion1Location.Y);
+                designer_trafo.Document.AddElement(newIonCell);
+                designer_trafo.Document.SendToBackElement(newIonCell);
                 designer_trafo.Document.SendToBackElement(blockPanel);
             }
             else if (designer_trafo.Document.FindElement(e.Location) != null
-              && designer_trafo.Document.FindElement(e.Location) is EmptyCell empty
-              && empty.Location == emptyCellButtonLocation)
+              && designer_trafo.Document.FindElement(e.Location) is IonCell ion2
+              && ion2.Location == ion2Location)
             {
-                var newEmptyCell = new EmptyCell(emptyCellButtonLocation.X, emptyCellButtonLocation.Y);
-                designer_trafo.Document.AddElement(newEmptyCell);
-                designer_trafo.Document.SendToBackElement(newEmptyCell);
+                var newIonCell = new IonCell(ion2Location.X, ion2Location.Y);
+                designer_trafo.Document.AddElement(newIonCell);
+                designer_trafo.Document.SendToBackElement(newIonCell);
                 designer_trafo.Document.SendToBackElement(blockPanel);
             }
             else if (designer_trafo.Document.FindElement(e.Location) != null
