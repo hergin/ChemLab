@@ -76,11 +76,9 @@ namespace BirdCommand
 
             var addRuleButtonOnCanvas = new RuleCell(ruleButtonLocation.X, ruleButtonLocation.Y, 140, 70);
             designer_trafo.Document.AddElement(addRuleButtonOnCanvas);
-            var addPigButton = new PigCell(pigButtonLocation.X, pigButtonLocation.Y);
-            designer_trafo.Document.AddElement(addPigButton);
 
             var ioncell = new IonCell(ion1Location.X, ion1Location.Y);
-            ioncell.AddIon(new Ion { Name = "Na", Charge = -2 });
+            ioncell.AddIon(new Ion { Name = "Na", Charge = -1 });
             designer_trafo.Document.AddElement(ioncell);
 
             var ioncell2 = new IonCell(ion2Location.X, ion2Location.Y);
@@ -317,6 +315,10 @@ namespace BirdCommand
             else if(e.Element is EmptyCell emptyCell)
             {
                 DesignerUtil.SnapNewEmptyCellToExistingNeighbors(designer_trafo, emptyCell, new Point(e.X, e.Y));
+            }
+            else if(e.Element is IonCell ionCell)
+            {
+                DesignerUtil.SnapIonCellToNeighbor(designer_trafo,ionCell,new Point(e.X, e.Y));
             }
         }
 

@@ -29,6 +29,11 @@ namespace BirdCommand.Custom
             OnAppearanceChanged(new EventArgs());
         }
 
+        public List<Ion> GetIons()
+        {
+            return this.ions;
+        }
+
         internal override void Draw(Graphics g)
         {
             base.Draw(g);
@@ -63,6 +68,7 @@ namespace BirdCommand.Custom
             return totalCharge;
         }
     }
+
 
 
 }

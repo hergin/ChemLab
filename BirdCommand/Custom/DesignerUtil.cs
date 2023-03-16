@@ -176,6 +176,56 @@ namespace BirdCommand.Custom
             return null;
         }
 
+        internal static IonCell FindIonCellUnderneath(Designer designer, IonCell ionCell, Point point)
+        {
+            foreach (var element in designer.Document.Elements)
+            {
+                BaseElement casted = element as BaseElement;
+                if (casted is IonCell result && !result.Equals(ionCell)
+                    && point.Y >= casted.Location.Y && point.Y < casted.Location.Y + casted.Size.Height
+                    && point.X >= casted.Location.X && point.X < casted.Location.X + casted.Size.Width)
+                {
+                    return result;
+                }
+            }
+            return null;
+        }
+
+        internal static void SnapIonCellToNeighbor(Designer designer_trafo, IonCell ionCell, Point locationDropped)
+        {
+            var ionCellSouth = DesignerUtil.FindIonCellUnderneath(designer_trafo, ionCell, new Point(locationDropped.X, locationDropped.Y + BirdCommandMain.CELL_SIZE));
+            if (ionCellSouth != null)
+            {
+                ionCell.AddIon(ionCellSouth.GetIons()[0]);
+                ionCellSouth.Location = new Point(ionCellSouth.Location.X, ionCellSouth.Location.Y + BirdCommandMain.CELL_SIZE);
+                return;
+            }
+
+            var ionCellNorth = DesignerUtil.FindIonCellUnderneath(designer_trafo, ionCell, new Point(locationDropped.X, locationDropped.Y - BirdCommandMain.CELL_SIZE));
+            if (ionCellNorth != null)
+            {
+                ionCell.AddIon(ionCellNorth.GetIons()[0]);
+                ionCellNorth.Location = new Point(ionCellNorth.Location.X, ionCellNorth.Location.Y - BirdCommandMain.CELL_SIZE);
+                return;
+            }
+            var ionCellEast = DesignerUtil.FindIonCellUnderneath(designer_trafo, ionCell, new Point(locationDropped.X + BirdCommandMain.CELL_SIZE, locationDropped.Y));
+            if (ionCellEast != null)
+            {
+                ionCell.AddIon(ionCellEast.GetIons()[0]);
+                ionCellEast.Location = new Point(ionCellEast.Location.X + BirdCommandMain.CELL_SIZE, ionCellEast.Location.Y );
+                return;
+            }
+            var ionCellWest = DesignerUtil.FindIonCellUnderneath(designer_trafo, ionCell, new Point(locationDropped.X - BirdCommandMain.CELL_SIZE, locationDropped.Y ));
+            if (ionCellWest != null)
+            {
+                ionCell.AddIon(ionCellWest.GetIons()[0]);
+                ionCellWest.Location = new Point(ionCellWest.Location.X - BirdCommandMain.CELL_SIZE, ionCellWest.Location.Y);
+                return;
+            }
+            return;
+
+        }
+
         internal static EmptyCell FindCellUnderneath(Designer designer, Point point)
         {
             foreach (var element in designer.Document.Elements)
@@ -250,37 +300,10 @@ namespace BirdCommand.Custom
                 emptyCell.Location = new Point(emptyUnderneathEast.Location.X + BirdCommandMain.CELL_SIZE, emptyUnderneathEast.Location.Y);
                 return;
             }
-            var emptyUnderneathWest = DesignerUtil.FindCellUnderneath(designer_trafo, emptyCell, new Point(locationDropped.X + BirdCommandMain.CELL_SIZE, locationDropped.Y));
-            if (emptyUnderneathWest != null)
-            {
-                emptyCell.Location = new Point(emptyUnderneathWest.Location.X - BirdCommandMain.CELL_SIZE, emptyUnderneathWest.Location.Y);
-                return;
-            }
-            var emptyUnderneathTopLeft = DesignerUtil.FindCellUnderneath(designer_trafo, emptyCell, new Point(locationDropped.X - BirdCommandMain.CELL_SIZE, locationDropped.Y - BirdCommandMain.CELL_SIZE));
-            if (emptyUnderneathTopLeft != null)
-            {
-                emptyCell.Location = new Point(emptyUnderneathTopLeft.Location.X + BirdCommandMain.CELL_SIZE, emptyUnderneathTopLeft.Location.Y + BirdCommandMain.CELL_SIZE);
-                return;
-            }
-            var emptyUnderneathBottomLeft = DesignerUtil.FindCellUnderneath(designer_trafo, emptyCell, new Point(locationDropped.X - BirdCommandMain.CELL_SIZE, locationDropped.Y + BirdCommandMain.CELL_SIZE));
-            if (emptyUnderneathBottomLeft != null)
-            {
-                emptyCell.Location = new Point(emptyUnderneathBottomLeft.Location.X + BirdCommandMain.CELL_SIZE, emptyUnderneathBottomLeft.Location.Y - BirdCommandMain.CELL_SIZE);
-                return;
-            }
-            var emptyUnderneathBottomRight = DesignerUtil.FindCellUnderneath(designer_trafo, emptyCell, new Point(locationDropped.X + BirdCommandMain.CELL_SIZE, locationDropped.Y + BirdCommandMain.CELL_SIZE));
-            if (emptyUnderneathBottomRight != null)
-            {
-                emptyCell.Location = new Point(emptyUnderneathBottomRight.Location.X - BirdCommandMain.CELL_SIZE, emptyUnderneathBottomRight.Location.Y - BirdCommandMain.CELL_SIZE);
-                return;
-            }
-            var emptyUnderneathTopRight = DesignerUtil.FindCellUnderneath(designer_trafo, emptyCell, new Point(locationDropped.X + BirdCommandMain.CELL_SIZE, locationDropped.Y - BirdCommandMain.CELL_SIZE));
-            if (emptyUnderneathTopRight != null)
-            {
-                emptyCell.Location = new Point(emptyUnderneathTopRight.Location.X - BirdCommandMain.CELL_SIZE, emptyUnderneathTopRight.Location.Y + BirdCommandMain.CELL_SIZE);
-                return;
-            }
+            
         }
+
+
 
         internal static void SolveMaze3(Designer designer)
         {
