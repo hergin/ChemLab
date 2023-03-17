@@ -1,3 +1,5 @@
+using System.Drawing;
+
 namespace BirdCommand.Custom
 {
     public class Ion
@@ -6,5 +8,8 @@ namespace BirdCommand.Custom
         public string Symbol { get; set; }
         public string Description { get; set; }
         public int Charge { get; set; }
+        public int Radius { get; set; }
+        public Color Color1 { get; set; }
+        public Color Color2 { get; set; }
     }
 }

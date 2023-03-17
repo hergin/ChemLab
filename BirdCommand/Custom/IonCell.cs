@@ -3,6 +3,7 @@ using Dalssoft.DiagramNet;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,7 +16,7 @@ namespace BirdCommand.Custom
         [NonSerialized]
         List<Ion> ions;
 
-        public IonCell(int x, int y,List<Ion> ions) : base(x, y, BirdCommandMain.CELL_SIZE, BirdCommandMain.CELL_SIZE)
+        public IonCell(int x, int y,List<Ion> ions) : base(x, y, ions.Sum(i=>i.Radius), ions.Sum(i => i.Radius))
         {
             FillColor1 = Color.Blue;
             FillColor2 = Color.LightBlue;
@@ -41,17 +42,49 @@ namespace BirdCommand.Custom
 
         internal override void Draw(Graphics g)
         {
-            base.Draw(g);
+            //base.Draw(g);
 
-            Pen p;
-            p = new Pen(borderColor, borderWidth);
 
-            if(this.GetTotalCharge() != 0)
+            if (ions.Count == 1)
             {
-                g.DrawEllipse(p, new Rectangle(Location.X + 50, location.Y, 20, 20));
-                g.DrawString(this.GetChargeString(), new Font("Trebuchet MS", 8), Brushes.Black, new PointF(Location.X + 53, Location.Y ));
+                var ion = ions[0];
+                elipse = new ElipseElement(location.X, location.Y, ion.Radius, ion.Radius);
+                Rectangle r = GetUnsignedRectangle(new Rectangle(location.X, location.Y, ion.Radius, ion.Radius));
+                Rectangle rb = new Rectangle(r.X, r.Y, r.Width + 1, r.Height + 1);
+                Brush b = new LinearGradientBrush(rb, Color.FromArgb((int)(255.0f * (opacity / 100.0f)), ion.Color1), Color.FromArgb((int)(255.0f * (opacity / 100.0f)), ion.Color2), LinearGradientMode.Horizontal);
+                g.FillEllipse(b, r);
+                Pen p = new Pen(borderColor, borderWidth);
+                g.DrawEllipse(p, r);
             }
-        }
+            else if (ions.Count == 2)
+            {
+                var sodiumIon = ions.Find(io=>io.Name=="Sodium");
+                elipse = new ElipseElement(location.X, location.Y, sodiumIon.Radius, sodiumIon.Radius);
+                Rectangle r = GetUnsignedRectangle(new Rectangle(location.X, location.Y, sodiumIon.Radius, sodiumIon.Radius));
+                Rectangle rb = new Rectangle(r.X, r.Y, r.Width + 1, r.Height + 1);
+                Brush b = new LinearGradientBrush(rb, Color.FromArgb((int)(255.0f * (opacity / 100.0f)), sodiumIon.Color1), Color.FromArgb((int)(255.0f * (opacity / 100.0f)), sodiumIon.Color2), LinearGradientMode.Horizontal);
+                g.FillEllipse(b, r);
+                Pen p = new Pen(borderColor, borderWidth);
+                g.DrawEllipse(p, r);
+
+                var chlorineIon = ions.Find(io => io.Name == "Chlorine");
+                elipse = new ElipseElement(location.X+sodiumIon.Radius, location.Y - sodiumIon.Radius/2, chlorineIon.Radius, chlorineIon.Radius);
+                r = GetUnsignedRectangle(new Rectangle(location.X + sodiumIon.Radius, location.Y - sodiumIon.Radius / 2, chlorineIon.Radius, chlorineIon.Radius));
+                rb = new Rectangle(r.X, r.Y, r.Width + 1, r.Height + 1);
+                b = new LinearGradientBrush(rb, Color.FromArgb((int)(255.0f * (opacity / 100.0f)), chlorineIon.Color1), Color.FromArgb((int)(255.0f * (opacity / 100.0f)), chlorineIon.Color2), LinearGradientMode.Horizontal);
+                g.FillEllipse(b, r);
+                p = new Pen(borderColor, borderWidth);
+                g.DrawEllipse(p, r);
+            }
+
+                /*
+
+                if(this.GetTotalCharge() != 0)
+                {
+                    g.DrawEllipse(p, new Rectangle(Location.X + 50, location.Y, 20, 20));
+                    g.DrawString(this.GetChargeString(), new Font("Trebuchet MS", 8), Brushes.Black, new PointF(Location.X + 53, Location.Y ));
+                }*/
+            }
        
         private string GetChargeString()
         {

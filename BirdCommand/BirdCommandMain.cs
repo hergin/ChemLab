@@ -77,14 +77,14 @@ namespace BirdCommand
             var addRuleButtonOnCanvas = new RuleCell(ruleButtonLocation.X, ruleButtonLocation.Y, 140, 70);
             designer_trafo.Document.AddElement(addRuleButtonOnCanvas);
 
-            var ion1 = new Ion { Name = "Sodium", Charge = -2,Symbol= "Na" };
+            var ion1 = new Ion { Name = "Sodium", Charge = -2, Symbol = "Na", Color1 = Color.Blue, Color2 = Color.LightBlue, Radius = 50 };
             var ionList1 = new List<Ion>() { ion1};
             var ioncell = new IonCell(ion1Location.X, ion1Location.Y,ionList1);
 
             designer_trafo.Document.AddElement(ioncell);
 
-            var ion2 = new Ion { Name = "Chlorine", Charge = 2,Symbol= "Cl" };
-            var ionList2 = new List<Ion>() { ion2};
+            var ion2 = new Ion { Name = "Chlorine", Charge = 2, Symbol = "Cl", Color1 = Color.Green, Color2 = Color.LightGreen, Radius = 75 };
+            var ionList2 = new List<Ion>() { ion1, ion2};
             var ioncell2 = new IonCell(ion2Location.X, ion2Location.Y,ionList2);
 
             designer_trafo.Document.AddElement(ioncell2);
