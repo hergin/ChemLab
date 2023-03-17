@@ -195,9 +195,9 @@ namespace BirdCommand.Custom
         {
             var ionCellSouth = DesignerUtil.FindIonCellUnderneath(designer_trafo, ionCell, new Point(locationDropped.X, locationDropped.Y + BirdCommandMain.CELL_SIZE));
             if (ionCellSouth != null)
-            {
+            {                
                 ionCell.AddIon(ionCellSouth.GetIons()[0]);
-                ionCellSouth.Location = new Point(ionCellSouth.Location.X, ionCellSouth.Location.Y + BirdCommandMain.CELL_SIZE);
+                ionCellSouth.AddIon(ionCell.GetIons()[0]);
                 return;
             }
 
@@ -205,21 +205,21 @@ namespace BirdCommand.Custom
             if (ionCellNorth != null)
             {
                 ionCell.AddIon(ionCellNorth.GetIons()[0]);
-                ionCellNorth.Location = new Point(ionCellNorth.Location.X, ionCellNorth.Location.Y - BirdCommandMain.CELL_SIZE);
+                ionCellNorth.AddIon(ionCell.GetIons()[0]);
                 return;
             }
             var ionCellEast = DesignerUtil.FindIonCellUnderneath(designer_trafo, ionCell, new Point(locationDropped.X + BirdCommandMain.CELL_SIZE, locationDropped.Y));
             if (ionCellEast != null)
             {
                 ionCell.AddIon(ionCellEast.GetIons()[0]);
-                ionCellEast.Location = new Point(ionCellEast.Location.X + BirdCommandMain.CELL_SIZE, ionCellEast.Location.Y );
+                ionCellEast.AddIon(ionCell.GetIons()[0]);
                 return;
             }
             var ionCellWest = DesignerUtil.FindIonCellUnderneath(designer_trafo, ionCell, new Point(locationDropped.X - BirdCommandMain.CELL_SIZE, locationDropped.Y ));
             if (ionCellWest != null)
             {
                 ionCell.AddIon(ionCellWest.GetIons()[0]);
-                ionCellWest.Location = new Point(ionCellWest.Location.X - BirdCommandMain.CELL_SIZE, ionCellWest.Location.Y);
+                ionCellWest.AddIon(ionCell.GetIons()[0]);
                 return;
             }
             return;

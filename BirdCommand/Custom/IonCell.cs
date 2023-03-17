@@ -10,19 +10,24 @@ using System.Threading.Tasks;
 namespace BirdCommand.Custom
 {
     [Serializable]
-    public class IonCell : ElipseElement
+    public class IonCell : ElipseNode
     {
         [NonSerialized]
         List<Ion> ions;
 
-        public IonCell(int x, int y) : base(x, y, BirdCommandMain.CELL_SIZE, BirdCommandMain.CELL_SIZE)
+        public IonCell(int x, int y,List<Ion> ions) : base(x, y, BirdCommandMain.CELL_SIZE, BirdCommandMain.CELL_SIZE)
         {
             FillColor1 = Color.Blue;
             FillColor2 = Color.LightBlue;
-            ions = new List<Ion>();
+            this.ions = ions;
+            Label = new LabelElement(new Rectangle(x,y+BirdCommandMain.CELL_SIZE/4,BirdCommandMain.CELL_SIZE,BirdCommandMain.CELL_SIZE/3));
+            label.Font = new Font("Trebuchet MS", 12);
+            label.ForeColor1 = Color.White;
+            label.BackColor1=Color.Red;
+            Label.Text = ions[0].Symbol;
         }
+       
         
-
         public void AddIon(Ion ion)
         {
             this.ions.Add(ion);
