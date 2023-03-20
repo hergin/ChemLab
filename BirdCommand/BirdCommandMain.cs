@@ -89,6 +89,7 @@ namespace BirdCommand
 
             designer_trafo.Document.AddElement(ioncell2);
 
+
             theTrashCell = new TrashCell();
             designer_trafo.Document.AddElement(theTrashCell);
 
