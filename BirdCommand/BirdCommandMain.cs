@@ -84,7 +84,7 @@ namespace BirdCommand
             designer_trafo.Document.AddElement(ioncell);
 
             var ion2 = new Ion { Name = "Chlorine", Charge = 2, Symbol = "Cl", Color1 = Color.Green, Color2 = Color.LightGreen, Radius = 75 };
-            var ionList2 = new List<Ion>() { ion1, ion2};
+            var ionList2 = new List<Ion>() {  ion2};
             var ioncell2 = new IonCell(ion2Location.X, ion2Location.Y,ionList2);
 
             designer_trafo.Document.AddElement(ioncell2);
@@ -149,7 +149,9 @@ namespace BirdCommand
                 && designer_trafo.Document.FindElement(e.Location) is IonCell ion1
                 && ion1.Location == ion1Location)
             {
-                var newIonCell = new IonCell(ion1Location.X, ion1Location.Y,ion1.GetIons());
+                var sampleIon = ion1.GetIons()[0];
+                var ionValues = new Ion { Name = sampleIon.Name, Charge = sampleIon.Charge, Symbol =sampleIon.Symbol, Color1 = sampleIon.Color1, Color2 = sampleIon.Color2, Radius = sampleIon.Radius };
+                var newIonCell = new IonCell(ion1Location.X, ion1Location.Y,new List<Ion> {ionValues});
                 designer_trafo.Document.AddElement(newIonCell);
                 designer_trafo.Document.SendToBackElement(newIonCell);
                 designer_trafo.Document.SendToBackElement(blockPanel);
@@ -158,7 +160,9 @@ namespace BirdCommand
               && designer_trafo.Document.FindElement(e.Location) is IonCell ion2
               && ion2.Location == ion2Location)
             {
-                var newIonCell = new IonCell(ion2Location.X, ion2Location.Y,ion2.GetIons());
+                var sampleIon = ion2.GetIons()[0];
+                var ionValues = new Ion { Name = sampleIon.Name, Charge = sampleIon.Charge, Symbol =sampleIon.Symbol, Color1 = sampleIon.Color1, Color2 = sampleIon.Color2, Radius = sampleIon.Radius };
+                var newIonCell = new IonCell(ion2Location.X, ion2Location.Y,new List<Ion> {ionValues});
                 designer_trafo.Document.AddElement(newIonCell);
                 designer_trafo.Document.SendToBackElement(newIonCell);
                 designer_trafo.Document.SendToBackElement(blockPanel);

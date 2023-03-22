@@ -24,7 +24,7 @@ namespace BirdCommand.Custom
         
         public void AddIon(Ion ion)
         {
-            this.ions.Add(ion);
+            ions.Add(ion);
             OnAppearanceChanged(new EventArgs());
         }
 
