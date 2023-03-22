@@ -176,14 +176,19 @@ namespace BirdCommand.Custom
             return null;
         }
 
-        internal static IonCell FindIonCellUnderneath(Designer designer, IonCell ionCell, Point point)
+        internal static IonCell FindIonCellUnderneath(Designer designer, IonCell ionCell)
         {
+            int rightBorder = ionCell.Location.X + ionCell.Size.Width;
+            int leftBorder = ionCell.Location.X;
+            int topBorder = ionCell.Location.Y;
+            int bottomBorder = ionCell.Location.Y + ionCell.Size.Height;
+
             foreach (var element in designer.Document.Elements)
             {
                 BaseElement casted = element as BaseElement;
-                if (casted is IonCell result && !result.Equals(ionCell)
-                    && point.Y >= casted.Location.Y && point.Y < casted.Location.Y + casted.Size.Height
-                    && point.X >= casted.Location.X && point.X < casted.Location.X + casted.Size.Width)
+                if ((casted is IonCell result && !result.GetIons()[0].Id.Equals(ionCell.GetIons()[0].Id))
+                    &&(leftBorder < result.Location.X + result.Size.Width && rightBorder > result.Location.X
+                      && topBorder < result.Location.Y + result.Size.Height && bottomBorder > result.Location.Y))
                 {
                     return result;
                 }
@@ -193,38 +198,14 @@ namespace BirdCommand.Custom
 
         internal static void SnapIonCellToNeighbor(Designer designer_trafo, IonCell ionCell, Point locationDropped)
         {
-            var ionCellSouth = DesignerUtil.FindIonCellUnderneath(designer_trafo, ionCell, new Point(locationDropped.X, locationDropped.Y + BirdCommandMain.CELL_SIZE));
-            if (ionCellSouth != null)
+            var ionCellUnderneath = DesignerUtil.FindIonCellUnderneath(designer_trafo, ionCell);
+            if (ionCellUnderneath != null)
             {                
-                ionCellSouth.AddIon(ionCell.GetIons()[0]);
+                ionCellUnderneath.AddIon(ionCell.GetIons()[0]);
                 designer_trafo.Document.DeleteElement(ionCell);
                 return;
             }
 
-            var ionCellNorth = DesignerUtil.FindIonCellUnderneath(designer_trafo, ionCell, new Point(locationDropped.X, locationDropped.Y - BirdCommandMain.CELL_SIZE));
-            if (ionCellNorth != null)
-            {
-                ionCellNorth.AddIon(ionCell.GetIons()[0]);
-                designer_trafo.Document.DeleteElement(ionCell);
-
-                return;
-            }
-            var ionCellEast = DesignerUtil.FindIonCellUnderneath(designer_trafo, ionCell, new Point(locationDropped.X + BirdCommandMain.CELL_SIZE, locationDropped.Y));
-            if (ionCellEast != null)
-            {
-                ionCellEast.AddIon(ionCell.GetIons()[0]);
-                designer_trafo.Document.DeleteElement(ionCell);
-
-                return;
-            }
-            var ionCellWest = DesignerUtil.FindIonCellUnderneath(designer_trafo, ionCell, new Point(locationDropped.X - BirdCommandMain.CELL_SIZE, locationDropped.Y ));
-            if (ionCellWest != null)
-            {
-                ionCellWest.AddIon(ionCell.GetIons()[0]);
-                designer_trafo.Document.DeleteElement(ionCell);
-
-                return;
-            }
             return;
 
         }

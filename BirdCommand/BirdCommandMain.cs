@@ -77,13 +77,13 @@ namespace BirdCommand
             var addRuleButtonOnCanvas = new RuleCell(ruleButtonLocation.X, ruleButtonLocation.Y, 140, 70);
             designer_trafo.Document.AddElement(addRuleButtonOnCanvas);
 
-            var ion1 = new Ion { Name = "Sodium", Charge = -2, Symbol = "Na", Color1 = Color.Blue, Color2 = Color.LightBlue, Radius = 50 };
+            var ion1 = new Ion { Id = Guid.NewGuid(), Name = "Sodium", Charge = -2, Symbol = "Na", Color1 = Color.Blue, Color2 = Color.LightBlue, Radius = 50 };
             var ionList1 = new List<Ion>() { ion1};
             var ioncell = new IonCell(ion1Location.X, ion1Location.Y,ionList1);
 
             designer_trafo.Document.AddElement(ioncell);
 
-            var ion2 = new Ion { Name = "Chlorine", Charge = 2, Symbol = "Cl", Color1 = Color.Green, Color2 = Color.LightGreen, Radius = 75 };
+            var ion2 = new Ion { Id = Guid.NewGuid(), Name = "Chlorine", Charge = 2, Symbol = "Cl", Color1 = Color.Green, Color2 = Color.LightGreen, Radius = 75 };
             var ionList2 = new List<Ion>() {  ion2};
             var ioncell2 = new IonCell(ion2Location.X, ion2Location.Y,ionList2);
 
@@ -150,7 +150,7 @@ namespace BirdCommand
                 && ion1.Location == ion1Location)
             {
                 var sampleIon = ion1.GetIons()[0];
-                var ionValues = new Ion { Name = sampleIon.Name, Charge = sampleIon.Charge, Symbol =sampleIon.Symbol, Color1 = sampleIon.Color1, Color2 = sampleIon.Color2, Radius = sampleIon.Radius };
+                var ionValues = new Ion {Id = Guid.NewGuid(), Name = sampleIon.Name, Charge = sampleIon.Charge, Symbol =sampleIon.Symbol, Color1 = sampleIon.Color1, Color2 = sampleIon.Color2, Radius = sampleIon.Radius };
                 var newIonCell = new IonCell(ion1Location.X, ion1Location.Y,new List<Ion> {ionValues});
                 designer_trafo.Document.AddElement(newIonCell);
                 designer_trafo.Document.SendToBackElement(newIonCell);
@@ -161,7 +161,7 @@ namespace BirdCommand
               && ion2.Location == ion2Location)
             {
                 var sampleIon = ion2.GetIons()[0];
-                var ionValues = new Ion { Name = sampleIon.Name, Charge = sampleIon.Charge, Symbol =sampleIon.Symbol, Color1 = sampleIon.Color1, Color2 = sampleIon.Color2, Radius = sampleIon.Radius };
+                var ionValues = new Ion {Id = Guid.NewGuid(), Name = sampleIon.Name, Charge = sampleIon.Charge, Symbol =sampleIon.Symbol, Color1 = sampleIon.Color1, Color2 = sampleIon.Color2, Radius = sampleIon.Radius };
                 var newIonCell = new IonCell(ion2Location.X, ion2Location.Y,new List<Ion> {ionValues});
                 designer_trafo.Document.AddElement(newIonCell);
                 designer_trafo.Document.SendToBackElement(newIonCell);
