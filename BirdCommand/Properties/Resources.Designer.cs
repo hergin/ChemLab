@@ -230,6 +230,17 @@ namespace BirdCommand.Properties {
             }
         }
         
+        ///txt file dscirbing the lab environment
+        ///5xNa
+        ///5xCl
+        
+        internal static string lab1 {
+            get {
+                return ResourceManager.GetString("Lab1", resourceCulture);
+            }
+        }
+
+        
         /// <summary>
         ///   Looks up a localized string similar to Wo-Wo-Wo-Wo-Wo-Wo-Wo-Wo
         ///Wo-Wo-Wo-St-Wo-St-Wo-Wo

@@ -4,6 +4,8 @@ using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 using System.Runtime.Serialization;
 using System.Security.Permissions;
+using System.Collections.Generic;
+
 
 namespace Dalssoft.DiagramNet
 {
@@ -476,6 +478,13 @@ namespace Dalssoft.DiagramNet
 			}
 			OnAppearancePropertyChanged(new EventArgs());
 		}
+		public void BringToFrontManyElements(List<BaseElement> elements)
+        {
+			foreach(BaseElement element in elements)
+            {
+				BringToFrontElement(element);
+            }
+        }
 
 		public void SendToBackElement(BaseElement el)
 		{

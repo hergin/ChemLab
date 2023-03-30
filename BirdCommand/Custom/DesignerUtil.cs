@@ -196,7 +196,7 @@ namespace BirdCommand.Custom
             return null;
         }
 
-        internal static void SnapIonCellToNeighbor(Designer designer_trafo, IonCell ionCell, Point locationDropped)
+        internal static void SnapIonCellToNeighbor(Designer designer_trafo, IonCell ionCell)
         {
             var ionCellUnderneath = DesignerUtil.FindIonCellUnderneath(designer_trafo, ionCell);
             if (ionCellUnderneath != null)

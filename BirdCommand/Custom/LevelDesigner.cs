@@ -4,12 +4,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Drawing;
 using System.Threading.Tasks;
 
 namespace BirdCommand.Custom
 {
     public class LevelDesigner
     {
+        
         public static List<BaseElement> ProduceLevelElements(String boardString)
         {
             var result = new List<BaseElement>();
@@ -74,6 +76,61 @@ namespace BirdCommand.Custom
             return result;
         }
 
+        public static List<Ion> ProduceIons(String boardString)
+        {
+            var result = new List<BaseElement>();
+            var ions = new List<Ion>();
+            var rows = boardString.Split(new char[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
+
+            for (int i = 0; i < rows.Count(); i++)
+            {
+                var cols = rows[i].Split(new char[] { 'x' }, StringSplitOptions.RemoveEmptyEntries);
+                int amount = int.Parse(cols[0]);
+                string symbol = cols[1];
+                for(int j=0; j < amount; j++)
+                { 
+                     switch(symbol)
+                    {
+                        case "Na":
+                            ions.Add(new Ion { Id= Guid.NewGuid(),Charge=1,Name="Sodium",Symbol="Na",Radius=50,Color1=Color.Blue,Color2=Color.LightBlue});
+                            break;
+                        case "Cl":
+                             ions.Add(new Ion { Id= Guid.NewGuid(),Charge=-1,Name="Chlorine",Symbol="Cl",Radius=75,Color1=Color.Green,Color2=Color.LightGreen});
+                            break;
+                    }
+
+                }
+            }
+            return ions;
+        }
+
+	public static List<IonCell> PlaceIonCells(List<Ion> ions)
+	{
+	    Random rnd = new Random();
+		List<IonCell> ionCells = new List<IonCell>();
+
+        foreach(Ion ion in ions)
+		 {
+		    if(ion.Symbol == "Na")
+		    {
+		        IonCell ioncell =  new IonCell(15,rnd.Next(250),new List<Ion>{ ion});
+		        ionCells.Add(ioncell);
+			}
+			else if(ion.Symbol == "Cl")
+			{
+		        IonCell ioncell =  new IonCell(75,rnd.Next(250),new List<Ion>{ ion});
+		        ionCells.Add(ioncell);
+
+            }
+                else
+                {
+                    IonCell ioncell =  new IonCell(rnd.Next(150),rnd.Next(150),new List<Ion>{ ion});
+		        ionCells.Add(ioncell);
+                }
+		   }
+		return ionCells;
+	}
+
         public static void GenericLevelDesign(Designer theBoard, String boardString)
         {
             var cells = ProduceLevelElements(boardString);
@@ -86,9 +143,22 @@ namespace BirdCommand.Custom
             theBoard.Document.BringToFrontElement(theBoard.Document.Elements.GetArray().Where(e => e is BirdCell).First());
         }
 
+        public static void GenericLabLevelDesign(Designer theBoard,String boardString)
+        {
+            var cells = ProduceIons(boardString);
+            var placedCells = PlaceIonCells(cells);
+
+            foreach (var cell in placedCells)
+            {
+                theBoard.Document.AddElement(cell);
+            }
+
+             theBoard.Document.BringToFrontManyElements(theBoard.Document.Elements.GetArray().Where(e => e is IonCell).ToList());
+        }
+
         public static void Level1(Designer theBoard)
         {
-            GenericLevelDesign(theBoard, Resources.hoc1);
+            GenericLabLevelDesign(theBoard,Resources.lab1);
         }
 
         public static void Level2(Designer theBoard)

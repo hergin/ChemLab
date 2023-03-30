@@ -26,7 +26,7 @@ namespace BirdCommand.Custom
         {
             ions.Add(ion);
             OnAppearanceChanged(new EventArgs());
-            base.size.Width = ions.Sum(x=> x.Radius) +10;
+            base.size.Width = ions.Sum(x=> x.Radius) +5;
         }
 
         public List<Ion> GetIons()
