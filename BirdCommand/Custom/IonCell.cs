@@ -1,3 +1,4 @@
+using BirdCommand.Model;
 using BirdCommand.Properties;
 using Dalssoft.DiagramNet;
 using System;
@@ -14,32 +15,32 @@ namespace BirdCommand.Custom
     public class IonCell : RectangleElement
     {
         [NonSerialized]
-        List<Ion> ions;
+        Compound compound;
 
         public IonCell(int x, int y,List<Ion> ions) : base(x, y, ions.Sum(i=>i.Radius)+15, ions.Select(i=>i.Radius).Max())
         {
-            this.ions = ions;
+            this.compound = new Compound { ions = ions };
         }
        
         
         public void AddIon(Ion ion)
         {
-            ions.Add(ion);
+            compound.ions.Add(ion);
             OnAppearanceChanged(new EventArgs());
-            base.size.Width = ions.Sum(x=> x.Radius) +5;
-            base.size.Height = ions.Max(x=> x.Radius) +5;
+            base.size.Width = compound.ions.Sum(x=> x.Radius) +5;
+            base.size.Height = compound.ions.Max(x=> x.Radius) +5;
         }
 
         public List<Ion> GetIons()
         {
-            return this.ions;
+            return this.compound.ions;
         }
 
         internal override void Draw(Graphics g)
         {
                 int xOffset = 0;
-                int largestRadius = ions.Max(x=> x.Radius);
-                foreach(Ion ion in ions)
+                int largestRadius = compound.ions.Max(x=> x.Radius);
+                foreach(Ion ion in compound.ions)
                 {
                 Rectangle r = GetUnsignedRectangle(new Rectangle(location.X +xOffset, location.Y+(largestRadius-ion.Radius)/2, ion.Radius, ion.Radius));
                 Rectangle rb = new Rectangle(r.X, r.Y, r.Width + 1, r.Height + 1);
@@ -71,7 +72,7 @@ namespace BirdCommand.Custom
         private int GetTotalCharge()
         {
             int totalCharge = 0;
-            foreach (var ion in ions)
+            foreach (var ion in compound.ions)
             {
                 totalCharge += ion.Charge;
             }
