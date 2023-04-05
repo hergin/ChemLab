@@ -108,18 +108,22 @@ namespace BirdCommand.Custom
 	{
 	    Random rnd = new Random();
 		List<IonCell> ionCells = new List<IonCell>();
+        var sodiumYOffset = 0;
+        var chlorineYOffset = 0;
 
         foreach(Ion ion in ions)
 		 {
 		    if(ion.Symbol == "Na")
 		    {
-		        IonCell ioncell =  new IonCell(15,rnd.Next(250),new List<Ion>{ ion});
+		        IonCell ioncell =  new IonCell(15,sodiumYOffset,new List<Ion>{ ion});
 		        ionCells.Add(ioncell);
+                sodiumYOffset+= ion.Radius;
 			}
 			else if(ion.Symbol == "Cl")
 			{
-		        IonCell ioncell =  new IonCell(75,rnd.Next(250),new List<Ion>{ ion});
+		        IonCell ioncell =  new IonCell(75,chlorineYOffset,new List<Ion>{ ion});
 		        ionCells.Add(ioncell);
+                chlorineYOffset += ion.Radius;
 
             }
                 else
