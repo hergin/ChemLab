@@ -10,7 +10,8 @@ namespace BirdCommand.Model
     enum ChangeStepType {
         Add, Delete
     }
-    internal class ChangeStep
+
+    internal  class ChangeStep
     {
         public ChangeStepType Type { get; set; }
         public Compound Compound { get; set; }
