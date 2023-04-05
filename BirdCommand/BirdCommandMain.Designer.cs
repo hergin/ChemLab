@@ -35,8 +35,6 @@ namespace BirdCommand
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
@@ -58,8 +56,6 @@ namespace BirdCommand
             this.copyLhsToRhsButton = new System.Windows.Forms.Button();
             this.decreaseRuleCountButton = new System.Windows.Forms.Button();
             this.increaseRuleCountButton = new System.Windows.Forms.Button();
-            this.turnLeftButton = new System.Windows.Forms.Button();
-            this.turnRightButton = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.startOverButton = new System.Windows.Forms.PictureBox();
             this.runButton = new System.Windows.Forms.PictureBox();
@@ -126,28 +122,7 @@ namespace BirdCommand
             this.button4.Text = "Move Bird Left";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
-            // button5
-            // 
-            this.button5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button5.Location = new System.Drawing.Point(107, 50);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(77, 82);
-            this.button5.TabIndex = 6;
-            this.button5.Text = "Turn Right";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
-            // 
-            // button6
-            // 
-            this.button6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button6.Location = new System.Drawing.Point(24, 50);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(77, 82);
-            this.button6.TabIndex = 7;
-            this.button6.Text = "Turn Left";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
+
             // 
             // pictureBox1
             // 
@@ -307,8 +282,6 @@ namespace BirdCommand
             this.debugPanel.Controls.Add(this.button2);
             this.debugPanel.Controls.Add(this.button3);
             this.debugPanel.Controls.Add(this.button4);
-            this.debugPanel.Controls.Add(this.button5);
-            this.debugPanel.Controls.Add(this.button6);
             this.debugPanel.Location = new System.Drawing.Point(16, 693);
             this.debugPanel.Name = "debugPanel";
             this.debugPanel.Size = new System.Drawing.Size(1325, 150);
@@ -368,8 +341,6 @@ namespace BirdCommand
             this.panel4.Controls.Add(this.copyLhsToRhsButton);
             this.panel4.Controls.Add(this.decreaseRuleCountButton);
             this.panel4.Controls.Add(this.increaseRuleCountButton);
-            this.panel4.Controls.Add(this.turnLeftButton);
-            this.panel4.Controls.Add(this.turnRightButton);
             this.panel4.Location = new System.Drawing.Point(1137, 142);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(200, 705);
@@ -419,28 +390,6 @@ namespace BirdCommand
             this.increaseRuleCountButton.TabIndex = 8;
             this.increaseRuleCountButton.UseVisualStyleBackColor = true;
             this.increaseRuleCountButton.Click += new System.EventHandler(this.increaseRuleCountButton_Click_1);
-            // 
-            // turnLeftButton
-            // 
-            this.turnLeftButton.BackgroundImage = global::BirdCommand.Properties.Resources.turnLeftButton;
-            this.turnLeftButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.turnLeftButton.Location = new System.Drawing.Point(108, 14);
-            this.turnLeftButton.Name = "turnLeftButton";
-            this.turnLeftButton.Size = new System.Drawing.Size(60, 69);
-            this.turnLeftButton.TabIndex = 7;
-            this.turnLeftButton.UseVisualStyleBackColor = true;
-            this.turnLeftButton.Click += new System.EventHandler(this.turnLeftButton_Click);
-            // 
-            // turnRightButton
-            // 
-            this.turnRightButton.BackgroundImage = global::BirdCommand.Properties.Resources.turnRightButton;
-            this.turnRightButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.turnRightButton.Location = new System.Drawing.Point(27, 14);
-            this.turnRightButton.Name = "turnRightButton";
-            this.turnRightButton.Size = new System.Drawing.Size(60, 69);
-            this.turnRightButton.TabIndex = 6;
-            this.turnRightButton.UseVisualStyleBackColor = true;
-            this.turnRightButton.Click += new System.EventHandler(this.turnRightButton_Click);
             // 
             // startOverButton
             // 
@@ -570,8 +519,6 @@ namespace BirdCommand
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button6;
         private Dalssoft.DiagramNet.Designer designer_trafo;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Panel panel2;
@@ -582,8 +529,6 @@ namespace BirdCommand
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.Button turnRightButton;
-        private System.Windows.Forms.Button turnLeftButton;
         private System.Windows.Forms.Button increaseRuleCountButton;
         private System.Windows.Forms.Button decreaseRuleCountButton;
         private System.Windows.Forms.Button copyLhsToRhsButton;

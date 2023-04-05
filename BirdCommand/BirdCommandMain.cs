@@ -55,8 +55,6 @@ namespace BirdCommand
             designer_trafo.MouseMove += Designer_trafo_MouseMove;
             designer_trafo.MouseDoubleClick += Designer_trafo_MouseDoubleClick;
 
-            toolTip1.SetToolTip(turnLeftButton, "Turn selected bird left");
-            toolTip1.SetToolTip(turnRightButton, "Turn selected bird right");
             toolTip1.SetToolTip(increaseRuleCountButton, "Increase the rule count of the selected rule");
             toolTip1.SetToolTip(decreaseRuleCountButton, "Decrease the rule count of the selected rule");
             toolTip1.SetToolTip(copyLhsToRhsButton, "Copy 'Current Pattern' to 'Pattern After'");
@@ -417,31 +415,6 @@ namespace BirdCommand
             debugPanel.Visible = !debugPanel.Visible;
         }
 
-        private void turnRightButton_Click(object sender, EventArgs e)
-        {
-            if (designer_trafo.Document.SelectedElements.Count == 1
-                && designer_trafo.Document.SelectedElements[0] is BirdCell bird)
-            {
-                bird.TurnRight();
-            }
-            else
-            {
-                MessageBox.Show("Please select a bird first to turn right.", "No bird selected!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
-
-        private void turnLeftButton_Click(object sender, EventArgs e)
-        {
-            if (designer_trafo.Document.SelectedElements.Count == 1
-                && designer_trafo.Document.SelectedElements[0] is BirdCell bird)
-            {
-                bird.TurnLeft();
-            }
-            else
-            {
-                MessageBox.Show("Please select a bird first to turn left.", "No bird selected!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
 
         private void increaseRuleCountButton_Click_1(object sender, EventArgs e)
         {
