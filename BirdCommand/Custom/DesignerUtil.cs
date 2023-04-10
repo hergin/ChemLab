@@ -14,9 +14,51 @@ namespace BirdCommand.Custom
     {
         internal static void ApplyChanges(Designer designer, List<ChangeStep> changes)
         {
+            CheckIfWinConditionMet(designer,changes);
             MessageBox.Show(String.Join(Environment.NewLine, changes), "Changes");
             // TODO apply the changes to the designer (i.e. add/remove elements)
         }
+
+
+         internal static Boolean CheckIfWinConditionMet(Designer designer, List<ChangeStep> changeSteps)
+        {
+                
+           foreach(ChangeStep changeStep in changeSteps)
+            {
+                Boolean isChangeStepRan = HandleChangeStep(designer,changeStep);
+                if(!isChangeStepRan)
+                {
+                    return false;
+                }
+            }
+           return true;
+        }
+
+        internal static Boolean HandleChangeStep(Designer designer, ChangeStep changeStep)
+        {
+            Random rnd = new Random();
+            if(changeStep.Type == ChangeStepType.Add )
+            {
+                IonCell ionCell = new IonCell(rnd.Next(240),240, changeStep.Compound.ions);
+                designer.Document.AddElement(ionCell);
+                return true;
+            }
+            if(changeStep.Type ==ChangeStepType.Delete)
+            {
+                BaseElement foundElement = designer.Document.Elements.GetArray().Where(x=> x.Name == changeStep.Compound.Symbol).First();
+               
+                if(foundElement == null)
+                {
+                    return false;
+                }
+                designer.Document.DeleteElement(foundElement);
+                return true;
+            }
+            return false;
+
+        }
+
+
         internal static void CopyLHStoRHS(Designer designer, RuleCell rule)
         {
             var lhsElements = TrafoUtil.FindPreConditionElements(DesignerUtil.GetTrafoElementsOutsideBlockWithoutStartOrSnapOrBlock(designer).ToList(),
@@ -268,6 +310,11 @@ namespace BirdCommand.Custom
             foreach (var birdCell in birdCells)
             {
                 designer.Document.BringToFrontElement(birdCell);
+            }
+            var ionCells = designer.Document.Elements.GetArray().Where(e => e is IonCell);
+            foreach (var ionCell in ionCells)
+            {
+                designer.Document.BringToFrontElement(ionCell);
             }
         }
 

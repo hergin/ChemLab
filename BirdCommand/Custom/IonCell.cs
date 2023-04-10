@@ -20,6 +20,7 @@ namespace BirdCommand.Custom
         public IonCell(int x, int y,List<Ion> ions) : base(x, y, ions.Sum(i=>i.Radius)+15, ions.Select(i=>i.Radius).Max())
         {
             this.compound = new Compound { ions = ions };
+            Name = compound.Symbol;
         }
        
         

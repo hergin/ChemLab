@@ -607,39 +607,6 @@ namespace BirdCommand
             DesignerUtil.SolveMaze3(designer_trafo);
         }
 
-        private Boolean CheckIfWinConditionMet(List<ChangeStep> changeSteps)
-        {
-           foreach(ChangeStep changeStep in changeSteps)
-            {
-                Boolean isChangeStepRan = HandleChangeStep(changeStep);
-                if(!isChangeStepRan)
-                {
-                    return false;
-                }
-            }
-           return true;
-        }
-
-        private Boolean HandleChangeStep(ChangeStep changeStep)
-        {
-            if(changeStep.Type == ChangeStepType.Add )
-            {
-                IonCell ionCell = new IonCell(100,100, changeStep.Compound.ions);
-                designer_board.Document.AddElement(ionCell);
-                return true;
-            }
-            if(changeStep.Type ==ChangeStepType.Delete)
-            {
-                BaseElement foundElement = designer_board.Document.FindElement(changeStep.Compound.Symbol);
-                if(foundElement == null)
-                {
-                    return false;
-                }
-                designer_board.Document.DeleteElement(foundElement);
-                return true;
-            }
-            return false;
-
-        }
+       
     }
 }
