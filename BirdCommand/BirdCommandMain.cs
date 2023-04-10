@@ -30,8 +30,8 @@ namespace BirdCommand
     {
         private const int TimeoutBetweenRuleExecution = 250;
         public static int CELL_SIZE = 50;
-        Point ion1Location = new Point(30, 30),
-            ion2Location = new Point(110, 30),
+        Point ion1Location = new Point(70, 10),
+            ion2Location = new Point(60, 65),
             pigButtonLocation = new Point(70, 120),
             ruleButtonLocation = new Point(25,220);
         BirdCell theBird;
@@ -77,13 +77,13 @@ namespace BirdCommand
             var addRuleButtonOnCanvas = new RuleCell(ruleButtonLocation.X, ruleButtonLocation.Y, 140, 70);
             designer_trafo.Document.AddElement(addRuleButtonOnCanvas);
 
-            var ion1 = new Ion { Id = Guid.NewGuid(), Name = "Sodium", Charge = 1, Symbol = "Na", Color1 = Color.Blue, Color2 = Color.LightBlue, Radius = 50 };
+            var ion1 =new Sodium();
             var ionList1 = new List<Ion>() { ion1};
             var ioncell = new IonCell(ion1Location.X, ion1Location.Y,ionList1);
 
             designer_trafo.Document.AddElement(ioncell);
 
-            var ion2 = new Ion { Id = Guid.NewGuid(), Name = "Chlorine", Charge = -1, Symbol = "Cl", Color1 = Color.Green, Color2 = Color.LightGreen, Radius = 75 };
+            var ion2 = new Chlorine();
             var ionList2 = new List<Ion>() {  ion2};
             var ioncell2 = new IonCell(ion2Location.X, ion2Location.Y,ionList2);
 
@@ -595,7 +595,7 @@ namespace BirdCommand
             var resourceName = "Lab" + '1';
             LevelDesigner.GenericLabLevelDesign(designer_board, Resources.ResourceManager.GetString(resourceName));
 
-            var ion2 = new Ion { Id = Guid.NewGuid(), Name = "Chlorine", Charge = -1, Symbol = "Cl", Color1 = Color.Green, Color2 = Color.LightGreen, Radius = 75 };
+            var ion2 = new Chlorine();
             var ionList2 = new List<Ion>() {  ion2};
             var ioncell2 = new IonCell(ion2Location.X, ion2Location.Y,ionList2);
 

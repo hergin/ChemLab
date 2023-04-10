@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Drawing;
 using System.Threading.Tasks;
+using BirdCommand.Model;
 
 namespace BirdCommand.Custom
 {
@@ -92,10 +93,10 @@ namespace BirdCommand.Custom
                      switch(symbol)
                     {
                         case "Na":
-                            ions.Add(new Ion { Id= Guid.NewGuid(),Charge=1,Name="Sodium",Symbol="Na",Radius=50,Color1=Color.Blue,Color2=Color.LightBlue});
+                            ions.Add( new Sodium());
                             break;
                         case "Cl":
-                             ions.Add(new Ion { Id= Guid.NewGuid(),Charge=-1,Name="Chlorine",Symbol="Cl",Radius=75,Color1=Color.Green,Color2=Color.LightGreen});
+                             ions.Add(  new Chlorine() );
                             break;
                     }
 
@@ -115,13 +116,13 @@ namespace BirdCommand.Custom
 		 {
 		    if(ion.Symbol == "Na")
 		    {
-		        IonCell ioncell =  new IonCell(15,sodiumYOffset,new List<Ion>{ ion});
+		        IonCell ioncell =  new IonCell(15,sodiumYOffset,new List<Ion>{ new Sodium()});
 		        ionCells.Add(ioncell);
                 sodiumYOffset+= ion.Radius;
 			}
 			else if(ion.Symbol == "Cl")
 			{
-		        IonCell ioncell =  new IonCell(75,chlorineYOffset,new List<Ion>{ ion});
+		        IonCell ioncell =  new IonCell(75,chlorineYOffset,new List<Ion>{ new Chlorine()});
 		        ionCells.Add(ioncell);
                 chlorineYOffset += ion.Radius;
 

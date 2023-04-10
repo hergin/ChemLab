@@ -18,7 +18,7 @@ namespace BirdCommand.Model
             this.Color2 = Color.LightGreen;
             this.Name = "Chlorine";
             this.Charge = -1;
-            this.Radius = 75;
+            this.Radius = 55;
         }
     }
 }
