@@ -158,7 +158,7 @@ namespace BirdCommand.Custom
 
         public static void Level1(Designer theBoard)
         {
-            GenericLabLevelDesign(theBoard,Resources.lab1);
+            GenericLabLevelDesign(theBoard,Resources.Lab1);
         }
 
         public static void Level2(Designer theBoard)

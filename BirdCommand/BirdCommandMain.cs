@@ -1,4 +1,5 @@
 ﻿using BirdCommand.Custom;
+using BirdCommand.Model;
 using BirdCommand.Properties;
 using Dalssoft.DiagramNet;
 using System;
@@ -191,10 +192,9 @@ namespace BirdCommand
         {
             switch (e.ProgressPercentage)
             {
-                case (int)TrafoProgress.UpdateBird:
-                    var changes = e.UserState as Tuple<Point, Direction>;
-                    theBird.Location = new Point(theBird.Location.X + changes.Item1.X, theBird.Location.Y + changes.Item1.Y);
-                    theBird.Direction = changes.Item2;
+                case (int)TrafoProgress.UpdateModel:
+                    var changes = e.UserState as List<ChangeStep>;
+                    DesignerUtil.ApplyChanges(designer_board, changes);
                     break;
                 case (int)TrafoProgress.Highlight:
                     ((RuleCell)e.UserState).Highlight();
@@ -229,32 +229,22 @@ namespace BirdCommand
 
                     for (int i = 0; i < ((RuleCell)rule).RuleCount; i++)
                     {
-                        var preConditionElements = TrafoUtil.FindPreConditionElements(trafoElements, rule);
-                        var postConditionElements = TrafoUtil.FindPostConditionElements(trafoElements, rule);
-                        var cloneOfPreConditionElements = PatternUtil.Clone(preConditionElements);
-                        var cloneOfPostConditionElements = PatternUtil.Clone(postConditionElements);
+                        var preConditionElements = TrafoUtil.FindPreConditionElementsChemistry(trafoElements, rule);
+                        var postConditionElements = TrafoUtil.FindPostConditionElementsChemistry(trafoElements, rule);
+                        //var cloneOfPreConditionElements = PatternUtil.Clone(preConditionElements);
+                        //var cloneOfPostConditionElements = PatternUtil.Clone(postConditionElements);
 
-                        var birdInPre = cloneOfPreConditionElements.Where(el=>el is BirdCell).First() as BirdCell;
-
-                        // We rotate the pattern until the bird direction in the pattern matches to the bird direction in the model (or do it 3 times because it becomes the original pattern after that)
-                        // because if it doesn't match, the rest of the pattern doesn't make sense to try at all
-                        int counter = 0;
-                        while (theBird.Direction != birdInPre.Direction && counter++ < 4)
-                        {
-                            cloneOfPreConditionElements = PatternUtil.Rotate90Clockwise(cloneOfPreConditionElements);
-                            cloneOfPostConditionElements=PatternUtil.Rotate90Clockwise(cloneOfPostConditionElements);
-                            birdInPre = cloneOfPreConditionElements.Where(el => el is BirdCell).First() as BirdCell;
-                        }
                         
-                        if (PyUtil.IsPatternInTheModel(designer_board.Document.Elements.GetArray().ToList(),
-                            cloneOfPreConditionElements))
+                        if (PyUtil.IsPatternInTheModelChemistry(designer_board.Document.Elements.GetArray().ToList(),
+                            preConditionElements))
                         {
-                            var changes = PyUtil.FindChangesToTheBirdInTheRule(cloneOfPreConditionElements, cloneOfPostConditionElements);
+                            var changes = PyUtil.FindChangesInTheRuleChemistry(preConditionElements, postConditionElements);
                             // TODO if there are no changes (patterns are same), there is an exception from c# parsing py response. Handle it gracefully.
-                            trafoRunner.ReportProgress((int)TrafoProgress.UpdateBird, changes);
+                            trafoRunner.ReportProgress((int)TrafoProgress.UpdateModel, changes);
 
                             Thread.Sleep(TimeoutBetweenRuleExecution);
-                            if (theBird.Location.Equals(thePig.Location))
+                            // TODO decide what to do below
+                            if (false && theBird.Location.Equals(thePig.Location))
                             {
                                 trafoRunner.ReportProgress((int)TrafoProgress.Success);
                                 trafoRunner.CancelAsync();
@@ -278,7 +268,8 @@ namespace BirdCommand
                     return;
                 }
             }
-            trafoRunner.ReportProgress((int)TrafoProgress.Failure);
+            // TODO decide what to do when done
+            //trafoRunner.ReportProgress((int)TrafoProgress.Failure);
             trafoRunner.CancelAsync();
             return;
         }

@@ -1,4 +1,5 @@
-﻿using Dalssoft.DiagramNet;
+﻿using BirdCommand.Model;
+using Dalssoft.DiagramNet;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -42,6 +43,20 @@ namespace BirdCommand.Custom
             }
         }
 
+        public static bool IsPatternInTheModelChemistry(List<BaseElement> model, List<BaseElement> prePattern)
+        {
+            var mazeGraph = ConvertUtil.PatternToGraphChemistry(model);
+
+            var patternGraph = ConvertUtil.PatternToGraphChemistry(prePattern);
+
+            var resultFromPY = PyUtil.CallPython("pattern-matching-chemistry.py",
+                mazeGraph.NodesToPY() + "|" + mazeGraph.EdgesToPY() + "|" + patternGraph.NodesToPY() + "|" + patternGraph.EdgesToPY());
+
+            var lines = resultFromPY.Split(new char[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
+
+            return lines[0].Trim() == "True";
+        }
+
         public static bool IsPatternInTheModel(List<BaseElement> model,List<BaseElement> prePattern)
         {
             var mazeGraph = ConvertUtil.PatternToGraph(model);
@@ -63,6 +78,61 @@ namespace BirdCommand.Custom
             var postConditionElements = TrafoUtil.FindPostConditionElements(trafoElements, rule);
 
             return FindChangesToTheBirdInTheRule(preConditionElements,postConditionElements);
+        }
+
+        internal static List<ChangeStep> FindChangesInTheRuleChemistry(List<BaseElement> preConditionElements, List<BaseElement> postConditionElements)
+        {
+            var result = new List<ChangeStep>();
+
+            var prePatternGraph = ConvertUtil.PatternToGraphChemistry(preConditionElements);
+            var postPatternGraph = ConvertUtil.PatternToGraphChemistry(postConditionElements);
+
+            var resultFromPY = PyUtil.CallPython("difference-finding.py",
+                prePatternGraph.NodesToPY() + "|" + prePatternGraph.EdgesToPY() + "|" + postPatternGraph.NodesToPY() + "|" + postPatternGraph.EdgesToPY());
+
+            var lines = resultFromPY.Split(new char[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
+
+            List<BaseElement> allElements = new List<BaseElement>();
+            allElements.AddRange(preConditionElements);
+            allElements.AddRange(postConditionElements);
+
+            var mode = ChangeStepType.Add;
+            foreach (var line in lines)
+            {
+                switch (line.Trim())
+                {
+                    case "Nodes To Add":
+                        mode = ChangeStepType.Add;
+                        continue;
+                    case "Nodes To Delete":
+                        mode = ChangeStepType.Delete;
+                        continue;
+                    case "-----":
+                    case "Edges To Add":
+                    case "Edges To Delete":
+                        continue;
+                    default:
+                        var symbol = line.Trim();
+                        switch (mode)
+                        {
+                            case ChangeStepType.Add:
+                                var ionCellToAdd = (IonCell)postConditionElements.Find(e => ((IonCell)e).GetCompound().Symbol == symbol);
+                                var changeStepAdd = new ChangeStep { Compound = ionCellToAdd.GetCompound(), Type = mode };
+                                result.Add(changeStepAdd);
+                                continue;
+                            case ChangeStepType.Delete:
+                                var ionCellToDelete = (IonCell)preConditionElements.Find(e => ((IonCell)e).GetCompound().Symbol == symbol);
+                                var changeStepDelete = new ChangeStep { Compound = ionCellToDelete.GetCompound(), Type = mode };
+                                result.Add(changeStepDelete);
+                                continue;
+                        }
+
+
+                        
+                        continue;
+                }
+            }
+            return result;
         }
 
         public static Tuple<Point, Direction> FindChangesToTheBirdInTheRule(List<BaseElement> preConditionElements, List<BaseElement> postConditionElements)

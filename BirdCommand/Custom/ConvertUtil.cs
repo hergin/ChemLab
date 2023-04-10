@@ -1,4 +1,5 @@
-﻿using BirdCommand.Properties;
+﻿using BirdCommand.Model;
+using BirdCommand.Properties;
 using Dalssoft.DiagramNet;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,22 @@ namespace BirdCommand.Custom
 {
     public class ConvertUtil
     {
+        public static Graph PatternToGraphChemistry(List<BaseElement> elements)
+        {
+            Graph result = new Graph();
+
+            foreach (var element in elements)
+            {
+                if (element is IonCell ionCell)
+                {
+                    var compound = ionCell.GetCompound();
+                    result.Add(new Node { Id = compound.Symbol, Type = compound.Symbol });
+                }
+            }
+
+            return result;
+        }
+
         public static Graph PatternToGraph(List<BaseElement> elements)
         {
             var result = new Graph();

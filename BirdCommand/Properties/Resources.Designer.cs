@@ -230,17 +230,6 @@ namespace BirdCommand.Properties {
             }
         }
         
-        ///txt file dscirbing the lab environment
-        ///5xNa
-        ///5xCl
-        
-        internal static string lab1 {
-            get {
-                return ResourceManager.GetString("Lab1", resourceCulture);
-            }
-        }
-
-        
         /// <summary>
         ///   Looks up a localized string similar to Wo-Wo-Wo-Wo-Wo-Wo-Wo-Wo
         ///Wo-Wo-Wo-St-Wo-St-Wo-Wo
@@ -332,6 +321,16 @@ namespace BirdCommand.Properties {
             get {
                 object obj = ResourceManager.GetObject("increaseRuleCountButton", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 5xNa
+        ///5xCl.
+        /// </summary>
+        internal static string Lab1 {
+            get {
+                return ResourceManager.GetString("Lab1", resourceCulture);
             }
         }
         
@@ -431,6 +430,16 @@ namespace BirdCommand.Properties {
         internal static byte[] pattern_matching {
             get {
                 object obj = ResourceManager.GetObject("pattern_matching", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] pattern_matching_chemistry {
+            get {
+                object obj = ResourceManager.GetObject("pattern_matching_chemistry", resourceCulture);
                 return ((byte[])(obj));
             }
         }

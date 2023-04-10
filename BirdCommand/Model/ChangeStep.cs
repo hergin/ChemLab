@@ -14,5 +14,10 @@ namespace BirdCommand.Model
     {
         public ChangeStepType Type { get; set; }
         public Compound Compound { get; set; }
+
+        public override string ToString()
+        {
+            return Type +": "+Compound.ToString();
+        }
     }
 }

@@ -40,7 +40,7 @@ if postPatternEdges.strip() != "":
 nodesToAdd = post_pattern.nodes()-pre_pattern.nodes()
 print()
 print("Nodes To Add")
-print("------------")
+print("-----")
 for node in nodesToAdd:
     print(node)
 
@@ -48,20 +48,20 @@ for node in nodesToAdd:
 nodesToDelete = pre_pattern.nodes() - post_pattern.nodes()
 print()
 print("Nodes To Delete")
-print("---------------")
+print("-----")
 for node in nodesToDelete:
     print(node)
 
 edgesToAdd = post_pattern.edges()-pre_pattern.edges()
 print()
 print("Edges To Add")
-print("------------")
+print("-----")
 for edge in edgesToAdd:
     print(edge)
 
 edgesToDelete = pre_pattern.edges() - post_pattern.edges()
 print()
 print("Edges To Delete")
-print("---------------")
+print("-----")
 for edge in edgesToDelete:
     print(edge)
