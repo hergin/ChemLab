@@ -1,15 +1,22 @@
-﻿using Dalssoft.DiagramNet;
+﻿using BirdCommand.Model;
+using Dalssoft.DiagramNet;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace BirdCommand.Custom
 {
     public class DesignerUtil
     {
+        internal static void ApplyChanges(Designer designer, List<ChangeStep> changes)
+        {
+            MessageBox.Show(String.Join(Environment.NewLine, changes), "Changes");
+            // TODO apply the changes to the designer (i.e. add/remove elements)
+        }
         internal static void CopyLHStoRHS(Designer designer, RuleCell rule)
         {
             var lhsElements = TrafoUtil.FindPreConditionElements(DesignerUtil.GetTrafoElementsOutsideBlockWithoutStartOrSnapOrBlock(designer).ToList(),

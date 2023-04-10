@@ -66,6 +66,7 @@
     <Compile Include="Custom\RuleCell.cs" />
     <Compile Include="Custom\StartCell.cs" />
     <Compile Include="Model\ChangeStep.cs" />
+    <Compile Include="Model\Chlorine.cs" />
     <Compile Include="Model\Compound.cs" />
     <Compile Include="Model\Ion.cs" />
     <Compile Include="Custom\IonCell.cs" />
@@ -118,6 +119,7 @@
     <Compile Include="DiagramNET\MoveAction.cs" />
     <Compile Include="DiagramNET\ResizeAction.cs" />
     <Compile Include="DiagramNET\UndoManager.cs" />
+    <Compile Include="Model\Sodium.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="BirdCommandMain.resx">
@@ -322,6 +324,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\maze9.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pattern-matching-chemistry.py">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Lab1.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

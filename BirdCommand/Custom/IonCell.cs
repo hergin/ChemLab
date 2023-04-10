@@ -31,6 +31,11 @@ namespace BirdCommand.Custom
             base.size.Height = compound.ions.Max(x=> x.Radius) +5;
         }
 
+        internal Compound GetCompound()
+        {
+            return this.compound;
+        }
+
         public List<Ion> GetIons()
         {
             return this.compound.ions;
