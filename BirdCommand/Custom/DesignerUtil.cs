@@ -12,6 +12,7 @@ namespace BirdCommand.Custom
 {
     public class DesignerUtil
     {
+        static int placementXOffset = 0;
         internal static void ApplyChanges(Designer designer, List<ChangeStep> changes)
         {
             CheckIfWinConditionMet(designer,changes);
@@ -22,7 +23,6 @@ namespace BirdCommand.Custom
 
          internal static Boolean CheckIfWinConditionMet(Designer designer, List<ChangeStep> changeSteps)
         {
-                
            foreach(ChangeStep changeStep in changeSteps)
             {
                 Boolean isChangeStepRan = HandleChangeStep(designer,changeStep);
@@ -39,7 +39,9 @@ namespace BirdCommand.Custom
             Random rnd = new Random();
             if(changeStep.Type == ChangeStepType.Add )
             {
-                IonCell ionCell = new IonCell(rnd.Next(240),240, changeStep.Compound.ions);
+                int yplacementOffset = (placementXOffset / 250) *50;
+                IonCell ionCell = new IonCell((placementXOffset %250),260 + yplacementOffset, changeStep.Compound.ions);
+                placementXOffset = placementXOffset + ionCell.Size.Width;
                 designer.Document.AddElement(ionCell);
                 return true;
             }

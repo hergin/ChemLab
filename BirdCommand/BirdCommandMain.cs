@@ -31,7 +31,7 @@ namespace BirdCommand
         private const int TimeoutBetweenRuleExecution = 250;
         public static int CELL_SIZE = 50;
         Point ion1Location = new Point(70, 10),
-            ion2Location = new Point(60, 65),
+            ion2Location = new Point(70, 65),
             pigButtonLocation = new Point(70, 120),
             ruleButtonLocation = new Point(25,220);
         BirdCell theBird;

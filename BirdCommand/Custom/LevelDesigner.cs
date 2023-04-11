@@ -122,7 +122,7 @@ namespace BirdCommand.Custom
 			}
 			else if(ion.Symbol == "Cl")
 			{
-		        IonCell ioncell =  new IonCell(75,chlorineYOffset,new List<Ion>{ new Chlorine()});
+		        IonCell ioncell =  new IonCell(80,chlorineYOffset,new List<Ion>{ new Chlorine()});
 		        ionCells.Add(ioncell);
                 chlorineYOffset += ion.Radius;
 
