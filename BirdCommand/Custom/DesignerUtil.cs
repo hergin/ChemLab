@@ -16,8 +16,6 @@ namespace BirdCommand.Custom
         internal static void ApplyChanges(Designer designer, List<ChangeStep> changes)
         {
             CheckIfWinConditionMet(designer,changes);
-            MessageBox.Show(String.Join(Environment.NewLine, changes), "Changes");
-            // TODO apply the changes to the designer (i.e. add/remove elements)
         }
 
 
