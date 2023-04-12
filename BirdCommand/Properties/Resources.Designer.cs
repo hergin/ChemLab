@@ -335,6 +335,17 @@ namespace BirdCommand.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 5xNa
+        ///5xCl
+        ///1xNaCl.
+        /// </summary>
+        internal static string Lab2 {
+            get {
+                return ResourceManager.GetString("Lab2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap maze_selector_box {

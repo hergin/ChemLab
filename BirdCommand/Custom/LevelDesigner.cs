@@ -77,10 +77,10 @@ namespace BirdCommand.Custom
             return result;
         }
 
-        public static List<Ion> ProduceIons(String boardString)
+        internal static List<Compound> ProduceIons(String boardString)
         {
             var result = new List<BaseElement>();
-            var ions = new List<Ion>();
+            var ions = new List<Compound>();
             var rows = boardString.Split(new char[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
 
             for (int i = 0; i < rows.Count(); i++)
@@ -93,11 +93,15 @@ namespace BirdCommand.Custom
                      switch(symbol)
                     {
                         case "Na":
-                            ions.Add( new Sodium());
+                            ions.Add( new Compound { ions = new List<Ion> { new Sodium() } });
                             break;
                         case "Cl":
-                             ions.Add(  new Chlorine() );
+                            ions.Add(new Compound { ions = new List<Ion> { new Chlorine() } });
                             break;
+                        case "NaCl":
+                            ions.Add(new Compound { ions = new List<Ion> { new Sodium(), new Chlorine() } });
+                            break;
+
                     }
 
                 }
@@ -105,36 +109,36 @@ namespace BirdCommand.Custom
             return ions;
         }
 
-	public static List<IonCell> PlaceIonCells(List<Ion> ions)
-	{
-	    Random rnd = new Random();
-		List<IonCell> ionCells = new List<IonCell>();
-        var sodiumYOffset = 0;
-        var chlorineYOffset = 0;
+        public static List<IonCell> PlaceIonCells(List<Compound> compounds)
+        {
+            Random rnd = new Random();
+            List<IonCell> ionCells = new List<IonCell>();
+            var sodiumYOffset = 0;
+            var chlorineYOffset = 0;
 
-        foreach(Ion ion in ions)
-		 {
-		    if(ion.Symbol == "Na")
-		    {
-		        IonCell ioncell =  new IonCell(15,sodiumYOffset,new List<Ion>{ new Sodium()});
-		        ionCells.Add(ioncell);
-                sodiumYOffset+= ion.Radius;
-			}
-			else if(ion.Symbol == "Cl")
-			{
-		        IonCell ioncell =  new IonCell(80,chlorineYOffset,new List<Ion>{ new Chlorine()});
-		        ionCells.Add(ioncell);
-                chlorineYOffset += ion.Radius;
+            foreach (var compound in compounds)
+            {
+                if (compound.Symbol == "Na")
+                {
+                    IonCell ioncell = new IonCell(15, sodiumYOffset, new List<Ion> { new Sodium() });
+                    ionCells.Add(ioncell);
+                    sodiumYOffset+= 5;
+                }
+                else if (compound.Symbol == "Cl")
+                {
+                    IonCell ioncell = new IonCell(80, chlorineYOffset, new List<Ion> { new Chlorine() });
+                    ionCells.Add(ioncell);
+                    chlorineYOffset += 5;
 
-            }
+                }
                 else
                 {
-                    IonCell ioncell =  new IonCell(rnd.Next(150),rnd.Next(150),new List<Ion>{ ion});
-		        ionCells.Add(ioncell);
+                    IonCell ioncell = new IonCell(rnd.Next(150), rnd.Next(150), compound.ions);
+                    ionCells.Add(ioncell);
                 }
-		   }
-		return ionCells;
-	}
+            }
+            return ionCells;
+        }
 
         public static void GenericLevelDesign(Designer theBoard, String boardString)
         {

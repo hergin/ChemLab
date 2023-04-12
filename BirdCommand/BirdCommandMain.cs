@@ -592,7 +592,7 @@ namespace BirdCommand
 
             designer_board.Document.Elements.Clear();
 
-            var resourceName = "Lab" + '1';
+            var resourceName = "Lab" + level;
             LevelDesigner.GenericLabLevelDesign(designer_board, Resources.ResourceManager.GetString(resourceName));
 
             var ion2 = new Chlorine();

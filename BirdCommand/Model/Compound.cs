@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BirdCommand.Model
 {
-    internal class Compound
+    public class Compound
     {
         public List<Ion> ions { get; set; }
 

@@ -331,6 +331,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\Lab2.txt" />
     <Content Include="Resources\Lab1.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
