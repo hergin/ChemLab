@@ -43,10 +43,11 @@ namespace BirdCommand
             this.maze3button = new System.Windows.Forms.PictureBox();
             this.maze2button = new System.Windows.Forms.PictureBox();
             this.maze1button = new System.Windows.Forms.PictureBox();
-            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.debugPanel = new System.Windows.Forms.Panel();
+            this.button5 = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
@@ -61,7 +62,6 @@ namespace BirdCommand
             this.runButton = new System.Windows.Forms.PictureBox();
             this.resetButton = new System.Windows.Forms.PictureBox();
             this.trafoRunner = new System.ComponentModel.BackgroundWorker();
-            this.label6 = new System.Windows.Forms.Label();
             this.designer_board = new Dalssoft.DiagramNet.Designer();
             this.designer_trafo = new Dalssoft.DiagramNet.Designer();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -122,16 +122,15 @@ namespace BirdCommand
             this.button4.Text = "Move Bird Left";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
-
             // 
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox1.BackgroundImage = global::BirdCommand.Properties.Resources.Bird_Command_logos_back;
+            this.pictureBox1.BackgroundImage = global::BirdCommand.Properties.Resources.ChemLab_logos;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox1.Location = new System.Drawing.Point(24, 8);
+            this.pictureBox1.Location = new System.Drawing.Point(8, 8);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(446, 76);
+            this.pictureBox1.Size = new System.Drawing.Size(370, 76);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 23;
             this.pictureBox1.TabStop = false;
@@ -139,7 +138,7 @@ namespace BirdCommand
             // 
             // panel2
             // 
-            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(173)))), ((int)(((byte)(188)))));
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(151)))), ((int)(((byte)(102)))));
             this.panel2.Controls.Add(this.pictureBox1);
             this.panel2.Controls.Add(this.panel6);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
@@ -152,7 +151,6 @@ namespace BirdCommand
             // 
             this.panel6.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.panel6.Controls.Add(this.panel5);
-            this.panel6.Controls.Add(this.label5);
             this.panel6.Location = new System.Drawing.Point(568, 16);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(387, 63);
@@ -232,17 +230,17 @@ namespace BirdCommand
             this.maze1button.MouseEnter += new System.EventHandler(this.maze1button_MouseEnter);
             this.maze1button.MouseLeave += new System.EventHandler(this.maze1button_MouseLeave);
             // 
-            // label5
+            // label6
             // 
-            this.label5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(173)))), ((int)(((byte)(188)))));
-            this.label5.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(14, 15);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(122, 34);
-            this.label5.TabIndex = 36;
-            this.label5.Text = "Classic Maze";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(232)))), ((int)(((byte)(234)))));
+            this.label6.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.Color.White;
+            this.label6.Location = new System.Drawing.Point(150, 6);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(31, 34);
+            this.label6.TabIndex = 38;
+            this.label6.Text = "...";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label1
             // 
@@ -275,6 +273,7 @@ namespace BirdCommand
             this.debugPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.debugPanel.BackColor = System.Drawing.Color.Salmon;
+            this.debugPanel.Controls.Add(this.button5);
             this.debugPanel.Controls.Add(this.button11);
             this.debugPanel.Controls.Add(this.button7);
             this.debugPanel.Controls.Add(this.label3);
@@ -287,6 +286,17 @@ namespace BirdCommand
             this.debugPanel.Size = new System.Drawing.Size(1325, 150);
             this.debugPanel.TabIndex = 30;
             this.debugPanel.Visible = false;
+            // 
+            // button5
+            // 
+            this.button5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button5.Location = new System.Drawing.Point(25, 50);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(156, 23);
+            this.button5.TabIndex = 32;
+            this.button5.Text = "Make model interactible";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click_1);
             // 
             // button11
             // 
@@ -367,13 +377,14 @@ namespace BirdCommand
             this.copyLhsToRhsButton.Size = new System.Drawing.Size(164, 91);
             this.copyLhsToRhsButton.TabIndex = 10;
             this.copyLhsToRhsButton.UseVisualStyleBackColor = true;
+            this.copyLhsToRhsButton.Visible = false;
             this.copyLhsToRhsButton.Click += new System.EventHandler(this.copyLhsToRhsButton_Click_1);
             // 
             // decreaseRuleCountButton
             // 
             this.decreaseRuleCountButton.BackgroundImage = global::BirdCommand.Properties.Resources.decreaseRuleCountButton;
             this.decreaseRuleCountButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.decreaseRuleCountButton.Location = new System.Drawing.Point(106, 202);
+            this.decreaseRuleCountButton.Location = new System.Drawing.Point(108, 20);
             this.decreaseRuleCountButton.Name = "decreaseRuleCountButton";
             this.decreaseRuleCountButton.Size = new System.Drawing.Size(75, 44);
             this.decreaseRuleCountButton.TabIndex = 9;
@@ -384,7 +395,7 @@ namespace BirdCommand
             // 
             this.increaseRuleCountButton.BackgroundImage = global::BirdCommand.Properties.Resources.increaseRuleCountButton;
             this.increaseRuleCountButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.increaseRuleCountButton.Location = new System.Drawing.Point(17, 202);
+            this.increaseRuleCountButton.Location = new System.Drawing.Point(19, 20);
             this.increaseRuleCountButton.Name = "increaseRuleCountButton";
             this.increaseRuleCountButton.Size = new System.Drawing.Size(75, 44);
             this.increaseRuleCountButton.TabIndex = 8;
@@ -437,18 +448,6 @@ namespace BirdCommand
             // 
             this.trafoRunner.WorkerReportsProgress = true;
             this.trafoRunner.WorkerSupportsCancellation = true;
-            // 
-            // label6
-            // 
-            this.label6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(232)))), ((int)(((byte)(234)))));
-            this.label6.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(150, 6);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(31, 34);
-            this.label6.TabIndex = 38;
-            this.label6.Text = "...";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // designer_board
             // 
@@ -535,7 +534,6 @@ namespace BirdCommand
         private System.Windows.Forms.PictureBox startOverButton;
         private System.Windows.Forms.PictureBox runButton;
         private System.Windows.Forms.PictureBox resetButton;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.PictureBox maze1button;
@@ -547,6 +545,7 @@ namespace BirdCommand
         private System.Windows.Forms.Button button11;
         private System.Windows.Forms.PictureBox maze9button;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button button5;
     }
 }
 

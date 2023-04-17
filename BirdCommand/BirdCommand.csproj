@@ -331,6 +331,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\ChemLab-logos.jpeg" />
+    <Content Include="Resources\ChemLab-logos_black.png" />
+    <Content Include="Resources\ChemLab-logos_transparent.png" />
+    <Content Include="Resources\ChemLab-logos_white.png" />
     <Content Include="Resources\Lab2.txt" />
     <Content Include="Resources\Lab1.txt" />
   </ItemGroup>

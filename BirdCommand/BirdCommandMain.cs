@@ -581,6 +581,11 @@ namespace BirdCommand
             thePig = (PigCell)designer_board.Document.Elements.GetArray().Where(e => e is PigCell).First();
         }
 
+        private void button5_Click_1(object sender, EventArgs e)
+        {
+            designer_board.Enabled = true;
+        }
+
         private void mazeButtons_Click(object sender, EventArgs e)
         {
             LoadLevel((sender as PictureBox).Tag.ToString());
