@@ -14,23 +14,17 @@ namespace BirdCommand.Custom
     {
         static int placementXOffset = 0;
         static int placementYOffset = 0;
-        internal static void ApplyChanges(Designer designer, List<ChangeStep> changes)
+        internal static Boolean ApplyChanges(Designer designer, List<ChangeStep> changes)
         {
-            CheckIfWinConditionMet(designer,changes);
-        }
-
-
-         internal static Boolean CheckIfWinConditionMet(Designer designer, List<ChangeStep> changeSteps)
-        {
-           foreach(ChangeStep changeStep in changeSteps)
+            foreach (ChangeStep changeStep in changes)
             {
-                Boolean isChangeStepRan = HandleChangeStep(designer,changeStep);
-                if(!isChangeStepRan)
+                Boolean isChangeStepRan = HandleChangeStep(designer, changeStep);
+                if (!isChangeStepRan)
                 {
                     return false;
                 }
             }
-           return true;
+            return true;
         }
 
         internal static Boolean HandleChangeStep(Designer designer, ChangeStep changeStep)
