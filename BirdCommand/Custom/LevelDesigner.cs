@@ -101,6 +101,9 @@ namespace BirdCommand.Custom
                         case "NaCl":
                             ions.Add(new Compound { ions = new List<Ion> { new Sodium(), new Chlorine() } });
                             break;
+                        case "H":
+                            ions.Add(new Compound { ions = new List<Ion> { new Hyrdogen() } });
+                            break;
                     }
 
                 }
@@ -117,10 +120,10 @@ namespace BirdCommand.Custom
             {
                 if(!compoundYoffsetDict.ContainsKey(compound.Symbol))
                 {
-                    compoundYoffsetDict.Add(compound.Symbol, 0);
+                    compoundYoffsetDict.Add(compound.Symbol, 5);
                     elementsPlaced +=1;
                 }
-                int xCoord = elementsPlaced * (350 / (uniqueCount +1));
+                int xCoord = elementsPlaced * (400 / (uniqueCount +1)) - (compound.GetHalfWidth()) ;
                 compoundYoffsetDict.TryGetValue(compound.Symbol,out int compoundYoffset);
                 IonCell ioncell = new IonCell(xCoord, compoundYoffset, compound);
                 ionCells.Add(ioncell);
