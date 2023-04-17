@@ -64,6 +64,7 @@ namespace BirdCommand
             this.trafoRunner = new System.ComponentModel.BackgroundWorker();
             this.designer_board = new Dalssoft.DiagramNet.Designer();
             this.designer_trafo = new Dalssoft.DiagramNet.Designer();
+            this.label_selectlab = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
             this.panel6.SuspendLayout();
@@ -146,6 +147,7 @@ namespace BirdCommand
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1353, 91);
             this.panel2.TabIndex = 26;
+            this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
             // panel6
             // 
@@ -452,7 +454,9 @@ namespace BirdCommand
             // designer_board
             // 
             this.designer_board.AutoScroll = true;
-            this.designer_board.BackColor = System.Drawing.SystemColors.Window;
+            this.designer_board.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(151)))), ((int)(((byte)(102)))));
+            this.designer_board.BackgroundImage = global::BirdCommand.Properties.Resources.icon2;
+            this.designer_board.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.designer_board.Enabled = false;
             this.designer_board.Location = new System.Drawing.Point(16, 105);
             this.designer_board.Name = "designer_board";
@@ -471,12 +475,26 @@ namespace BirdCommand
             this.designer_trafo.Size = new System.Drawing.Size(697, 705);
             this.designer_trafo.TabIndex = 11;
             // 
+            // label_selectlab
+            // 
+            this.label_selectlab.AutoSize = true;
+            this.label_selectlab.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(151)))), ((int)(((byte)(102)))));
+            this.label_selectlab.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_selectlab.ForeColor = System.Drawing.Color.DimGray;
+            this.label_selectlab.Location = new System.Drawing.Point(104, 408);
+            this.label_selectlab.Name = "label_selectlab";
+            this.label_selectlab.Size = new System.Drawing.Size(225, 48);
+            this.label_selectlab.TabIndex = 36;
+            this.label_selectlab.Text = "Select a lab environment\r\nfrom the numbers above!";
+            this.label_selectlab.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // BirdCommandMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1353, 855);
+            this.Controls.Add(this.label_selectlab);
             this.Controls.Add(this.debugPanel);
             this.Controls.Add(this.resetButton);
             this.Controls.Add(this.runButton);
@@ -492,7 +510,7 @@ namespace BirdCommand
             this.MinimumSize = new System.Drawing.Size(1350, 800);
             this.Name = "BirdCommandMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Bird Command";
+            this.Text = "ChemLab: Chemical Reactions Made Easy";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel2.ResumeLayout(false);
@@ -509,6 +527,7 @@ namespace BirdCommand
             ((System.ComponentModel.ISupportInitialize)(this.runButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.resetButton)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -546,6 +565,7 @@ namespace BirdCommand
         private System.Windows.Forms.PictureBox maze9button;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Label label_selectlab;
     }
 }
 

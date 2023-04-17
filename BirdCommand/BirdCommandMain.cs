@@ -28,6 +28,7 @@ namespace BirdCommand
     // TODO solve the first one by using the whole pattern and it looks like failing sometime.
     public partial class BirdCommandMain : Form
     {
+        string currentLab = "1";
         private const int TimeoutBetweenRuleExecution = 250;
         public static int CELL_SIZE = 50;
         Point ion1Location = new Point(70, 10),
@@ -60,8 +61,8 @@ namespace BirdCommand
             toolTip1.SetToolTip(increaseRuleCountButton, "Increase the rule count of the selected rule");
             toolTip1.SetToolTip(decreaseRuleCountButton, "Decrease the rule count of the selected rule");
             toolTip1.SetToolTip(copyLhsToRhsButton, "Copy 'Current Pattern' to 'Pattern After'");
-            toolTip1.SetToolTip(resetButton, "Move the bird back to the original position in the maze");
-            toolTip1.SetToolTip(startOverButton, "This will reset the puzzle to its start state and delete all the blocks you've added or changed.");
+            toolTip1.SetToolTip(resetButton, "Reset the tranformation");
+            toolTip1.SetToolTip(startOverButton, "This will reset the lab to its start state and delete all the blocks you've added or changed.");
             toolTip1.SetToolTip(duplicateButton, "Duplicate the selected rule");
             toolTip1.SetToolTip(maze1button, "Open maze 1");
             toolTip1.SetToolTip(maze2button, "Open maze 2");
@@ -101,8 +102,10 @@ namespace BirdCommand
             trafoRunner.DoWork += TrafoRunner_DoWork;
             trafoRunner.ProgressChanged += TrafoRunner_ProgressChanged;
 
+            designer_board.Document.GridSize = new Size(500,500);
+
             // TODO uncommenting this removes the rule button and trash button
-            //LoadLevel("1");
+            //LoadLevel(currentLab);
         }
 
         private void Designer_trafo_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -456,7 +459,7 @@ namespace BirdCommand
 
         private void startOverButton_Click(object sender, EventArgs e)
         {
-            DialogResult dialogResult = MessageBox.Show("This will reset the puzzle to its start state and delete all the blocks you've added or changed.", "Are you sure you want to start over?", MessageBoxButtons.YesNo,MessageBoxIcon.Question);
+            DialogResult dialogResult = MessageBox.Show("This will reset the lab to its start state and delete all the blocks you've added or changed.", "Are you sure you want to start over?", MessageBoxButtons.YesNo,MessageBoxIcon.Question);
             if (dialogResult == DialogResult.Yes)
             {
                 StartOver();
@@ -586,6 +589,11 @@ namespace BirdCommand
             designer_board.Enabled = true;
         }
 
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
         private void mazeButtons_Click(object sender, EventArgs e)
         {
             LoadLevel((sender as PictureBox).Tag.ToString());
@@ -593,6 +601,8 @@ namespace BirdCommand
 
         private void LoadLevel(String level)
         {
+            label_selectlab.Visible = false;
+            currentLab = level;
             StartOver();
 
             designer_board.Document.Elements.Clear();

@@ -335,6 +335,7 @@
     <Content Include="Resources\ChemLab-logos_black.png" />
     <Content Include="Resources\ChemLab-logos_transparent.png" />
     <Content Include="Resources\ChemLab-logos_white.png" />
+    <Content Include="Resources\icon2.jpeg" />
     <Content Include="Resources\Lab2.txt" />
     <Content Include="Resources\Lab1.txt" />
   </ItemGroup>
