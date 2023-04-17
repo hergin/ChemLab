@@ -595,6 +595,11 @@ namespace BirdCommand
 
         }
 
+        private void designer_board_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void mazeButtons_Click(object sender, EventArgs e)
         {
             currentLab = (sender as PictureBox).Tag.ToString();

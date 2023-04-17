@@ -67,6 +67,7 @@
     <Compile Include="Custom\StartCell.cs" />
     <Compile Include="Model\ChangeStep.cs" />
     <Compile Include="Model\Chlorine.cs" />
+    <Compile Include="Model\Hydrogen.cs" />
     <Compile Include="Model\Compound.cs" />
     <Compile Include="Model\Ion.cs" />
     <Compile Include="Custom\IonCell.cs" />

@@ -22,8 +22,14 @@ namespace BirdCommand.Custom
             this.compound = new Compound { ions = ions };
             Name = compound.Symbol;
         }
-       
-        
+
+        public IonCell(int x, int y, Compound compound) : base(x, y, compound.ions.Sum(i => i.Radius) + 15, compound.ions.Select(i => i.Radius).Max())
+        {
+            this.compound = compound;
+            Name = compound.Symbol;
+        }
+
+
         public void AddIon(Ion ion)
         {
             compound.ions.Add(ion);
