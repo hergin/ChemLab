@@ -144,6 +144,19 @@ namespace BirdCommand.Custom.Tests
         }
 
         [TestMethod()]
+        public void FindChangesInTheRuleChemistry_Test_DeleteTwoIonsOnly()
+        {
+            List<BaseElement> ruleLhs = new List<BaseElement>();
+            ruleLhs.Add(new IonCell(50, 50, new List<Ion> { new Sodium() }));
+            ruleLhs.Add(new IonCell(100, 50, new List<Ion> { new Sodium() }));
+
+            List<BaseElement> ruleRhs = new List<BaseElement>();
+
+            var result = PyUtil.FindChangesInTheRuleChemistry(ruleLhs, ruleRhs);
+            Assert.AreEqual(2, result.Count);
+        }
+
+        [TestMethod()]
         public void FindChangesToTheBirdInTheRuleTest()
         {
             var ruleAndItsContents = new List<BaseElement>();

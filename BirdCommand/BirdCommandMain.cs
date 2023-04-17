@@ -468,6 +468,7 @@ namespace BirdCommand
 
         private void StartOver()
         {
+            LoadLevel(currentLab);
             Reset();
             foreach (var element in DesignerUtil.GetTrafoElementsOutsideBlockWithoutStartOrSnapOrBlock(designer_trafo))
             {
@@ -596,14 +597,13 @@ namespace BirdCommand
 
         private void mazeButtons_Click(object sender, EventArgs e)
         {
-            LoadLevel((sender as PictureBox).Tag.ToString());
+            currentLab = (sender as PictureBox).Tag.ToString();
+            LoadLevel(currentLab);
         }
 
         private void LoadLevel(String level)
         {
             label_selectlab.Visible = false;
-            currentLab = level;
-            StartOver();
 
             designer_board.Document.Elements.Clear();
 
@@ -615,6 +615,13 @@ namespace BirdCommand
             var ioncell2 = new IonCell(ion2Location.X, ion2Location.Y,ionList2);
 
             designer_trafo.Document.AddElement(ioncell2);
+
+            Reset();
+            foreach (var element in DesignerUtil.GetTrafoElementsOutsideBlockWithoutStartOrSnapOrBlock(designer_trafo))
+            {
+                designer_trafo.Document.DeleteElement(element);
+            }
+            designer_trafo.Document.ClearSelection();
         }
 
         private void button7_Click(object sender, EventArgs e)
