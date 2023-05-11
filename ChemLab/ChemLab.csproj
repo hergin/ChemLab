@@ -1,0 +1,287 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8B12CDDF-8F86-40D4-9EF8-5EAF9501E6FE}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>ChemLab</RootNamespace>
+    <AssemblyName>ChemLab</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ChemLabMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChemLabMain.Designer.cs">
+      <DependentUpon>ChemLabMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Custom\ConvertUtil.cs" />
+    <Compile Include="Custom\DesignerUtil.cs" />
+    <Compile Include="Custom\Graph.cs" />
+    <Compile Include="Custom\PatternUtil.cs" />
+    <Compile Include="Custom\PyUtil.cs" />
+    <Compile Include="Custom\ReactionCell.cs" />
+    <Compile Include="Custom\SnapCell.cs" />
+    <Compile Include="Custom\StartCell.cs" />
+    <Compile Include="Model\ChangeStep.cs" />
+    <Compile Include="Model\Chlorine.cs" />
+    <Compile Include="Model\Hydrogen.cs" />
+    <Compile Include="Model\Compound.cs" />
+    <Compile Include="Model\Ion.cs" />
+    <Compile Include="Custom\IonCell.cs" />
+    <Compile Include="Custom\LevelDesigner.cs" />
+    <Compile Include="Custom\TrafoUtil.cs" />
+    <Compile Include="Custom\TrashCell.cs" />
+    <Compile Include="DiagramNET\Designer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DiagramNET\DesignerAction.cs" />
+    <Compile Include="DiagramNET\DiagramUtil.cs" />
+    <Compile Include="DiagramNET\Document.cs" />
+    <Compile Include="DiagramNET\EditLabelAction.cs" />
+    <Compile Include="DiagramNET\ElementCollection.cs" />
+    <Compile Include="DiagramNET\element\BaseElement.cs" />
+    <Compile Include="DiagramNET\element\BaseLinkElement.cs" />
+    <Compile Include="DiagramNET\element\CommentBoxElement.cs" />
+    <Compile Include="DiagramNET\element\CommentBoxNode.cs" />
+    <Compile Include="DiagramNET\element\ConnectorElement.cs" />
+    <Compile Include="DiagramNET\element\controller\CommentBoxController.cs" />
+    <Compile Include="DiagramNET\element\controller\ConnectorController.cs" />
+    <Compile Include="DiagramNET\element\controller\ControllerHelper.cs" />
+    <Compile Include="DiagramNET\element\controller\ElipseController.cs" />
+    <Compile Include="DiagramNET\element\controller\IControllable.cs" />
+    <Compile Include="DiagramNET\element\controller\IController.cs" />
+    <Compile Include="DiagramNET\element\controller\ILabelController.cs" />
+    <Compile Include="DiagramNET\element\controller\IMoveController.cs" />
+    <Compile Include="DiagramNET\element\controller\IResizeController.cs" />
+    <Compile Include="DiagramNET\element\controller\LineController.cs" />
+    <Compile Include="DiagramNET\element\controller\RectangleController.cs" />
+    <Compile Include="DiagramNET\element\controller\RightAngleLinkController.cs" />
+    <Compile Include="DiagramNET\element\ElipseElement.cs" />
+    <Compile Include="DiagramNET\element\ElipseNode.cs" />
+    <Compile Include="DiagramNET\element\ILabelElement.cs" />
+    <Compile Include="DiagramNET\element\LabelElement.cs" />
+    <Compile Include="DiagramNET\element\LineElement.cs" />
+    <Compile Include="DiagramNET\element\NodeElement.cs" />
+    <Compile Include="DiagramNET\element\RectangleElement.cs" />
+    <Compile Include="DiagramNET\element\RectangleNode.cs" />
+    <Compile Include="DiagramNET\element\RightAngleLinkElement.cs" />
+    <Compile Include="DiagramNET\element\StraightLinkElement.cs" />
+    <Compile Include="DiagramNET\events\ElementConnectEventArgs.cs" />
+    <Compile Include="DiagramNET\events\ElementEventArgs.cs" />
+    <Compile Include="DiagramNET\events\ElementMouseEventArgs.cs" />
+    <Compile Include="DiagramNET\events\ElementSelectionEventArgs.cs" />
+    <Compile Include="DiagramNET\GeneralEnuns.cs" />
+    <Compile Include="DiagramNET\IContainer.cs" />
+    <Compile Include="DiagramNET\MoveAction.cs" />
+    <Compile Include="DiagramNET\ResizeAction.cs" />
+    <Compile Include="DiagramNET\UndoManager.cs" />
+    <Compile Include="Model\Sodium.cs" />
+    <Compile Include="Model\TrafoDesigner.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="ChemLabMain.resx">
+      <DependentUpon>ChemLabMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DiagramNET\Designer.resx">
+      <DependentUpon>Designer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Include="Resources\WPy64-39100.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hoc1.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hoc2.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hoc3.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rule-start.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rule.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\snap.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\run-button.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\increaseRuleCountButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\decreaseRuleCountButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\reset-button.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\start-over-button.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\start-over-button-over.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\run-button-over.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\reset-button-over.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\maze-selector-box.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\maze2_over.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\maze3.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\maze3_over.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\maze1.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\maze1_over.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\maze2.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rule-highlighted.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rule-start-highlighted.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pattern-matching.py">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\difference-finding.py">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\small-maze.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rule-condensed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\canopen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\canclosed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\difference-finding-just-bird.py">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rule-condensed-highlighted.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hoc9.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\maze9_over.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\maze9.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pattern-matching-chemistry.py">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\ChemLab-logos.jpeg" />
+    <Content Include="Resources\ChemLab-logos_black.png" />
+    <Content Include="Resources\ChemLab-logos_transparent.png" />
+    <Content Include="Resources\ChemLab-logos_white.png" />
+    <Content Include="Resources\icon2.jpeg" />
+    <Content Include="Resources\Lab2.txt" />
+    <Content Include="Resources\Lab1.txt" />
+    <None Include="Resources\reaction.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
