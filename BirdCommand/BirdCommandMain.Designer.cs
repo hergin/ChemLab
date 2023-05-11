@@ -47,12 +47,10 @@ namespace BirdCommand
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.decreaseRuleCountButton = new System.Windows.Forms.Button();
-            this.increaseRuleCountButton = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.startOverButton = new System.Windows.Forms.PictureBox();
-            this.runButton = new System.Windows.Forms.PictureBox();
             this.resetButton = new System.Windows.Forms.PictureBox();
+            this.runButton = new System.Windows.Forms.PictureBox();
             this.trafoRunner = new System.ComponentModel.BackgroundWorker();
             this.label_selectlab = new System.Windows.Forms.Label();
             this.designer_board = new Dalssoft.DiagramNet.Designer();
@@ -65,10 +63,9 @@ namespace BirdCommand
             ((System.ComponentModel.ISupportInitialize)(this.maze2button)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.maze1button)).BeginInit();
             this.debugPanel.SuspendLayout();
-            this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.startOverButton)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.runButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.resetButton)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.runButton)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -269,36 +266,10 @@ namespace BirdCommand
             this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(228)))), ((int)(((byte)(228)))), ((int)(((byte)(228)))));
-            this.panel4.Controls.Add(this.decreaseRuleCountButton);
-            this.panel4.Controls.Add(this.increaseRuleCountButton);
             this.panel4.Location = new System.Drawing.Point(1137, 142);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(200, 705);
             this.panel4.TabIndex = 30;
-            // 
-            // decreaseRuleCountButton
-            // 
-            this.decreaseRuleCountButton.BackgroundImage = global::BirdCommand.Properties.Resources.decreaseRuleCountButton;
-            this.decreaseRuleCountButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.decreaseRuleCountButton.Location = new System.Drawing.Point(108, 20);
-            this.decreaseRuleCountButton.Name = "decreaseRuleCountButton";
-            this.decreaseRuleCountButton.Size = new System.Drawing.Size(75, 44);
-            this.decreaseRuleCountButton.TabIndex = 9;
-            this.toolTip1.SetToolTip(this.decreaseRuleCountButton, "Decrease the rule count of the selected rule");
-            this.decreaseRuleCountButton.UseVisualStyleBackColor = true;
-            this.decreaseRuleCountButton.Click += new System.EventHandler(this.decreaseRuleCountButton_Click_1);
-            // 
-            // increaseRuleCountButton
-            // 
-            this.increaseRuleCountButton.BackgroundImage = global::BirdCommand.Properties.Resources.increaseRuleCountButton;
-            this.increaseRuleCountButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.increaseRuleCountButton.Location = new System.Drawing.Point(19, 20);
-            this.increaseRuleCountButton.Name = "increaseRuleCountButton";
-            this.increaseRuleCountButton.Size = new System.Drawing.Size(75, 44);
-            this.increaseRuleCountButton.TabIndex = 8;
-            this.toolTip1.SetToolTip(this.increaseRuleCountButton, "Increase the rule count of the selected rule");
-            this.increaseRuleCountButton.UseVisualStyleBackColor = true;
-            this.increaseRuleCountButton.Click += new System.EventHandler(this.increaseRuleCountButton_Click_1);
             // 
             // startOverButton
             // 
@@ -318,19 +289,6 @@ namespace BirdCommand
             this.startOverButton.MouseEnter += new System.EventHandler(this.startOverButton_MouseEnter);
             this.startOverButton.MouseLeave += new System.EventHandler(this.startOverButton_MouseLeave);
             // 
-            // runButton
-            // 
-            this.runButton.BackgroundImage = global::BirdCommand.Properties.Resources.run_button;
-            this.runButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.runButton.Location = new System.Drawing.Point(16, 520);
-            this.runButton.Name = "runButton";
-            this.runButton.Size = new System.Drawing.Size(124, 57);
-            this.runButton.TabIndex = 34;
-            this.runButton.TabStop = false;
-            this.runButton.Click += new System.EventHandler(this.runButton_Click);
-            this.runButton.MouseEnter += new System.EventHandler(this.runButton_MouseEnter);
-            this.runButton.MouseLeave += new System.EventHandler(this.runButton_MouseLeave);
-            // 
             // resetButton
             // 
             this.resetButton.BackgroundImage = global::BirdCommand.Properties.Resources.reset_button;
@@ -344,6 +302,19 @@ namespace BirdCommand
             this.resetButton.Click += new System.EventHandler(this.resetButton_Click_1);
             this.resetButton.MouseEnter += new System.EventHandler(this.resetButton_MouseEnter);
             this.resetButton.MouseLeave += new System.EventHandler(this.resetButton_MouseLeave);
+            // 
+            // runButton
+            // 
+            this.runButton.BackgroundImage = global::BirdCommand.Properties.Resources.run_button;
+            this.runButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.runButton.Location = new System.Drawing.Point(16, 520);
+            this.runButton.Name = "runButton";
+            this.runButton.Size = new System.Drawing.Size(124, 57);
+            this.runButton.TabIndex = 34;
+            this.runButton.TabStop = false;
+            this.runButton.Click += new System.EventHandler(this.runButton_Click);
+            this.runButton.MouseEnter += new System.EventHandler(this.runButton_MouseEnter);
+            this.runButton.MouseLeave += new System.EventHandler(this.runButton_MouseLeave);
             // 
             // trafoRunner
             // 
@@ -409,10 +380,9 @@ namespace BirdCommand
             ((System.ComponentModel.ISupportInitialize)(this.maze1button)).EndInit();
             this.debugPanel.ResumeLayout(false);
             this.debugPanel.PerformLayout();
-            this.panel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.startOverButton)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.runButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.resetButton)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.runButton)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -429,8 +399,6 @@ namespace BirdCommand
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.Button increaseRuleCountButton;
-        private System.Windows.Forms.Button decreaseRuleCountButton;
         private System.Windows.Forms.PictureBox startOverButton;
         private System.Windows.Forms.PictureBox runButton;
         private System.Windows.Forms.PictureBox resetButton;

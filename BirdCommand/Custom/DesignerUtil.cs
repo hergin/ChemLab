@@ -50,20 +50,6 @@ namespace BirdCommand.Custom
 
         }
 
-        internal static void MoveRuleAndItsContents(Designer designer, RuleCell rule, int newX, int newY)
-        {
-            var ruleStarterPosition = rule.Location;
-
-            var ruleContent = DesignerUtil.FindElementsWithin(designer, rule);
-            foreach (var element in ruleContent)
-            {
-                // move the contents of the rule as well
-                var differenceX = Math.Abs(element.Location.X - ruleStarterPosition.X);
-                var differenceY = Math.Abs(element.Location.Y - ruleStarterPosition.Y);
-                element.Location = new Point(newX + differenceX, newY + differenceY);
-            }
-        }
-
         internal static void MoveReactionAndItsContents(Designer designer, ReactionCell reaction, int newX, int newY)
         {
             var reactionStarterPosition = reaction.Location;

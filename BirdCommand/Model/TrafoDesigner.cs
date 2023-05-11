@@ -54,7 +54,7 @@ namespace BirdCommand.Model
         private void TrafoDesigner_ElementMouseDown(object sender, ElementMouseEventArgs e)
         {
             DesignerUtil.ArrangeTheOrder(this);
-            if (e.Element is RuleCell || e.Element is ReactionCell)
+            if (e.Element is ReactionCell)
             {
                 this.Document.ClearSelection();
                 List<BaseElement> list = DesignerUtil.FindElementsWithin(this, e.Element);
@@ -64,9 +64,9 @@ namespace BirdCommand.Model
 
         private void TrafoDesigner_ElementMoving(object sender, ElementEventArgs e)
         {
-            if (e.Element is RuleCell || e.Element is ReactionCell)
+            if (e.Element is ReactionCell)
             {
-                var possibleElements = DesignerUtil.GetTrafoElementsOutsideBlockWithoutSnapOrBlock(this).Where(el => (el is RuleCell || el is StartCell || el is ReactionCell)
+                var possibleElements = DesignerUtil.GetTrafoElementsOutsideBlockWithoutSnapOrBlock(this).Where(el => (el is StartCell || el is ReactionCell)
                     && !el.Equals(e.Element));
 
                 var smallest = int.MaxValue;
@@ -122,20 +122,15 @@ namespace BirdCommand.Model
                 return;
             }
 
-            if (e.Element is RuleCell rule)
+            if (e.Element is ReactionCell reaction)
             {
-                DesignerUtil.MoveRuleAndItsContents(this, rule, theSnapCell.Location.X - 11, theSnapCell.Location.Y);
+                DesignerUtil.MoveReactionAndItsContents(this, reaction, theSnapCell.Location.X - 11, theSnapCell.Location.Y+5);
 
                 // TODO Move the rest of the rules accordingly (if we put rule within two rules)
-                foreach (var otherRule in DesignerUtil.GetTrafoElementsOutsideBlockWithoutStartOrSnapOrBlock(this).Where(el => el is RuleCell && el.Location.Y > rule.Location.Y))
+                foreach (var otherRule in DesignerUtil.GetTrafoElementsOutsideBlockWithoutStartOrSnapOrBlock(this).Where(el => el is ReactionCell && el.Location.Y > reaction.Location.Y))
                 {
                     // this should be investigated more. Because some elements of the newly moved rule might be on top of the existing rule which will mess things up.
                 }
-
-            }
-            else if (e.Element is ReactionCell reaction)
-            {
-                DesignerUtil.MoveReactionAndItsContents(this, reaction, theSnapCell.Location.X - 11, theSnapCell.Location.Y+5);
             }
             else if (e.Element is IonCell ionCell)
             {

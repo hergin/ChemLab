@@ -27,8 +27,7 @@ namespace BirdCommand
         private const int TimeoutBetweenRuleExecution = 250;
         public static int CELL_SIZE = 50;
         Point ion1Location = new Point(70, 10),
-            ion2Location = new Point(70, 75),
-            ruleButtonLocation = new Point(25, 220);
+            ion2Location = new Point(70, 75);
 
 
 
@@ -48,9 +47,6 @@ namespace BirdCommand
 
             trafoDesigner.MouseDown += trafoDesigner_MouseDown;
 
-
-            var addRuleButtonOnCanvas = new RuleCell(ruleButtonLocation.X, ruleButtonLocation.Y, 140, 70);
-            trafoDesigner.Document.AddElement(addRuleButtonOnCanvas);
 
             var ion1 = new Sodium();
             var ionList1 = new List<Ion>() { ion1 };
@@ -104,21 +100,9 @@ namespace BirdCommand
                 trafoDesigner.SendBlockToBack();
             }
             else if (trafoDesigner.Document.FindElement(e.Location) != null
-              && trafoDesigner.Document.FindElement(e.Location) is RuleCell rule
-              && rule.Location == ruleButtonLocation)
-            {
-                rule.ResizeToOriginal();
-                trafoDesigner.Document.BringToFrontElement(rule);
-                var newRule = new RuleCell(ruleButtonLocation.X, ruleButtonLocation.Y, 140, 70);
-                trafoDesigner.Document.AddElement(newRule);
-                trafoDesigner.Document.SendToBackElement(newRule);
-                trafoDesigner.SendBlockToBack();
-            }
-            else if (trafoDesigner.Document.FindElement(e.Location) != null
             && trafoDesigner.Document.FindElement(e.Location) is ReactionCell reaction)
             {
                 reaction.ResizeToOriginal();
-                reaction.Highlight();
                 trafoDesigner.Document.BringToFrontElement(reaction);
                 var newReaction = new ReactionCell(25, 300, 140, 35);
                 trafoDesigner.Document.AddElement(newReaction);
@@ -136,10 +120,10 @@ namespace BirdCommand
                     DesignerUtil.ApplyChanges(designer_board, changes);
                     break;
                 case (int)TrafoProgress.Highlight:
-                    ((RuleCell)e.UserState).Highlight();
+                    ((ReactionCell)e.UserState).Highlight();
                     break;
                 case (int)TrafoProgress.Unhighlight:
-                    ((RuleCell)e.UserState).Unhighlight();
+                    ((ReactionCell)e.UserState).Unhighlight();
                     break;
                 case (int)TrafoProgress.Error:
                     MessageBox.Show(e.UserState.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -156,20 +140,20 @@ namespace BirdCommand
         private void TrafoRunner_DoWork(object sender, DoWorkEventArgs e)
         {
             // TODO take empty or other scenarios into account
-            var allRules = DesignerUtil.GetTrafoElementsOutsideBlockWithoutStartOrSnapOrBlock(trafoDesigner).Where(el => el is RuleCell).Cast<RuleCell>().ToList();
-            allRules.Sort((a, b) => { return a.Location.Y - b.Location.Y; });
-            foreach (var rule in allRules)
+            var allReactions = DesignerUtil.GetTrafoElementsOutsideBlockWithoutStartOrSnapOrBlock(trafoDesigner).Where(el => el is ReactionCell).Cast<ReactionCell>().ToList();
+            allReactions.Sort((a, b) => { return a.Location.Y - b.Location.Y; });
+            foreach (var reaction in allReactions)
             {
                 try
                 {
-                    trafoRunner.ReportProgress((int)TrafoProgress.Highlight, rule);
+                    trafoRunner.ReportProgress((int)TrafoProgress.Highlight, reaction);
 
                     var trafoElements = DesignerUtil.GetTrafoElementsOutsideBlockWithoutStartOrSnapOrBlock(trafoDesigner);
 
-                    for (int i = 0; i < ((RuleCell)rule).RuleCount; i++)
-                    {
-                        var preConditionElements = TrafoUtil.FindPreConditionElementsChemistry(trafoElements, rule);
-                        var postConditionElements = TrafoUtil.FindPostConditionElementsChemistry(trafoElements, rule);
+                    //for (int i = 0; i < ((ReactionCell)reaction).RuleCount; i++)
+                    //{
+                        var preConditionElements = TrafoUtil.FindPreConditionElementsChemistry(trafoElements, reaction);
+                        var postConditionElements = TrafoUtil.FindPostConditionElementsChemistry(trafoElements, reaction);
                         //var cloneOfPreConditionElements = PatternUtil.Clone(preConditionElements);
                         //var cloneOfPostConditionElements = PatternUtil.Clone(postConditionElements);
 
@@ -196,9 +180,9 @@ namespace BirdCommand
                             trafoRunner.CancelAsync();
                             return;
                         }
-                    }
+                    //}
 
-                    trafoRunner.ReportProgress((int)TrafoProgress.Unhighlight, rule);
+                    trafoRunner.ReportProgress((int)TrafoProgress.Unhighlight, reaction);
                 }
                 catch (Exception exp)
                 {
@@ -216,31 +200,6 @@ namespace BirdCommand
         private void pictureBox1_DoubleClick(object sender, EventArgs e)
         {
             debugPanel.Visible = !debugPanel.Visible;
-        }
-
-
-        private void increaseRuleCountButton_Click_1(object sender, EventArgs e)
-        {
-            if (trafoDesigner.Document.SelectedElements.GetArray().Where(el => el is RuleCell).Count() >= 1)
-            {
-                ((RuleCell)trafoDesigner.Document.SelectedElements.GetArray().Where(el => el is RuleCell).First()).IncreaseRuleCount();
-            }
-            else
-            {
-                MessageBox.Show("Please select a rule first to increase its rule count.", "No rule selected!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
-
-        private void decreaseRuleCountButton_Click_1(object sender, EventArgs e)
-        {
-            if (trafoDesigner.Document.SelectedElements.GetArray().Where(el => el is RuleCell).Count() >= 1)
-            {
-                ((RuleCell)trafoDesigner.Document.SelectedElements.GetArray().Where(el => el is RuleCell).First()).DecreaseRuleCount();
-            }
-            else
-            {
-                MessageBox.Show("Please select a rule first to decrease its rule count.", "No rule selected!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
         }
 
         private void startOverButton_MouseEnter(object sender, EventArgs e)
@@ -311,9 +270,9 @@ namespace BirdCommand
         void Reset()
         {
             trafoDesigner.UnHighlightStart();
-            foreach (var rule in DesignerUtil.GetTrafoElementsOutsideBlockWithoutStartOrSnapOrBlock(trafoDesigner).Where(el => el is RuleCell))
+            foreach (var reaction in DesignerUtil.GetTrafoElementsOutsideBlockWithoutStartOrSnapOrBlock(trafoDesigner).Where(el => el is ReactionCell))
             {
-                ((RuleCell)rule).Unhighlight();
+                ((ReactionCell)reaction).Unhighlight();
             }
         }
 

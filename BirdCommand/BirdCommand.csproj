@@ -62,7 +62,6 @@
     <Compile Include="Custom\PyUtil.cs" />
     <Compile Include="Custom\ReactionCell.cs" />
     <Compile Include="Custom\SnapCell.cs" />
-    <Compile Include="Custom\RuleCell.cs" />
     <Compile Include="Custom\StartCell.cs" />
     <Compile Include="Model\ChangeStep.cs" />
     <Compile Include="Model\Chlorine.cs" />
