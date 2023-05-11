@@ -4,9 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace BirdCommand.Custom
 {
@@ -30,19 +27,19 @@ namespace BirdCommand.Custom
         internal static Boolean HandleChangeStep(Designer designer, ChangeStep changeStep)
         {
             Random rnd = new Random();
-            if(changeStep.Type == ChangeStepType.Add )
+            if (changeStep.Type == ChangeStepType.Add)
             {
-                IonCell ionCell = new IonCell((placementXOffset %250),260 + placementYOffset, changeStep.Compound.ions);
+                IonCell ionCell = new IonCell((placementXOffset % 250), 260 + placementYOffset, changeStep.Compound.ions);
                 placementXOffset += 5;
-                placementYOffset +=5;
+                placementYOffset += 5;
                 designer.Document.AddElement(ionCell);
                 return true;
             }
-            if(changeStep.Type ==ChangeStepType.Delete)
+            if (changeStep.Type == ChangeStepType.Delete)
             {
-                BaseElement foundElement = designer.Document.Elements.GetArray().Where(x=> x.Name == changeStep.Compound.Symbol).First();
-               
-                if(foundElement == null)
+                BaseElement foundElement = designer.Document.Elements.GetArray().Where(x => x.Name == changeStep.Compound.Symbol).First();
+
+                if (foundElement == null)
                 {
                     return false;
                 }
@@ -51,29 +48,6 @@ namespace BirdCommand.Custom
             }
             return false;
 
-        }
-
-
-        internal static void CopyLHStoRHS(Designer designer, RuleCell rule)
-        {
-            var lhsElements = TrafoUtil.FindPreConditionElements(DesignerUtil.GetTrafoElementsOutsideBlockWithoutStartOrSnapOrBlock(designer).ToList(),
-                                rule);
-
-            foreach (var element in lhsElements)
-            {
-                if (element is EmptyCell empty)
-                {
-                    designer.Document.AddElement(new EmptyCell(empty.Location.X + 200, empty.Location.Y));
-                }
-                else if (element is BirdCell bird)
-                {
-                    designer.Document.AddElement(new BirdCell(bird.Location.X + 200, bird.Location.Y, bird.Direction));
-                }
-                else if (element is PigCell pig)
-                {
-                    designer.Document.AddElement(new PigCell(pig.Location.X + 200, pig.Location.Y));
-                }
-            }
         }
 
         internal static RuleCell AddRuleToNextEmptySpot(Designer designer)
@@ -116,7 +90,7 @@ namespace BirdCommand.Custom
 
             // Find the blockpanel if exists (it is type of RectangleNode)
             var possibleBlockPanel = allElements.Where(e => e is RectangleNode).FirstOrDefault();
-            if(possibleBlockPanel != null)
+            if (possibleBlockPanel != null)
             {
                 // return the elements fully outside the block panel
                 var blockPanel = possibleBlockPanel as RectangleNode;
@@ -155,70 +129,6 @@ namespace BirdCommand.Custom
             return false;
         }
 
-        internal static Point FindPositionOfAnotherEmptyAround(Designer designer, EmptyCell empty)
-        {
-            foreach (var element in designer.Document.Elements)
-            {
-                if (element is EmptyCell result)
-                {
-                    // area-1: newly created is above the existing element
-                    if (empty.Location.Y >= result.Location.Y - BirdCommandMain.CELL_SIZE && empty.Location.Y <= result.Location.Y
-                        && empty.Location.X >= result.Location.X && empty.Location.X <= result.Location.X + result.Size.Width)
-                    {
-                        return new Point(result.Location.X, result.Location.Y - BirdCommandMain.CELL_SIZE);
-                    }
-                    else // area-2: newly created is below the existing element
-                    if (empty.Location.Y >= result.Location.Y + BirdCommandMain.CELL_SIZE && empty.Location.Y <= result.Location.Y + result.Size.Height + BirdCommandMain.CELL_SIZE
-                        && empty.Location.X >= result.Location.X && empty.Location.X <= result.Location.X + result.Size.Width)
-                    {
-                        return new Point(result.Location.X, result.Location.Y + BirdCommandMain.CELL_SIZE);
-                    }
-                    else // area-3: newly created is right of the existing element
-                    if (empty.Location.Y >= result.Location.Y  && empty.Location.Y <= result.Location.Y + result.Size.Height
-                        && empty.Location.X >= result.Location.X + BirdCommandMain.CELL_SIZE && empty.Location.X <= result.Location.X + result.Size.Width + BirdCommandMain.CELL_SIZE)
-                    {
-                        return new Point(result.Location.X + BirdCommandMain.CELL_SIZE, result.Location.Y);
-                    }
-                    else // area-4: newly created is left of the existing element
-                    if (empty.Location.Y >= result.Location.Y && empty.Location.Y <= result.Location.Y + result.Size.Height
-                        && empty.Location.X >= result.Location.X - BirdCommandMain.CELL_SIZE && empty.Location.X <= result.Location.X)
-                    {
-                        return new Point(result.Location.X - BirdCommandMain.CELL_SIZE, result.Location.Y);
-                    }
-                }
-            }
-            return empty.Location;
-        }
-
-        internal static EmptyCell FindCellUnderneath(Designer designer, BirdCell bird)
-        {
-            foreach (var element in designer.Document.Elements)
-            {
-                BaseElement casted = element as BaseElement;
-                if (casted is EmptyCell result
-                    && bird.Location.Y >= casted.Location.Y && bird.Location.Y < casted.Location.Y + casted.Size.Height
-                    && bird.Location.X >= casted.Location.X && bird.Location.X < casted.Location.X + casted.Size.Width)
-                {
-                    return result;
-                }
-            }
-            return null;
-        }
-
-        internal static EmptyCell FindCellUnderneath(Designer designer, EmptyCell empty, Point point)
-        {
-            foreach (var element in designer.Document.Elements)
-            {
-                BaseElement casted = element as BaseElement;
-                if (casted is EmptyCell result && !result.Equals(empty)
-                    && point.Y >= casted.Location.Y && point.Y < casted.Location.Y + casted.Size.Height
-                    && point.X >= casted.Location.X && point.X < casted.Location.X + casted.Size.Width)
-                {
-                    return result;
-                }
-            }
-            return null;
-        }
 
         internal static IonCell FindIonCellUnderneath(Designer designer, IonCell ionCell)
         {
@@ -231,7 +141,7 @@ namespace BirdCommand.Custom
             {
                 BaseElement casted = element as BaseElement;
                 if ((casted is IonCell result && !result.GetIons()[0].Id.Equals(ionCell.GetIons()[0].Id))
-                    &&(leftBorder < result.Location.X + result.Size.Width && rightBorder > result.Location.X
+                    && (leftBorder < result.Location.X + result.Size.Width && rightBorder > result.Location.X
                       && topBorder < result.Location.Y + result.Size.Height && bottomBorder > result.Location.Y))
                 {
                     return result;
@@ -244,7 +154,7 @@ namespace BirdCommand.Custom
         {
             var ionCellUnderneath = DesignerUtil.FindIonCellUnderneath(designer_trafo, ionCell);
             if (ionCellUnderneath != null)
-            {                
+            {
                 ionCellUnderneath.AddIon(ionCell.GetIons()[0]);
                 designer_trafo.Document.DeleteElement(ionCell);
                 return;
@@ -252,21 +162,6 @@ namespace BirdCommand.Custom
 
             return;
 
-        }
-
-        internal static EmptyCell FindCellUnderneath(Designer designer, Point point)
-        {
-            foreach (var element in designer.Document.Elements)
-            {
-                BaseElement casted = element as BaseElement;
-                if (casted is EmptyCell result
-                    && point.Y >= casted.Location.Y && point.Y < casted.Location.Y + casted.Size.Height
-                    && point.X >= casted.Location.X && point.X < casted.Location.X + casted.Size.Width)
-                {
-                    return result;
-                }
-            }
-            return null;
         }
 
         internal static List<BaseElement> FindElementsWithin(Designer designer, BaseElement parentElement)
@@ -291,21 +186,6 @@ namespace BirdCommand.Custom
 
         internal static void ArrangeTheOrder(Designer designer)
         {
-            var emptyCells = designer.Document.Elements.GetArray().Where(e => e is EmptyCell);
-            foreach (var emptyCell in emptyCells)
-            {
-                designer.Document.BringToFrontElement(emptyCell);
-            }
-            var pigCells = designer.Document.Elements.GetArray().Where(e => e is PigCell);
-            foreach (var pigCell in pigCells)
-            {
-                designer.Document.BringToFrontElement(pigCell);
-            }
-            var birdCells = designer.Document.Elements.GetArray().Where(e => e is BirdCell);
-            foreach (var birdCell in birdCells)
-            {
-                designer.Document.BringToFrontElement(birdCell);
-            }
             var ionCells = designer.Document.Elements.GetArray().Where(e => e is IonCell);
             foreach (var ionCell in ionCells)
             {
@@ -313,53 +193,5 @@ namespace BirdCommand.Custom
             }
         }
 
-        internal static void SnapNewEmptyCellToExistingNeighbors(Designer designer_trafo, EmptyCell emptyCell, Point locationDropped)
-        {
-            var emptyUnderneathSouth = DesignerUtil.FindCellUnderneath(designer_trafo, emptyCell, new Point(locationDropped.X, locationDropped.Y + BirdCommandMain.CELL_SIZE));
-            if (emptyUnderneathSouth != null)
-            {
-                emptyCell.Location = new Point(emptyUnderneathSouth.Location.X, emptyUnderneathSouth.Location.Y - BirdCommandMain.CELL_SIZE);
-                return;
-            }
-            var emptyUnderneathNorth = DesignerUtil.FindCellUnderneath(designer_trafo, emptyCell, new Point(locationDropped.X, locationDropped.Y - BirdCommandMain.CELL_SIZE));
-            if (emptyUnderneathNorth != null)
-            {
-                emptyCell.Location = new Point(emptyUnderneathNorth.Location.X, emptyUnderneathNorth.Location.Y + BirdCommandMain.CELL_SIZE);
-                return;
-            }
-            var emptyUnderneathEast = DesignerUtil.FindCellUnderneath(designer_trafo, emptyCell, new Point(locationDropped.X - BirdCommandMain.CELL_SIZE, locationDropped.Y));
-            if (emptyUnderneathEast != null)
-            {
-                emptyCell.Location = new Point(emptyUnderneathEast.Location.X + BirdCommandMain.CELL_SIZE, emptyUnderneathEast.Location.Y);
-                return;
-            }
-            
-        }
-
-
-
-        internal static void SolveMaze3(Designer designer)
-        {
-            RuleCell firstRule = DesignerUtil.AddRuleToNextEmptySpot(designer);
-            firstRule.IncreaseRuleCount();
-            designer.Document.AddElement(new EmptyCell(firstRule.Location.X + 50, firstRule.Location.Y + 50));
-            designer.Document.AddElement(new EmptyCell(firstRule.Location.X + 100, firstRule.Location.Y + 50));
-            designer.Document.AddElement(new BirdCell(firstRule.Location.X + 50, firstRule.Location.Y + 50, Direction.Right));
-            designer.Document.AddElement(new EmptyCell(firstRule.Location.X + 250, firstRule.Location.Y + 50));
-            designer.Document.AddElement(new EmptyCell(firstRule.Location.X + 300, firstRule.Location.Y + 50));
-            designer.Document.AddElement(new BirdCell(firstRule.Location.X + 300, firstRule.Location.Y + 50, Direction.Right));
-
-            RuleCell secondRule = DesignerUtil.AddRuleToNextEmptySpot(designer);
-            designer.Document.AddElement(new BirdCell(secondRule.Location.X + 50, secondRule.Location.Y + 50, Direction.Right));
-            designer.Document.AddElement(new BirdCell(secondRule.Location.X + 250, secondRule.Location.Y + 50, Direction.Down));
-
-            RuleCell thirdRule = DesignerUtil.AddRuleToNextEmptySpot(designer);
-            designer.Document.AddElement(new EmptyCell(thirdRule.Location.X + 50, thirdRule.Location.Y + 50));
-            designer.Document.AddElement(new EmptyCell(thirdRule.Location.X + 50, thirdRule.Location.Y + 100));
-            designer.Document.AddElement(new BirdCell(thirdRule.Location.X + 50, thirdRule.Location.Y + 50, Direction.Down));
-            designer.Document.AddElement(new EmptyCell(thirdRule.Location.X + 250, thirdRule.Location.Y + 50));
-            designer.Document.AddElement(new EmptyCell(thirdRule.Location.X + 250, thirdRule.Location.Y + 100));
-            designer.Document.AddElement(new BirdCell(thirdRule.Location.X + 250, thirdRule.Location.Y + 100, Direction.Down));
-        }
     }
 }

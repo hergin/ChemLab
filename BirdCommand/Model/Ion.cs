@@ -1,11 +1,11 @@
-using System.Drawing;
 using System;
+using System.Drawing;
 
 namespace BirdCommand.Custom
 {
     public class Ion
     {
-        public Guid Id { get;set;}
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public string Symbol { get; set; }
         public string Description { get; set; }

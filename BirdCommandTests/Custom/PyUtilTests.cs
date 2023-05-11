@@ -1,14 +1,8 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using BirdCommand.Custom;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BirdCommandTests.Properties;
+﻿using BirdCommand.Model;
 using Dalssoft.DiagramNet;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
 using System.IO;
-using BirdCommand.Model;
 
 namespace BirdCommand.Custom.Tests
 {
@@ -75,17 +69,7 @@ namespace BirdCommand.Custom.Tests
             Assert.IsFalse(PyUtil.IsPatternInTheModelChemistry(model, ruleElements));
         }
 
-        [TestMethod()]
-        public void IsPatternInTheModelTest()
-        {
-            var elementsOfSmallMaze = LevelDesigner.ProduceLevelElements(Resources.small_maze);
-            List<BaseElement> lhs = new List<BaseElement>();
-            lhs.Add(new EmptyCell(0, 0));
-            lhs.Add(new EmptyCell(0, 50));
-            lhs.Add(new BirdCell(0, 0));
 
-            Assert.IsTrue(PyUtil.IsPatternInTheModel(elementsOfSmallMaze, lhs));
-        }
 
         [TestMethod()]
         public void CallPythonTest()
@@ -103,7 +87,7 @@ namespace BirdCommand.Custom.Tests
             List<BaseElement> ruleRhs = new List<BaseElement>();
             ruleRhs.Add(new IonCell(1000, 50, new List<Ion> { new Sodium() }));
 
-            var result = PyUtil.FindChangesInTheRuleChemistry(ruleLhs,ruleRhs);
+            var result = PyUtil.FindChangesInTheRuleChemistry(ruleLhs, ruleRhs);
 
             Assert.AreEqual(2, result.Count);
 
@@ -156,23 +140,5 @@ namespace BirdCommand.Custom.Tests
             Assert.AreEqual(2, result.Count);
         }
 
-        [TestMethod()]
-        public void FindChangesToTheBirdInTheRuleTest()
-        {
-            var ruleAndItsContents = new List<BaseElement>();
-            RuleCell firstRule = new RuleCell(300, 20);
-            ruleAndItsContents.Add(firstRule);
-            ruleAndItsContents.Add(new EmptyCell(firstRule.Location.X + 50, firstRule.Location.Y + 50));
-            ruleAndItsContents.Add(new EmptyCell(firstRule.Location.X + 100, firstRule.Location.Y + 50));
-            ruleAndItsContents.Add(new BirdCell(firstRule.Location.X + 50, firstRule.Location.Y + 50, Direction.Right));
-            ruleAndItsContents.Add(new EmptyCell(firstRule.Location.X + 250, firstRule.Location.Y + 50));
-            ruleAndItsContents.Add(new EmptyCell(firstRule.Location.X + 300, firstRule.Location.Y + 50));
-            ruleAndItsContents.Add(new BirdCell(firstRule.Location.X + 300, firstRule.Location.Y + 50, Direction.Down));
-
-            var result = PyUtil.FindChangesToTheBirdInTheRule(ruleAndItsContents, firstRule);
-            Assert.AreEqual(50, result.Item1.X);
-            Assert.AreEqual(0, result.Item1.Y);
-            Assert.AreEqual(Direction.Down, result.Item2);
-        }
     }
 }

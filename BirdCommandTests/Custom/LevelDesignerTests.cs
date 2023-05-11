@@ -1,9 +1,7 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using BirdCommand.Custom;
+﻿using BirdCommand.Custom;
 using BirdCommand.Model;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
 
 namespace BirdCommandTests.Custom
 {
@@ -15,11 +13,11 @@ namespace BirdCommandTests.Custom
         [TestMethod]
         public void PlaceTwoCompoundsEvenly()
         {
-             List<Compound> compounds = new List<Compound> { new Compound { ions = new List<Ion> { new Sodium() } }, new Compound { ions = new List<Ion> { new Chlorine() } } };
-            
-            List<IonCell> placedCells =  LevelDesigner.PlaceIonCells(compounds,2);
+            List<Compound> compounds = new List<Compound> { new Compound { ions = new List<Ion> { new Sodium() } }, new Compound { ions = new List<Ion> { new Chlorine() } } };
+
+            List<IonCell> placedCells = LevelDesigner.PlaceIonCells(compounds, 2);
             int oneThirdxCoord = 400 / 3;
-            Assert.AreEqual(oneThirdxCoord - compounds[0].GetHalfWidth(),placedCells[0].Location.X);
+            Assert.AreEqual(oneThirdxCoord - compounds[0].GetHalfWidth(), placedCells[0].Location.X);
             Assert.AreEqual((oneThirdxCoord * 2) - compounds[1].GetHalfWidth(), placedCells[1].Location.X);
 
         }
@@ -36,7 +34,7 @@ namespace BirdCommandTests.Custom
             List<IonCell> placedCells = LevelDesigner.PlaceIonCells(compounds, 3);
             int oneForthxCoord = 400 / 4;
             Assert.AreEqual(oneForthxCoord - compounds[0].GetHalfWidth(), placedCells[0].Location.X);
-            Assert.AreEqual((oneForthxCoord * 2)- compounds[1].GetHalfWidth(), placedCells[1].Location.X);
+            Assert.AreEqual((oneForthxCoord * 2) - compounds[1].GetHalfWidth(), placedCells[1].Location.X);
             Assert.AreEqual((oneForthxCoord * 3) - compounds[2].GetHalfWidth(), placedCells[2].Location.X);
 
         }
@@ -57,7 +55,7 @@ namespace BirdCommandTests.Custom
             Assert.AreEqual(oneThirdxCoord * 2 - compounds[1].GetHalfWidth(), placedCells[1].Location.X);
             Assert.AreEqual(initialYValue, placedCells[1].Location.Y);
             Assert.AreEqual(oneThirdxCoord * 2 - compounds[2].GetHalfWidth(), placedCells[2].Location.X);
-            Assert.AreEqual(placedCells[1].Location.Y +5, placedCells[2].Location.Y);
+            Assert.AreEqual(placedCells[1].Location.Y + 5, placedCells[2].Location.Y);
         }
 
     }

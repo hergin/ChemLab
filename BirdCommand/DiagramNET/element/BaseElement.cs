@@ -1,188 +1,185 @@
 using System;
 using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.ComponentModel;
-using System.Xml;
+using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.IO;
 
 namespace Dalssoft.DiagramNet
 {
-	/// <summary>
-	/// This is the base for all element the will be draw on the
-	/// document.
-	/// </summary>
-	[Serializable]
-	public abstract class BaseElement
-	{
-		protected Point location;
-		protected Size size;
-		protected bool visible = true;
-		protected Color borderColor = Color.Black;
-		protected int borderWidth = 1;
-		protected int opacity = 100;
-		internal protected Rectangle invalidateRec = Rectangle.Empty;
-		internal protected bool IsInvalidated = true;
+    /// <summary>
+    /// This is the base for all element the will be draw on the
+    /// document.
+    /// </summary>
+    [Serializable]
+    public abstract class BaseElement
+    {
+        protected Point location;
+        protected Size size;
+        protected bool visible = true;
+        protected Color borderColor = Color.Black;
+        protected int borderWidth = 1;
+        protected int opacity = 100;
+        internal protected Rectangle invalidateRec = Rectangle.Empty;
+        internal protected bool IsInvalidated = true;
 
-		protected BaseElement()
-		{
-		}
-
-		public BaseElement Clone()
+        protected BaseElement()
         {
-			// https://csharp-extension.com/en/method/1002450/object-deepclone
-			IFormatter formatter = new BinaryFormatter();
-			using (var stream = new MemoryStream())
-			{
-				formatter.Serialize(stream, this);
-				stream.Seek(0, SeekOrigin.Begin);
-				return (BaseElement)formatter.Deserialize(stream);
-			}
         }
 
-		protected BaseElement(int x, int y, int width, int height)
-		{
-			location  = new Point(x, y);
-			size = new Size(width, height);
-		}
-        public string  Name { get; set; }
+        public BaseElement Clone()
+        {
+            // https://csharp-extension.com/en/method/1002450/object-deepclone
+            IFormatter formatter = new BinaryFormatter();
+            using (var stream = new MemoryStream())
+            {
+                formatter.Serialize(stream, this);
+                stream.Seek(0, SeekOrigin.Begin);
+                return (BaseElement)formatter.Deserialize(stream);
+            }
+        }
+
+        protected BaseElement(int x, int y, int width, int height)
+        {
+            location = new Point(x, y);
+            size = new Size(width, height);
+        }
+        public string Name { get; set; }
         public virtual Point Location
-		{
-			get
-			{
-				return location;
-			}
-			set
-			{
-				location = value;
-				OnAppearanceChanged(new EventArgs());
-			}
-		}
+        {
+            get
+            {
+                return location;
+            }
+            set
+            {
+                location = value;
+                OnAppearanceChanged(new EventArgs());
+            }
+        }
 
-		public virtual Size Size
-		{
-			get
-			{
-				return size;
-			}
-			set
-			{
-				size = value;
-				OnAppearanceChanged(new EventArgs());
-			}
-		}
+        public virtual Size Size
+        {
+            get
+            {
+                return size;
+            }
+            set
+            {
+                size = value;
+                OnAppearanceChanged(new EventArgs());
+            }
+        }
 
-		public virtual bool Visible
-		{
-			get
-			{
-				return visible;
-			}
-			set
-			{
-				visible = value;
-				OnAppearanceChanged(new EventArgs());
-			}
-		}
+        public virtual bool Visible
+        {
+            get
+            {
+                return visible;
+            }
+            set
+            {
+                visible = value;
+                OnAppearanceChanged(new EventArgs());
+            }
+        }
 
-		public virtual Color BorderColor
-		{
-			get
-			{
-				return borderColor;
-			}
-			set
-			{
-				borderColor = value;
-				OnAppearanceChanged(new EventArgs());
-			}
-		}
+        public virtual Color BorderColor
+        {
+            get
+            {
+                return borderColor;
+            }
+            set
+            {
+                borderColor = value;
+                OnAppearanceChanged(new EventArgs());
+            }
+        }
 
-		public virtual int BorderWidth
-		{
-			get
-			{
-				return borderWidth;
-			}
-			set
-			{
-				borderWidth = value;
-				OnAppearanceChanged(new EventArgs());
-			}
-		}
-		
-		public virtual int Opacity 
-		{
-			get
-			{
-				return opacity;
-			}
-			set
-			{
-				if ((value >= 0) || (value <=100))
-					opacity = value;
-				else
-					throw new Exception("'" + value + "' is not a valid value for 'Opacity'. 'Opacity' should be between 0 and 100.");
+        public virtual int BorderWidth
+        {
+            get
+            {
+                return borderWidth;
+            }
+            set
+            {
+                borderWidth = value;
+                OnAppearanceChanged(new EventArgs());
+            }
+        }
 
-				OnAppearanceChanged(new EventArgs());
-			}
-		}
-		internal virtual void Draw(Graphics g)
-		{
-			IsInvalidated = false;
-		}
+        public virtual int Opacity
+        {
+            get
+            {
+                return opacity;
+            }
+            set
+            {
+                if ((value >= 0) || (value <= 100))
+                    opacity = value;
+                else
+                    throw new Exception("'" + value + "' is not a valid value for 'Opacity'. 'Opacity' should be between 0 and 100.");
+
+                OnAppearanceChanged(new EventArgs());
+            }
+        }
+        internal virtual void Draw(Graphics g)
+        {
+            IsInvalidated = false;
+        }
 
 
-		public virtual void Invalidate()
-		{
-			if (IsInvalidated)
-				invalidateRec = Rectangle.Union(invalidateRec, GetUnsignedRectangle());
-			else
-				invalidateRec = GetUnsignedRectangle();
+        public virtual void Invalidate()
+        {
+            if (IsInvalidated)
+                invalidateRec = Rectangle.Union(invalidateRec, GetUnsignedRectangle());
+            else
+                invalidateRec = GetUnsignedRectangle();
 
-			IsInvalidated = true;
-		}
+            IsInvalidated = true;
+        }
 
-		public virtual Rectangle GetRectangle()
-		{
-			return new Rectangle(this.Location, this.Size);
-		}
+        public virtual Rectangle GetRectangle()
+        {
+            return new Rectangle(this.Location, this.Size);
+        }
 
-		public virtual Rectangle GetUnsignedRectangle()
-		{
-			
-			return GetUnsignedRectangle(GetRectangle());
-		}
+        public virtual Rectangle GetUnsignedRectangle()
+        {
 
-		internal static Rectangle GetUnsignedRectangle(Rectangle rec)
-		{
-			Rectangle retRectangle = rec;
-			if (rec.Width < 0)
-			{
-				retRectangle.X = rec.X + rec.Width;
-				retRectangle.Width = - rec.Width;
-			}
-			
-			if (rec.Height < 0)
-			{
-				retRectangle.Y = rec.Y + rec.Height;
-				retRectangle.Height = - rec.Height;
-			}
+            return GetUnsignedRectangle(GetRectangle());
+        }
 
-			return retRectangle;
-		}
+        internal static Rectangle GetUnsignedRectangle(Rectangle rec)
+        {
+            Rectangle retRectangle = rec;
+            if (rec.Width < 0)
+            {
+                retRectangle.X = rec.X + rec.Width;
+                retRectangle.Width = -rec.Width;
+            }
 
-		#region Events
-		[field: NonSerialized]
-		public event EventHandler AppearanceChanged;
+            if (rec.Height < 0)
+            {
+                retRectangle.Y = rec.Y + rec.Height;
+                retRectangle.Height = -rec.Height;
+            }
 
-		protected virtual void OnAppearanceChanged(EventArgs e)
-		{
-			if (AppearanceChanged != null)
-				AppearanceChanged(this, e);
-		}
-		#endregion
+            return retRectangle;
+        }
 
-	}
+        #region Events
+        [field: NonSerialized]
+        public event EventHandler AppearanceChanged;
+
+        protected virtual void OnAppearanceChanged(EventArgs e)
+        {
+            if (AppearanceChanged != null)
+                AppearanceChanged(this, e);
+        }
+        #endregion
+
+    }
 }

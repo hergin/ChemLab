@@ -118,27 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="BirdDown" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\BirdDown.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="BirdLeft" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\BirdLeft.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="BirdRight" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\BirdRight.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="BirdUp" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\BirdUp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Bird_Command_logos" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Bird Command-logos.jpeg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Bird_Command_logos_back" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Bird Command-logos_back.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Bird_Command_logos_transparent" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Bird Command-logos_transparent.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="canclosed" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\canclosed.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -148,29 +127,11 @@
   <data name="ChemLab_logos" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\chemlab-logos.jpeg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="copyLHStoRHSbutton" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\copyLHStoRHSbutton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="decreaseRuleCountButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\decreaseRuleCountButton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="difference_finding" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\difference-finding.py;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="duplicateButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\duplicateButton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Empty" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Empty.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Glass" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Glass.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="HalfStone" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\HalfStone.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="HalfWood" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\HalfWood.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="hoc1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\hoc1.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
@@ -183,9 +144,6 @@
   </data>
   <data name="hoc9" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\hoc9.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
-  </data>
-  <data name="icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon.jpeg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icon1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -235,9 +193,6 @@
   <data name="pattern_matching_chemistry" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\pattern-matching-chemistry.py;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Pig" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Pig.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="reset_button" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\reset-button.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -279,21 +234,6 @@
   </data>
   <data name="start_over_button_over" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\start-over-button-over.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Stone" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Stone.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="TNT" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\TNT.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="turnLeftButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\turnLeftButton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="turnRightButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\turnRightButton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Wood" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Wood.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="WPy64_39100" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\WPy64-39100.zip;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>

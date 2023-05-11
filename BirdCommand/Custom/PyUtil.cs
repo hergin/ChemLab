@@ -3,11 +3,7 @@ using Dalssoft.DiagramNet;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BirdCommand.Custom
 {
@@ -57,28 +53,6 @@ namespace BirdCommand.Custom
             return lines[0].Trim() == "True";
         }
 
-        public static bool IsPatternInTheModel(List<BaseElement> model,List<BaseElement> prePattern)
-        {
-            var mazeGraph = ConvertUtil.PatternToGraph(model);
-
-            var patternGraph = ConvertUtil.PatternToGraph(prePattern);
-
-            var resultFromPY = PyUtil.CallPython("pattern-matching.py",
-                mazeGraph.NodesToPY() + "|" + mazeGraph.EdgesToPY() + "|" + patternGraph.NodesToPY() + "|" + patternGraph.EdgesToPY());
-
-            var lines = resultFromPY.Split(new char[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
-
-            return lines[0].Trim() == "True";
-        }
-
-        // Return a position difference and a new direction for the bird
-        public static Tuple<Point,Direction> FindChangesToTheBirdInTheRule(List<BaseElement> trafoElements, RuleCell rule)
-        {
-            var preConditionElements = TrafoUtil.FindPreConditionElements(trafoElements, rule);
-            var postConditionElements = TrafoUtil.FindPostConditionElements(trafoElements, rule);
-
-            return FindChangesToTheBirdInTheRule(preConditionElements,postConditionElements);
-        }
 
         internal static List<ChangeStep> FindChangesInTheRuleChemistry(List<BaseElement> preConditionElements, List<BaseElement> postConditionElements)
         {
@@ -128,39 +102,12 @@ namespace BirdCommand.Custom
                         }
 
 
-                        
+
                         continue;
                 }
             }
             return result;
         }
 
-        public static Tuple<Point, Direction> FindChangesToTheBirdInTheRule(List<BaseElement> preConditionElements, List<BaseElement> postConditionElements)
-        {
-            var prePatternGraph = ConvertUtil.PatternToGraph(preConditionElements);
-            var postPatternGraph = ConvertUtil.PatternToGraph(postConditionElements);
-
-            var resultFromPY = PyUtil.CallPython("difference-finding-just-bird.py",
-                prePatternGraph.NodesToPY() + "|" + prePatternGraph.EdgesToPY() + "|" + postPatternGraph.NodesToPY() + "|" + postPatternGraph.EdgesToPY());
-
-            var lines = resultFromPY.Split(new char[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
-            var newBirdStr = lines[0];
-            var oldBirdStr = lines[1];
-            var newBirdStrSplit = newBirdStr.Split(new char[] { '_' }, StringSplitOptions.RemoveEmptyEntries);
-            var newBirdDirectionStr = newBirdStrSplit[1];
-            var newBirdDirectionEnum = (Direction)Enum.Parse(typeof(Direction), newBirdDirectionStr);
-            var newBirdX = int.Parse(newBirdStrSplit[2]);
-            var newBirdY = int.Parse(newBirdStrSplit[3]);
-            var oldBirdStrSplit = oldBirdStr.Split(new char[] { '_' }, StringSplitOptions.RemoveEmptyEntries);
-            var oldBirdDirectionStr = oldBirdStrSplit[1];
-            var oldBirdDirectionEnum = Enum.Parse(typeof(Direction), oldBirdDirectionStr);
-            var oldBirdX = int.Parse(oldBirdStrSplit[2]);
-            var oldBirdY = int.Parse(oldBirdStrSplit[3]);
-
-            var locationDifferenceX = newBirdX - oldBirdX;
-            var locationDifferenceY = newBirdY - oldBirdY;
-
-            return new Tuple<Point, Direction>(new Point(locationDifferenceX, locationDifferenceY), newBirdDirectionEnum);
-        }
     }
 }

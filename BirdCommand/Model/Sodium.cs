@@ -1,16 +1,12 @@
 ﻿using BirdCommand.Custom;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BirdCommand.Model
 {
     internal class Sodium : Ion
     {
-        public Sodium():base()
+        public Sodium() : base()
         {
             this.Symbol = "Na";
             this.Id = Guid.NewGuid();

@@ -1,11 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using BirdCommand.Custom;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Dalssoft.DiagramNet;
+﻿using Dalssoft.DiagramNet;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace BirdCommand.Custom.Tests
 {

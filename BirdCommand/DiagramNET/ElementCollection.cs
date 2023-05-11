@@ -4,235 +4,235 @@ using System.Drawing;
 
 namespace Dalssoft.DiagramNet
 {
-	[Serializable]
-	public class ElementCollection : ReadOnlyCollectionBase
-	{
-		private Point location = new Point(maxIntSize, maxIntSize);
-		private Size size = new Size(0, 0);
-		private bool enabledCalc = true;	
-		
-		private bool needCalc = true;
+    [Serializable]
+    public class ElementCollection : ReadOnlyCollectionBase
+    {
+        private Point location = new Point(maxIntSize, maxIntSize);
+        private Size size = new Size(0, 0);
+        private bool enabledCalc = true;
 
-		public const int maxIntSize = 100;
+        private bool needCalc = true;
 
-		#region Collection Members
-		
-		internal ElementCollection(): base() { }
+        public const int maxIntSize = 100;
 
-		public BaseElement this[int item]
-		{
-			get
-			{
-				return (BaseElement) InnerList[item];
-			}
-		}
+        #region Collection Members
 
-		internal virtual int Add(BaseElement element)
-		{
-			needCalc = true;
+        internal ElementCollection() : base() { }
 
-			return InnerList.Add(element);
-		}
+        public BaseElement this[int item]
+        {
+            get
+            {
+                return (BaseElement)InnerList[item];
+            }
+        }
 
-		public bool Contains(BaseElement element)
-		{
-			return InnerList.Contains(element);
-		}
+        internal virtual int Add(BaseElement element)
+        {
+            needCalc = true;
 
-		public int IndexOf(BaseElement element)
-		{
-			return InnerList.IndexOf(element);
-		}
+            return InnerList.Add(element);
+        }
 
-		internal void Insert(int index, BaseElement element)
-		{
-			needCalc = true;
-						
-			InnerList.Insert(index, element);
-		}
-		
-		internal void Remove(BaseElement element)
-		{
-			InnerList.Remove(element);
+        public bool Contains(BaseElement element)
+        {
+            return InnerList.Contains(element);
+        }
 
-			needCalc = true;
+        public int IndexOf(BaseElement element)
+        {
+            return InnerList.IndexOf(element);
+        }
 
-		}
+        internal void Insert(int index, BaseElement element)
+        {
+            needCalc = true;
 
-		internal void Clear()
-		{
-			InnerList.Clear();
-			needCalc = true;
-		}
+            InnerList.Insert(index, element);
+        }
 
-		internal void ChangeIndex(int i, int y)
-		{
-			object tmp = InnerList[y];
-			InnerList[y] = InnerList[i];
-			InnerList[i] = tmp;
-		}
+        internal void Remove(BaseElement element)
+        {
+            InnerList.Remove(element);
 
-		#region Implementation of IEnumerator
-		public class BaseElementEnumarator : IEnumerator 
-		{
+            needCalc = true;
 
-			private IEnumerator baseEnumarator;
-			private IEnumerable tmp;
+        }
 
-			BaseElementEnumarator(ElementCollection mapping): base()
-			{
-				tmp = (IEnumerable) mapping;
-				baseEnumarator = tmp.GetEnumerator();
-			}
+        internal void Clear()
+        {
+            InnerList.Clear();
+            needCalc = true;
+        }
 
-			
+        internal void ChangeIndex(int i, int y)
+        {
+            object tmp = InnerList[y];
+            InnerList[y] = InnerList[i];
+            InnerList[i] = tmp;
+        }
 
-			void IEnumerator.Reset()
-			{
-				baseEnumarator.Reset();
-			}
-			bool IEnumerator.MoveNext()
-			{
-				return baseEnumarator.MoveNext();
-			}
-			
-			object IEnumerator.Current
-			{
-				get
-				{
-					return baseEnumarator.Current;
-				}
-			}
+        #region Implementation of IEnumerator
+        public class BaseElementEnumarator : IEnumerator
+        {
 
-			public void Reset()
-			{
-				baseEnumarator.Reset();
-			}
-			public bool MoveNext()
-			{
-				return baseEnumarator.MoveNext();
-			}
-			
-			public BaseElement Current
-			{
-				get
-				{
-					return (BaseElement) baseEnumarator.Current;
-				}
-			}
-		}
-		#endregion
+            private IEnumerator baseEnumarator;
+            private IEnumerable tmp;
 
-		#endregion
-	
-		public BaseElement[] GetArray()
-		{
-			BaseElement[] els = new BaseElement[InnerList.Count];
-			for (int i = 0; i <= InnerList.Count - 1; i++)
-			{
-				els[i] = (BaseElement) InnerList[i];
-			}
-			return els;
-		}
+            BaseElementEnumarator(ElementCollection mapping) : base()
+            {
+                tmp = (IEnumerable)mapping;
+                baseEnumarator = tmp.GetEnumerator();
+            }
 
-		#region Window Methods and Properties
 
-		internal bool EnabledCalc
-		{
-			get
-			{
-				return enabledCalc;
-			}
-			set
-			{
-				enabledCalc = value;
 
-				if (enabledCalc)
-				{
-					needCalc = true;
-				}
-			}
-		}
+            void IEnumerator.Reset()
+            {
+                baseEnumarator.Reset();
+            }
+            bool IEnumerator.MoveNext()
+            {
+                return baseEnumarator.MoveNext();
+            }
 
-		internal Point WindowLocation
-		{
-			get
-			{	
-				CalcWindow();
-				return location;
-			}
-		}
+            object IEnumerator.Current
+            {
+                get
+                {
+                    return baseEnumarator.Current;
+                }
+            }
 
-		internal Size WindowSize
-		{
-			get
-			{
-				CalcWindow();
-				return size;
-			}
-		}
+            public void Reset()
+            {
+                baseEnumarator.Reset();
+            }
+            public bool MoveNext()
+            {
+                return baseEnumarator.MoveNext();
+            }
 
-		internal void CalcWindow(bool forceCalc)
-		{
-			if (forceCalc)
-				needCalc = forceCalc;
-			CalcWindow();
-		}
+            public BaseElement Current
+            {
+                get
+                {
+                    return (BaseElement)baseEnumarator.Current;
+                }
+            }
+        }
+        #endregion
 
-		internal void CalcWindow()
-		{
-			if (!enabledCalc) return;
+        #endregion
 
-			if (!needCalc) return;
+        public BaseElement[] GetArray()
+        {
+            BaseElement[] els = new BaseElement[InnerList.Count];
+            for (int i = 0; i <= InnerList.Count - 1; i++)
+            {
+                els[i] = (BaseElement)InnerList[i];
+            }
+            return els;
+        }
 
-			location.X = maxIntSize;
-			location.Y = maxIntSize;
-			size.Width = 0;
-			size.Height = 0;
-			foreach (BaseElement element in this)
-			{
-				CalcWindowLocation(element);
-			}
-			
-			foreach (BaseElement element in this)
-			{
-				CalcWindowSize(element);
-			}
+        #region Window Methods and Properties
 
-			needCalc = false;
-		}
+        internal bool EnabledCalc
+        {
+            get
+            {
+                return enabledCalc;
+            }
+            set
+            {
+                enabledCalc = value;
 
-		internal void CalcWindowLocation(BaseElement element)
-		{
-			if (!enabledCalc) return;
+                if (enabledCalc)
+                {
+                    needCalc = true;
+                }
+            }
+        }
 
-			Point elementLocation = element.Location;
+        internal Point WindowLocation
+        {
+            get
+            {
+                CalcWindow();
+                return location;
+            }
+        }
 
-			if (elementLocation.X < location.X)
-				location.X = elementLocation.X;
-		
-			if (elementLocation.Y < location.Y)
-				location.Y = elementLocation.Y;
-		}
+        internal Size WindowSize
+        {
+            get
+            {
+                CalcWindow();
+                return size;
+            }
+        }
 
-		internal void CalcWindowSize(BaseElement element)
-		{
-			if (!enabledCalc) return;
+        internal void CalcWindow(bool forceCalc)
+        {
+            if (forceCalc)
+                needCalc = forceCalc;
+            CalcWindow();
+        }
 
-			int val;
+        internal void CalcWindow()
+        {
+            if (!enabledCalc) return;
 
-			Point elementLocation = element.Location;
-			Size elementSize = element.Size;
+            if (!needCalc) return;
 
-			val = (elementLocation.X + elementSize.Width) - location.X;
-			if (val > size.Width)
-				size.Width = val;
+            location.X = maxIntSize;
+            location.Y = maxIntSize;
+            size.Width = 0;
+            size.Height = 0;
+            foreach (BaseElement element in this)
+            {
+                CalcWindowLocation(element);
+            }
 
-			val = (elementLocation.Y + elementSize.Height) - location.Y;
-			if (val > size.Height)
-				size.Height = val;
+            foreach (BaseElement element in this)
+            {
+                CalcWindowSize(element);
+            }
 
-		}
-		#endregion
-	}
+            needCalc = false;
+        }
+
+        internal void CalcWindowLocation(BaseElement element)
+        {
+            if (!enabledCalc) return;
+
+            Point elementLocation = element.Location;
+
+            if (elementLocation.X < location.X)
+                location.X = elementLocation.X;
+
+            if (elementLocation.Y < location.Y)
+                location.Y = elementLocation.Y;
+        }
+
+        internal void CalcWindowSize(BaseElement element)
+        {
+            if (!enabledCalc) return;
+
+            int val;
+
+            Point elementLocation = element.Location;
+            Size elementSize = element.Size;
+
+            val = (elementLocation.X + elementSize.Width) - location.X;
+            if (val > size.Width)
+                size.Width = val;
+
+            val = (elementLocation.Y + elementSize.Height) - location.Y;
+            if (val > size.Height)
+                size.Height = val;
+
+        }
+        #endregion
+    }
 }

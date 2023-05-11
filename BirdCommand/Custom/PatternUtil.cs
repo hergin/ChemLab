@@ -1,14 +1,7 @@
 ﻿using Dalssoft.DiagramNet;
-using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.IO;
 using System.Linq;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace BirdCommand.Custom
 {
@@ -32,22 +25,5 @@ namespace BirdCommand.Custom
             return clone;
         }
 
-        public static List<BaseElement> Rotate90Clockwise(List<BaseElement> pattern)
-        {
-            var normalizedClone = NormalizePattern(pattern);
-            foreach (var element in normalizedClone)
-            {
-                var midX = element.Location.X + element.Size.Width / 2;
-                var midY = element.Location.Y + element.Size.Height / 2;
-                var newMidX = -midY;
-                var newMidY = midX;
-                var newX = newMidX - element.Size.Width / 2;
-                var newY = newMidY - element.Size.Height / 2;
-                element.Location = new Point(newX, newY);
-                if (element is BirdCell bird)
-                    bird.TurnRight();
-            }
-            return NormalizePattern(normalizedClone);
-        }
     }
 }
