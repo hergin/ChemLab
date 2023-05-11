@@ -64,6 +64,8 @@ namespace BirdCommand
 
             trafoDesigner.Document.AddElement(ioncell2);
 
+            trafoDesigner.Document.AddElement(new ReactionCell(25, 300, 140, 35));
+
 
             trafoRunner.DoWork += TrafoRunner_DoWork;
             trafoRunner.ProgressChanged += TrafoRunner_ProgressChanged;
@@ -110,6 +112,17 @@ namespace BirdCommand
                 var newRule = new RuleCell(ruleButtonLocation.X, ruleButtonLocation.Y, 140, 70);
                 trafoDesigner.Document.AddElement(newRule);
                 trafoDesigner.Document.SendToBackElement(newRule);
+                trafoDesigner.SendBlockToBack();
+            }
+            else if (trafoDesigner.Document.FindElement(e.Location) != null
+            && trafoDesigner.Document.FindElement(e.Location) is ReactionCell reaction)
+            {
+                reaction.ResizeToOriginal();
+                reaction.Highlight();
+                trafoDesigner.Document.BringToFrontElement(reaction);
+                var newReaction = new ReactionCell(25, 300, 140, 35);
+                trafoDesigner.Document.AddElement(newReaction);
+                trafoDesigner.Document.SendToBackElement(newReaction);
                 trafoDesigner.SendBlockToBack();
             }
         }

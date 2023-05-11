@@ -50,25 +50,6 @@ namespace BirdCommand.Custom
 
         }
 
-        internal static RuleCell AddRuleToNextEmptySpot(Designer designer)
-        {
-            var highestY = 0;
-            foreach (var element in GetTrafoElementsOutsideBlockWithoutSnapOrBlock(designer))
-            {
-                if (element is RuleCell || element is StartCell)
-                {
-                    if (element.Location.Y + element.Size.Height > highestY)
-                    {
-                        highestY = element.Location.Y + element.Size.Height;
-                    }
-                }
-            }
-            var newRule = new RuleCell(231, highestY - 5);
-            designer.Document.AddElement(newRule);
-            DesignerUtil.ArrangeTheOrder(designer);
-            return newRule;
-        }
-
         internal static void MoveRuleAndItsContents(Designer designer, RuleCell rule, int newX, int newY)
         {
             var ruleStarterPosition = rule.Location;
@@ -79,6 +60,20 @@ namespace BirdCommand.Custom
                 // move the contents of the rule as well
                 var differenceX = Math.Abs(element.Location.X - ruleStarterPosition.X);
                 var differenceY = Math.Abs(element.Location.Y - ruleStarterPosition.Y);
+                element.Location = new Point(newX + differenceX, newY + differenceY);
+            }
+        }
+
+        internal static void MoveReactionAndItsContents(Designer designer, ReactionCell reaction, int newX, int newY)
+        {
+            var reactionStarterPosition = reaction.Location;
+
+            var reactionContent = DesignerUtil.FindElementsWithin(designer, reaction);
+            foreach (var element in reactionContent)
+            {
+                // move the contents of the rule as well
+                var differenceX = Math.Abs(element.Location.X - reactionStarterPosition.X);
+                var differenceY = Math.Abs(element.Location.Y - reactionStarterPosition.Y);
                 element.Location = new Point(newX + differenceX, newY + differenceY);
             }
         }

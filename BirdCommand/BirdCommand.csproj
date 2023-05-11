@@ -60,6 +60,7 @@
     <Compile Include="Custom\Graph.cs" />
     <Compile Include="Custom\PatternUtil.cs" />
     <Compile Include="Custom\PyUtil.cs" />
+    <Compile Include="Custom\ReactionCell.cs" />
     <Compile Include="Custom\SnapCell.cs" />
     <Compile Include="Custom\RuleCell.cs" />
     <Compile Include="Custom\StartCell.cs" />
@@ -281,6 +282,7 @@
     <Content Include="Resources\icon2.jpeg" />
     <Content Include="Resources\Lab2.txt" />
     <Content Include="Resources\Lab1.txt" />
+    <None Include="Resources\reaction.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

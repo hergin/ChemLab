@@ -9,7 +9,7 @@ namespace BirdCommand.Custom
     [Serializable]
     public class TrashCell : RectangleElement
     {
-        public TrashCell() : base(60, 330, 70, 70)
+        public TrashCell() : base(60, 430, 70, 70)
         {
             Background = Resources.canclosed;
             FillColor1 = Color.Transparent;

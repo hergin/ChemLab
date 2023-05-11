@@ -12,6 +12,7 @@ namespace Dalssoft.DiagramNet
         protected Color fillColor1 = Color.White;
         protected Color fillColor2 = Color.DodgerBlue;
         protected LabelElement label = new LabelElement();
+        protected bool DrawBorderFlag = false;
 
         [NonSerialized]
         private RectangleController controller;
@@ -27,6 +28,13 @@ namespace Dalssoft.DiagramNet
 
         public RectangleElement(int x, int y, int width, int height)
         {
+            location = new Point(x, y);
+            size = new Size(width, height);
+        }
+
+        public RectangleElement(int x, int y, int width, int height, bool drawBorder)
+        {
+            this.DrawBorderFlag = drawBorder;
             location = new Point(x, y);
             size = new Size(width, height);
         }
@@ -133,7 +141,20 @@ namespace Dalssoft.DiagramNet
         {
             //Border
             Pen p = new Pen(borderColor, borderWidth);
-            g.DrawRectangle(p, r);
+            g.DrawPolygon(p, new PointF[] { 
+                new PointF(r.X, r.Y), 
+                new PointF(r.X + 20, r.Y), 
+                new PointF(r.X + 25, r.Y+5),
+                new PointF(r.X + 30, r.Y+5),
+                new PointF(r.X + 35, r.Y),
+                new PointF(r.X + r.Width, r.Y), 
+                new PointF(r.X + r.Width, r.Y + r.Height),
+                new PointF(r.X+35, r.Y + r.Height),
+                new PointF(r.X+30, r.Y + r.Height+5),
+                new PointF(r.X+25, r.Y + r.Height+5),
+                new PointF(r.X+20, r.Y + r.Height),
+                new PointF(r.X, r.Y + r.Height) });
+            //g.DrawRectangle(p, r);
             p.Dispose();
         }
         Image __Background = null;
@@ -158,7 +179,8 @@ namespace Dalssoft.DiagramNet
             {
                 g.DrawImage(Background, r.X, r.Y, r.Width, r.Height);
             }
-            //DrawBorder(g, r);
+            if(DrawBorderFlag)
+                DrawBorder(g, r);
             b.Dispose();
         }
 
