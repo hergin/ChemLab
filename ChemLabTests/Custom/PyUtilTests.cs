@@ -1,4 +1,5 @@
 ﻿using ChemLab.Model;
+using ChemLab.Model.Ions;
 using Dalssoft.DiagramNet;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace ChemLab.Custom.Tests
         [TestInitialize()]
         public void ensurePY()
         {
-            Assert.IsTrue(Directory.Exists(@"Resources\WPy64-39100\"), @"Make sure to extract portable python under Resources under bin folder! It should be like bin\Resources\WPy64-39100\");
+            Assert.IsTrue(Directory.Exists(@"Resources\WPy64-39100\"), @"Make sure to extract portable python under Resources under bin folder in the test project! It should be like bin\debug\Resources\WPy64-39100\");
         }
 
         [TestMethod()]

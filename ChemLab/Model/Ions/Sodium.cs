@@ -2,7 +2,7 @@
 using System;
 using System.Drawing;
 
-namespace ChemLab.Model
+namespace ChemLab.Model.Ions
 {
     internal class Sodium : Ion
     {
@@ -10,8 +10,8 @@ namespace ChemLab.Model
         {
             this.Symbol = "Na";
             this.Id = Guid.NewGuid();
-            this.Color1 = Color.Blue;
-            this.Color2 = Color.LightBlue;
+            this.Color1 = Color.SeaGreen;
+            this.Color2 = Color.SeaGreen;
             this.Name = "Sodium";
             this.Charge = 1;
             this.Radius = 50;

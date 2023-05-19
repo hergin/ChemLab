@@ -1,4 +1,5 @@
 ﻿using ChemLab.Model;
+using ChemLab.Model.Ions;
 using ChemLab.Properties;
 using Dalssoft.DiagramNet;
 using System;
@@ -33,6 +34,18 @@ namespace ChemLab.Custom
                             break;
                         case "NaCl":
                             ions.Add(new Compound { ions = new List<Ion> { new Sodium(), new Chlorine() } });
+                            break;
+                        case "Pb":
+                            ions.Add(new Compound { ions = new List<Ion> { new Lead() } });
+                            break;
+                        case "NO3":
+                            ions.Add(new Compound { ions = new List<Ion> { new Nitrate() } });
+                            break;
+                        case "Ag":
+                            ions.Add(new Compound { ions = new List<Ion> { new Silver() } });
+                            break;
+                        case "K":
+                            ions.Add(new Compound { ions = new List<Ion> { new Potassium() } });
                             break;
                         case "H":
                             ions.Add(new Compound { ions = new List<Ion> { new Hyrdogen() } });
@@ -82,6 +95,21 @@ namespace ChemLab.Custom
         public static void Level1(Designer theBoard)
         {
             GenericLabLevelDesign(theBoard, Resources.Lab1);
+        }
+
+        public static void Level2(Designer theBoard)
+        {
+            GenericLabLevelDesign(theBoard, Resources.Lab2);
+        }
+
+        public static void Level3(Designer theBoard)
+        {
+            GenericLabLevelDesign(theBoard, Resources.Lab3);
+        }
+
+        public static void Level4(Designer theBoard)
+        {
+            GenericLabLevelDesign(theBoard, Resources.Lab4);
         }
 
     }

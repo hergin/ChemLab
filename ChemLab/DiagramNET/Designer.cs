@@ -1,3 +1,4 @@
+using ChemLab.Custom;
 using System;
 using System.ComponentModel;
 using System.Drawing;
@@ -6,6 +7,7 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
+using System.Linq;
 
 namespace Dalssoft.DiagramNet
 {
@@ -933,8 +935,11 @@ namespace Dalssoft.DiagramNet
                 }
             }
 
-            // resizeAction = new ResizeAction(); // HACK to eliminate resizing in our project
-            // resizeAction.Select(document);
+            if (selectedElement is ReactionCell || document.SelectedElements.GetArray().Any(s=>s is ReactionCell))
+            {
+                resizeAction = new ResizeAction(); // HACK to eliminate resizing in our project
+                resizeAction.Select(document);
+            }
         }
 
         private void EndSelectElements(Rectangle selectionRectangle)

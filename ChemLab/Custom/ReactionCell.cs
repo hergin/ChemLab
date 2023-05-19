@@ -23,10 +23,15 @@ namespace ChemLab.Custom
             BorderColor = Color.Black;
             BorderWidth = 2;
 
-            Label = new LabelElement(x, y, w, h);
+            ResetLabel();
+        }
+
+        private void ResetLabel()
+        {
+            Label = new LabelElement(this.location.X, this.location.Y, this.size.Width, this.size.Height);
             //Label.Alignment = StringAlignment.Far;
             //Label.LineAlignment = StringAlignment.Near;
-            label.Font = new Font("Trebuchet MS", h / 2);
+            label.Font = new Font("Trebuchet MS", this.size.Height / 2 < 50 ? this.size.Height / 2 : 50);
             label.ForeColor1 = Color.Blue;
             Label.Text = "→";
         }
@@ -49,6 +54,12 @@ namespace ChemLab.Custom
             Label.Size = new Size(600, 100);
             label.Font = new Font("Trebuchet MS", 50);
             OnAppearanceChanged(new EventArgs());
+        }
+
+        public override void Invalidate()
+        {
+            base.Invalidate();
+            ResetLabel();
         }
     }
 }

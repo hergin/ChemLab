@@ -1,5 +1,6 @@
 ﻿using ChemLab.Custom;
 using ChemLab.Model;
+using ChemLab.Model.Ions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 

@@ -64,7 +64,12 @@
     <Compile Include="Custom\SnapCell.cs" />
     <Compile Include="Custom\StartCell.cs" />
     <Compile Include="Model\ChangeStep.cs" />
-    <Compile Include="Model\Chlorine.cs" />
+    <Compile Include="Model\IonCells\LeadIonCell.cs" />
+    <Compile Include="Model\IonCells\NitrateIonCell.cs" />
+    <Compile Include="Model\IonCells\PotassiumIonCell.cs" />
+    <Compile Include="Model\IonCells\SilverIonCell.cs" />
+    <Compile Include="Model\Ions\Chlorine.cs" />
+    <Compile Include="Model\IonCells\ChlorineIonCell.cs" />
     <Compile Include="Model\Hydrogen.cs" />
     <Compile Include="Model\Compound.cs" />
     <Compile Include="Model\Ion.cs" />
@@ -116,7 +121,12 @@
     <Compile Include="DiagramNET\MoveAction.cs" />
     <Compile Include="DiagramNET\ResizeAction.cs" />
     <Compile Include="DiagramNET\UndoManager.cs" />
-    <Compile Include="Model\Sodium.cs" />
+    <Compile Include="Model\Ions\Lead.cs" />
+    <Compile Include="Model\Ions\Nitrate.cs" />
+    <Compile Include="Model\Ions\Potassium.cs" />
+    <Compile Include="Model\Ions\Silver.cs" />
+    <Compile Include="Model\Ions\Sodium.cs" />
+    <Compile Include="Model\IonCells\SodiumIonCell.cs" />
     <Compile Include="Model\TrafoDesigner.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -155,19 +165,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\hoc1.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\hoc2.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\hoc3.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\rule-start.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\rule.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\snap.png" />
@@ -176,16 +174,7 @@
     <None Include="Resources\run-button.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\icon.jpeg" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\icon.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\increaseRuleCountButton.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\decreaseRuleCountButton.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\reset-button.PNG" />
@@ -203,30 +192,6 @@
     <None Include="Resources\reset-button-over.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\maze-selector-box.PNG" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\maze2_over.PNG" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\maze3.PNG" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\maze3_over.PNG" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\maze1.PNG" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\maze1_over.PNG" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\maze2.PNG" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\rule-highlighted.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\rule-start-highlighted.png" />
   </ItemGroup>
   <ItemGroup>
@@ -240,12 +205,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\small-maze.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\rule-condensed.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\canopen.png" />
   </ItemGroup>
   <ItemGroup>
@@ -255,18 +214,6 @@
     <None Include="Resources\difference-finding-just-bird.py">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\rule-condensed-highlighted.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\hoc9.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\maze9_over.PNG" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\maze9.PNG" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\pattern-matching-chemistry.py">
@@ -279,6 +226,8 @@
     <Content Include="Resources\ChemLab-logos_transparent.png" />
     <Content Include="Resources\ChemLab-logos_white.png" />
     <Content Include="Resources\icon2.jpeg" />
+    <Content Include="Resources\Lab4.txt" />
+    <Content Include="Resources\Lab3.txt" />
     <Content Include="Resources\Lab2.txt" />
     <Content Include="Resources\Lab1.txt" />
     <None Include="Resources\reaction.png" />

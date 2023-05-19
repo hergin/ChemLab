@@ -33,6 +33,7 @@ namespace ChemLab
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ChemLabMain));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.maze9button = new System.Windows.Forms.PictureBox();
             this.maze3button = new System.Windows.Forms.PictureBox();
             this.maze2button = new System.Windows.Forms.PictureBox();
@@ -51,8 +52,10 @@ namespace ChemLab
             this.runButton = new System.Windows.Forms.PictureBox();
             this.trafoRunner = new System.ComponentModel.BackgroundWorker();
             this.label_selectlab = new System.Windows.Forms.Label();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.designer_board = new Dalssoft.DiagramNet.Designer();
+            this.linkLabel2 = new System.Windows.Forms.LinkLabel();
+            this.linkLabel3 = new System.Windows.Forms.LinkLabel();
+            this.linkLabel4 = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.maze9button)).BeginInit();
@@ -81,6 +84,9 @@ namespace ChemLab
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(151)))), ((int)(((byte)(102)))));
+            this.panel2.Controls.Add(this.linkLabel4);
+            this.panel2.Controls.Add(this.linkLabel3);
+            this.panel2.Controls.Add(this.linkLabel2);
             this.panel2.Controls.Add(this.linkLabel1);
             this.panel2.Controls.Add(this.pictureBox1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
@@ -88,7 +94,18 @@ namespace ChemLab
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1353, 91);
             this.panel2.TabIndex = 26;
-            this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
+            // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Location = new System.Drawing.Point(697, 41);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(31, 13);
+            this.linkLabel1.TabIndex = 24;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Tag = "1";
+            this.linkLabel1.Text = "Lab1";
+            this.linkLabel1.Click += new System.EventHandler(this.mazeButtons_Click);
             // 
             // maze9button
             // 
@@ -280,18 +297,6 @@ namespace ChemLab
             this.label_selectlab.Text = "Select a lab environment\r\nfrom the numbers above!";
             this.label_selectlab.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // linkLabel1
-            // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(697, 41);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(31, 13);
-            this.linkLabel1.TabIndex = 24;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Tag = "1";
-            this.linkLabel1.Text = "Lab1";
-            this.linkLabel1.Click += new System.EventHandler(this.mazeButtons_Click);
-            // 
             // designer_board
             // 
             this.designer_board.AutoScroll = true;
@@ -303,7 +308,42 @@ namespace ChemLab
             this.designer_board.Name = "designer_board";
             this.designer_board.Size = new System.Drawing.Size(401, 401);
             this.designer_board.TabIndex = 1;
-            this.designer_board.Load += new System.EventHandler(this.designer_board_Load);
+            // 
+            // linkLabel2
+            // 
+            this.linkLabel2.AutoSize = true;
+            this.linkLabel2.Location = new System.Drawing.Point(734, 41);
+            this.linkLabel2.Name = "linkLabel2";
+            this.linkLabel2.Size = new System.Drawing.Size(31, 13);
+            this.linkLabel2.TabIndex = 25;
+            this.linkLabel2.TabStop = true;
+            this.linkLabel2.Tag = "2";
+            this.linkLabel2.Text = "Lab2";
+            this.linkLabel2.Click += new System.EventHandler(this.mazeButtons_Click);
+            // 
+            // linkLabel3
+            // 
+            this.linkLabel3.AutoSize = true;
+            this.linkLabel3.Location = new System.Drawing.Point(771, 41);
+            this.linkLabel3.Name = "linkLabel3";
+            this.linkLabel3.Size = new System.Drawing.Size(31, 13);
+            this.linkLabel3.TabIndex = 26;
+            this.linkLabel3.TabStop = true;
+            this.linkLabel3.Tag = "3";
+            this.linkLabel3.Text = "Lab3";
+            this.linkLabel3.Click += new System.EventHandler(this.mazeButtons_Click);
+            // 
+            // linkLabel4
+            // 
+            this.linkLabel4.AutoSize = true;
+            this.linkLabel4.Location = new System.Drawing.Point(808, 41);
+            this.linkLabel4.Name = "linkLabel4";
+            this.linkLabel4.Size = new System.Drawing.Size(31, 13);
+            this.linkLabel4.TabIndex = 27;
+            this.linkLabel4.TabStop = true;
+            this.linkLabel4.Tag = "4";
+            this.linkLabel4.Text = "Lab4";
+            this.linkLabel4.Click += new System.EventHandler(this.mazeButtons_Click);
             // 
             // ChemLabMain
             // 
@@ -368,6 +408,9 @@ namespace ChemLab
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Label label_selectlab;
         private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.LinkLabel linkLabel4;
+        private System.Windows.Forms.LinkLabel linkLabel3;
+        private System.Windows.Forms.LinkLabel linkLabel2;
     }
 }
 

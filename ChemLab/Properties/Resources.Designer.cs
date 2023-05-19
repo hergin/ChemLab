@@ -19,7 +19,7 @@ namespace ChemLab.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -101,70 +101,6 @@ namespace ChemLab.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Wo-Wo-Wo-Wo-Wo-Wo-Wo-Wo
-        ///Wo-Wo-Wo-St-Wo-St-Wo-Wo
-        ///Wo-Wo-HW-BD-Gl-Wo-Wo-HW
-        ///Wo-Wo-St-Em-HW-Wo-Wo-Wo
-        ///Wo-HW-HW-Pi-HW-Wo-Wo-Wo
-        ///Wo-Wo-Wo-St-Wo-Wo-Wo-Wo
-        ///Wo-Wo-Gl-St-Wo-Wo-Wo-HS
-        ///Wo-Wo-Wo-St-Wo-HW-HS-Wo.
-        /// </summary>
-        internal static string hoc1 {
-            get {
-                return ResourceManager.GetString("hoc1", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Wo-Wo-St-Wo-Wo-Wo-St-Wo
-        ///Wo-Wo-Wo-Wo-Wo-Wo-Wo-Wo
-        ///Wo-Wo-Wo-Wo-Wo-Wo-Wo-Wo
-        ///HW-Wo-HW-Gl-HS-St-Wo-Wo
-        ///Wo-Gl-BR-Em-Em-Pi-HS-Wo
-        ///Wo-HW-St-HS-St-St-Wo-Wo
-        ///Wo-Wo-Wo-HW-Wo-Wo-Wo-Wo
-        ///Wo-Wo-Wo-Wo-Wo-Wo-Wo-Wo.
-        /// </summary>
-        internal static string hoc2 {
-            get {
-                return ResourceManager.GetString("hoc2", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Wo-Wo-Wo-HW-Wo-Wo-HS-Wo
-        ///Wo-Wo-Wo-Wo-HS-St-Wo-Wo
-        ///Wo-HS-HW-Wo-Tn-St-Wo-St
-        ///Wo-HW-BR-Em-Em-St-Gl-Wo
-        ///St-Gl-Tn-Wo-Pi-HS-Wo-Wo
-        ///Wo-St-St-Wo-St-Wo-Wo-Wo
-        ///St-Wo-Wo-Wo-Wo-Wo-Wo-Wo
-        ///Wo-Wo-Wo-Wo-HS-Wo-Wo-Wo.
-        /// </summary>
-        internal static string hoc3 {
-            get {
-                return ResourceManager.GetString("hoc3", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Gl-HS-Wo-Wo-Wo-Wo-Wo-Wo
-        ///Wo-Wo-Wo-Wo-Wo-Wo-Wo-Wo
-        ///HS-Wo-Gl-HS-Gl-HW-Wo-Wo
-        ///Wo-St-BR-Em-Em-Gl-Wo-HW
-        ///Wo-Wo-Wo-Wo-Em-HW-Gl-Wo
-        ///Wo-HS-Pi-Em-Em-HS-Wo-Wo
-        ///Wo-St-St-Gl-Gl-Wo-Wo-St
-        ///Wo-Wo-Wo-Gl-St-Wo-Wo-Wo.
-        /// </summary>
-        internal static string hoc9 {
-            get {
-                return ResourceManager.GetString("hoc9", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
         internal static System.Drawing.Icon icon1 {
@@ -195,13 +131,32 @@ namespace ChemLab.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 5xNa
-        ///5xCl
-        ///1xNaCl.
+        ///   Looks up a localized string similar to 5xAg
+        ///5xNO3.
         /// </summary>
         internal static string Lab2 {
             get {
                 return ResourceManager.GetString("Lab2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 5xPb
+        ///10xNO3.
+        /// </summary>
+        internal static string Lab3 {
+            get {
+                return ResourceManager.GetString("Lab3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 5xK
+        ///5xCl.
+        /// </summary>
+        internal static string Lab4 {
+            get {
+                return ResourceManager.GetString("Lab4", resourceCulture);
             }
         }
         
@@ -292,17 +247,6 @@ namespace ChemLab.Properties {
             get {
                 object obj = ResourceManager.GetObject("run_button_over", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to BD
-        ///Em
-        ///Pi.
-        /// </summary>
-        internal static string small_maze {
-            get {
-                return ResourceManager.GetString("small_maze", resourceCulture);
             }
         }
         

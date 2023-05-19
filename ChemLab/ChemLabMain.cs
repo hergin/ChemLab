@@ -1,5 +1,6 @@
 ﻿using ChemLab.Custom;
 using ChemLab.Model;
+using ChemLab.Model.IonCells;
 using ChemLab.Properties;
 using System;
 using System.Collections.Generic;
@@ -26,11 +27,6 @@ namespace ChemLab
         string currentLab = "1";
         private const int TimeoutBetweenRuleExecution = 250;
         public static int CELL_SIZE = 50;
-        Point ion1Location = new Point(70, 10),
-            ion2Location = new Point(70, 75);
-
-
-
 
 
         TrafoDesigner trafoDesigner;
@@ -43,25 +39,9 @@ namespace ChemLab
             InitializeComponent();
             trafoDesigner.SendToBack();
 
-
-
             trafoDesigner.MouseDown += trafoDesigner_MouseDown;
 
-
-            var ion1 = new Sodium();
-            var ionList1 = new List<Ion>() { ion1 };
-            var ioncell = new IonCell(ion1Location.X, ion1Location.Y, ionList1);
-
-            trafoDesigner.Document.AddElement(ioncell);
-
-            var ion2 = new Chlorine();
-            var ionList2 = new List<Ion>() { ion2 };
-            var ioncell2 = new IonCell(ion2Location.X, ion2Location.Y, ionList2);
-
-            trafoDesigner.Document.AddElement(ioncell2);
-
-            trafoDesigner.Document.AddElement(new ReactionCell(25, 300, 140, 35));
-
+            FillBlocksPanel();
 
             trafoRunner.DoWork += TrafoRunner_DoWork;
             trafoRunner.ProgressChanged += TrafoRunner_ProgressChanged;
@@ -72,42 +52,83 @@ namespace ChemLab
             //LoadLevel(currentLab);
         }
 
+        void FillBlocksPanel()
+        {
+            trafoDesigner.Document.AddElement(new ReactionCell(28, 540, 140, 35));
+
+            trafoDesigner.Document.AddElement(new SodiumIonCell(70, 30));
+            trafoDesigner.Document.AddElement(new ChlorineIonCell(67, 110));
+            trafoDesigner.Document.AddElement(new SilverIonCell(70, 200));
+            trafoDesigner.Document.AddElement(new NitrateIonCell(63, 280));
+            trafoDesigner.Document.AddElement(new LeadIonCell(70, 370));
+            trafoDesigner.Document.AddElement(new PotassiumIonCell(73, 450));
+        }
+
 
 
         private void trafoDesigner_MouseDown(object sender, MouseEventArgs e)
         {
-            // TODO if element is not dragged to the canvas, delete the newly created one or the old one! It sure has duplication on the button area.
-            if (trafoDesigner.Document.FindElement(e.Location) != null
-                && trafoDesigner.Document.FindElement(e.Location) is IonCell ion1
-                && ion1.Location == ion1Location)
+            if (e.Location.X < 200)
             {
-                var sampleIon = ion1.GetIons()[0];
-                var ionValues = new Ion { Id = Guid.NewGuid(), Name = sampleIon.Name, Charge = sampleIon.Charge, Symbol = sampleIon.Symbol, Color1 = sampleIon.Color1, Color2 = sampleIon.Color2, Radius = sampleIon.Radius };
-                var newIonCell = new IonCell(ion1Location.X, ion1Location.Y, new List<Ion> { ionValues });
-                trafoDesigner.Document.AddElement(newIonCell);
-                trafoDesigner.Document.SendToBackElement(newIonCell);
-                trafoDesigner.SendBlockToBack();
-            }
-            else if (trafoDesigner.Document.FindElement(e.Location) != null
-              && trafoDesigner.Document.FindElement(e.Location) is IonCell ion2
-              && ion2.Location == ion2Location)
-            {
-                var sampleIon = ion2.GetIons()[0];
-                var ionValues = new Ion { Id = Guid.NewGuid(), Name = sampleIon.Name, Charge = sampleIon.Charge, Symbol = sampleIon.Symbol, Color1 = sampleIon.Color1, Color2 = sampleIon.Color2, Radius = sampleIon.Radius };
-                var newIonCell = new IonCell(ion2Location.X, ion2Location.Y, new List<Ion> { ionValues });
-                trafoDesigner.Document.AddElement(newIonCell);
-                trafoDesigner.Document.SendToBackElement(newIonCell);
-                trafoDesigner.SendBlockToBack();
-            }
-            else if (trafoDesigner.Document.FindElement(e.Location) != null
-            && trafoDesigner.Document.FindElement(e.Location) is ReactionCell reaction)
-            {
-                reaction.ResizeToOriginal();
-                trafoDesigner.Document.BringToFrontElement(reaction);
-                var newReaction = new ReactionCell(25, 300, 140, 35);
-                trafoDesigner.Document.AddElement(newReaction);
-                trafoDesigner.Document.SendToBackElement(newReaction);
-                trafoDesigner.SendBlockToBack();
+                // TODO if element is not dragged to the canvas, delete the newly created one or the old one! It sure has duplication on the button area.
+                if (trafoDesigner.Document.FindElement(e.Location) != null
+                    && trafoDesigner.Document.FindElement(e.Location) is SodiumIonCell sodiumIon)
+                {
+                    var newIonCell = new SodiumIonCell(sodiumIon.Location.X, sodiumIon.Location.Y);
+                    trafoDesigner.Document.AddElement(newIonCell);
+                    trafoDesigner.Document.SendToBackElement(newIonCell);
+                    trafoDesigner.SendBlockToBack();
+                }
+                else if (trafoDesigner.Document.FindElement(e.Location) != null
+                    && trafoDesigner.Document.FindElement(e.Location) is ChlorineIonCell chlorineIon)
+                {
+                    var newIonCell = new ChlorineIonCell(chlorineIon.Location.X, chlorineIon.Location.Y);
+                    trafoDesigner.Document.AddElement(newIonCell);
+                    trafoDesigner.Document.SendToBackElement(newIonCell);
+                    trafoDesigner.SendBlockToBack();
+                }
+                else if (trafoDesigner.Document.FindElement(e.Location) != null
+                    && trafoDesigner.Document.FindElement(e.Location) is SilverIonCell silverIon)
+                {
+                    var newIonCell = new SilverIonCell(silverIon.Location.X, silverIon.Location.Y);
+                    trafoDesigner.Document.AddElement(newIonCell);
+                    trafoDesigner.Document.SendToBackElement(newIonCell);
+                    trafoDesigner.SendBlockToBack();
+                }
+                else if (trafoDesigner.Document.FindElement(e.Location) != null
+                    && trafoDesigner.Document.FindElement(e.Location) is NitrateIonCell nitrateIon)
+                {
+                    var newIonCell = new NitrateIonCell(nitrateIon.Location.X, nitrateIon.Location.Y);
+                    trafoDesigner.Document.AddElement(newIonCell);
+                    trafoDesigner.Document.SendToBackElement(newIonCell);
+                    trafoDesigner.SendBlockToBack();
+                }
+                else if (trafoDesigner.Document.FindElement(e.Location) != null
+                    && trafoDesigner.Document.FindElement(e.Location) is LeadIonCell leadIon)
+                {
+                    var newIonCell = new LeadIonCell(leadIon.Location.X, leadIon.Location.Y);
+                    trafoDesigner.Document.AddElement(newIonCell);
+                    trafoDesigner.Document.SendToBackElement(newIonCell);
+                    trafoDesigner.SendBlockToBack();
+                }
+                else if (trafoDesigner.Document.FindElement(e.Location) != null
+                    && trafoDesigner.Document.FindElement(e.Location) is PotassiumIonCell potassiumIon)
+                {
+                    var newIonCell = new PotassiumIonCell(potassiumIon.Location.X, potassiumIon.Location.Y);
+                    trafoDesigner.Document.AddElement(newIonCell);
+                    trafoDesigner.Document.SendToBackElement(newIonCell);
+                    trafoDesigner.SendBlockToBack();
+                }
+                else if (trafoDesigner.Document.FindElement(e.Location) != null
+                    && trafoDesigner.Document.FindElement(e.Location) is ReactionCell reaction)
+                {
+                    trafoDesigner.Document.BringToFrontElement(reaction);
+                    var newReaction = new ReactionCell(reaction.Location.X, reaction.Location.Y, reaction.Size.Width, reaction.Size.Height);
+                    reaction.ResizeToOriginal();
+                    trafoDesigner.Document.AddElement(newReaction);
+                    trafoDesigner.Document.SendToBackElement(newReaction);
+                    trafoDesigner.SendBlockToBack();
+                }
             }
         }
 
@@ -282,16 +303,6 @@ namespace ChemLab
             designer_board.Enabled = true;
         }
 
-        private void panel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void designer_board_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void mazeButtons_Click(object sender, EventArgs e)
         {
             currentLab = (sender as LinkLabel).Tag.ToString();
@@ -307,11 +318,6 @@ namespace ChemLab
             var resourceName = "Lab" + level;
             LevelDesigner.GenericLabLevelDesign(designer_board, Resources.ResourceManager.GetString(resourceName));
 
-            var ion2 = new Chlorine();
-            var ionList2 = new List<Ion>() { ion2 };
-            var ioncell2 = new IonCell(ion2Location.X, ion2Location.Y, ionList2);
-
-            trafoDesigner.Document.AddElement(ioncell2);
 
             Reset();
             foreach (var element in DesignerUtil.GetTrafoElementsOutsideBlockWithoutStartOrSnapOrBlock(trafoDesigner))

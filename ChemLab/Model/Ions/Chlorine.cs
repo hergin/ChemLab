@@ -2,7 +2,7 @@
 using System;
 using System.Drawing;
 
-namespace ChemLab.Model
+namespace ChemLab.Model.Ions
 {
     internal class Chlorine : Ion
     {
@@ -10,8 +10,8 @@ namespace ChemLab.Model
         {
             this.Symbol = "Cl";
             this.Id = Guid.NewGuid();
-            this.Color1 = Color.Green;
-            this.Color2 = Color.LightGreen;
+            this.Color1 = Color.Goldenrod;
+            this.Color2 = Color.Goldenrod;
             this.Name = "Chlorine";
             this.Charge = -1;
             this.Radius = 55;

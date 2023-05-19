@@ -9,7 +9,7 @@ namespace ChemLab.Custom
     [Serializable]
     public class TrashCell : RectangleElement
     {
-        public TrashCell() : base(60, 430, 70, 70)
+        public TrashCell() : base(60, 630, 70, 70)
         {
             Background = Resources.canclosed;
             FillColor1 = Color.Transparent;

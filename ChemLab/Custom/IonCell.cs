@@ -20,11 +20,7 @@ namespace ChemLab.Custom
             Name = compound.Symbol;
         }
 
-        public IonCell(int x, int y, Compound compound) : base(x, y, compound.ions.Sum(i => i.Radius) + 15, compound.ions.Select(i => i.Radius).Max())
-        {
-            this.compound = compound;
-            Name = compound.Symbol;
-        }
+        public IonCell(int x, int y, Compound compound) : this(x, y, compound.ions) { }
 
 
         public void AddIon(Ion ion)

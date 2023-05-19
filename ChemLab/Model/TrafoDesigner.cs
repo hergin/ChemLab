@@ -100,8 +100,8 @@ namespace ChemLab.Model
 
         private void TrafoDesigner_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
         {
-            if (e.X > theTrashCell.Location.X && e.X < theTrashCell.Location.X + theTrashCell.Size.Width
-                && e.Y > theTrashCell.Location.Y && e.Y < theTrashCell.Location.Y + theTrashCell.Size.Height)
+            if (e.X > blockPanel.Location.X && e.X < blockPanel.Location.X + blockPanel.Size.Width
+                && e.Y > blockPanel.Location.Y && e.Y < blockPanel.Location.Y + blockPanel.Size.Height)
             {
                 theTrashCell.OpenCan();
             }
@@ -115,8 +115,8 @@ namespace ChemLab.Model
         {
             theSnapCell.Visible = false;
 
-            if (e.X > theTrashCell.Location.X && e.X < theTrashCell.Location.X + theTrashCell.Size.Width
-                && e.Y > theTrashCell.Location.Y && e.Y < theTrashCell.Location.Y + theTrashCell.Size.Height)
+            if (e.X > blockPanel.Location.X && e.X < blockPanel.Location.X + blockPanel.Size.Width
+                && e.Y > blockPanel.Location.Y && e.Y < blockPanel.Location.Y + blockPanel.Size.Height)
             {
                 this.Document.DeleteSelectedElements();
                 return;

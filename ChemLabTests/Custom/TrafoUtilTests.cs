@@ -1,4 +1,5 @@
 ﻿using ChemLab.Model;
+using ChemLab.Model.Ions;
 using Dalssoft.DiagramNet;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
