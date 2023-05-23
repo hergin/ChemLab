@@ -14,7 +14,7 @@ namespace ChemLab.Custom
         [NonSerialized]
         Compound compound;
 
-        public IonCell(int x, int y, List<Ion> ions) : base(x, y, ions.Sum(i => i.Radius) + 15, ions.Select(i => i.Radius).Max())
+        public IonCell(int x, int y, List<Ion> ions) : base(x, y, ions.Sum(i => i.Radius), ions.Select(i => i.Radius).Max())
         {
             this.compound = new Compound { ions = ions };
             Name = compound.Symbol;
@@ -54,10 +54,10 @@ namespace ChemLab.Custom
                 Pen p = new Pen(borderColor, borderWidth);
                 g.DrawEllipse(p, r);
 
-                g.DrawString(ion.Symbol, new Font("Trebuchet MS", 12), Brushes.Black, new PointF(Location.X + xOffset + ion.Radius / 2 - 10, Location.Y + ion.Radius / 2 - 10));
+                g.DrawString(ion.Symbol, new Font("Trebuchet MS", 13), Brushes.Black, new PointF(Location.X + xOffset + ion.Radius / 2 - ion.Symbol.Length*5, Location.Y + ion.Radius / 2-10));
                 xOffset = xOffset + ion.Radius;
             }
-            g.DrawString(this.GetChargeString(), new Font("Trebuchet MS", 12), Brushes.Black, new PointF(Location.X + xOffset, Location.Y - 5));
+            g.DrawString(this.GetChargeString(), new Font("Trebuchet MS", 10), Brushes.Black, new PointF(Location.X + xOffset-25, Location.Y));
         }
 
         private string GetChargeString()

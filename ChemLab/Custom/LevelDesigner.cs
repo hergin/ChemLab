@@ -62,8 +62,10 @@ namespace ChemLab.Custom
             List<IonCell> ionCells = new List<IonCell>();
             Dictionary<String, int> compoundYoffsetDict = new Dictionary<String, int>();
             int elementsPlaced = 0;
-            foreach (var compound in compounds)
-            {
+            for (int i = 0; i < compounds.Count; i++)
+            {   
+                Compound compound = compounds[i];
+
                 if (!compoundYoffsetDict.ContainsKey(compound.Symbol))
                 {
                     compoundYoffsetDict.Add(compound.Symbol, 5);
@@ -71,7 +73,7 @@ namespace ChemLab.Custom
                 }
                 int xCoord = elementsPlaced * (400 / (uniqueCount + 1)) - (compound.GetHalfWidth());
                 compoundYoffsetDict.TryGetValue(compound.Symbol, out int compoundYoffset);
-                IonCell ioncell = new IonCell(xCoord, compoundYoffset, compound);
+                IonCell ioncell = new IonCell(xCoord+i*2, compoundYoffset+10, compound);
                 ionCells.Add(ioncell);
                 compoundYoffsetDict[compound.Symbol] = compoundYoffset + 5;
             }
